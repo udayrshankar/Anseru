@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { CheckCircle2, Lock, Users, HardDrive, FileText, Slack } from "lucide-react";
+import { CheckCircle2, Lock } from "lucide-react";
 import hubImage from "../assets/Group 54.png"; 
 
 // --- UI CARD COMPONENTS (Kept consistent) ---

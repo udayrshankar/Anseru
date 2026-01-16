@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion"; // 1. Import Variants
 import GlowCard from "../GlowCard";
 

@@ -1,4 +1,3 @@
-import image from "../../assets/Group 59 (1).png";
 import Background from "../Background";
 import HeroCards from "./HeroCards";
 
