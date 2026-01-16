@@ -5,9 +5,9 @@ import { tabContent, type TabKey } from "./TabContents";
 
 // Mapping internal keys to the Visual Labels in your screenshot
 const TAB_LABELS: Record<TabKey, string> = {
-  jane: "RFP",
-  maya: "Security Questionnaire",
-  alex: "Trust Center",
+  jane: "Jane",
+  maya: "Maya",
+  alex: "Alex",
 };
 
 export default function AITabs() {
