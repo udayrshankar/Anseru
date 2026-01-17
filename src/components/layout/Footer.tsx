@@ -4,10 +4,11 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div>
-            <h3 className="font-inter text-2xl font-extrabold text-[#483953]">
+            {/* Brand Logo - Keep distinct or use H3 */}
+            <h3 className="text-[#483953]">
               ANSERU
             </h3>
-            <p className="mt-4 text-[#483953] max-w-[300px]">
+            <p className="mt-4 text-[#483953] max-w-[300px] text-smalls">
               Your edge in RFPs & Reviews. Powered by AI for Trust.
             </p>
           </div>
@@ -18,13 +19,14 @@ export default function Footer() {
             ["Resources", ["Help Center", "API Docs", "ROI Calculator", "Status"]],
           ].map(([title, items]) => (
             <div key={title as string}>
-              <h4 className="font-bold uppercase text-sm text-[#483953] mb-4">
+              {/* Table Heading Style */}
+              <h4 className="text-table-heading text-[#483953] mb-4">
                 {title}
               </h4>
               <ul className="space-y-3">
                 {(items as string[]).map((item) => (
                   <li key={item}>
-                    <a href="#" className="hover:opacity-70">
+                    <a href="#" className="text-smalls hover:opacity-70">
                       {item}
                     </a>
                   </li>
@@ -35,11 +37,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-10 border-t border-[#483953] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-[#483953]">
+          <p className="text-smalls text-[#483953]">
             © 2024 Anseru Inc. All rights reserved.
           </p>
 
-          <div className="flex gap-5 text-sm">
+          <div className="flex gap-5 text-smalls">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
           </div>

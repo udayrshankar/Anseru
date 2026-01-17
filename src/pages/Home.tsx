@@ -10,7 +10,7 @@ import Footer from "../components/layout/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-[#F6F6F8] w-full">
+    <div className="bg-[#F6F6F8] w-full -z-5">
       {/* Header */}
       <Header />
 

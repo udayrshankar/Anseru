@@ -1,9 +1,28 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500&display=swap');
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Typography System */
+  --font-onest: 'Onest', system-ui, sans-serif;
+  
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-light: 300;
+
+  --fs-h1: 45px;
+  --fs-h2: 42px;
+  --fs-h3: 36px;
+  --fs-body: 20px;
+  --fs-table: 18px;
+  --fs-smalls: 16px;
+
+  --lh-tight: 120%;
+  --lh-auto: normal;
+
+  /* Base Setup */
+  font-family: var(--font-onest);
+  line-height: var(--lh-auto);
+  font-weight: var(--fw-regular);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -15,34 +34,54 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Base Elements */
+h1 {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+}
 
-html,
-body,
-#root {
+h2 {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-auto);
+}
+
+h3 {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-auto);
+}
+
+/* Utility Classes */
+.text-body {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body);
+  line-height: var(--lh-auto);
+}
+
+.text-table-heading {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-table);
+  line-height: var(--lh-auto);
+}
+
+.text-smalls {
+  font-family: var(--font-onest);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-smalls);
+  line-height: var(--lh-auto);
+}
+
+html, body, #root {
   width: 100%;
   min-height: 100%;
   margin: 0;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
@@ -50,64 +89,4 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-
-/* ------------------------------
-   Gradient base (matches image)
--------------------------------- */
-
-.bg-gradient-base {
-  background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #f5ecfb 22%,
-    #e9d5ff 45%,
-    #fbcfe8 68%,
-    #fda4af 100%
-  );
-  background-size: 300% 300%;
-}
-
-/* ------------------------------
-   Frosted glass grid
--------------------------------- */
-
-.bg-glass-grid {
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
-  background-color: rgba(255, 255, 255, 0.4);
-
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.45) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.45) 1px,
-      transparent 1px
-    );
-
-  background-size: 44px 44px;
-}
-
-/* ------------------------------
-   Ambient light diffusion
--------------------------------- */
-
-.bg-light-drift {
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0) 60%
-  );
-  pointer-events: none;
 }

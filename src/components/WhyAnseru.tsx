@@ -1,4 +1,3 @@
-
 const cards = [
   {
     title: "Close Deals Faster",
@@ -25,7 +24,6 @@ const cards = [
 const WhyAnseru = () => {
   return (
     <div>
-      {/* Inject custom keyframe for scrolling */}
       <style>
         {`
           @keyframes scroll {
@@ -39,24 +37,22 @@ const WhyAnseru = () => {
       </style>
 
       <section className="py-16 relative overflow-hidden group">
-        {/* Fade gradients on sides */}
         <div className="absolute left-0 top-0 w-[100px] md:w-[180px] h-full bg-gradient-to-r from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
         <div className="absolute right-0 top-0 w-[100px] md:w-[180px] h-full bg-gradient-to-l from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
 
         <div className="max-w-[1440px] mx-auto px-4 relative z-10">
           <div className="mb-12 ml-4 md:ml-8">
-            <p className="font-onest text-lg text-black mb-2">
+            <p className="text-smalls text-black mb-2">
               Fast and Accurate
             </p>
-            <h2 className="font-onest text-[42px] font-normal text-[#483953]">
+            {/* H2 Style (42px, Regular) */}
+            <h2 className="text-[#483953]">
               Why Anseru
             </h2>
           </div>
 
-          {/* Infinite Scroll Container */}
           <div className="flex overflow-hidden">
             <div className="flex gap-6 w-max animate-scroll group-hover:[animation-play-state:paused]">
-              {/* Render cards twice to create seamless loop */}
               {[...cards, ...cards].map((card, index) => (
                 <div
                   key={index}
@@ -68,16 +64,15 @@ const WhyAnseru = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      d={card.path}
-                      stroke="black"
-                    />
+                    <path d={card.path} stroke="black" />
                   </svg>
                   <div className="space-y-4 relative z-10">
-                    <h3 className="font-onest text-3xl md:text-4xl font-medium text-[#483953]">
+                    {/* H3 Style (36px, Medium) */}
+                    <h3 className="text-[#483953]">
                       {card.title}
                     </h3>
-                    <p className="font-onest text-xl md:text-2xl font-light text-[#483953]">
+                    {/* Body Style (26px, Light) */}
+                    <p className="text-body text-[#483953]">
                       {card.desc}
                     </p>
                   </div>
