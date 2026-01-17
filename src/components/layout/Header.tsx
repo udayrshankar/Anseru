@@ -5,7 +5,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-8 px-4">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-2 px-4">
       <nav className="w-full max-w-[1200px] min-h-[72px] rounded-full border border-black/10 bg-white/10 backdrop-blur-[50px] shadow-lg flex items-center justify-between px-6 py-4">
         <div className="font-exo text-[25px] font-bold text-[#090909]">
           ANSERU

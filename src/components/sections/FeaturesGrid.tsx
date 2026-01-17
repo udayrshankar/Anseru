@@ -1,129 +1,136 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { 
+  MdSpeed, 
+  MdVerifiedUser, 
+  MdRocketLaunch, 
+  MdSupportAgent 
+} from "react-icons/md";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-interface FeatureCardProps {
+// Utility for cleaner tailwind classes
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// --- Types ---
+interface Feature {
   title: string;
   description: string;
-  svg: React.ReactNode;
+  icon: React.ElementType; // Icon component reference
   minHeight?: string;
 }
+
+interface FeatureCardProps extends Feature {
+  index: number;
+}
+
+// --- Components ---
 
 function FeatureCard({
   title,
   description,
-  svg,
-  minHeight = "min-h-[529px]",
+  icon: Icon,
+  minHeight = "min-h-[500px]",
+  index,
 }: FeatureCardProps) {
   return (
-    <div
-      className={`relative rounded-[22px] bg-gradient-to-br from-[#EBEBEB] to-[#FEE6FF] p-11 overflow-hidden ${minHeight} flex flex-col justify-end`}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -8, scale: 1.01 }}
+      className={cn(
+        "group relative flex flex-col justify-end overflow-hidden rounded-[22px] p-10",
+        "bg-gradient-to-br from-[#EBEBEB] to-[#FEE6FF]",
+        "border border-white/50 shadow-sm hover:shadow-xl transition-all duration-300 ease-out",
+        minHeight
+      )}
     >
-      {svg}
+      {/* Background Decorator Icon (The "Watermark") */}
+      <div className="absolute -right-12 -top-12 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
+         <Icon className="h-96 w-96 rotate-12 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-700 ease-in-out text-[#483953]" />
+      </div>
 
-      <div className="space-y-4 relative z-10">
-        <h3 className="font-onest text-4xl font-medium text-[#483953]">
+      {/* Floating Animated Icon */}
+      <div className="absolute top-12 left-8">
+        <div className="relative">
+            {/* Glow effect behind icon */}
+            <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
+            <Icon className="relative z-10 w-24 h-24 text-[#483953]/80 group-hover:text-[#483953] transition-colors duration-300" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 space-y-4 max-w-md">
+        <h3 className="font-onest text-4xl font-medium text-[#483953] leading-tight group-hover:translate-x-1 transition-transform duration-300">
           {title}
         </h3>
-        <p className="font-onest text-2xl font-light text-[#483953]">
+        <p className="font-onest text-xl font-light text-[#483953]/90 leading-relaxed">
           {description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default function FeaturesGrid() {
+  const features: Feature[] = [
+    {
+      title: "Close Deals Faster",
+      description: "Automate RFPs and security questionnaires to cut response times and accelerate your sales cycle.",
+      icon: MdSpeed,
+    },
+    {
+      title: "Build Instant Trust",
+      description: "Deliver accurate, compliance-ready answers that boost buyer confidence and help you win more approvals.",
+      icon: MdVerifiedUser,
+    },
+    {
+      title: "Accelerated Onboarding",
+      description: "Cut training time in half by giving new team members ready-made, brand-aligned responses.",
+      icon: MdRocketLaunch,
+      minHeight: "min-h-[460px]", // Slightly adjusted height variation
+    },
+    {
+      title: "Smarter Support",
+      description: "Delight customers with instant, accurate replies while your agents focus on what matters most.",
+      icon: MdSupportAgent,
+      minHeight: "min-h-[460px]",
+    },
+  ];
+
   return (
-    <section className="py-16 px-4">
+    <section className="py-24 px-4 bg-white">
       <div className="max-w-[1205px] mx-auto">
         {/* Header */}
-        <div className="mb-12">
-          <p className="font-onest text-lg text-black mb-2">
-            Fast and Accurate
-          </p>
-          <h2 className="font-onest text-[42px] font-normal text-[#483953]">
-            Your Edge in RFPs & Reviews.
-          </h2>
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
+              Fast and Accurate
+            </p>
+            <h2 className="font-onest text-5xl md:text-[52px] font-normal text-[#483953] leading-[1.1]">
+              Your Edge in <span className="font-medium">RFPs & Reviews.</span>
+            </h2>
+          </motion.div>
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Close Deals Faster */}
-          <FeatureCard
-            title="Close Deals Faster"
-            description="Automate RFPs and security questionnaires to cut response times and accelerate your sales cycle."
-            svg={
-              <svg
-                className="absolute top-12 left-48 w-52 h-52"
-                viewBox="0 0 211 211"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M109.62 99.2827L109.548 99.8462H150.368L84.271 178.989L92.8071 120.518L92.8911 119.946H57.8823L117.936 33.3892L109.62 99.2827Z"
-                  stroke="black"
-                />
-              </svg>
-            }
-          />
-
-          {/* Build Instant Trust */}
-          <FeatureCard
-            title="Build Instant Trust"
-            description="Deliver accurate, compliance-ready answers that boost buyer confidence and help you win more approvals."
-            svg={
-              <svg
-                className="absolute top-12 left-48 w-52 h-52"
-                viewBox="0 0 211 211"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M163.904 52.2169V97.588C163.904 117.12 158.331 134.601 147.185 150.045C136.066 165.451 122.172 175.768 105.499 181.023Z"
-                  stroke="black"
-                />
-              </svg>
-            }
-          />
-
-          {/* Accelerated Onboarding */}
-          <FeatureCard
-            title="Accelerated Onboarding"
-            description="Cut training time in half by giving new team members ready-made, brand-aligned responses."
-            minHeight="min-h-[497px]"
-            svg={
-              <svg
-                className="absolute top-12 left-48 w-52 h-52"
-                viewBox="0 0 211 211"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M109.62 99.2827L109.548 99.8462H150.368L84.271 178.989Z"
-                  stroke="black"
-                />
-              </svg>
-            }
-          />
-
-          {/* Smarter Support */}
-          <FeatureCard
-            title="Smarter Support"
-            description="Delight customers with instant, accurate replies while your agents focus on what matters most."
-            minHeight="min-h-[497px]"
-            svg={
-              <svg
-                className="absolute top-12 left-48 w-52 h-52"
-                viewBox="0 0 211 211"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M163.904 52.2168V97.5879C163.904 117.12 158.331 134.601 147.185 150.045Z"
-                  stroke="black"
-                />
-              </svg>
-            }
-          />
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {features.map((feature, idx) => (
+            <FeatureCard
+              key={idx}
+              index={idx}
+              {...feature}
+            />
+          ))}
         </div>
       </div>
     </section>
