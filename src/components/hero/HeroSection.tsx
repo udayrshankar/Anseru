@@ -4,13 +4,13 @@ import SmartCTA from "../SmartCTA";
 
 export default function HeroSection() {
   return (
-    <section className="relative pt-4">
-      <div className="relative mx-auto overflow-hidden">
-        <div className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px] overflow-hidden">
+    <section className="relative pt-4 pb-12 w-full overflow-hidden">
+      <div className="relative mx-auto w-full">
+        <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[40px] overflow-hidden">
           <Background />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center text-center pt-50">
+        <div className="relative z-10 flex flex-col items-center text-center pt-50 overflow-hidden">
           {/* Main Title -> H1 */}
           <h1 className="max-w-6xl text-[#2A1638] mb-5">
             Win More Deals – Powered by Agentic AI for <br/>

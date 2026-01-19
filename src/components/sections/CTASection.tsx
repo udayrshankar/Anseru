@@ -3,8 +3,8 @@ import SmartCTA from "../SmartCTA";
 
 export default function CTASection() {
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-[1380px] mx-auto">
+    <section className="py-0 px-6">
+      <div className="max-w-[1400px] mx-auto">
         <div className="relative rounded-[48px] overflow-hidden">
           <img
             src={image}
@@ -13,7 +13,7 @@ export default function CTASection() {
           />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            <h2 className="font-onest text-[45px] font-medium text-[#483953] mb-8 max-w-[971px] leading-tight">
+            <h2 className="font-onest text-[45px] font-medium text-[#2A1638] mb-8 max-w-[971px] leading-tight">
               Fully automate any customer trust workflow with AI
             </h2>
 

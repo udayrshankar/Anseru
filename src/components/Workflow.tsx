@@ -252,10 +252,10 @@ export default function Workflow() {
   });
 
   return (
-    <div className="relative pb-32 overflow-hidden bg-gray-50/50">
+    <div className="relative pb-32 overflow-hidden bg-white">
       {/* BACKGROUND */}
-      <div className="absolute inset-0 max-w-[1440px] mx-auto overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px] overflow-hidden">
+      <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
           <div className="flex flex-col w-full">
              {[...Array(6)].map((_, i) => (
                 <img 
@@ -278,7 +278,7 @@ export default function Workflow() {
         <div className="relative mt-8">
           <div
             ref={containerRef}
-            className="max-w-6xl mx-auto px-6 md:px-12 relative z-10"
+            className="max-w-[1400px] mx-auto px-6 relative z-10"
           >
             {/* PIPE BACKGROUND (Snake Path) */}
             <ResponsivePipe

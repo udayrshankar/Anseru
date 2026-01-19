@@ -5,17 +5,21 @@ import LovedByTeams from "../components/sections/LovedByTeams";
 import FeaturesGrid from "../components/sections/FeaturesGrid";
 import Workflow from "../components/Workflow";
 import WhyAnseru from "../components/WhyAnseru";
+import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 
+// Control the vertical spacing between sections here
+const SECTION_GAP = "gap-20";
+
 export default function Home() {
   return (
-    <div className="bg-[#F6F6F8] w-full -z-5">
+    <div className="bg-white w-full -z-5">
       {/* Header */}
       <Header />
 
       {/* Hero */}
-      <main>
+      <main className={`flex flex-col ${SECTION_GAP}`}>
         <HeroSection />
 
         {/* AI Strategy Tabs */}
@@ -32,6 +36,9 @@ export default function Home() {
 
         {/* Why Anseru */}
         <WhyAnseru />
+
+        {/* Testimonials */}
+        <Testimonials />
 
         {/* Call to Action */}
         <CTASection />

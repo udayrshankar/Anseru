@@ -51,7 +51,7 @@ function FeatureCard({
     >
       {/* Background Decorator Icon (The "Watermark") */}
       <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
-         <Icon className="h-48 w-48 rotate-12 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-700 ease-in-out text-[#483953]" />
+         <Icon className="h-48 w-48 rotate-12 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-700 ease-in-out text-[#2A1638]" />
       </div>
 
       {/* Floating Animated Icon */}
@@ -59,16 +59,16 @@ function FeatureCard({
         <div className="relative">
             {/* Glow effect behind icon */}
             <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
-            <Icon className="relative z-10 w-12 h-12 text-[#483953]/80 group-hover:text-[#483953] transition-colors duration-300" />
+            <Icon className="relative z-10 w-12 h-12 text-[#2A1638]/80 group-hover:text-[#2A1638] transition-colors duration-300" />
         </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 space-y-2 max-w-sm">
-        <h3 className="font-onest text-2xl font-medium text-[#483953] leading-tight group-hover:translate-x-1 transition-transform duration-300">
+        <h3 className="font-onest text-2xl font-medium text-[#2A1638] leading-tight group-hover:translate-x-1 transition-transform duration-300">
           {title}
         </h3>
-        <p className="font-onest text-lg font-light text-[#483953]/90 leading-relaxed">
+        <p className="font-onest text-lg font-light text-[#2A1638]/90 leading-relaxed">
           {description}
         </p>
       </div>
@@ -103,8 +103,8 @@ export default function FeaturesGrid() {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
-      <div className="max-w-[1205px] mx-auto">
+    <section className="py-0 px-6 bg-white">
+      <div className="max-w-[1400px] mx-auto">
         {/* Header */}
         <div className="mb-16">
           <motion.div
@@ -116,7 +116,7 @@ export default function FeaturesGrid() {
             <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
               Fast and Accurate
             </p>
-            <h2 className="font-onest text-5xl md:text-[52px] font-normal text-[#483953] leading-[1.1]">
+            <h2 className="font-onest text-5xl md:text-[52px] font-normal text-[#2A1638] leading-[1.1]">
               Your Edge in <span className="font-medium">RFPs & Reviews.</span>
             </h2>
           </motion.div>
