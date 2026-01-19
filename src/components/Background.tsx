@@ -1,4 +1,4 @@
-import image from "../assets/Group 59 (1).png"
+import image from "../assets/bg2.png"
 const Background = () => {
   return (
     <div>

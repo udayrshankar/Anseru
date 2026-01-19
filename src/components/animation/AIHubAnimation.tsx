@@ -1,139 +1,204 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Slack,
-  FileSpreadsheet,
-  Mail,
-  Trello,
-  Github,
-  Database,
-  Cloud,
-  MessageSquare,
-  Calendar,
-  FileText,
-  PieChart,
-  Server,
-} from "lucide-react";
+  SiSlack,
+  SiGooglesheets,
+  SiJira,
+  SiDropbox,
+  SiGoogledrive,
+} from "react-icons/si";
+import { BsMicrosoftTeams } from "react-icons/bs";
 
-// Configuration for the 12 surrounding apps
-const apps = [
-  { icon: Slack, color: "#0f0f0f", label: "Slack" },
-  { icon: FileSpreadsheet, color: "#0f0f0f", label: "Sheets" },
-  { icon: Mail, color: "#0f0f0f", label: "Email" },
-  { icon: Database, color: "#0f0f0f", label: "CRM" },
-  { icon: Trello, color: "#0f0f0f", label: "Tasks" },
-  { icon: Github, color: "#0f0f0f", label: "Code" },
-  { icon: Cloud, color: "#0f0f0f", label: "Drive" },
-  { icon: MessageSquare, color: "#0f0f0f", label: "Chat" },
-  { icon: Calendar, color: "#0f0f0f", label: "Calendar" },
-  { icon: FileText, color: "#0f0f0f", label: "Docs" },
-  { icon: PieChart, color: "#0f0f0f", label: "Analytics" },
-  { icon: Server, color: "#0f0f0f", label: "ERP" },
+/* --- 1. CONFIGURATION --- */
+const leftApps = [
+  { id: "teams", label: "Teams", icon: BsMicrosoftTeams, color: "#464EB8" },
+  { id: "jira", label: "Jira", icon: SiJira, color: "#0052CC" },
+  { id: "dropbox", label: "Dropbox", icon: SiDropbox, color: "#0061FF" },
 ];
 
+const rightApps = [
+  { id: "drive", label: "Drive", icon: SiGoogledrive, color: "#1EA362" },
+  { id: "sheets", label: "Sheets", icon: SiGooglesheets, color: "#0F9D58" },
+  { id: "slack", label: "Slack", icon: SiSlack, color: "#E01E5A" },
+];
+
+/* --- 2. MAIN COMPONENT --- */
 const AIHubAnimation = () => {
-  // Increased container width slightly to accommodate the oval shape
-  const containerWidth = 700; 
-  const containerHeight = 500;
-  
+  const containerWidth = 900;
+  const containerHeight = 450;
   const centerX = containerWidth / 2;
   const centerY = containerHeight / 2;
 
-  // ELLIPSE CONFIGURATION
-  // Radius X is larger to clear the wide box
-  // Radius Y is smaller to prevent "going too far up or down"
-  const radiusX = 300; 
-  const radiusY = 190; 
+  const boxWidth = 240;
+  const boxHeight = 80;
+
+  // --- PATH GENERATOR ---
+  const getCircuitPath = (side: "left" | "right", index: number, total: number) => {
+    const spacing = 90;
+    const yOffset = (index - (total - 1) / 2) * spacing;
+
+    const startX = side === "left" ? 80 : containerWidth - 80;
+    const startY = centerY + yOffset;
+    
+    const endX = side === "left" ? centerX - boxWidth / 2 : centerX + boxWidth / 2;
+    const endY = centerY + (index - (total - 1) / 2) * 10; 
+
+    const turnX = side === "left" ? startX + 140 : startX - 140;
+
+    const verticalDist = Math.abs(endY - startY);
+    const radius = Math.min(25, verticalDist / 2);
+
+    const dirX = side === "left" ? 1 : -1;
+    const dirY = startY < endY ? 1 : -1;
+
+    let path = "";
+
+    if (verticalDist < 2) {
+       // Straight Line
+       path = `M ${startX} ${startY} L ${endX} ${endY}`;
+    } else {
+       // Curved Line - Constructed delicately to avoid breaks
+       // M startX startY
+       // L (turnX - radius) startY
+       // Q turnX startY, turnX (startY + radius)
+       // L turnX (endY - radius)
+       // Q turnX endY, (turnX + radius) endY
+       // L endX endY
+       
+       path = `M ${startX} ${startY} L ${turnX - (radius * dirX)} ${startY} Q ${turnX} ${startY} ${turnX} ${startY + (radius * dirY)} L ${turnX} ${endY - (radius * dirY)} Q ${turnX} ${endY} ${turnX + (radius * dirX)} ${endY} L ${endX} ${endY}`;
+    }
+
+    // SANITIZATION: Remove any double spaces or newlines just to be safe
+    return { 
+      path: path.replace(/\s+/g, ' ').trim(), 
+      startX, startY, endX, endY 
+    };
+  };
 
   return (
     <div
-      className="relative mx-auto"
+      className="relative mx-auto flex items-center justify-center font-sans overflow-hidden"
       style={{ width: containerWidth, height: containerHeight }}
     >
-      {/* --- 1. The Central AI Box --- */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        {/* Glowing backdrop for the hub */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-pink-500/30 blur-2xl rounded-full" />
-        
-        {/* Box Container - widened to w-[420px] to match "w-100" intent securely */}
-        <div className="relative bg-white bg-opacity-80 backdrop-blur-xl border border-white/50 rounded-[30px] p-8 shadow-[0_0_40px_rgba(192,132,252,0.25)] flex flex-col items-center justify-center text-center w-[420px] h-48">
-           {/* Subtle inner gradient border effect */}
-           <div className="absolute inset-0 rounded-[30px] border-[2px] border-transparent bg-linear-to-br from-purple-200 to-pink-200 [mask:linear-gradient(#fff_0_0)_padding-box,linear-gradient(#fff_0_0)] -z-10"></div>
-           
-           <h3 className="leading-tight text-2xl font-medium text-gray-900">
-             Win deals with Anseru
-           </h3>
-        </div>
+    
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-blue-100/50 via-purple-100/50 to-pink-100/50 blur-[80px] rounded-full opacity-60" />
       </div>
 
-      {/* --- 2. Surrounding Apps & Connections Loop --- */}
-      {apps.map((app, index) => {
-        // ELLIPSE LOGIC
-        // 1. Full circle is 2 * PI
-        // 2. We divide by number of apps
-        // 3. We offset by -PI/2 to start at top
-        // 4. CRITICAL: We add (Math.PI / 12) which is 15 degrees. 
-        //    Since items are 30 deg apart, this half-step shift ensures 
-        //    the "Bottom" (90 deg) is exactly between two items.
-        const step = (2 * Math.PI) / apps.length;
-        const angle = index * step - Math.PI / 2 + (Math.PI / 12);
-        
-        const x = centerX + radiusX * Math.cos(angle);
-        const y = centerY + radiusY * Math.sin(angle);
+      {/* SVG Layer */}
+      <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible">
+        <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
 
-        return (
-          <React.Fragment key={index}>
-            {/* A. The Connecting Line (SVG) */}
-            <svg className="absolute inset-0 pointer-events-none z-0" width={containerWidth} height={containerHeight}>
-              <line
-                x1={x}
-                y1={y}
-                x2={centerX}
-                y2={centerY}
-                stroke="#E5E7EB"
-                strokeWidth="1.5"
-                strokeDasharray="4 4"
+        {[...leftApps, ...rightApps].map((app, i) => {
+          const side = i < leftApps.length ? "left" : "right";
+          const index = i < leftApps.length ? i : i - leftApps.length;
+          const { path, endX, endY } = getCircuitPath(side, index, leftApps.length);
+          
+          const gradientId = `grad-${side}-${i}`;
+          
+          return (
+            <React.Fragment key={i}>
+              <defs>
+                <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor={side === 'left' ? app.color : '#cbd5e1'} stopOpacity="0.8" />
+                    <stop offset="100%" stopColor={side === 'right' ? app.color : '#cbd5e1'} stopOpacity="0.8" />
+                </linearGradient>
+              </defs>
+
+              {/* Static Wire */}
+              <path d={path} stroke="#e2e8f0" strokeWidth="2" fill="none" />
+
+              {/* Animated Gradient Wire */}
+              <motion.path 
+                 d={path}
+                 stroke={`url(#${gradientId})`}
+                 strokeWidth="2"
+                 fill="none"
+                 initial={{ pathLength: 0, opacity: 0.2 }}
+                 animate={{ pathLength: 1, opacity: 1 }}
+                 transition={{ duration: 1.5, delay: 0.2 }}
               />
-            </svg>
+              
+              {/* Terminal Dot */}
+              <circle cx={endX} cy={endY} r="3" fill="white" stroke={app.color} strokeWidth="2" />
 
-            {/* B. The Flowing Data Dot Animation */}
+              {/* FLOWING PARTICLE */}
+              {/* IMPORTANT: We use a simpler animation strategy if offset-path proves tricky in some browsers */}
+              <motion.circle
+                r="4" 
+                fill={app.color} 
+                filter="url(#glow)"
+                initial={{ opacity: 0 }}
+                animate={{ 
+                    opacity: [0, 1, 1, 0], 
+                    offsetDistance: ["0%", "100%"] 
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: Math.random() * 1.5 
+                }}
+                // We strictly wrap the path string in simple quotes to avoid parsing errors
+                style={{ offsetPath: `path('${path}')` }} 
+              />
+            </React.Fragment>
+          );
+        })}
+      </svg>
+
+      {/* Icons */}
+      {[...leftApps, ...rightApps].map((app, i) => {
+          const side = i < leftApps.length ? "left" : "right";
+          const index = i < leftApps.length ? i : i - leftApps.length;
+          const { startX, startY } = getCircuitPath(side, index, leftApps.length);
+          
+          return (
             <motion.div
-              className="absolute w-3 h-3 rounded-full z-10"
-              style={{ 
-                backgroundColor: app.color,
-                boxShadow: `0 0 10px ${app.color}80`,
-              }}
-              initial={{ left: x - 6, top: y - 6, opacity: 0, scale: 0.5 }}
-              animate={{
-                left: [x - 6, centerX - 6],
-                top: [y - 6, centerY - 6],
-                opacity: [0, 1, 1, 0],
-                scale: [0.5, 1, 0.8, 0]
-              }}
-              transition={{
-                duration: 3 + Math.random(),
-                repeat: Infinity,
-                delay: index * 0.2,
-                ease: "easeInOut",
-              }}
-            />
-
-            {/* C. The App Icon Bubble */}
-            <div
-              className="absolute z-20 flex flex-col items-center justify-center p-3 bg-white rounded-2xl shadow-md border border-gray-100 transition-transform hover:scale-110"
+              key={i}
+              className="absolute z-20 flex items-center justify-center rounded-2xl border border-white/60 bg-white/70 backdrop-blur-xl shadow-sm"
               style={{
-                left: x,
-                top: y,
-                transform: "translate(-50%, -50%)",
-                width: '60px',
-                height: '60px'
+                left: startX,
+                top: startY,
+                width: 56, 
+                height: 56,
+                transform: "translate(-50%, -50%)"
               }}
+              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.9)" }}
             >
-              <app.icon size={30} color={app.color} />
-            </div>
-          </React.Fragment>
-        );
+              <app.icon size={24} color={app.color} />
+            </motion.div>
+          );
       })}
+
+      {/* Center Hub */}
+      <div className="relative z-30">
+        <motion.div
+          className="relative flex flex-col items-center justify-center rounded-2xl border border-white/40 bg-white/10 backdrop-blur-2xl shadow-2xl"
+          style={{ width: boxWidth, height: boxHeight }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="absolute inset-0 rounded-2xl border border-white/20 pointer-events-none" />
+          <h1 className="text-4xl text-gray-900"
+          style={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, textShadow: "0 2px 10px rgba(0,0,0,0.1)" }}>
+            ANSERU
+          </h1>
+          <div className="absolute -bottom-3 flex items-center gap-2 px-3 py-1 bg-white/80 backdrop-blur shadow-sm rounded-full border border-gray-100">
+             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+             <span className="text-[10px] uppercase tracking-wider font-semibold text-gray-500 font-sans">System Active</span>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

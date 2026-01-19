@@ -3,7 +3,7 @@ import HeroCards from "./HeroCards";
 
 export default function HeroSection() {
   return (
-    <section className="relative pt-4 px-4">
+    <section className="relative pt-4">
       <div className="relative mx-auto overflow-hidden">
         <div className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px] overflow-hidden">
           <Background />

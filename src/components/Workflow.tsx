@@ -1,264 +1,292 @@
-import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform, MotionValue } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useSpring, useInView } from "framer-motion";
+import { type LucideIcon, Bot, User, Shield, Layers } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
-import bgImage from "../assets/bg2.png"; 
+import bgImage from "../assets/bg2.png";
 
-// --- COMPONENT: PLACEHOLDER BOX ---
-const PlaceholderBox = ({ label }: { label: string }) => (
-  <div className="relative w-full aspect-[16/10] rounded-xl border border-gray-200 bg-white/50 backdrop-blur-md shadow-sm overflow-hidden flex flex-col items-center justify-center group ml-auto">
-    <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-purple-50/40 opacity-80" />
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
-    
-    <div className="relative z-10 flex flex-col items-center gap-4 transition-transform duration-500 group-hover:scale-105">
-      <div className="w-12 h-12 rounded-lg bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 flex items-center justify-center text-xl">
-        ⚡
-      </div>
-      <div className="text-center">
-         <p className="text-sm font-semibold text-gray-900">{label}</p>
-         <p className="text-xs text-gray-400 mt-1">Feature visualization</p>
-      </div>
-    </div>
-    
-    <div className="absolute inset-0 border-2 border-transparent group-hover:border-purple-200/50 rounded-xl transition-colors duration-500 pointer-events-none" />
+// --- DATA ---
+const STEPS = [
+  {
+    id: 1,
+    title: "AI-Drafted Responses",
+    description:
+      "Generate clear, context-aware replies instantly using your knowledge base.",
+    label: "Smart Drafting Engine",
+    icon: Bot,
+  },
+  {
+    id: 2,
+    title: "Smart Personalization",
+    description:
+      "Tone-aware and intent-driven responses that feel human and engaging.",
+    label: "Personalization Core",
+    icon: User,
+  },
+  {
+    id: 3,
+    title: "Team Consistency",
+    description:
+      "Maintain a unified brand voice across teams without manual reviews.",
+    label: "Brand Voice Guard",
+    icon: Shield,
+  },
+  {
+    id: 4,
+    title: "Workflow Integration",
+    description:
+      "Seamlessly integrate into your CRM and tools without disrupting habits.",
+    label: "Integrations",
+    icon: Layers,
+  },
+];
+
+/* ---------------------------------------------
+   HOOK: USE DIMENSIONS
+--------------------------------------------- */
+const useDimensions = (ref: React.RefObject<HTMLElement>) => {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      setDimensions({
+        width: entry.contentRect.width,
+        height: entry.contentRect.height,
+      });
+    });
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return dimensions;
+};
+
+/* ---------------------------------------------
+   COMPONENT: FEATURE CARD
+--------------------------------------------- */
+const FeatureCard = ({
+  label,
+  icon: Icon,
+}: {
+  label: string;
+  icon: LucideIcon;
+}) => (
+  <div className="group relative w-full aspect-[16/10] rounded-2xl border border-white/20 bg-white/40 backdrop-blur-md shadow-lg overflow-hidden flex flex-col items-center justify-center transition-all hover:scale-[1.02] hover:shadow-xl hover:bg-white/60">
+    <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+    <Icon className="w-8 h-8 text-gray-700 mb-3 relative z-10" />
+    <span className="text-sm font-semibold text-gray-700 relative z-10">
+      {label}
+    </span>
   </div>
 );
 
-// --- COMPONENT: ACTIVE TIMELINE DOT ---
-const ActiveTimelineNode = ({ progress, threshold }: { progress: MotionValue<number>, threshold: number }) => {
-  const backgroundColor = useTransform(progress, [threshold - 0.05, threshold], ["#ffffff", "#000000"]);
-  const borderColor = useTransform(progress, [threshold - 0.05, threshold], ["#e5e7eb", "#000000"]);
-  const scale = useTransform(progress, [threshold - 0.05, threshold], [1, 1.2]);
-  const boxShadow = useTransform(
-    progress, 
-    [threshold - 0.05, threshold], 
-    ["0px 0px 0px rgba(0,0,0,0)", "0px 0px 12px rgba(147, 51, 234, 0.5)"]
-  );
+/* ---------------------------------------------
+   COMPONENT: RESPONSIVE PIPE (The Background Line)
+--------------------------------------------- */
+const ResponsivePipe = ({
+  containerRef,
+  progress,
+}: {
+  containerRef: React.RefObject<HTMLDivElement>;
+  progress: any;
+}) => {
+  const { width, height } = useDimensions(containerRef);
+
+  // ALIGNMENT MATH:
+  // We align the pipe to 108px from the left to match the grid column center
+  // (Padding 48px + Half Column 60px = 108px)
+  const startX = width / 2 + 50;
+  const endX = 48 + 60;
+  const radius = 40;
+
+  if (width === 0) return null;
+
+  const path = `
+    M ${startX} -150 
+    L ${startX} 80 
+    Q ${startX} 120 ${startX - radius} 120 
+    L ${endX + radius} 120 
+    Q ${endX} 120 ${endX} 160 
+    L ${endX} ${height - 150}
+  `;
 
   return (
-    <motion.div 
-      style={{ backgroundColor, borderColor, scale, boxShadow }}
-      className="absolute left-[-20px] lg:left-[-30px] top-2 w-4 h-4 border-[3px] rounded-full z-20 -translate-x-1/2"
-    />
-  );
-};
-
-// --- COMPONENT: PIPE CONNECTOR ---
-const PipeConnector = () => {
-  return (
-    <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-visible z-0">
-      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+    <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block">
+      <svg className="w-full h-full overflow-visible">
+        {/* Inactive Gray Trace */}
         <path
-          d={`
-            M 50% -400          
-            V 40                
-            Q 50% 70 48% 70     
-            H 60                
-            Q 30 70 30 100      
-            V 150               
-          `}
+          d={path}
           fill="none"
-          stroke="black"
-          strokeWidth="2"
+          stroke="#E5E7EB"
+          strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="50%" cy="-400" r="3" fill="black" />
+        {/* Active Dark Fill */}
+        <motion.path
+          d={path}
+          fill="none"
+          stroke="url(#gradient-dark)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ pathLength: progress }}
+        />
+        <defs>
+          <linearGradient id="gradient-dark" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#374151" />
+            <stop offset="100%" stopColor="#000000" />
+          </linearGradient>
+        </defs>
       </svg>
     </div>
   );
 };
 
-// --- MAIN WORKFLOW COMPONENT ---
-const Workflow = () => {
+/* ---------------------------------------------
+   COMPONENT: TIMELINE NODE (The Dot)
+--------------------------------------------- */
+const TimelineNode = ({ isActive }: { isActive: boolean }) => (
+  // POSITIONING MATH:
+  // -translate-x-1/2: Centers the dot itself horizontally
+  // -left-[92px]: Moves the center of the dot to the exact center of the left column
+  // (Gap 32px + Half Column 60px = 92px away from this container's left edge)
+  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 -left-[92px] hidden lg:flex items-center justify-center">
+    {/* Outer Ring */}
+    <div
+      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+        isActive
+          ? "border-black bg-white scale-125 shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+          : "border-gray-300 bg-gray-50 scale-100"
+      }`}
+    >
+      {/* Inner Dot */}
+      <div
+        className={`w-2 h-2 rounded-full transition-all duration-500 ${
+          isActive ? "bg-black" : "bg-transparent"
+        }`}
+      />
+    </div>
+
+    {/* Pulse Effect when Active (Optional subtle glow) */}
+    {isActive && (
+      <div className="absolute inset-0 rounded-full border border-black animate-ping opacity-20 w-5 h-5" />
+    )}
+  </div>
+);
+
+/* ---------------------------------------------
+   MAIN COMPONENT
+--------------------------------------------- */
+export default function Workflow() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
+  // Controls the "Liquid" fill of the main pipe
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 40%", "end 90%"]
+    offset: ["start 95%", "end 100%"],
   });
 
-  const scaleY = useSpring(scrollYProgress, {
+  const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
-  const THRESHOLDS = [0.05, 0.30, 0.55, 0.80];
-
   return (
-    <div className="relative pb-32 overflow-hidden">
-      
-      {/* --- 1. BACKGROUND IMAGE LAYER --- */}
-      <div 
-        className="absolute inset-0 z-0 max-w-[1373px] mx-auto rounded-[50px]"
-        style={{
-           backgroundImage: `url(${bgImage})`,
-           backgroundSize: '100% auto', // Streches X to 100%, keeps Y proportional (no vertical distortion)
-           backgroundPosition: 'bottom center', // Anchors image to top so it flows down naturally
-           backgroundRepeat: 'no-repeat'
-        }}
-      />
+    <div className="relative pb-32 overflow-hidden bg-gray-50/50">
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 max-w-[1440px] mx-auto overflow-hidden pointer-events-none">
+        <div
+          className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px]"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "100% auto", // Width fills container, Height scales proportionally
+            backgroundRepeat: "no-repeat", // Prevents the image from repeating
+            backgroundPosition: "center bottom", // Positions the image at the bottom center
+            transform: "rotate(180deg)"
+          }}
+        />
+         <div className="absolute inset-0 bg-linear-to-b from-white/0 via-[#f6f6f8] to-[#f6f6f8]" />
+      </div>
 
-      {/* --- 2. WHITE OVERLAY --- */}
-      <div className="absolute inset-0 z-0 bg-white/50 backdrop-blur-[1px]" />
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <div className=" pb-0 flex justify-center relative z-20">
+          <AIHubAnimation />
+        </div>
 
-      {/* --- 3. MAIN CONTENT --- */}
-      <div className="relative z-10">
-          
-          {/* --- HEADER (Hub Animation) --- */}
-          <div className="relative pt-20 pb-0 flex justify-center items-center overflow-visible z-20">
-            <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-pink-50/40 via-purple-50/20 to-transparent pointer-events-none z-0" />
-            <div className="relative z-10 w-full max-w-4xl px-4 flex justify-center scale-[0.65] md:scale-90 lg:scale-100 origin-center">
-              <AIHubAnimation />
-            </div>
-          </div>
+        <div className="relative mt-0">
+          <div
+            ref={containerRef}
+            className="max-w-6xl mx-auto px-6 md:px-12 relative z-10"
+          >
+            {/* PIPE BACKGROUND */}
+            <ResponsivePipe
+              containerRef={containerRef}
+              progress={smoothProgress}
+            />
 
-          {/* --- TIMELINE SECTION --- */}
-          <div ref={containerRef} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-            
-            <div className="hidden lg:block relative w-full z-0">
-              <PipeConnector />
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-8">
+              <div className="hidden lg:block"></div>
 
-            <div className="grid grid-cols-[40px_1fr] lg:grid-cols-[60px_1fr] gap-0">
-              
-              <div className="relative w-full h-full">
-                <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2" />
-                <div className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 origin-top">
-                    <motion.div 
-                      style={{ scaleY, transformOrigin: "top" }} 
-                      className="w-full h-full bg-black origin-top"
-                    />
-                </div>
-              </div>
-
-              <div className="space-y-24 lg:space-y-32 pb-20 pt-10">
-                  
-                  {/* STEP 1 */}
-                  <div className="group relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-                    <ActiveTimelineNode progress={scrollYProgress} threshold={THRESHOLDS[0]} />
-                    
-                    <div className="lg:pr-8 pt-1">
-                        <motion.div 
-                          initial={{ opacity: 0, x: -20 }} 
-                          whileInView={{ opacity: 1, x: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3">AI-Drafted Responses</h3>
-                          <p className="text-lg text-gray-500 leading-relaxed">
-                              Generate clear, context-aware replies instantly. Our engine ingests your knowledge base to keep communication sharp, consistent, and on-brand.
-                          </p>
-                        </motion.div>
-                    </div>
-                    <div className="relative">
-                        <motion.div 
-                          initial={{ opacity: 0, y: 20 }} 
-                          whileInView={{ opacity: 1, y: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5, delay: 0.1 }}
-                        >
-                          <PlaceholderBox label="Smart Drafting Engine" />
-                        </motion.div>
-                    </div>
-                  </div>
-
-                  {/* STEP 2 */}
-                  <div className="group relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-                    <ActiveTimelineNode progress={scrollYProgress} threshold={THRESHOLDS[1]} />
-                    
-                    <div className="lg:pr-8 pt-1">
-                        <motion.div 
-                          initial={{ opacity: 0, x: -20 }} 
-                          whileInView={{ opacity: 1, x: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <div className="inline-flex items-center gap-2 bg-purple-50 px-3 py-1 rounded-full mb-4 border border-purple-100">
-                              <span className="text-xs font-bold text-purple-700 uppercase tracking-wide">Context Aware</span>
-                          </div>
-                          <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3">Smart Personalization</h3>
-                          <p className="text-lg text-gray-500 leading-relaxed">
-                              Tailor every response to the customer's intent. The AI adapts tone and detail level ensuring conversations feel human, not robotic.
-                          </p>
-                        </motion.div>
-                    </div>
-                    <div className="relative">
-                        <motion.div 
-                          initial={{ opacity: 0, y: 20 }} 
-                          whileInView={{ opacity: 1, y: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5, delay: 0.1 }}
-                        >
-                          <PlaceholderBox label="Personalization Core" />
-                        </motion.div>
-                    </div>
-                  </div>
-
-                  {/* STEP 3 */}
-                  <div className="group relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-                    <ActiveTimelineNode progress={scrollYProgress} threshold={THRESHOLDS[2]} />
-                    
-                    <div className="lg:pr-8 pt-1">
-                        <motion.div 
-                          initial={{ opacity: 0, x: -20 }} 
-                          whileInView={{ opacity: 1, x: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3">Team Consistency</h3>
-                          <p className="text-lg text-gray-500 leading-relaxed">
-                              Maintain a unified brand voice across sales, support, and onboarding. Whether it's a seasoned rep or a new hire, the quality remains top-tier.
-                          </p>
-                        </motion.div>
-                    </div>
-                    <div className="relative">
-                        <motion.div 
-                          initial={{ opacity: 0, y: 20 }} 
-                          whileInView={{ opacity: 1, y: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5, delay: 0.1 }}
-                        >
-                          <PlaceholderBox label="Brand Voice Guard" />
-                        </motion.div>
-                    </div>
-                  </div>
-
-                  {/* STEP 4 */}
-                  <div className="group relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-                    <ActiveTimelineNode progress={scrollYProgress} threshold={THRESHOLDS[3]} />
-                    
-                    <div className="lg:pr-8 pt-1">
-                        <motion.div 
-                          initial={{ opacity: 0, x: -20 }} 
-                          whileInView={{ opacity: 1, x: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-3">Workflow Integration</h3>
-                          <p className="text-lg text-gray-500 leading-relaxed">
-                              Plug seamlessly into CRM and support tools. Teams can draft, edit, and send responses without ever breaking their existing flow.
-                          </p>
-                        </motion.div>
-                    </div>
-                    <div className="relative">
-                        <motion.div 
-                          initial={{ opacity: 0, y: 20 }} 
-                          whileInView={{ opacity: 1, y: 0 }} 
-                          viewport={{ once: true, margin: "-10%" }}
-                          transition={{ duration: 0.5, delay: 0.1 }}
-                        >
-                          <PlaceholderBox label="Workflow Integrations" />
-                        </motion.div>
-                    </div>
-                  </div>
-
+              <div className="space-y-32 pt-48 pb-24">
+                {STEPS.map((step, index) => (
+                  <FeatureRow key={step.id} step={step} index={index} />
+                ))}
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default Workflow;
+/* ---------------------------------------------
+   SUB-COMPONENT: ROW
+--------------------------------------------- */
+const FeatureRow = ({
+  step,
+  index,
+}: {
+  step: (typeof STEPS)[0];
+  index: number;
+}) => {
+  const ref = useRef(null);
+
+  // Triggers when the row is in the middle of the screen
+  const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", once: false });
+
+  return (
+    <motion.section
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="grid lg:grid-cols-2 gap-12 items-center relative"
+    >
+      {/* Pass Active State to the Dot */}
+      <TimelineNode isActive={isInView} />
+
+      <div className="text-left space-y-4">
+        <h3
+          className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${
+            isInView ? "text-black" : "text-gray-400"
+          }`}
+        >
+          {step.title}
+        </h3>
+        <p className="text-lg text-gray-600 leading-relaxed max-w-md">
+          {step.description}
+        </p>
+      </div>
+
+      <div className="relative">
+        <FeatureCard label={step.label} icon={step.icon} />
+        {/* Soft back-glow behind card */}
+        <div className="absolute -inset-4 bg-blue-500/10 blur-2xl rounded-full -z-10" />
+      </div>
+    </motion.section>
+  );
+};

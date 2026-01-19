@@ -37,8 +37,8 @@ const WhyAnseru = () => {
       </style>
 
       <section className="py-16 relative overflow-hidden group">
-        <div className="absolute left-0 top-0 w-[100px] md:w-[180px] h-full bg-gradient-to-r from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
-        <div className="absolute right-0 top-0 w-[100px] md:w-[180px] h-full bg-gradient-to-l from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
+        <div className="absolute left-0 bottom-0 w-[100px] md:w-[180px] h-[80%] bg-gradient-to-r from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
+        <div className="absolute right-0 bottom-0 w-[100px] md:w-[180px] h-[80%] bg-gradient-to-l from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
 
         <div className="max-w-[1440px] mx-auto px-4 relative z-10">
           <div className="mb-12 ml-4 md:ml-8">
