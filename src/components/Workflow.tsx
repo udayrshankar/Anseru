@@ -43,7 +43,8 @@ const STEPS = [
 /* ---------------------------------------------
    HOOK: USE DIMENSIONS
 --------------------------------------------- */
-const useDimensions = (ref: React.RefObject<HTMLElement>) => {
+// FIX: Added ' | null' to the type definition to match useRef initialization
+const useDimensions = (ref: React.RefObject<HTMLElement | null>) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -87,7 +88,8 @@ const ResponsivePipe = ({
   containerRef,
   progress,
 }: {
-  containerRef: React.RefObject<HTMLDivElement>;
+  // FIX: Added ' | null' to allow the RefObject to be nullable
+  containerRef: React.RefObject<HTMLDivElement | null>;
   progress: any;
 }) => {
   const { width, height } = useDimensions(containerRef);
