@@ -2,6 +2,10 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { type LucideIcon, Bot, User, Shield, Layers } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
+import SmartDraftingAnimation from "./animation/SmartDraftingAnimation";
+import SmartPersonalizationAnimation from "./animation/SmartPersonalizationAnimation";
+import BrandVoiceAnimation from "./animation/BrandVoiceAnimation";
+import IntegrationsAnimation from "./animation/IntegrationsAnimation";
 import bgImage from "../assets/bg2.png";
 
 // --- DATA ---
@@ -13,6 +17,7 @@ const STEPS = [
       "Generate clear, context-aware replies instantly using your knowledge base.",
     label: "Smart Drafting Engine",
     icon: Bot,
+    component: SmartDraftingAnimation,
   },
   {
     id: 2,
@@ -21,6 +26,7 @@ const STEPS = [
       "Tone-aware and intent-driven responses that feel human and engaging.",
     label: "Personalization Core",
     icon: User,
+    component: SmartPersonalizationAnimation,
   },
   {
     id: 3,
@@ -29,6 +35,7 @@ const STEPS = [
       "Maintain a unified brand voice across teams without manual reviews.",
     label: "Brand Voice Guard",
     icon: Shield,
+    component: BrandVoiceAnimation,
   },
   {
     id: 4,
@@ -37,6 +44,7 @@ const STEPS = [
       "Seamlessly integrate into your CRM and tools without disrupting habits.",
     label: "Integrations",
     icon: Layers,
+    component: IntegrationsAnimation,
   },
 ];
 
@@ -68,16 +76,27 @@ const useDimensions = (ref: React.RefObject<HTMLElement | null>) => {
 const FeatureCard = ({
   label,
   icon: Icon,
+  component: AnimationComponent
 }: {
   label: string;
   icon: LucideIcon;
+  component: React.ComponentType;
 }) => (
-  <div className="group relative w-full aspect-[16/10] rounded-2xl border border-white/20 bg-white/40 backdrop-blur-md shadow-lg overflow-hidden flex flex-col items-center justify-center transition-all hover:scale-[1.02] hover:shadow-xl hover:bg-white/60">
-    <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-    <Icon className="w-8 h-8 text-gray-700 mb-3 relative z-10" />
-    <span className="text-sm font-semibold text-gray-700 relative z-10">
-      {label}
-    </span>
+  <div className="group relative w-full aspect-[16/10] rounded-2xl border border-white/50 bg-white/90 shadow-lg overflow-hidden flex flex-col items-center justify-center transition-all hover:scale-[1.02] hover:shadow-xl">
+    <div className="absolute inset-0 bg-gradient-to-br from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+    
+    {/* Animation Layer */}
+    <div className="absolute inset-0 z-0">
+        <AnimationComponent />
+    </div>
+
+    {/* Label Overlay - Reduced blur here too */}
+    <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1 rounded-full border border-gray-100 shadow-sm z-10 flex items-center gap-2">
+        <Icon className="w-4 h-4 text-gray-700" />
+        <span className="text-xs font-semibold text-gray-700">
+        {label}
+        </span>
+    </div>
   </div>
 );
 
@@ -285,9 +304,8 @@ const FeatureRow = ({
       </div>
 
       <div className="relative">
-        <FeatureCard label={step.label} icon={step.icon} />
-        {/* Soft back-glow behind card */}
-        <div className="absolute -inset-4 bg-blue-500/10 blur-2xl rounded-full -z-10" />
+        <FeatureCard label={step.label} icon={step.icon} component={step.component} />
+        {/* Soft back-glow removed for performance */}
       </div>
     </motion.section>
   );

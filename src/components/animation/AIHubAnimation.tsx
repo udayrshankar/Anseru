@@ -57,18 +57,10 @@ const AIHubAnimation = () => {
        // Straight Line
        path = `M ${startX} ${startY} L ${endX} ${endY}`;
     } else {
-       // Curved Line - Constructed delicately to avoid breaks
-       // M startX startY
-       // L (turnX - radius) startY
-       // Q turnX startY, turnX (startY + radius)
-       // L turnX (endY - radius)
-       // Q turnX endY, (turnX + radius) endY
-       // L endX endY
-       
+       // Curved Line 
        path = `M ${startX} ${startY} L ${turnX - (radius * dirX)} ${startY} Q ${turnX} ${startY} ${turnX} ${startY + (radius * dirY)} L ${turnX} ${endY - (radius * dirY)} Q ${turnX} ${endY} ${turnX + (radius * dirX)} ${endY} L ${endX} ${endY}`;
     }
 
-    // SANITIZATION: Remove any double spaces or newlines just to be safe
     return { 
       path: path.replace(/\s+/g, ' ').trim(), 
       startX, startY, endX, endY 
@@ -80,22 +72,15 @@ const AIHubAnimation = () => {
       className="relative mx-auto flex items-center justify-center font-sans overflow-hidden"
       style={{ width: containerWidth, height: containerHeight }}
     >
-    
+        {/* Background Blob - Optimized with simple opacity/translate instead of complex blur/filter chains if possible, sticking to opacity here */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-blue-100/50 via-purple-100/50 to-pink-100/50 blur-[80px] rounded-full opacity-60" />
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gradient-to-r from-blue-100/50 via-purple-100/50 to-pink-100/50 blur-[80px] rounded-full opacity-60" 
+         style={{ willChange: "transform" }} />
       </div>
 
       {/* SVG Layer */}
       <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible">
-        <defs>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            </filter>
-        </defs>
+          {/* REMOVED EXPENSIVE FILTER 'glow' */}
 
         {[...leftApps, ...rightApps].map((app, i) => {
           const side = i < leftApps.length ? "left" : "right";
@@ -116,7 +101,7 @@ const AIHubAnimation = () => {
               {/* Static Wire */}
               <path d={path} stroke="#e2e8f0" strokeWidth="2" fill="none" />
 
-              {/* Animated Gradient Wire */}
+              {/* Animated Gradient Wire - Optimized to just run opacities or simpler drawing */}
               <motion.path 
                  d={path}
                  stroke={`url(#${gradientId})`}
@@ -130,12 +115,13 @@ const AIHubAnimation = () => {
               {/* Terminal Dot */}
               <circle cx={endX} cy={endY} r="3" fill="white" stroke={app.color} strokeWidth="2" />
 
-              {/* FLOWING PARTICLE */}
-              {/* IMPORTANT: We use a simpler animation strategy if offset-path proves tricky in some browsers */}
+              {/* FLOWING PARTICLE - Removed direct offset-path animation if it causes issues, but standard framer-motion path animation is usually ok on GPU. 
+                  Removed 'filter' prop to speed up rendering.
+              */}
               <motion.circle
                 r="4" 
                 fill={app.color} 
-                filter="url(#glow)"
+                // filter="url(#glow)" <--- REMOVED
                 initial={{ opacity: 0 }}
                 animate={{ 
                     opacity: [0, 1, 1, 0], 
@@ -147,8 +133,7 @@ const AIHubAnimation = () => {
                   ease: "easeInOut",
                   delay: Math.random() * 1.5 
                 }}
-                // We strictly wrap the path string in simple quotes to avoid parsing errors
-                style={{ offsetPath: `path('${path}')` }} 
+                style={{ offsetPath: `path('${path}')`, willChange: "offset-distance, opacity" }} 
               />
             </React.Fragment>
           );
@@ -170,7 +155,8 @@ const AIHubAnimation = () => {
                 top: startY,
                 width: 56, 
                 height: 56,
-                transform: "translate(-50%, -50%)"
+                transform: "translate(-50%, -50%)",
+                willChange: "transform"
               }}
               whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.9)" }}
             >
@@ -183,7 +169,7 @@ const AIHubAnimation = () => {
       <div className="relative z-30">
         <motion.div
           className="relative flex flex-col items-center justify-center rounded-2xl border border-white/40 bg-white/10 backdrop-blur-2xl shadow-2xl"
-          style={{ width: boxWidth, height: boxHeight }}
+          style={{ width: boxWidth, height: boxHeight, willChange: "transform, opacity" }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}

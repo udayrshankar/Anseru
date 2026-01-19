@@ -1,5 +1,6 @@
 import Background from "../Background";
 import HeroCards from "./HeroCards";
+import SmartCTA from "../SmartCTA";
 
 export default function HeroSection() {
   return (
@@ -20,6 +21,10 @@ export default function HeroSection() {
           <p className="text-body text-[#2A1638]/70 max-w-3xl mb-10">
             Agents autonomously research your approved knowledge base, provide contextually accurate, auditable responses governed by human-in-the loop workflows with evidence traceability for security, sales, and compliance teams.
           </p>
+
+          <div className="mb-12">
+            <SmartCTA />
+          </div>
 
           <HeroCards />
         </div>
