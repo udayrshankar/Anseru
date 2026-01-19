@@ -1,15 +1,29 @@
+import bgImage from "../../assets/bg2.png";
+
 export default function Footer() {
   return (
-    <footer className="border-t border-[#483953] bg-[url('https://api.builder.io/api/v1/image/assets/TEMP/8db418d32026a7ce83976b125ba3f12bdf433531?width=2880')] bg-cover bg-center">
-      <div className="max-w-[1200px] mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div>
-            {/* Brand Logo - Keep distinct or use H3 */}
-            <h3 className="text-[#483953]">
-              ANSERU
+    <footer className="relative border-t border-white/50 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+        style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+        }}
+      />
+      
+      {/* Content */}
+      <div className="relative z-10 max-w-[1240px] mx-auto px-6 pt-24 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-2 space-y-6">
+            <h3 className="text-3xl font-medium text-[#483953] tracking-tight">
+              Anseru
             </h3>
-            <p className="mt-4 text-[#483953] max-w-[300px] text-smalls">
-              Your edge in RFPs & Reviews. Powered by AI for Trust.
+            <p className="text-lg text-[#483953]/70 max-w-sm leading-relaxed">
+              Your edge in RFPs & Reviews. Powered by agentic AI to build trust and accelerate deals.
             </p>
           </div>
 
@@ -18,15 +32,17 @@ export default function Footer() {
             ["Company", ["About", "Careers", "Blog", "Contact"]],
             ["Resources", ["Help Center", "API Docs", "ROI Calculator", "Status"]],
           ].map(([title, items]) => (
-            <div key={title as string}>
-              {/* Table Heading Style */}
-              <h4 className="text-table-heading text-[#483953] mb-4">
+            <div key={title as string} className="lg:col-span-1">
+              <h4 className="text-base font-semibold text-[#483953] mb-6 uppercase tracking-wider opacity-80">
                 {title}
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {(items as string[]).map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-smalls hover:opacity-70">
+                    <a 
+                      href="#" 
+                      className="text-[#483953]/70 hover:text-[#483953] text-[15px] transition-colors duration-200"
+                    >
                       {item}
                     </a>
                   </li>
@@ -36,14 +52,15 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-10 border-t border-[#483953] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-smalls text-[#483953]">
+        <div className="pt-8 border-t border-[#483953]/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-sm text-[#483953]/60">
             © 2024 Anseru Inc. All rights reserved.
           </p>
 
-          <div className="flex gap-5 text-smalls">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+          <div className="flex gap-8 text-sm text-[#483953]/60">
+            <a href="#" className="hover:text-[#483953] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#483953] transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-[#483953] transition-colors">Security</a>
           </div>
         </div>
       </div>

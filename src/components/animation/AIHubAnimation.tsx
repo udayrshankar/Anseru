@@ -158,7 +158,6 @@ const AIHubAnimation = () => {
                 transform: "translate(-50%, -50%)",
                 willChange: "transform"
               }}
-              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.9)" }}
             >
               <app.icon size={24} color={app.color} />
             </motion.div>

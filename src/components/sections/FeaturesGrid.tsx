@@ -32,7 +32,7 @@ function FeatureCard({
   title,
   description,
   icon: Icon,
-  minHeight = "min-h-[500px]",
+  minHeight = "min-h-[300px]",
   index,
 }: FeatureCardProps) {
   return (
@@ -43,32 +43,32 @@ function FeatureCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.01 }}
       className={cn(
-        "group relative flex flex-col justify-end overflow-hidden rounded-[22px] p-10",
+        "group relative flex flex-col justify-end overflow-hidden rounded-[20px] p-6",
         "bg-gradient-to-br from-[#EBEBEB] to-[#FEE6FF]",
         "border border-white/50 shadow-sm hover:shadow-xl transition-all duration-300 ease-out",
         minHeight
       )}
     >
       {/* Background Decorator Icon (The "Watermark") */}
-      <div className="absolute -right-12 -top-12 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
-         <Icon className="h-96 w-96 rotate-12 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-700 ease-in-out text-[#483953]" />
+      <div className="absolute -right-6 -top-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
+         <Icon className="h-48 w-48 rotate-12 group-hover:rotate-[20deg] group-hover:scale-110 transition-transform duration-700 ease-in-out text-[#483953]" />
       </div>
 
       {/* Floating Animated Icon */}
-      <div className="absolute top-12 left-8">
+      <div className="absolute top-6 left-6">
         <div className="relative">
             {/* Glow effect behind icon */}
             <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
-            <Icon className="relative z-10 w-24 h-24 text-[#483953]/80 group-hover:text-[#483953] transition-colors duration-300" />
+            <Icon className="relative z-10 w-12 h-12 text-[#483953]/80 group-hover:text-[#483953] transition-colors duration-300" />
         </div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 space-y-4 max-w-md">
-        <h3 className="font-onest text-4xl font-medium text-[#483953] leading-tight group-hover:translate-x-1 transition-transform duration-300">
+      <div className="relative z-10 space-y-2 max-w-sm">
+        <h3 className="font-onest text-2xl font-medium text-[#483953] leading-tight group-hover:translate-x-1 transition-transform duration-300">
           {title}
         </h3>
-        <p className="font-onest text-xl font-light text-[#483953]/90 leading-relaxed">
+        <p className="font-onest text-lg font-light text-[#483953]/90 leading-relaxed">
           {description}
         </p>
       </div>
@@ -92,13 +92,13 @@ export default function FeaturesGrid() {
       title: "Accelerated Onboarding",
       description: "Cut training time in half by giving new team members ready-made, brand-aligned responses.",
       icon: MdRocketLaunch,
-      minHeight: "min-h-[460px]", // Slightly adjusted height variation
+      minHeight: "min-h-[280px]", // Even smaller variation
     },
     {
       title: "Smarter Support",
       description: "Delight customers with instant, accurate replies while your agents focus on what matters most.",
       icon: MdSupportAgent,
-      minHeight: "min-h-[460px]",
+      minHeight: "min-h-[280px]",
     },
   ];
 

@@ -1,3 +1,6 @@
+import React, { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
 const cards = [
   {
     title: "Close Deals Faster",
@@ -22,68 +25,76 @@ const cards = [
 ];
 
 const WhyAnseru = () => {
-  return (
-    <div>
-      <style>
-        {`
-          @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-scroll {
-            animation: scroll 40s linear infinite;
-          }
-        `}
-      </style>
-
-      <section className="py-16 relative overflow-hidden group">
-        <div className="absolute left-0 bottom-0 w-[100px] md:w-[180px] h-[80%] bg-gradient-to-r from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
-        <div className="absolute right-0 bottom-0 w-[100px] md:w-[180px] h-[80%] bg-gradient-to-l from-[#F6F6F8] to-transparent pointer-events-none z-20"></div>
-
-        <div className="max-w-[1440px] mx-auto px-4 relative z-10">
-          <div className="mb-12 ml-4 md:ml-8">
-            <p className="text-smalls text-black mb-2">
-              Fast and Accurate
-            </p>
-            {/* H2 Style (42px, Regular) */}
-            <h2 className="text-[#483953]">
-              Why Anseru
-            </h2>
-          </div>
-
-          <div className="flex overflow-hidden">
-            <div className="flex gap-6 w-max animate-scroll group-hover:[animation-play-state:paused]">
-              {[...cards, ...cards].map((card, index) => (
-                <div
-                  key={index}
-                  className="relative rounded-[22px] bg-gradient-to-br from-[#EBEBEB] to-[#FEE6FF] p-11 overflow-hidden min-w-[350px] md:min-w-[590px] min-h-[529px] flex flex-col justify-end flex-shrink-0"
-                >
-                  <svg
-                    className="absolute top-12 left-48 w-52 h-52"
-                    viewBox="0 0 211 211"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d={card.path} stroke="black" />
-                  </svg>
-                  <div className="space-y-4 relative z-10">
-                    {/* H3 Style (36px, Medium) */}
-                    <h3 className="text-[#483953]">
-                      {card.title}
-                    </h3>
-                    {/* Body Style (26px, Light) */}
-                    <p className="text-body text-[#483953]">
-                      {card.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState(0);
+  
+    useEffect(() => {
+      if (carouselRef.current) {
+        setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
+      }
+    }, []);
+  
+    return (
+      <div className="bg-[#f6f6f8]">
+        <section className="py-24 relative overflow-hidden">
+          <div className="max-w-[1440px] mx-auto px-6 relative z-10">
+            <div className="mb-12 md:pl-2">
+              <p className="text-smalls text-black mb-2 opacity-60 uppercase tracking-widest font-medium">
+                Proven Results
+              </p>
+              <h2 className="text-[#483953] text-5xl md:text-6xl font-medium tracking-tight">
+                Why Anseru?
+              </h2>
             </div>
+  
+            {/* Draggable Carousel */}
+            <motion.div 
+                ref={carouselRef} 
+                className="overflow-hidden cursor-grab active:cursor-grabbing"
+            >
+              <motion.div 
+                drag="x" 
+                dragConstraints={{ right: 0, left: -width }} 
+                className="flex gap-8"
+              >
+                {cards.map((card, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative rounded-[32px] bg-white p-10 overflow-hidden min-w-[320px] md:min-w-[400px] min-h-[420px] flex flex-col justify-between flex-shrink-0 shadow-sm border border-black/[0.04] group hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                     {/* Subtle Background Pattern/Icon */}
+                    <svg
+                      className="absolute -bottom-10 -right-10 w-64 h-64 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 rotate-12"
+                      viewBox="0 0 211 211"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d={card.path} stroke="currentColor" className="text-[#483953]" strokeWidth="2" />
+                    </svg>
+  
+                    <div className="relative z-10">
+                        <div className="w-16 h-16 rounded-2xl bg-[#F6F6F8] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                             <svg className="w-8 h-8 text-[#483953]" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d={card.path} fill="currentColor" />
+                             </svg>
+                        </div>
+                        
+                        <h3 className="text-[#483953] text-3xl font-medium mb-4 leading-tight">
+                        {card.title}
+                        </h3>
+                    </div>
+  
+                    <p className="text-body text-[#483953]/80 relative z-10 font-normal leading-relaxed">
+                        {card.desc}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+        </section>
+      </div>
+    );
+  };
 
 export default WhyAnseru;

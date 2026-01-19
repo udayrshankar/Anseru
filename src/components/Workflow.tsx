@@ -58,9 +58,10 @@ const useDimensions = (ref: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
     if (!ref.current) return;
     const observer = new ResizeObserver(([entry]) => {
+      const target = entry.target as HTMLElement;
       setDimensions({
-        width: entry.contentRect.width,
-        height: entry.contentRect.height,
+        width: target.clientWidth,
+        height: target.clientHeight,
       });
     });
     observer.observe(ref.current);
@@ -101,34 +102,75 @@ const FeatureCard = ({
 );
 
 /* ---------------------------------------------
-   COMPONENT: RESPONSIVE PIPE (The Background Line)
+   COMPONENT: RESPONSIVE PIPE (Orthogonal Snake Path)
 --------------------------------------------- */
 const ResponsivePipe = ({
   containerRef,
   progress,
 }: {
-  // FIX: Added ' | null' to allow the RefObject to be nullable
   containerRef: React.RefObject<HTMLDivElement | null>;
   progress: any;
 }) => {
   const { width, height } = useDimensions(containerRef);
 
-  // ALIGNMENT MATH:
-  // We align the pipe to 108px from the left to match the grid column center
-  // (Padding 48px + Half Column 60px = 108px)
-  const startX = width / 2 + 50;
-  const endX = 48 + 60;
-  const radius = 40;
-
   if (width === 0) return null;
 
+  // LAYOUT CONSTANTS
+  const leftX = 40; // Fixed pixels from left
+  const rightX = width - 40; // Fixed pixels from right
+  const centerX = width / 2;
+  const radius = 30; // Corner radius
+
+  // We have 4 rows.
+  // We need to distribute vertical segments.
+  // Row 0 is at Top. Row 3 at Bottom.
+  // The path needs to wrap around.
+  // Start: Top Center (above Row 0) -> Left
+  // Row 0 Side: Left
+  // Cross: Left -> Right (between Row 0 & 1)
+  // Row 1 Side: Right
+  // Cross: Right -> Left (between Row 1 & 2)
+  // Row 2 Side: Left
+  // Cross: Left -> Right (between Row 2 & 3)
+  // Row 3 Side: Right
+  // End: Right Bottom or back to Center? 
+  // Let's end at Bottom Right for now.
+
+  const steps = 4;
+  const stepHeight = height / steps; // Rough height per step
+
+  // Key Y-coordinates (centers of gaps between rows)
+  const yStart = 0;
+  const yGap1 = stepHeight * 1;
+  const yGap2 = stepHeight * 2;
+  const yGap3 = stepHeight * 3;
+  const yEnd = height;
+
+  // Path Construction
+  // 1. M Center Top -> Vertical down
+  // 2. Curve to Horizontal Left
+  // 3. Line to Left Top (with corner) -> Left Vertical
+  // ...
+
   const path = `
-    M ${startX} -150 
-    L ${startX} 80 
-    Q ${startX} 120 ${startX - radius} 120 
-    L ${endX + radius} 120 
-    Q ${endX} 120 ${endX} 160 
-    L ${endX} ${height - 150}
+    M ${centerX} ${yStart - 200}
+    L ${centerX} ${yStart - radius}
+    Q ${centerX} ${yStart} ${centerX - radius} ${yStart}
+    L ${leftX + radius} ${yStart}
+    Q ${leftX} ${yStart} ${leftX} ${yStart + radius}
+    L ${leftX} ${yGap1 - radius}
+    Q ${leftX} ${yGap1} ${leftX + radius} ${yGap1}
+    L ${rightX - radius} ${yGap1}
+    Q ${rightX} ${yGap1} ${rightX} ${yGap1 + radius}
+    L ${rightX} ${yGap2 - radius}
+    Q ${rightX} ${yGap2} ${rightX - radius} ${yGap2}
+    L ${leftX + radius} ${yGap2}
+    Q ${leftX} ${yGap2} ${leftX} ${yGap2 + radius}
+    L ${leftX} ${yGap3 - radius}
+    Q ${leftX} ${yGap3} ${leftX + radius} ${yGap3}
+    L ${rightX - radius} ${yGap3}
+    Q ${rightX} ${yGap3} ${rightX} ${yGap3 + radius}
+    L ${rightX} ${yEnd}
   `;
 
   return (
@@ -139,16 +181,39 @@ const ResponsivePipe = ({
           d={path}
           fill="none"
           stroke="#E5E7EB"
-          strokeWidth="4"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+        
+        {/* Scroll Hint Animation */}
+        <motion.path
+            d={path}
+            fill="none"
+            stroke="#9ca3af" // Intermediate gray (darker than base)
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ 
+                pathLength: [0, 0.15, 0],
+                opacity: [0, 1, 0]
+            }}
+            transition={{ 
+                duration: 2.5,
+                delay: 3, // Start after 3 seconds
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "easeInOut"
+            }}
+        />
+
         {/* Active Dark Fill */}
         <motion.path
           d={path}
           fill="none"
           stroke="url(#gradient-dark)"
-          strokeWidth="4"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{ pathLength: progress }}
@@ -158,6 +223,11 @@ const ResponsivePipe = ({
             <stop offset="0%" stopColor="#374151" />
             <stop offset="100%" stopColor="#000000" />
           </linearGradient>
+           <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+            markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#000" />
+          </marker>
         </defs>
       </svg>
     </div>
@@ -165,47 +235,14 @@ const ResponsivePipe = ({
 };
 
 /* ---------------------------------------------
-   COMPONENT: TIMELINE NODE (The Dot)
---------------------------------------------- */
-const TimelineNode = ({ isActive }: { isActive: boolean }) => (
-  // POSITIONING MATH:
-  // -translate-x-1/2: Centers the dot itself horizontally
-  // -left-[92px]: Moves the center of the dot to the exact center of the left column
-  // (Gap 32px + Half Column 60px = 92px away from this container's left edge)
-  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 -left-[92px] hidden lg:flex items-center justify-center">
-    {/* Outer Ring */}
-    <div
-      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-        isActive
-          ? "border-black bg-white scale-125 shadow-[0_0_15px_rgba(0,0,0,0.2)]"
-          : "border-gray-300 bg-gray-50 scale-100"
-      }`}
-    >
-      {/* Inner Dot */}
-      <div
-        className={`w-2 h-2 rounded-full transition-all duration-500 ${
-          isActive ? "bg-black" : "bg-transparent"
-        }`}
-      />
-    </div>
-
-    {/* Pulse Effect when Active (Optional subtle glow) */}
-    {isActive && (
-      <div className="absolute inset-0 rounded-full border border-black animate-ping opacity-20 w-5 h-5" />
-    )}
-  </div>
-);
-
-/* ---------------------------------------------
    MAIN COMPONENT
 --------------------------------------------- */
 export default function Workflow() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Controls the "Liquid" fill of the main pipe
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 95%", "end 100%"],
+    offset: ["start 40%", "end 90%"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
@@ -218,17 +255,19 @@ export default function Workflow() {
     <div className="relative pb-32 overflow-hidden bg-gray-50/50">
       {/* BACKGROUND */}
       <div className="absolute inset-0 max-w-[1440px] mx-auto overflow-hidden pointer-events-none">
-        <div
-          className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px]"
-          style={{
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: "100% auto", // Width fills container, Height scales proportionally
-            backgroundRepeat: "no-repeat", // Prevents the image from repeating
-            backgroundPosition: "center bottom", // Positions the image at the bottom center
-            transform: "rotate(180deg)"
-          }}
-        />
-         <div className="absolute inset-0 bg-linear-to-b from-white/0 via-[#f6f6f8] to-[#f6f6f8]" />
+        <div className="absolute inset-0 max-w-[1373px] mx-auto rounded-[50px] overflow-hidden">
+          <div className="flex flex-col w-full">
+             {[...Array(6)].map((_, i) => (
+                <img 
+                  key={i}
+                  src={bgImage} 
+                  alt="" 
+                  className="w-full h-auto select-none pointer-events-none -mt-[18px]"
+                  style={{ transform: i % 2 !== 0 ? 'scaleY(-1)' : 'none' }}
+                />
+             ))}
+          </div>
+        </div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
@@ -236,25 +275,21 @@ export default function Workflow() {
           <AIHubAnimation />
         </div>
 
-        <div className="relative mt-0">
+        <div className="relative mt-8">
           <div
             ref={containerRef}
             className="max-w-6xl mx-auto px-6 md:px-12 relative z-10"
           >
-            {/* PIPE BACKGROUND */}
+            {/* PIPE BACKGROUND (Snake Path) */}
             <ResponsivePipe
               containerRef={containerRef}
               progress={smoothProgress}
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-8">
-              <div className="hidden lg:block"></div>
-
-              <div className="space-y-32 pt-48 pb-24">
-                {STEPS.map((step, index) => (
-                  <FeatureRow key={step.id} step={step} index={index} />
-                ))}
-              </div>
+            <div className="space-y-32 pt-24 pb-24 relative">
+              {STEPS.map((step, index) => (
+                <FeatureRow key={step.id} step={step} index={index} />
+              ))}
             </div>
           </div>
         </div>
@@ -264,7 +299,7 @@ export default function Workflow() {
 }
 
 /* ---------------------------------------------
-   SUB-COMPONENT: ROW
+   SUB-COMPONENT: ROW (ZigZag Layout)
 --------------------------------------------- */
 const FeatureRow = ({
   step,
@@ -274,8 +309,7 @@ const FeatureRow = ({
   index: number;
 }) => {
   const ref = useRef(null);
-
-  // Triggers when the row is in the middle of the screen
+  const isEven = index % 2 === 0;
   const isInView = useInView(ref, { margin: "-50% 0px -50% 0px", once: false });
 
   return (
@@ -284,28 +318,47 @@ const FeatureRow = ({
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="grid lg:grid-cols-2 gap-12 items-center relative"
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className="grid lg:grid-cols-2 gap-16 items-center relative"
     >
-      {/* Pass Active State to the Dot */}
-      <TimelineNode isActive={isInView} />
-
-      <div className="text-left space-y-4">
-        <h3
-          className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${
-            isInView ? "text-black" : "text-gray-400"
-          }`}
-        >
-          {step.title}
-        </h3>
-        <p className="text-lg text-gray-600 leading-relaxed max-w-md">
-          {step.description}
-        </p>
+      {/* LEFT COLUMN */}
+      <div className={`space-y-4 ${isEven ? "lg:text-left lg:pl-12" : "relative"}`}>
+        {isEven ? (
+            // EVEN (0): Text on Left
+            <div className="relative">
+                <h3 className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+                    {step.title}
+                </h3>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                    {step.description}
+                </p>
+            </div>
+        ) : (
+            // ODD (1): Card on Left
+            <div className="relative">
+                <FeatureCard label={step.label} icon={step.icon} component={step.component} />
+            </div>
+        )}
       </div>
 
-      <div className="relative">
-        <FeatureCard label={step.label} icon={step.icon} component={step.component} />
-        {/* Soft back-glow removed for performance */}
+      {/* RIGHT COLUMN */}
+      <div className={`space-y-4 ${isEven ? "relative" : "lg:text-right lg:pr-12"}`}>
+        {isEven ? (
+            // EVEN (0): Card on Right
+            <div className="relative">
+                 <FeatureCard label={step.label} icon={step.icon} component={step.component} />
+            </div>
+        ) : (
+             // ODD (1): Text on Right
+             <div className="relative">
+                <h3 className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+                    {step.title}
+                </h3>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                     {step.description}
+                </p>
+             </div>
+        )}
       </div>
     </motion.section>
   );
