@@ -278,7 +278,7 @@ export default function Workflow() {
         <div className="relative mt-8">
           <div
             ref={containerRef}
-            className="max-w-[1400px] mx-auto px-6 relative z-10"
+            className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10"
           >
             {/* PIPE BACKGROUND (Snake Path) */}
             <ResponsivePipe
@@ -319,14 +319,14 @@ const FeatureRow = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="grid lg:grid-cols-2 gap-16 items-center relative"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
     >
       {/* LEFT COLUMN */}
-      <div className={`space-y-4 ${isEven ? "lg:text-left lg:pl-12" : "relative"}`}>
+      <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:text-left lg:pl-12 order-1 lg:order-1" : "relative order-2 lg:order-1"}`}>
         {isEven ? (
             // EVEN (0): Text on Left
             <div className="relative">
-                <h3 className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+                <h3 className={`text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
                     {step.title}
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
@@ -342,7 +342,7 @@ const FeatureRow = ({
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className={`space-y-4 ${isEven ? "relative" : "lg:text-right lg:pr-12"}`}>
+      <div className={`lg:col-span-6 space-y-4 ${isEven ? "relative order-2 lg:order-2" : "lg:text-right lg:pr-12 order-1 lg:order-2"}`}>
         {isEven ? (
             // EVEN (0): Card on Right
             <div className="relative">
@@ -351,7 +351,7 @@ const FeatureRow = ({
         ) : (
              // ODD (1): Text on Right
              <div className="relative">
-                <h3 className={`text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+                <h3 className={`text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
                     {step.title}
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">

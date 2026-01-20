@@ -27,19 +27,19 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="py-0 bg-white relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10">
             {/* Header */}
             <div className="text-center mb-16 max-w-2xl mx-auto">
                 <p className="text-sm font-semibold text-[#2A1638]/60 mb-3 uppercase tracking-widest">
                     Trusted by Leaders
                 </p>
-                <h2 className="text-4xl md:text-5xl font-medium text-[#2A1638] tracking-tight mb-6">
+                <h2 className="text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight mb-6">
                     Loved by teams who move fast
                 </h2>
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                 {testimonials.map((item, idx) => (
                     <motion.div 
                         key={idx}
@@ -47,7 +47,7 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        className="bg-[#F6F6F8] rounded-[2rem] p-8 md:p-10 flex flex-col justify-between border border-transparent hover:border-black/5 transition-colors duration-300"
+                        className="md:col-span-4 bg-[#F6F6F8] rounded-[2rem] p-6 md:p-8 flex flex-col justify-between border border-transparent hover:border-black/5 transition-colors duration-300"
                     >
                         {/* Quote */}
                         <div className="mb-8">

@@ -43,10 +43,11 @@ function FeatureCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.01 }}
       className={cn(
-        "group relative flex flex-col justify-end overflow-hidden rounded-[20px] p-6",
+        "group relative flex flex-col justify-end overflow-hidden rounded-[32px] p-6 md:p-8",
         "bg-gradient-to-br from-[#EBEBEB] to-[#FEE6FF]",
         "border border-white/50 shadow-sm hover:shadow-xl transition-all duration-300 ease-out",
-        minHeight
+        minHeight,
+        "md:col-span-6"
       )}
     >
       {/* Background Decorator Icon (The "Watermark") */}
@@ -104,7 +105,7 @@ export default function FeaturesGrid() {
 
   return (
     <section className="py-0 px-6 bg-white">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Header */}
         <div className="mb-16">
           <motion.div
@@ -116,14 +117,14 @@ export default function FeaturesGrid() {
             <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
               Fast and Accurate
             </p>
-            <h2 className="font-onest text-5xl md:text-[52px] font-normal text-[#2A1638] leading-[1.1]">
+            <h2 className="font-onest text-4xl md:text-[52px] font-normal text-[#2A1638] leading-[1.1]">
               Your Edge in <span className="font-medium">RFPs & Reviews.</span>
             </h2>
           </motion.div>
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
           {features.map((feature, idx) => (
             <FeatureCard
               key={idx}

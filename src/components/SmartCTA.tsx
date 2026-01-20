@@ -57,7 +57,7 @@ const SmartCTA = () => {
       {/* Typewriter Container */}
       <div className="flex items-center gap-2 bg-white border border-[#EE00FF]/30 rounded-[15px] px-6 h-[42px] shadow-[0_0_15px_rgba(238,0,255,0.15)] min-w-[180px] w-full sm:w-auto overflow-hidden relative">
          <span className="text-xl">✨</span>
-         <div className="flex items-center text-[#393939] font-medium text-[15px] font-inter">
+         <div className="flex items-center text-[#393939] font-medium text-[15px] font-onest">
             <span className="mr-1">Automate</span>
             <span className="text-[#EE00FF] font-semibold relative">
                 {displayedText}
@@ -69,7 +69,7 @@ const SmartCTA = () => {
 
       {/* Book Demo Button */}
       <motion.button 
-        className="px-6 h-[42px] rounded-[15px] bg-gradient-to-b from-[#222] to-[#000] text-white font-inter text-[15px] font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 group relative overflow-hidden w-full sm:w-auto justify-center"
+        className="px-6 h-[42px] rounded-[15px] bg-gradient-to-b from-[#222] to-[#000] text-white font-onest text-[15px] font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 group relative overflow-hidden w-full sm:w-auto justify-center"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >

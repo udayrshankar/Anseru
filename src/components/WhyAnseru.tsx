@@ -25,12 +25,12 @@ const WhyAnseru = () => {
     return (
       <div className="bg-white">
         <section className="py-0 relative overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+          <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10">
             <div className="mb-16 text-center max-w-2xl mx-auto">
               <p className="text-sm text-[#2A1638]/60 mb-3 uppercase tracking-widest font-medium">
                 Proven Results
               </p>
-              <h2 className="text-[#2A1638] text-4xl md:text-5xl font-medium tracking-tight mb-4">
+              <h2 className="text-[#2A1638] text-3xl md:text-5xl font-medium tracking-tight mb-4">
                 Why Anseru?
               </h2>
               <p className="text-lg text-[#483953]/70">
@@ -39,10 +39,10 @@ const WhyAnseru = () => {
             </div>
   
             {/* Bento Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[400px]">
-              {/* Card 1: Large (Span 2) */}
-              <div className="relative group md:col-span-2 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-10 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
-                 <div className="absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 scale-150 origin-top-right">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto md:auto-rows-[400px]">
+              {/* Card 1: Large (Span 8) */}
+              <div className="relative group md:col-span-8 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-6 md:p-8 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
+                 <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 scale-150 origin-top-right">
                     <svg className="w-64 h-64 rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={cards[0].path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />
                     </svg>
@@ -58,8 +58,8 @@ const WhyAnseru = () => {
                  </div>
               </div>
 
-              {/* Card 2: Regular (Span 1) */}
-              <div className="relative group md:col-span-1 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-8 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
+              {/* Card 2: Regular (Span 4) */}
+              <div className="relative group md:col-span-4 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-6 md:p-8 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
                  <div className="absolute -bottom-4 -right-4 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 scale-125">
                     <svg className="w-48 h-48 -rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={cards[1].path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />
@@ -76,8 +76,8 @@ const WhyAnseru = () => {
                  </div>
               </div>
 
-               {/* Card 3: Regular (Span 1) */}
-               <div className="relative group md:col-span-1 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-8 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
+               {/* Card 3: Regular (Span 4) */}
+               <div className="relative group md:col-span-4 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-6 md:p-8 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 scale-150">
                     <svg className="w-56 h-56" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={cards[2].path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />
@@ -94,8 +94,8 @@ const WhyAnseru = () => {
                  </div>
               </div>
 
-              {/* Card 4: Large (Span 2) */}
-              <div className="relative group md:col-span-2 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-10 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
+              {/* Card 4: Large (Span 8) */}
+              <div className="relative group md:col-span-8 min-h-[400px] rounded-[32px] bg-[#F6F6F8] p-10 overflow-hidden flex flex-col justify-between border border-black/[0.03] hover:shadow-lg transition-shadow duration-300">
                  <div className="absolute top-0 right-0 p-10 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-500 scale-150 origin-top-right">
                     <svg className="w-64 h-64 rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={cards[3].path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />

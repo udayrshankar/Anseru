@@ -4,7 +4,7 @@ import SmartCTA from "../SmartCTA";
 export default function CTASection() {
   return (
     <section className="py-0 px-6">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] w-full mx-auto px-6">
         <div className="relative rounded-[48px] overflow-hidden">
           <img
             src={image}

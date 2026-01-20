@@ -14,11 +14,11 @@ export default function Footer() {
       />
       
       {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 pt-24 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 xl:px-[120px] pt-24 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
           
           {/* Brand Column */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-6 space-y-6">
             <h3 className="text-3xl font-medium text-[#2A1638] tracking-tight">
               Anseru
             </h3>
@@ -32,7 +32,7 @@ export default function Footer() {
             ["Company", ["About", "Careers", "Blog", "Contact"]],
             ["Resources", ["Help Center", "API Docs", "ROI Calculator", "Status"]],
           ].map(([title, items]) => (
-            <div key={title as string} className="lg:col-span-1">
+            <div key={title as string} className="lg:col-span-2">
               <h4 className="text-base font-semibold text-[#2A1638] mb-6 uppercase tracking-wider opacity-80">
                 {title}
               </h4>

@@ -13,15 +13,15 @@ export default function AITabs() {
   const [activeTab, setActiveTab] = useState<TabKey>("jane");
 
   return (
-    <section className="w-full px-4 pt-0 pb-0">
-      <div className="max-w-[1300px] mx-auto relative mt-0">
+    <section className="w-full px-6 xl:px-[120px] pt-0 pb-0">
+      <div className="max-w-[1400px] mx-auto relative mt-0">
         
        {/* Card Container */ }
-       <div className="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 p-8 md:p-12 min-h-[500px]">
+       <div className="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 p-6 md:p-12 min-h-[500px]">
         
          {/* Floating Tabs (positioned at top center, overlapping border) */}
-         <div className="absolute left-1/2 -translate-x-1/2 -top-6 z-20">
-             <div className="bg-white/80 backdrop-blur-md shadow-sm border border-black/5 rounded-full p-1.5 flex gap-1 min-w-[775px]">
+         <div className="absolute left-0 right-0 top-[-3rem] md:-top-6 z-20 flex justify-center px-4">
+             <div className="bg-white/80 backdrop-blur-md shadow-sm border border-black/5 rounded-full p-1.5 flex gap-1 overflow-x-auto no-scrollbar max-w-full">
                  {(Object.keys(tabContent) as TabKey[]).map((tab) => (
                  <button
                      key={tab}
@@ -55,15 +55,15 @@ export default function AITabs() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full pt-8 md:pt-0"
             >
               {/* Left Side: Content */}
-              <div className="space-y-6 pt-4">
+              <div className="lg:col-span-6 space-y-6 pt-4">
                  <div>
                     <p className="text-[#2A1638]/60 mb-2 uppercase tracking-wide text-xs font-semibold">
                       {tabContent[activeTab].role}
                     </p>
-                    <h2 className="text-4xl md:text-5xl font-medium text-[#2d2d2d] leading-tight mb-4">
+                    <h2 className="text-3xl md:text-5xl font-medium text-[#2d2d2d] leading-tight mb-4">
                         <span className="text-[#2A1638]">{tabContent[activeTab].title.split(':')[0]}</span>
                         <span className="block text-2xl md:text-3xl mt-1 text-gray-500 font-normal">
                              {tabContent[activeTab].title.split(':')[1]}
@@ -94,7 +94,7 @@ export default function AITabs() {
               </div>
 
               {/* Right Side: Media (Image + Video Look) */}
-              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50 group">
+              <div className="lg:col-span-6 relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50 group">
                  <motion.img
                    initial={{ scale: 1.05 }}
                    animate={{ scale: 1 }}
