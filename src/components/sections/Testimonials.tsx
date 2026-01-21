@@ -1,85 +1,205 @@
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote } from "lucide-react";
 
-const testimonials = [
+const TESTIMONIALS = [
   {
-    quote: "Anseru has completely transformed how we handle security questionnaires. What used to take our engineering team days now happens in minutes with higher accuracy.",
-    author: "Sarah Chen",
-    role: "CISO",
-    company: "TechFlow",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=2071&auto=format&fit=crop"
-  },
-  {
-    quote: "The ROI was immediate. We've cut our RFP response time by 75% while maintaining our brand voice perfectly. It's like having an extra team of proposal writers.",
-    author: "Michael Ross",
-    role: "VP of Sales",
+    id: 1,
+    quote: "Anseru cut our RFP response time by 60%. The AI understands our security posture better than some of our own team members.",
+    author: "Sarah Jenkins",
+    role: "VP of Sales Engineering",
     company: "CloudScale",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
+    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d"
   },
   {
-    quote: "Finally, a compliance tool that actually understands context. The automated audit trails have made our SOC2 renewals a breeze instead of a nightmare.",
+    id: 2,
+    quote: "Finally, a tool that doesn't just hallucinate answers. The reference linking to our actual policy docs is a game changer for compliance.",
+    author: "David Chen",
+    role: "Chief Information Security Officer",
+    company: "FinTech Global",
+    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+  },
+  {
+    id: 3,
+    quote: "We use it for every security questionnaire. It's like having an extra dedicated security engineer who works 24/7.",
     author: "Elena Rodriguez",
-    role: "Head of Compliance",
-    company: "DataGuard",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
+    role: "Director of Compliance",
+    company: "HealthVault",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026302d"
+  },
+  {
+    id: 4,
+    quote: "The brand voice customization is spot on. It sounds exactly like our best sales reps wrote it, but in seconds.",
+    author: "Mark Thompson",
+    role: "Head of Revenue Operations",
+    company: "SaaSify",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026708c"
+  },
+  {
+    id: 5,
+    quote: "Onboarding was seamless. We uploaded our knowledge base and were getting accurate drafts within the first hour.",
+    author: "Jessica Lee",
+    role: "Sales Enablement Lead",
+    company: "TechFlow",
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702f"
   }
 ];
 
-export default function Testimonials() {
+const Testimonials = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const duration = 5000; // 5 seconds per slide
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, duration);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Calculate the position for *every* card to ensure smooth animating
+  // We want to render all of them, but hidden ones should be positioned logically
+  // so they can slide in from the correct side.
+  
+  const getCardStyle = (index: number) => {
+      // Calculate circular distance from active index
+      // e.g. active=0. index=4 (length 5). Distance should be -1 (Left), not +4.
+      const len = TESTIMONIALS.length;
+      
+      // We want a result between -floor(len/2) and +floor(len/2)
+      let diff = (index - activeIndex) % len;
+      if (diff > len / 2) diff -= len;
+      if (diff < -len / 2) diff += len;
+
+      // Determine visual state based on diff
+      // 0 = Center
+      // -1 = Left
+      // 1 = Right
+      // Others = Hidden (but positioned behind for smooth entry)
+      
+      let x = "0%";
+      let scale = 1;
+      let opacity = 1;
+      let zIndex = 10;
+      let filter = "blur(0px)";
+
+      if (diff === 0) {
+          x = "0%";
+          scale = 1;
+          opacity = 1;
+          zIndex = 20;
+          filter = "blur(0px)";
+      } else if (diff === -1) {
+          x = "-65%"; // Slightly more spacing
+          scale = 0.8;
+          opacity = 0.4;
+          zIndex = 10;
+          filter = "blur(2px)";
+      } else if (diff === 1) {
+          x = "65%";
+          scale = 0.8;
+          opacity = 0.4;
+          zIndex = 10;
+          filter = "blur(2px)";
+      } else {
+          // Cards further away.
+          // Position them behind the center/side cards so they can "flow" through
+          // If diff is -2, it should be way left. If +2, way right.
+          x = diff < 0 ? "-120%" : "120%";
+          scale = 0.6;
+          opacity = 0;
+          zIndex = 0;
+      }
+
+      return { x, scale, opacity, zIndex, filter };
+  };
+
   return (
-    <section className="py-0 bg-white relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10">
-            {/* Header */}
-            <div className="text-center mb-16 max-w-2xl mx-auto">
-                <p className="text-sm font-semibold text-[#2A1638]/60 mb-3 uppercase tracking-widest">
-                    Trusted by Leaders
-                </p>
-                <h2 className="text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight mb-6">
-                    Loved by teams who move fast
-                </h2>
-            </div>
+    <section className="py-24 bg-white overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] mb-16 text-center">
+        <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638] mb-6">
+          Trusted by fast-growing teams
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          See how companies are automating their trust and sales workflows.
+        </p>
+      </div>
 
-            {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-                {testimonials.map((item, idx) => (
-                    <motion.div 
-                        key={idx}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        className="md:col-span-4 bg-[#F6F6F8] rounded-[2rem] p-6 md:p-8 flex flex-col justify-between border border-transparent hover:border-black/5 transition-colors duration-300"
-                    >
-                        {/* Quote */}
-                        <div className="mb-8">
-                            {/* Decorative Quote Icon */}
-                            <svg className="w-8 h-8 text-[#2A1638]/10 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14.017 21L14.017 18C14.017 16.896 14.353 15.925 15.025 15.087C15.697 14.249 16.58 13.653 17.674 13.3L16.295 8.199C15.009 8.653 13.987 9.4 13.23 10.44C12.473 11.48 12.095 12.787 12.095 14.36V21H2.00299V16.62C2.00299 13.16 2.896 10.04 4.682 7.26C6.468 4.48 9.01 2.507 12.308 1.34L13.804 5.28C11.516 6.133 9.873 7.32 8.875 8.84C7.877 10.36 7.378 12.46 7.378 15.14H9.842C10.998 15.14 11.956 15.54 12.716 16.34C13.476 17.14 13.856 18.093 13.856 19.2V21H14.017ZM23.997 21L23.997 18C23.997 16.896 24.333 15.925 25.005 15.087C25.677 14.249 26.56 13.653 27.654 13.3L26.275 8.199C24.989 8.653 23.967 9.4 23.21 10.44C22.453 11.48 22.075 12.787 22.075 14.36V21H11.983V16.62C11.983 13.16 12.876 10.04 14.662 7.26C16.448 4.48 18.99 2.507 22.288 1.34L23.784 5.28C21.496 6.133 19.853 7.32 18.855 8.84C17.857 10.36 17.358 12.46 17.358 15.14H19.822C20.978 15.14 21.936 15.54 22.696 16.34C23.456 17.14 23.836 18.093 23.836 19.2V21H23.997Z" transform="translate(-2 -1)"/>
-                            </svg>
-                            <p className="text-xl text-[#2A1638] leading-relaxed font-normal">
-                                "{item.quote}"
-                            </p>
-                        </div>
+      <div className="relative h-[400px] flex items-center justify-center">
+        <div className="relative w-full max-w-5xl h-full flex items-center justify-center">
+             <AnimatePresence initial={false} mode="popLayout">
+                 {TESTIMONIALS.map((t, i) => {
+                     const style = getCardStyle(i);
+                     
+                     // Optimization: Only render items relevant to the transition (visible + immediate neighbors)
+                     // But for perfect smoothness on wraps, rendering all with computed positions is safer usually.
+                     // Let's render all and let Framer handle the shared layout animations.
+                     
+                     return (
+                         <motion.div
+                            key={t.id}
+                            initial={false} // Let it interpolate from previous state
+                            animate={style}
+                            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }} // Custom bezier for premium feel
+                            className="absolute w-[90%] md:w-[600px] bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col justify-between h-[320px]"
+                         >
+                             {/* Timer Border for Active Card (only render if Active) */}
+                             {i === activeIndex && (
+                                 <svg className="absolute inset-0 w-full h-full pointer-events-none rounded-3xl overflow-visible">
+                                     <rect 
+                                        x="0" y="0" width="100%" height="100%" 
+                                        rx="24" ry="24" 
+                                        fill="none" 
+                                        stroke="#E8D4F5" 
+                                        strokeWidth="4" 
+                                        className="opacity-30"
+                                     />
+                                     <motion.rect 
+                                        x="0" y="0" width="100%" height="100%" 
+                                        rx="24" ry="24" 
+                                        fill="none" 
+                                        stroke="#C084FC" 
+                                        strokeWidth="4"
+                                        initial={{ pathLength: 0 }}
+                                        animate={{ pathLength: 1 }}
+                                        transition={{ duration: duration / 1000, ease: "linear" }}
+                                        key={activeIndex} 
+                                     />
+                                 </svg>
+                             )}
 
-                        {/* Author */}
-                        <div className="flex items-center gap-4">
-                            <img 
-                                src={item.image} 
-                                alt={item.author} 
-                                className="w-12 h-12 rounded-full object-cover border border-black/5"
-                            />
-                            <div>
-                                <h4 className="text-base font-semibold text-[#2A1638]">
-                                    {item.author}
-                                </h4>
-                                <p className="text-sm text-[#2A1638]/60">
-                                    {item.role}, {item.company}
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
+                             <div className="relative">
+                                 <Quote className="w-10 h-10 text-purple-100 absolute -top-2 -left-2 -z-10" fill="currentColor" />
+                                 <p className="text-xl md:text-2xl font-medium text-[#2A1638] leading-relaxed relative z-10">
+                                     "{t.quote}"
+                                 </p>
+                             </div>
+
+                             <div className="flex items-center gap-4 mt-6">
+                                 <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full object-cover border border-gray-100" />
+                                 <div>
+                                     <h4 className="font-bold text-gray-900">{t.author}</h4>
+                                     <p className="text-sm text-gray-500">{t.role}, {t.company}</p>
+                                 </div>
+                             </div>
+                         </motion.div>
+                     );
+                 })}
+             </AnimatePresence>
         </div>
+      </div>
+
+      {/* Manual Indicators */}
+      <div className="flex justify-center gap-3 mt-8">
+          {TESTIMONIALS.map((_, i) => (
+              <button 
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${i === activeIndex ? "w-8 bg-[#C084FC]" : "w-2 bg-gray-200"}`}
+              />
+          ))}
+      </div>
     </section>
   );
-}
+};
+
+export default Testimonials;

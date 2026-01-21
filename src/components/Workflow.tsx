@@ -7,6 +7,7 @@ import SmartPersonalizationAnimation from "./animation/SmartPersonalizationAnima
 import BrandVoiceAnimation from "./animation/BrandVoiceAnimation";
 import IntegrationsAnimation from "./animation/IntegrationsAnimation";
 import bgImage from "../assets/bg2.png";
+import SmartCTA from "./SmartCTA";
 
 // --- DATA ---
 const STEPS = [
@@ -121,12 +122,13 @@ const ResponsivePipe = ({
 
   // Steps correspond to rows (centers of cards)
   const steps = 4;
-  const stepHeight = height / steps; 
+  const stepHeight = height / (steps + 0.5); // Adjusted to make room for CTA
 
   const p0 = { x: rightX, y: stepHeight * 0.5 }; // Row 0: Right
   const p1 = { x: leftX, y: stepHeight * 1.5 };  // Row 1: Left
   const p2 = { x: rightX, y: stepHeight * 2.5 }; // Row 2: Right
-  const p3 = { x: leftX, y: stepHeight * 3.5 };  // Row 3: Left (Termination)
+  const p3 = { x: leftX, y: stepHeight * 3.5 };  // Row 3: Left (Termination of Features)
+  const pCTA = { x: centerX, y: height - 60 };   // End point at CTA top
 
   // Midpoints for vertical transitions
   const midY01 = (p0.y + p1.y) / 2;
@@ -135,53 +137,57 @@ const ResponsivePipe = ({
 
   // Path Construction: Orthogonal with Rounded Corners
   // Start: Top Center (above) -> Vertical Down -> Turn Right
-  // We start at (centerX, -80) to give it enough vertical drop from the AIHub component
   let path = `M ${centerX} -200`;
   
   // 0. Drop down and turn Right
-  //    Line down to (centerX, -radius) relative to turning point 0? 
-  //    Actually let's turn at y=0.
   path += ` L ${centerX} -${radius}`;
   path += ` Q ${centerX} 0 ${centerX + radius} 0`;
 
   // 1. Go Right towards P0 column
-  //    Line to (rightX - radius, 0)
   path += ` L ${p0.x - radius} 0`;
   path += ` Q ${p0.x} 0 ${p0.x} ${radius}`;
-  path += ` L ${p0.x} ${midY01 - radius}`; // Go through P0 down to next turn
+  path += ` L ${p0.x} ${midY01 - radius}`; 
 
   // 2. Turn Left towards P1
-  //    Arc to (rightX - radius, midY01)
-  //    Line to (leftX + radius, midY01)
-  //    Arc to (leftX, midY01 + radius)
-  //    Line to (leftX, midY12 - radius)
   path += ` Q ${p0.x} ${midY01} ${p0.x - radius} ${midY01}`;
   path += ` L ${p1.x + radius} ${midY01}`;
   path += ` Q ${p1.x} ${midY01} ${p1.x} ${midY01 + radius}`;
-  path += ` L ${p1.x} ${midY12 - radius}`; // Go through P1 down to next turn
+  path += ` L ${p1.x} ${midY12 - radius}`; 
 
   // 3. Turn Right towards P2
-  //    Arc to (leftX + radius, midY12)
-  //    Line to (rightX - radius, midY12)
-  //    Arc to (rightX, midY12 + radius)
-  //    Line to (rightX, midY23 - radius)
   path += ` Q ${p1.x} ${midY12} ${p1.x + radius} ${midY12}`;
   path += ` L ${p2.x - radius} ${midY12}`;
   path += ` Q ${p2.x} ${midY12} ${p2.x} ${midY12 + radius}`;
-  path += ` L ${p2.x} ${midY23 - radius}`; // Go through P2 down to next turn
+  path += ` L ${p2.x} ${midY23 - radius}`; 
 
-  // 4. Turn Left towards P3 (Termination)
-  //    Arc to (rightX - radius, midY23)
-  //    Line to (leftX + radius, midY23)
-  //    Arc to (leftX, midY23 + radius)
-  //    Line to (leftX, p3.y) --> Terminate at P3 center
+  // 4. Turn Left towards P3
   path += ` Q ${p2.x} ${midY23} ${p2.x - radius} ${midY23}`;
   path += ` L ${p3.x + radius} ${midY23}`;
   path += ` Q ${p3.x} ${midY23} ${p3.x} ${midY23 + radius}`;
-  path += ` L ${p3.x} ${p3.y}`;
+  path += ` L ${p3.x} ${p3.y - radius}`; // Go through P3
+
+  // 5. Connect P3 to Center Bottom (CTA)
+  // Current at: (p3.x, p3.y - radius) -> Wait, let's just go through p3.y
+  // Terminating path from P3 to CTA:
+  // Need to turn right from P3, go to Center X, turn Down to CTA.
+  
+  // Go down through P3 first
+  // path from (p3.x, midY23 + radius) was just drawn? No, last command was L p3.x (p3.y - radius).
+  // Actually we came from TOP. 
+  // Let's re-verify the last segment to P3.
+  // We turned left at midY23 to align with p3.x.
+  // Now we are going DOWN towards p3.y.
+  // We should go through p3.y and continue down.
+  const turnY_CTA = p3.y + radius + 40; // Turn point below P3
+
+  path += ` L ${p3.x} ${turnY_CTA - radius}`; // Down past P3
+  path += ` Q ${p3.x} ${turnY_CTA} ${p3.x + radius} ${turnY_CTA}`; // Turn Right
+  path += ` L ${pCTA.x - radius} ${turnY_CTA}`; // Across to Center
+  path += ` Q ${pCTA.x} ${turnY_CTA} ${pCTA.x} ${turnY_CTA + radius}`; // Turn Down
+  path += ` L ${pCTA.x} ${pCTA.y - 50}`; // Down to CTA
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block">
+    <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block z-0">
       <svg className="w-full h-full overflow-visible">
         {/* Inactive Gray Trace */}
         <path
@@ -197,7 +203,7 @@ const ResponsivePipe = ({
         <motion.path
             d={path}
             fill="none"
-            stroke="#9ca3af" 
+            stroke="#2b2b2bff" 
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -207,7 +213,7 @@ const ResponsivePipe = ({
                 opacity: [0, 1, 0]
             }}
             transition={{ 
-                duration: 4, 
+                duration: 5, 
                 delay: 1,
                 repeat: Infinity,
                 repeatDelay: 1,
@@ -230,11 +236,6 @@ const ResponsivePipe = ({
             <stop offset="0%" stopColor="#374151" />
             <stop offset="100%" stopColor="#000000" />
           </linearGradient>
-           <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
-            markerWidth="6" markerHeight="6"
-            orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#000" />
-          </marker>
         </defs>
       </svg>
     </div>
@@ -293,10 +294,15 @@ export default function Workflow() {
               progress={smoothProgress}
             />
 
-            <div className="space-y-32 pt-24 pb-24 relative">
+            <div className="space-y-32 pt-24 pb-24 relative z-10">
               {STEPS.map((step, index) => (
                 <FeatureRow key={step.id} step={step} index={index} />
               ))}
+              
+              {/* FINAL CTA - Connected by Pipe */}
+              <div className="flex justify-center pt-10">
+                 <SmartCTA />
+              </div>
             </div>
           </div>
         </div>
