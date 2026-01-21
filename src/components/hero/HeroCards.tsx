@@ -55,7 +55,7 @@ export default function HeroCards() {
       },
     },
     left: {
-      x: "-65%",
+      x: "-55%",
       scale: 0.85,
       zIndex: 1,
       opacity: 0.7,
@@ -66,7 +66,7 @@ export default function HeroCards() {
       },
     },
     right: {
-      x: "65%",
+      x: "55%",
       scale: 0.85,
       zIndex: 1,
       opacity: 0.7,
@@ -79,7 +79,7 @@ export default function HeroCards() {
   };
 
   return (
-    <div className="relative mt-32 flex h-[350px] w-full items-center justify-center">
+    <div className="relative mt-32 flex h-[350px] w-full items-center justify-center -translate-x-15">
       {CARDS.map((card, index) => {
         const position = getCardState(index, activeIndex);
 
@@ -95,7 +95,7 @@ export default function HeroCards() {
               transformOrigin: "bottom center",
             }}
           >
-            <div className="w-[240px]">
+            <div className="w-[300px] md:w-[400px]">
               <GlowCard 
                 title={card.title} 
                 subtitle={card.subtitle} 
