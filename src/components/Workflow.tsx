@@ -101,9 +101,7 @@ const FeatureCard = ({
   </div>
 );
 
-/* ---------------------------------------------
-   COMPONENT: RESPONSIVE PIPE (Orthogonal Snake Path)
---------------------------------------------- */
+
 const ResponsivePipe = ({
   containerRef,
   progress,
@@ -116,62 +114,71 @@ const ResponsivePipe = ({
   if (width === 0) return null;
 
   // LAYOUT CONSTANTS
-  const leftX = 40; // Fixed pixels from left
-  const rightX = width - 40; // Fixed pixels from right
   const centerX = width / 2;
-  const radius = 30; // Corner radius
+  const leftX = width * 0.23; 
+  const rightX = width * 0.77;
+  const radius = 40; // Corner radius for rounded 90-degree turns
 
-  // We have 4 rows.
-  // We need to distribute vertical segments.
-  // Row 0 is at Top. Row 3 at Bottom.
-  // The path needs to wrap around.
-  // Start: Top Center (above Row 0) -> Left
-  // Row 0 Side: Left
-  // Cross: Left -> Right (between Row 0 & 1)
-  // Row 1 Side: Right
-  // Cross: Right -> Left (between Row 1 & 2)
-  // Row 2 Side: Left
-  // Cross: Left -> Right (between Row 2 & 3)
-  // Row 3 Side: Right
-  // End: Right Bottom or back to Center? 
-  // Let's end at Bottom Right for now.
-
+  // Steps correspond to rows (centers of cards)
   const steps = 4;
-  const stepHeight = height / steps; // Rough height per step
+  const stepHeight = height / steps; 
 
-  // Key Y-coordinates (centers of gaps between rows)
-  const yStart = 0;
-  const yGap1 = stepHeight * 1;
-  const yGap2 = stepHeight * 2;
-  const yGap3 = stepHeight * 3;
-  const yEnd = height;
+  const p0 = { x: rightX, y: stepHeight * 0.5 }; // Row 0: Right
+  const p1 = { x: leftX, y: stepHeight * 1.5 };  // Row 1: Left
+  const p2 = { x: rightX, y: stepHeight * 2.5 }; // Row 2: Right
+  const p3 = { x: leftX, y: stepHeight * 3.5 };  // Row 3: Left (Termination)
 
-  // Path Construction
-  // 1. M Center Top -> Vertical down
-  // 2. Curve to Horizontal Left
-  // 3. Line to Left Top (with corner) -> Left Vertical
-  // ...
+  // Midpoints for vertical transitions
+  const midY01 = (p0.y + p1.y) / 2;
+  const midY12 = (p1.y + p2.y) / 2;
+  const midY23 = (p2.y + p3.y) / 2;
 
-  const path = `
-    M ${centerX} ${yStart - 200}
-    L ${centerX} ${yStart - radius}
-    Q ${centerX} ${yStart} ${centerX - radius} ${yStart}
-    L ${leftX + radius} ${yStart}
-    Q ${leftX} ${yStart} ${leftX} ${yStart + radius}
-    L ${leftX} ${yGap1 - radius}
-    Q ${leftX} ${yGap1} ${leftX + radius} ${yGap1}
-    L ${rightX - radius} ${yGap1}
-    Q ${rightX} ${yGap1} ${rightX} ${yGap1 + radius}
-    L ${rightX} ${yGap2 - radius}
-    Q ${rightX} ${yGap2} ${rightX - radius} ${yGap2}
-    L ${leftX + radius} ${yGap2}
-    Q ${leftX} ${yGap2} ${leftX} ${yGap2 + radius}
-    L ${leftX} ${yGap3 - radius}
-    Q ${leftX} ${yGap3} ${leftX + radius} ${yGap3}
-    L ${rightX - radius} ${yGap3}
-    Q ${rightX} ${yGap3} ${rightX} ${yGap3 + radius}
-    L ${rightX} ${yEnd}
-  `;
+  // Path Construction: Orthogonal with Rounded Corners
+  // Start: Top Center (above) -> Vertical Down -> Turn Right
+  // We start at (centerX, -80) to give it enough vertical drop from the AIHub component
+  let path = `M ${centerX} -200`;
+  
+  // 0. Drop down and turn Right
+  //    Line down to (centerX, -radius) relative to turning point 0? 
+  //    Actually let's turn at y=0.
+  path += ` L ${centerX} -${radius}`;
+  path += ` Q ${centerX} 0 ${centerX + radius} 0`;
+
+  // 1. Go Right towards P0 column
+  //    Line to (rightX - radius, 0)
+  path += ` L ${p0.x - radius} 0`;
+  path += ` Q ${p0.x} 0 ${p0.x} ${radius}`;
+  path += ` L ${p0.x} ${midY01 - radius}`; // Go through P0 down to next turn
+
+  // 2. Turn Left towards P1
+  //    Arc to (rightX - radius, midY01)
+  //    Line to (leftX + radius, midY01)
+  //    Arc to (leftX, midY01 + radius)
+  //    Line to (leftX, midY12 - radius)
+  path += ` Q ${p0.x} ${midY01} ${p0.x - radius} ${midY01}`;
+  path += ` L ${p1.x + radius} ${midY01}`;
+  path += ` Q ${p1.x} ${midY01} ${p1.x} ${midY01 + radius}`;
+  path += ` L ${p1.x} ${midY12 - radius}`; // Go through P1 down to next turn
+
+  // 3. Turn Right towards P2
+  //    Arc to (leftX + radius, midY12)
+  //    Line to (rightX - radius, midY12)
+  //    Arc to (rightX, midY12 + radius)
+  //    Line to (rightX, midY23 - radius)
+  path += ` Q ${p1.x} ${midY12} ${p1.x + radius} ${midY12}`;
+  path += ` L ${p2.x - radius} ${midY12}`;
+  path += ` Q ${p2.x} ${midY12} ${p2.x} ${midY12 + radius}`;
+  path += ` L ${p2.x} ${midY23 - radius}`; // Go through P2 down to next turn
+
+  // 4. Turn Left towards P3 (Termination)
+  //    Arc to (rightX - radius, midY23)
+  //    Line to (leftX + radius, midY23)
+  //    Arc to (leftX, midY23 + radius)
+  //    Line to (leftX, p3.y) --> Terminate at P3 center
+  path += ` Q ${p2.x} ${midY23} ${p2.x - radius} ${midY23}`;
+  path += ` L ${p3.x + radius} ${midY23}`;
+  path += ` Q ${p3.x} ${midY23} ${p3.x} ${midY23 + radius}`;
+  path += ` L ${p3.x} ${p3.y}`;
 
   return (
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block">
@@ -190,18 +197,18 @@ const ResponsivePipe = ({
         <motion.path
             d={path}
             fill="none"
-            stroke="#9ca3af" // Intermediate gray (darker than base)
+            stroke="#9ca3af" 
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ 
-                pathLength: [0, 0.15, 0],
+                pathLength: [0, 0.4, 0], 
                 opacity: [0, 1, 0]
             }}
             transition={{ 
-                duration: 2.5,
-                delay: 3, // Start after 3 seconds
+                duration: 4, 
+                delay: 1,
                 repeat: Infinity,
                 repeatDelay: 1,
                 ease: "easeInOut"
@@ -271,7 +278,7 @@ export default function Workflow() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className=" pb-0 flex justify-center relative z-20">
+        <div className="hidden lg:block pb-0 flex justify-center relative z-20">
           <AIHubAnimation />
         </div>
 

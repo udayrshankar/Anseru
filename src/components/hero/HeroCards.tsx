@@ -95,7 +95,7 @@ export default function HeroCards() {
               transformOrigin: "bottom center",
             }}
           >
-            <div className="w-[300px]">
+            <div className="w-[240px]">
               <GlowCard 
                 title={card.title} 
                 subtitle={card.subtitle} 

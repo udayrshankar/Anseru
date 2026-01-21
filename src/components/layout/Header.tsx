@@ -16,8 +16,7 @@ export default function Header() {
           {["HOME", "FEATURES", "PRODUCT", "COMPANY", "PRICING"].map((item) => (
             <a
               key={item}
-              href="#"
-              // Using text-smalls (18px) per your system
+              href={"/"+item.toLowerCase()}
               className="text-smalls text-[#090909] hover:opacity-70 uppercase"
             >
               {item}

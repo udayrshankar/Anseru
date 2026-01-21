@@ -12,7 +12,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
   color = "#C084FC",
 }) => {
   return (
-    <div className="relative w-[280px] h-[420px] rounded-[32px] bg-white p-[6px]">
+    <div className="relative w-full max-w-[280px] aspect-[280/500] rounded-[32px] bg-white p-[6px]">
       <div className="absolute inset-0 rounded-[32px] blur-2xl bg-black/30 -z-10" />
 
       <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-gradient-to-b from-[#F6E9F9] via-white to-white">
