@@ -3,10 +3,9 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Background from "../components/Background";
 import SmartCTA from "../components/SmartCTA";
-import Card from "../components/Card";
 import { 
   Database, Zap, Brain, Users, FileCheck, AlertTriangle, 
-  Plug, Shield, ArrowRight, CheckCircle, Layers, BookOpen 
+  Plug, Shield, ArrowRight, CheckCircle, Layers 
 } from "lucide-react";
 
 const Features = () => {
