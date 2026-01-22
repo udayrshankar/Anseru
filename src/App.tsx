@@ -2,6 +2,8 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Features from './pages/Features';
+import Products from './pages/Products';
+import Pricing from './pages/Pricing';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/features" element={<Features />} />
+        <Route path="/product" element={<Products />} />
+        <Route path="/pricing" element={<Pricing />} />
         {/* Catch-all for 404 Not Found */}
         <Route path="*" element={<div>404 Page Not Found</div>} />
       </Routes>
