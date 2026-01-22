@@ -7,7 +7,7 @@ export default function AITabs() {
   const [activeTab, setActiveTab] = useState<TabKey>("maya");
 
   return (
-    <section className="w-full px-6 xl:px-[120px] py-12 md:py-20">
+    <section className="w-full px-6 xl:px-[120px]">
       <div className="max-w-[1400px] mx-auto relative">
         
        {/* Card Container */ }

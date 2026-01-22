@@ -114,7 +114,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="bg-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] mb-16 text-center">
         <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638] mb-6">
           Trusted by fast-growing teams

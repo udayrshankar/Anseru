@@ -46,7 +46,7 @@ export default function FeaturesGrid() {
     <section className="py-0 px-6 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}

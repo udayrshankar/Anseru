@@ -260,7 +260,7 @@ export default function Workflow() {
   });
 
   return (
-    <div className="relative pb-32 overflow-hidden bg-white">
+    <div className="relative pb-16 overflow-hidden bg-white">
       {/* BACKGROUND */}
       <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
         <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
@@ -294,7 +294,7 @@ export default function Workflow() {
               progress={smoothProgress}
             />
 
-            <div className="space-y-32 pt-24 pb-24 relative z-10">
+            <div className="space-y-20 pt-16 pb-16 relative z-10">
               {STEPS.map((step, index) => (
                 <FeatureRow key={step.id} step={step} index={index} />
               ))}

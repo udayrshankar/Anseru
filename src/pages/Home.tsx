@@ -10,7 +10,7 @@ import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 
 // Control the vertical spacing between sections here
-const SECTION_GAP = "gap-20";
+const SECTION_GAP = "gap-12";
 
 export default function Home() {
   return (
