@@ -45,14 +45,14 @@ const WhyAnseru = () => {
             </div>
   
             {/* Bento Grid Layout - Uses Shared Card Component */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto md:auto-rows-[400px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 auto-rows-auto md:auto-rows-[280px]">
               {cards.map((card, idx) => (
                 <Card
                   key={idx}
                   title={card.title}
                   description={card.desc}
                   index={idx}
-                  minHeight="min-h-[300px] md:min-h-[400px]"
+                  minHeight="min-h-[220px] md:min-h-[260px]"
                   className={card.colSpan}
                   icon={
                     <svg viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +60,7 @@ const WhyAnseru = () => {
                     </svg>
                   }
                   watermark={
-                     <svg className="w-64 h-64 -rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <svg className="w-56 h-56 -rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d={card.path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />
                     </svg>
                   }

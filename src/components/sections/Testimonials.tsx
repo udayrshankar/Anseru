@@ -93,13 +93,13 @@ const Testimonials = () => {
           scale = 0.8;
           opacity = 0.4;
           zIndex = 10;
-          filter = "blur(2px)";
+          filter = "blur(0px)";
       } else if (diff === 1) {
           x = "65%";
           scale = 0.8;
           opacity = 0.4;
           zIndex = 10;
-          filter = "blur(2px)";
+          filter = "blur(0px)";
       } else {
           // Cards further away.
           // Position them behind the center/side cards so they can "flow" through

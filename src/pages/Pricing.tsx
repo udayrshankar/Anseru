@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Background from "../components/Background";
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X } from "lucide-react";
 import SmartCTA from "../components/SmartCTA";
+import image from "../assets/bg2.png"
+
 
 const Pricing = () => {
   return (
@@ -280,18 +282,25 @@ const PricingTiers = () => {
 
 const ClosingCTA = () => {
   return (
-    <section className="py-24 bg-white text-center px-6">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl md:text-4xl font-medium text-[#2A1638] mb-8 leading-tight">
-          Anseru is not just helping teams respond faster. <br className="hidden md:block"/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
-            We're building intelligence that compounds deal after deal.
-          </span>
-        </h2>
-        <button className="px-8 py-4 bg-[#2A1638] text-white rounded-full font-medium hover:bg-opacity-90 transition-all flex items-center justify-center gap-2 mx-auto shadow-xl hover:shadow-2xl hover:-translate-y-1">
-          Start Your Journey
-          <ArrowRight className="w-4 h-4" />
-        </button>
+
+    <section className="py-0 px-6">
+      <div className="max-w-[1400px] w-full mx-auto px-6">
+        <div className="relative rounded-[48px] overflow-hidden">
+          <img
+            src={image}
+            alt="CTA Background"
+            className="w-full h-[400px] object-cover"
+          />
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+            <h2 className="font-onest text-3xl md:text-[45px] font-medium text-[#2A1638] mb-8 max-w-[971px] leading-tight">
+              Anseru is not just helping teams respond faster.
+We're building intelligence that compounds deal after deal.
+            </h2>
+
+            <SmartCTA />
+          </div>
+        </div>
       </div>
     </section>
   );

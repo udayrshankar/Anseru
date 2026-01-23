@@ -189,6 +189,19 @@ const ResponsivePipe = ({
   return (
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none hidden lg:block z-0">
       <svg className="w-full h-full overflow-visible">
+        <defs>
+          <linearGradient id="gradient-dark" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#374151" />
+            <stop offset="100%" stopColor="#000000" />
+          </linearGradient>
+          <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#E5E7EB" />
+          </marker>
+          <marker id="arrow-dark" markerWidth="6" markerHeight="6" refX="10" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#000000" />
+          </marker>
+        </defs>
+
         {/* Inactive Gray Trace */}
         <path
           d={path}
@@ -197,6 +210,7 @@ const ResponsivePipe = ({
           strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
+          markerEnd="url(#arrow-gray)"
         />
         
         {/* Scroll Hint Animation */}
@@ -230,13 +244,8 @@ const ResponsivePipe = ({
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{ pathLength: progress }}
+          markerEnd="url(#arrow-dark)"
         />
-        <defs>
-          <linearGradient id="gradient-dark" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#374151" />
-            <stop offset="100%" stopColor="#000000" />
-          </linearGradient>
-        </defs>
       </svg>
     </div>
   );
@@ -294,7 +303,7 @@ export default function Workflow() {
               progress={smoothProgress}
             />
 
-            <div className="space-y-20 pt-16 pb-16 relative z-10">
+            <div className="space-y-20 pt-16 relative z-10">
               {STEPS.map((step, index) => (
                 <FeatureRow key={step.id} step={step} index={index} />
               ))}
