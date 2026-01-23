@@ -293,9 +293,7 @@ export default function Workflow() {
           <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
             we are building the next generation of deal generation
           </p>
-          <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-            Deal Infrastructure
-          </h2>
+     
         </div>
 
         <div className="hidden lg:block pb-0 flex justify-center relative z-20 -mt-24">
