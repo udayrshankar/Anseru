@@ -28,12 +28,7 @@ const Features = () => {
 
 
 const ClosingSection = () => {
-  const benefits = [
-    "Boosts team efficiency",
-    "Reduces manual errors",
-    "Improves consistency across deals",
-    "Scales with enterprise complexity"
-  ];
+
 
 
 
