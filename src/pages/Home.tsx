@@ -4,7 +4,6 @@ import HeroSection from "../components/hero/HeroSection";
 import AITabs from "../components/tabs/AITabs";
 import { type TabKey } from "../components/tabs/TabContents";
 import LovedByTeams from "../components/sections/LovedByTeams";
-import FeaturesGrid from "../components/sections/FeaturesGrid";
 import Workflow from "../components/Workflow";
 import WhyAnseru from "../components/WhyAnseru";
 import Testimonials from "../components/sections/Testimonials";
