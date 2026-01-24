@@ -67,9 +67,9 @@ const CoreFeatures = () => {
 
   return (
     <section className="py-0 bg-[#FAFAFA] relative">
-      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] py-12 md:py-20">
+      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Section Header */}
-        <div className="mb-12 lg:mb-20 text-center relative lg:sticky lg:top-24 z-0">
+        <div className="mb-12 lg:mb-20 text-center relative lg:sticky lg:top-25 z-0">
           <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
             Platform Capabilities
           </p>
@@ -79,7 +79,7 @@ const CoreFeatures = () => {
         </div>
 
         {/* Features Stacking List */}
-        <div className="flex flex-col gap-6 lg:gap-8 pb-20">
+        <div className="flex flex-col gap-6 lg:gap-3 pb-20">
           {features.map((feature, idx) => (
             <motion.div
               key={idx}
@@ -90,7 +90,7 @@ const CoreFeatures = () => {
               className="relative lg:sticky"
               style={{
                 // We apply the top offset logic but it only takes effect when position: sticky is active (lg screens)
-                top: `${180 + idx * 40}px`, 
+                top: `${225 + idx * 10}px`, 
                 zIndex: idx + 1,
               }}
             >

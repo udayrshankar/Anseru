@@ -44,7 +44,7 @@ const TimerBorder = ({ duration }: { duration: number }) => {
           rx="38.5"
           fill="none"
           stroke={`url(#${gradientId})`}
-          strokeWidth="3"
+          strokeWidth="2"
           initial={{ pathLength: 0, opacity: 1 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: duration / 1000, ease: "linear" }}
@@ -60,22 +60,30 @@ const TimerBorder = ({ duration }: { duration: number }) => {
 // -- Lively Background Orbs --
 const MovingOrbs = () => {
     // Generate random positions/movements for a "lively" feel
-    // Use stable IDs to avoid re-renders shuffling them randomly on every update
-    const orbs = Array.from({ length: 12 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 40 + 20, // 20px to 60px
-      initialX: Math.random() * 100,
-      initialY: Math.random() * 100,
-      duration: Math.random() * 10 + 10, // 10s to 20s
-      delay: Math.random() * 5,
-    }));
+    // Use useMemo to keep values stable across re-renders within the same mount
+    const orbs = React.useMemo(() => {
+      return Array.from({ length: 12 }).map((_, i) => ({
+        id: i,
+        // Size: 30px to 70px for visibility
+        size: Math.random() * 40 + 5, 
+        initialX: Math.random() * 100,
+        initialY: Math.random() * 100,
+        duration: Math.random() * 20 + 10, // 10s to 30s for slow, smooth drift
+        delay: Math.random() * 5,
+        // Pre-calculate paths for stability
+        moveX: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0], // Larger movement range
+        moveY: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
+      }));
+    }, []);
   
     return (
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
         {orbs.map((orb) => (
           <motion.div
             key={orb.id}
-            className="absolute rounded-full bg-purple-400/10 blur-xl"
+            // Use purple/black mix or just dark purple for shadow effect. 
+            // Restoring blur for "orb" look.
+            className="absolute rounded-full bg-white"
             style={{
               width: orb.size,
               height: orb.size,
@@ -83,9 +91,9 @@ const MovingOrbs = () => {
               top: `${orb.initialY}%`,
             }}
             animate={{
-              x: [0, Math.random() * 100 - 50, 0],
-              y: [0, Math.random() * 100 - 50, 0],
-              opacity: [0.3, 0.6, 0.3],
+              x: orb.moveX,
+              y: orb.moveY,
+              opacity: [0.2, 0.4, 0.2],
             }}
             transition={{
               duration: orb.duration,
@@ -116,14 +124,25 @@ export default function Card({
     <motion.div
       // Animation Logic
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      whileInView={{ 
+        opacity: 1, 
+        y: 0,
+        transition: { duration: 0.5, delay: index * 0.1, ease: "easeOut" }
+      }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
       onMouseEnter={onMouseEnter}
       
       // Interaction States: Lift on hover or active
-      animate={isActive ? { y: -6, scale: 1.01 } : {}}
-      whileHover={{ y: -6, scale: 1.01 }}
+      animate={{
+        y: isActive ? -20 : 0,
+        scale: isActive ? 1.05 : 1,
+        transition: { duration: 0.3, ease: "easeOut" } // Instant transition for interactions
+      }}
+      whileHover={{ 
+        y: -20, 
+        scale: 1.05,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
 
       className={cn(
         // Layout & Base
@@ -144,15 +163,15 @@ export default function Card({
       {isActive && <TimerBorder duration={duration} />}
 
       {/* 2. Visual Layer: Background Gradients & Orbs */}
-      <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Subtle interior sheen */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/40 to-transparent opacity-100" />
+        <div className="absolute inset-0 opacity-100" />
         
         {/* Top-Right Purple Orb */}
-        <div className="absolute top-[-20%] right-[-20%] w-80 h-80 bg-purple-200/30 rounded-full blur-[100px] transition-transform duration-700 hover:scale-110" />
+        <div className="absolute top-[-20%] right-[-20%] w-80 h-80 bg-[#d0b2ec] rounded-full blur-[100px] transition-transform duration-700 hover:scale-110" />
         
         {/* Bottom-Left Blue Orb */}
-        <div className="absolute bottom-[-20%] left-[-20%] w-72 h-72 bg-blue-200/20 rounded-full blur-[90px]" />
+        <div className="absolute bottom-[-20%] left-[-20%] w-72 h-72 bg-[#f4dfec] rounded-full blur-[90px]" />
 
         {/* Dynamic Moving Orbs */}
         {withMovingOrbs && <MovingOrbs />}
@@ -172,7 +191,7 @@ export default function Card({
         <div className="relative z-10 w-18 h-18 mb-8 flex items-center justify-center rounded-2xl bg-white shadow-[0_20px_40px_-5px_rgba(0,0,0,0.15)] transition-transform duration-500 group-hover:scale-110">
            {/* Icon internal gloss */}
            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/80 bg-gradient-to-br from-white via-transparent to-black/[0.02]" />
-           <div className="relative text-[#2A1638] [&>svg]:w-9 [&>svg]:h-9 transition-transform duration-500 [&>svg]:rotate-3">
+           <div className="relative text-[#4a238a] [&>svg]:w-9 [&>svg]:h-9 transition-transform duration-500 [&>svg]:rotate-3">
              {icon}
            </div>
         </div>

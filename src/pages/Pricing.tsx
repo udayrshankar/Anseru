@@ -108,7 +108,7 @@ const BenchmarkTable = () => {
         {/* macOS Window Style Table */}
         <div className="rounded-[24px] border border-black/[0.08] shadow-2xl shadow-purple-500/10 bg-white overflow-hidden">
           {/* macOS Title Bar */}
-          <div className="bg-[#F6F6F8] px-5 py-4 border-b border-black/[0.03] flex items-center gap-2">
+          <div className="bg-[#ddcdeb] px-5 py-4 border-b border-black/[0.03] flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-[#FF5F57] border border-[#E0443E]/30"></div>
             <div className="w-3 h-3 rounded-full bg-[#FEBC2E] border border-[#D89E24]/30"></div>
             <div className="w-3 h-3 rounded-full bg-[#28C840] border border-[#1AAB29]/30"></div>
@@ -130,22 +130,22 @@ const BenchmarkTable = () => {
                 {rows.map((row, idx) => (
                   <tr 
                     key={idx} 
-                    className="group transition-all duration-300 ease-out hover:scale-[1.01] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-purple-50/30 hover:z-10 relative"
+                    className="group transition-all duration-300 ease-out hover:scale-[1.01] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-[#e3d1f2] hover:z-10 relative"
                   >
-                    <td className="p-4 pl-8 text-sm font-medium text-[#2A1638] border-b border-black/[0.03]">
+                    <td className="p-4 pl-8 text-sm font-medium text-[#2A1638]">
                       {row.feature}
                     </td>
-                    <td className="p-4 text-center bg-purple-50/20 border-x border-purple-100/30 border-b border-purple-100/20">
+                    <td className="p-4 text-center">
                       <div className="flex justify-center items-center h-full">
                         {renderCell(row.anseru)}
                       </div>
                     </td>
-                    <td className="p-4 text-center border-b border-black/[0.03]">
+                    <td className="p-4 text-center">
                       <div className="flex justify-center items-center h-full">
                         {renderCell(row.security)}
                       </div>
                     </td>
-                    <td className="p-4 text-center border-b border-black/[0.03]">
+                    <td className="p-4 text-center">
                       <div className="flex justify-center items-center h-full">
                         {renderCell(row.traditional)}
                       </div>
@@ -168,18 +168,18 @@ const PricingTiers = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           
           {/* Starter Card */}
-          <div className="rounded-[32px] p-8 bg-white border border-black/[0.05] shadow-lg hover:shadow-xl transition-shadow relative flex flex-col">
+          <div className="rounded-[32px] text-[#402e4c] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#7e43ca] transition-shadow relative flex flex-col">
             <div className="mb-6">
               <span className="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-100 px-3 py-1 rounded-full">
                 Starter
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-[#2A1638] mb-2">Early Revenue Teams</h3>
-            <p className="text-sm text-[#2A1638]/60 mb-6">
+            <h3 className="text-2xl font-bold mb-2">Early Revenue Teams</h3>
+            <p className="text-sm mb-6">
               Best for early-stage or lean sales teams handling occasional RFPs.
             </p>
-            <p className="text-3xl font-light text-[#2A1638] mb-8">
-              Usage-based <span className="text-base text-[#2A1638]/40">/pay per use</span>
+            <p className="text-3xl font-light mb-8">
+              Usage-based <span className="text-base">/pay per use</span>
             </p>
             
             <button className="w-full py-3.5 rounded-full border-2 border-[#2A1638] text-[#2A1638] font-semibold hover:bg-[#2A1638] hover:text-white transition-colors mb-8">
@@ -194,8 +194,8 @@ const PricingTiers = () => {
                 "Human-in-the-loop review",
                 "Standard integrations"
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-[#2A1638]/80 text-sm">
-                  <Check className="w-4 h-4 text-purple-500 mt-0.5 shrink-0" />
+                <li key={i} className="flex items-start gap-3 text-sm">
+                  <Check className="w-4 h-4 mt-0.5 shrink-0" />
                   {item}
                 </li>
               ))}
@@ -203,24 +203,24 @@ const PricingTiers = () => {
           </div>
 
           {/* Growth Card (Highlighted) */}
-          <div className="rounded-[32px] p-10 bg-[#2A1638] text-white shadow-2xl relative flex flex-col lg:-mt-4 lg:mb-4">
+          <div className="rounded-[32px] text-white hover:scale-[1.05] p-8 bg-[#2a1638] border-2 border-[#7e43ca] shadow-lg hover:shadow-xl transition-all relative flex flex-col">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#9F5AF0] to-[#7038BA] text-white text-[10px] uppercase font-bold tracking-widest py-1.5 px-4 rounded-full shadow-lg">
               Most Popular
             </div>
             <div className="mb-6">
               <span className="text-xs font-bold text-purple-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
-                Growth
+                Growth/Mid Market
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Scaling Sales Teams</h3>
-            <p className="text-sm text-white/60 mb-6">
+            <h3 className="text-2xl font-bold mb-2">Scaling Sales Teams</h3>
+            <p className="text-sm mb-6">
               Best for scaling sales teams with regular enterprise deals.
             </p>
-            <p className="text-3xl font-light text-white mb-8">
-              Volume-based <span className="text-base text-white/40">/fixed pricing</span>
+            <p className="text-3xl font-light mb-8">
+              Volume-based <span className="text-base">/fixed pricing</span>
             </p>
             
-            <button className="w-full py-3.5 rounded-full bg-white text-[#2A1638] font-semibold hover:bg-gray-100 transition-colors mb-8">
+            <button className="w-full text-black py-3.5 rounded-full bg-white font-semibold hover:bg-gray-100 transition-colors mb-8">
               Talk to Sales
             </button>
 
@@ -233,7 +233,7 @@ const PricingTiers = () => {
                 "CRM + cloud storage integrations",
                 "Analytics & coverage insights"
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-white/80 text-sm">
+                <li key={i} className="flex items-start gap-3 text-sm">
                   <Check className="w-4 h-4 text-purple-300 mt-0.5 shrink-0" />
                   {item}
                 </li>
@@ -242,18 +242,18 @@ const PricingTiers = () => {
           </div>
 
           {/* Enterprise Card */}
-          <div className="rounded-[32px] p-8 bg-white border border-black/[0.05] shadow-lg hover:shadow-xl transition-shadow relative flex flex-col">
+          <div className="rounded-[32px] text-[#402e4c] p-8 bg-white hover:scale-[1.05] shadow-lg border-2 border-[#7e43ca] hover:shadow-xl transition-all relative flex flex-col">
             <div className="mb-6">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">
                 Enterprise
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-[#2A1638] mb-2">High-Volume Teams</h3>
-            <p className="text-sm text-[#2A1638]/60 mb-6">
+            <h3 className="text-2xl font-bold mb-2">High-Volume Teams</h3>
+            <p className="text-sm mb-6">
               Best for high-volume enterprise sales, security-heavy buying environments.
             </p>
-            <p className="text-3xl font-light text-[#2A1638] mb-8">
-              Custom <span className="text-base text-[#2A1638]/40">/enterprise pricing</span>
+            <p className="text-3xl font-light mb-8">
+              Custom <span className="text-base">/enterprise pricing</span>
             </p>
             
             <button className="w-full py-3.5 rounded-full border-2 border-[#2A1638] text-[#2A1638] font-semibold hover:bg-[#2A1638] hover:text-white transition-colors mb-8">
@@ -269,8 +269,8 @@ const PricingTiers = () => {
                 "Dedicated onboarding & support",
                 "SLA & security reviews"
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-[#2A1638]/80 text-sm">
-                  <Check className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                <li key={i} className="flex items-start gap-3 text-sm">
+                  <Check className="w-4 h-4 mt-0.5 shrink-0" />
                   {item}
                 </li>
               ))}

@@ -3,7 +3,7 @@ import { Database, Zap, Brain } from "lucide-react";
 import Card from "../Card";
 import { useSequentialAnimation } from "../../hooks/useSequentialAnimation";
 
-const HowItWorks = () => {
+const   HowItWorks = () => {
   const steps = [
     {
       number: "01",
@@ -81,7 +81,7 @@ const HowItWorks = () => {
                  }
                  className="pt-12" // Extra padding for the number/icon alignment if needed
                  isActive={activeIndex === idx}
-                 duration={4000}
+                 duration={3000}
                  withMovingOrbs={true}
                  onMouseEnter={() => setActiveIndex(idx)}
               />
@@ -93,14 +93,24 @@ const HowItWorks = () => {
               
                {/* Transfer Particle: Flows between active cards (Moved here to avoid clipping) */}
                {activeIndex === idx && (
-                  <motion.div
-                    layoutId="active-transfer-particle"
-                    className="absolute top-8 right-8 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shadow-[0_0_20px_rgba(168,85,247,0.6)] z-30 pointer-events-none"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
+                  <div className="absolute top-8 right-8 z-30 pointer-events-none">
+                     {/* Expanding Signal Ripple */}
+                     <motion.div
+                       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-[#4a2387]"
+                       initial={{ opacity: 0.8, scale: 0.5 }}
+                       animate={{ opacity: 0, scale: 2 }}
+                       transition={{
+                         duration: 1.5,
+                         repeat: Infinity,
+                         ease: "easeOut"
+                       }}
+                     />
+                    <div
+                        className="w-4 h-4 rounded-full bg-[#4a2387] shadow-[0_0_15px_rgba(74,35,135,0.5)]"
+                        
+                        
+                     />
+                  </div>
                )}
             </motion.div>
           ))}
