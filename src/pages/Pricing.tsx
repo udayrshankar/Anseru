@@ -99,7 +99,7 @@ const BenchmarkTable = () => {
             <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
               Why Teams Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">Anseru</span>
             </h2>
-            <p className="text-center text-[#2A1638]/60 max-w-2xl">
+            <p className="text-center text-[#2A1638]/60 max-w-2xl mx-auto">
               The table below highlights how Anseru compares across the capabilities that matter in enterprise RFP and security workflows.
             </p>
           </motion.div>
