@@ -2,10 +2,10 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
-import SmartDraftingAnimation from "./animation/SmartDraftingAnimation";
-import SmartPersonalizationAnimation from "./animation/SmartPersonalizationAnimation";
-import BrandVoiceAnimation from "./animation/BrandVoiceAnimation";
-import IntegrationsAnimation from "./animation/IntegrationsAnimation";
+import ConnectAnimation from "./animation/ConnectAnimation";
+import UploadAnimation from "./animation/UploadAnimation";
+import GenerateAnimation from "./animation/GenerateAnimation";
+import ReviewAnimation from "./animation/ReviewAnimation";
 import bgImage from "../assets/bg2.png";
 import SmartCTA from "./SmartCTA";
 
@@ -19,7 +19,7 @@ const STEPS = [
     label: "Knowledge Integrations",
     metric: "🔐 100% source traceability",
     icon: Lock,
-    component: IntegrationsAnimation,
+    component: ConnectAnimation,
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const STEPS = [
     label: "Universal Parser",
     metric: "⏱️ < 2 minutes to get started",
     icon: UploadCloud,
-    component: SmartPersonalizationAnimation, // Using Personalization/User icon animation as placeholder for Upload
+    component: UploadAnimation,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const STEPS = [
     label: "Smart Drafting Engine",
     metric: "🤖 70-75% auto-answered",
     icon: Sparkles,
-    component: SmartDraftingAnimation,
+    component: GenerateAnimation,
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const STEPS = [
     label: "Continuous Learning",
     metric: "♻️ Compounding time savings",
     icon: Repeat,
-    component: BrandVoiceAnimation,
+    component: ReviewAnimation,
   },
 ];
 

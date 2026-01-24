@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, FileText, CheckCircle, Database, Lock, RefreshCw, Clock, ArrowRight } from "lucide-react";
+import { Shield, FileText, Database, Lock, RefreshCw, Clock } from "lucide-react";
 
 export const SudResponse = () => {
   return (
