@@ -26,8 +26,9 @@ const Pricing = () => {
 
 const PricingHero = () => {
   return (
-    <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
+    <section className="relative w-full min-h-[65vh] flex flex-col overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
+        {/* Rounded Background Container matching Home Hero */}
         <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[40px] overflow-hidden">
           <Background />
         </div>
@@ -35,22 +36,23 @@ const PricingHero = () => {
 
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20">
         <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
-          Pricing That Scales With <br className="hidden md:block"/>
+          Pricing That Scales With
+ <br className="hidden md:block"/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
             Deal Value, Not Seat Count
           </span>
         </h1>
 
-        <p className="text-base md:text-lg text-[#2A1638]/70 max-w-2xl mb-6">
+        <p className="text-base md:text-lg text-[#2A1638]/70 max-w-3xl mb-10">
           Choose a plan based on deal volume and complexity. All plans include core intelligence, governance, and evidence-first workflows.
         </p>
-        
-        <p className="text-sm font-medium text-[#2A1638]/50 uppercase tracking-widest mb-10">
-          Anseru is priced as deal infrastructure, not per-seat software.
-        </p>
-      <SmartCTA />
+
+        <div className="mb-12">
+          <SmartCTA />
+        </div>
       </div>
     </section>
+
   );
 };
 
@@ -91,13 +93,13 @@ const BenchmarkTable = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
+            <p className="font-onest text-center text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
               Pricing & Value Comparison
             </p>
-            <h2 className="font-onest text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
+            <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
               Why Teams Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">Anseru</span>
             </h2>
-            <p className="text-[#2A1638]/60 max-w-2xl">
+            <p className="text-center text-[#2A1638]/60 max-w-2xl">
               The table below highlights how Anseru compares across the capabilities that matter in enterprise RFP and security workflows.
             </p>
           </motion.div>
