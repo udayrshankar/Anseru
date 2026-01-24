@@ -126,9 +126,9 @@ const ResponsivePipe = ({
 
   const p0 = { x: rightX, y: stepHeight * 0.5 }; // Row 0: Right
   const p1 = { x: leftX, y: stepHeight * 1.5 };  // Row 1: Left
-  const p2 = { x: rightX, y: stepHeight * 2.5 }; // Row 2: Right
+  const p2 = { x: rightX, y: stepHeight * 2.5 + 50 }; // Row 2: Right
   const p3 = { x: leftX, y: stepHeight * 3.5 };  // Row 3: Left (Termination of Features)
-  const pCTA = { x: centerX, y: height - 60 };   // End point at CTA top
+  const pCTA = { x: centerX, y: height - 100 };   // End point at CTA top
 
   // Midpoints for vertical transitions
   const midY01 = (p0.y + p1.y) / 2;
@@ -194,10 +194,10 @@ const ResponsivePipe = ({
             <stop offset="0%" stopColor="#374151" />
             <stop offset="100%" stopColor="#000000" />
           </linearGradient>
-          <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
             <path d="M0,0 L0,6 L6,3 z" fill="#E5E7EB" />
           </marker>
-          <marker id="arrow-dark" markerWidth="6" markerHeight="6" refX="10" refY="3" orient="auto">
+          <marker id="arrow-dark" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
             <path d="M0,0 L0,6 L6,3 z" fill="#000000" />
           </marker>
         </defs>
@@ -269,7 +269,7 @@ export default function Workflow() {
   });
 
   return (
-    <div className="relative pb-16 overflow-hidden bg-white">
+    <div className="relative pb-5 overflow-hidden bg-white mt-5">
       {/* BACKGROUND */}
       <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
         <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
@@ -319,7 +319,7 @@ export default function Workflow() {
               ))}
               
               {/* FINAL CTA - Connected by Pipe */}
-              <div className="flex justify-center pt-10 scale-125 origin-top -translate-y-19">
+              <div className="flex justify-center pt-10 scale-150 origin-top -translate-y-20  ">
                  <SmartCTA />
               </div>
             </div>

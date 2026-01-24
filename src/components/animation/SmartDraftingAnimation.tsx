@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const SmartDraftingAnimation = () => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <div className="w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden bg-white">
       {/* Background Elements - Simplified */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 opacity-50 pointer-events-none" />
       

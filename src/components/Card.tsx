@@ -44,7 +44,7 @@ const TimerBorder = ({ duration }: { duration: number }) => {
           rx="38.5"
           fill="none"
           stroke={`url(#${gradientId})`}
-          strokeWidth="2"
+          strokeWidth="1"
           initial={{ pathLength: 0, opacity: 1 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: duration / 1000, ease: "linear" }}

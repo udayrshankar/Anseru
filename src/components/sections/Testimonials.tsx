@@ -114,17 +114,17 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#FAFAFA] to-[#F3EBF7] overflow-hidden mt-5">
+    <section className="bg-white overflow-hidden mt-12 mb-12">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] text-center">
-        <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638] mb-6">
+        <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
           Trusted by fast-growing teams
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
           See how companies are automating their trust and sales workflows.
         </p>
       </div>
 
-      <div className="relative h-[400px] flex items-center justify-center">
+      <div className="relative h-[400px] flex items-center justify-center mt-5">
         <div className="relative w-full max-w-5xl h-full flex items-center justify-center">
              <AnimatePresence initial={false} mode="popLayout">
                  {TESTIMONIALS.map((t, i) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, type Variants } from "framer-motion"; // 1. Import Variants
+import { motion, type Variants } from "framer-motion";
 import GlowCard from "../GlowCard";
 
 const CARDS = [
@@ -15,16 +15,10 @@ const CARDS = [
     subtitle: "Your deal-closing RFP Agent",
     color: "#D8B4FE",
   },
-  {
-    id: 2,
-    title: "Sud here!",
-    subtitle: "Security review specialist",
-    color: "#93C5FD",
-  },
 ];
 
 export default function HeroCards() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,43 +27,30 @@ export default function HeroCards() {
     return () => clearInterval(interval);
   }, []);
 
+  // NEW LOGIC: Only two states needed: "front" and "back"
   const getCardState = (index: number, activeIndex: number) => {
-    if (index === activeIndex) return "center";
-    if (index === (activeIndex + 1) % CARDS.length) return "right";
-    return "left";
+    return index === activeIndex ? "front" : "back";
   };
 
-  // 2. Explicitly type the variants object
   const variants: Variants = {
-    center: {
-      x: "0%",
-      scale: 1.1,
+    front: {
       zIndex: 10,
       opacity: 1,
+      scale: 1.1,
+      y: 0,          // Centered vertically
       filter: "blur(0px)",
-      rotate: 0,
       transition: { 
         type: "spring", 
         stiffness: 200, 
         damping: 25 
       },
     },
-    left: {
-      x: "-55%",
-      scale: 0.85,
+    back: {
       zIndex: 1,
-      opacity: 0.7,
-      transition: { 
-        type: "spring", 
-        stiffness: 200, 
-        damping: 25 
-      },
-    },
-    right: {
-      x: "55%",
-      scale: 0.85,
-      zIndex: 1,
-      opacity: 0.7,
+      opacity: 0.5,
+      scale: 0.95,   // Slightly smaller
+      y: -15,        // Peeks out from the top slightly (Stack effect)
+      filter: "blur(2px)",
       transition: { 
         type: "spring", 
         stiffness: 200, 
@@ -87,12 +68,12 @@ export default function HeroCards() {
           <motion.div
             key={card.id}
             variants={variants}
-            initial="center"
+            initial="back" // Start from back state
             animate={position}
             onClick={() => setActiveIndex(index)}
             className="absolute cursor-pointer"
             style={{ 
-              transformOrigin: "bottom center",
+              transformOrigin: "center center", // Changed to center for better stacking
             }}
           >
             <div className="w-[300px] md:w-[400px]">

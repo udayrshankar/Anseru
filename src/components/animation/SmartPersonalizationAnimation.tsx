@@ -3,9 +3,9 @@ import { User } from "lucide-react";
 
 const SmartPersonalizationAnimation = () => {
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-white">
             {/* Background Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-rose-50/50 to-orange-50/50 opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-rose-50/50 to-orange-50/50 opacity-50   " />
 
             <div className="relative z-10">
                 {/* Central Profile */}

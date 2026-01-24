@@ -27,10 +27,10 @@ const cards = [
 const WhyAnseru = () => {
     const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(cards.length);
     return (
-      <div className="bg-[#FDFCFE]">
-        <section className="py-0 relative overflow-hidden">
+      <div className="bg-white mt-8">
+        <section className="py-0 relative">
           <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10">
-            <div className="mb-10 text-center max-w-2xl mx-auto">
+            <div className="mb-15 text-center max-w-2xl mx-auto">
               <p className="text-sm text-[#2A1638]/60 mb-3 uppercase tracking-widest font-medium">
                 Proven Results
               </p>

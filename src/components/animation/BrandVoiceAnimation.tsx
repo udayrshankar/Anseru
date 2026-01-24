@@ -3,7 +3,7 @@ import { Shield } from "lucide-react";
 
 const BrandVoiceAnimation = () => {
     return (
-        <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-white/50">
+        <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-white">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-cyan-50 opacity-60" />
 
             {/* Shield Filter */}

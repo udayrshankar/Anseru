@@ -1,6 +1,6 @@
 export default function LovedByTeams() {
   return (
-    <section className="px-6 py-0">
+    <section className="px-6 py-10">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] text-center">
         <h2 className="font-onest text-lg text-[#2A1638] mb-8">
           Loved by Teams At
