@@ -9,7 +9,7 @@ const cards = [
     icon: ShieldCheck,
   },
   {
-    title: "One source of truth for sales and security",
+    title: "One source of truth for sales and security teams",
     desc: "RFPs and security questionnaires use the same connected knowledge base so teams stay aligned and responses stay consistent.",
     icon: Database,
   },
@@ -56,9 +56,9 @@ const WhyAnseru = () => {
                   description={card.desc}
                   index={idx}
                   minHeight="min-h-[220px] md:min-h-[260px]"
-                  icon={<card.icon className="w-12 h-12" />}
+                  icon={<card.icon className="w-12 h-12 text-[#2A1638]" />}
                   watermark={
-                     <card.icon className="w-56 h-56 -rotate-12 text-[#2A1638] opacity-[0.03]" />
+                     <card.icon className="w-64 h-64 -rotate-12 text-[#2A1638] opacity-[0.05]" />
                   }
                   isActive={activeIndex === idx}
                   duration={4000}

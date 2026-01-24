@@ -41,8 +41,8 @@ export default function AnimationCarousel({ activeTab }: AnimationCarouselProps)
 
   return (
     <div className="w-full h-full relative group">
-      {/* Background with slight gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800" />
+      {/* Solid Brand-Aligned Background */}
+      <div className="absolute inset-0 bg-[#FBF7FF]" />
       
       {/* Active Animation */}
       <div className="absolute inset-0">
@@ -72,7 +72,7 @@ export default function AnimationCarousel({ activeTab }: AnimationCarouselProps)
                key={i}
                onClick={() => setIndex(i)}
                className={`h-1.5 rounded-full transition-all duration-300 ${
-                 i === index ? "w-8 bg-white" : "w-1.5 bg-white/30 hover:bg-white/50"
+                 i === index ? "w-8 bg-purple-600" : "w-1.5 bg-purple-200 hover:bg-purple-300"
                }`}
              />
           ))}
@@ -84,7 +84,7 @@ export default function AnimationCarousel({ activeTab }: AnimationCarouselProps)
              key={`${activeTab}-${index}-label`}
              initial={{ opacity: 0, y: -10 }}
              animate={{ opacity: 1, y: 0 }}
-             className="bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-white/90 text-xs font-mono"
+             className="bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-purple-100 text-purple-900/80 text-xs font-mono font-medium shadow-sm"
           >
               {currentAnimations[index].label}
           </motion.div>

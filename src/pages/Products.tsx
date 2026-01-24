@@ -37,9 +37,9 @@ const Products = () => {
           <ProductsHero />
           <AgentCardsSection onHover={setActiveProduct} onSelect={handleProductSelect} />
         
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 bg-white shadow-[10px_10px_40px_rgba(0,0,0,0.3)] rounded-[50px] py-8 mx-25">
           {/* Toggle Control / Details Start Anchor */}
-          <div ref={detailsRef} className="flex justify-center relative z-20 bg-white">
+          <div ref={detailsRef} className="flex justify-center relative z-20 -translate-y-15">
             <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full py-2 px-2 flex gap-1 items-center ring-1 ring-black/[0.03]">
               <button
                 onClick={() => setActiveProduct('rfp')}
@@ -125,7 +125,7 @@ const ProductsHero = () => {
          Two agents. One shared
  <br className="hidden md:block"/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
-            intelligence layer.
+            Intelligence Layer.
           </span>
         </h1>
 
@@ -169,21 +169,21 @@ const AgentCardsSection = ({
             title="RFP Agent"
             description="Built for sales, pre-sales, and proposal teams responding to complex enterprise RFPs. Removes chaos by breaking it into a clear, repeatable flow."
             icon={<FileText />}
-            minHeight="min-h-[450px]"
+            minHeight="min-h-[500px]"
             withMovingOrbs={true}
             onMouseEnter={() => onHover('rfp')}
             onClick={() => onSelect('rfp')} 
-            className="group cursor-pointer"
+            className="group cursor-pointer relative"
           >
             {/* Custom Children: Badge & Tags */}
-            <div className="mt-6">
+            <div className="mt-auto pt-6">
                <div className="inline-flex items-center gap-2 mb-6 bg-purple-100 px-3 py-1 rounded-full">
-                  <span className="text-xs font-bold text-purple-600 uppercase tracking-widest">
-                    For Proposals
+                  <span className="text-sm font-bold text-purple-600 uppercase tracking-widest">
+                    For GTM and Sales Teams
                   </span>
                </div>
                
-               <div className="flex flex-wrap gap-3 mt-4">
+               <div className="flex flex-wrap gap-3">
                   {["Ingestion", "Mapping", "Drafting", "Review"].map((tag) => (
                     <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
                       {tag}
@@ -192,8 +192,8 @@ const AgentCardsSection = ({
                </div>
             </div>
             
-            {/* Divider line on desktop (preserved from original) */}
-            <div className="hidden lg:block absolute right-0 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-purple-200 to-transparent" />
+            {/* Divider line on desktop - Positioned absolutely to the RIGHT edge of this card */}
+            <div className="hidden lg:block absolute -right-4 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-purple-200 to-transparent z-10" />
           </Card>
 
           {/* Security Agent Panel - Using Card Component */}
@@ -201,28 +201,31 @@ const AgentCardsSection = ({
             title="Security Agent"
             description="Built for accuracy, consistency, and auditability. Answer security questions perfectly, using approved evidence from your compliance documentation."
             icon={<Lock />}
-            minHeight="min-h-[450px]"
+            minHeight="min-h-[500px]"
             withMovingOrbs={true}
             onMouseEnter={() => onHover('security')}
-            onClick={() => onSelect('security')}
-            className="group cursor-pointer"
+            onClick={() => onSelect('security')} 
+            className="group cursor-pointer relative"
           >
-             {/* Custom Children: Badge & Tags */}
-             <div className="mt-6">
+            {/* Custom Children: Badge & Tags */}
+            <div className="mt-auto pt-6">
                <div className="inline-flex items-center gap-2 mb-6 bg-blue-100 px-3 py-1 rounded-full">
-                  <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
-                    For Security
+                  <span className="text-sm font-bold text-blue-600 uppercase tracking-widest">
+                    For Compliance and Security Teams
                   </span>
                </div>
                
-               <div className="flex flex-wrap gap-3 mt-4">
-                  {["Evidence", "Freshness", "Consistency", "Audit"].map((tag) => (
-                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-blue-100 shadow-sm">
+               <div className="flex flex-wrap gap-3">
+                  {["Evidence", "Freshness", "Accuracy", "Audit"].map((tag) => (
+                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
                       {tag}
                     </span>
                   ))}
                </div>
             </div>
+            
+            {/* Divider line on desktop - Positioned absolutely to the RIGHT edge of this card */}
+            <div className="hidden lg:block absolute -right-4 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-purple-200 to-transparent z-10" />
           </Card>
         </div>
       </div>
@@ -295,7 +298,7 @@ const RFPAgentSection = () => {
               minHeight="min-h-[150px]"
               icon={<step.icon />}
               watermark={
-                <step.icon className="h-48 w-48 -rotate-12 text-[#2A1638]" />
+                <step.icon className="h-48 w-48 -rotate-12 text-[#2A1638] opacity-[0.05]" />
               }
               isActive={activeIndex === idx}
               duration={4000}
@@ -337,7 +340,7 @@ const SecurityAgentSection = () => {
   const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(features.length);
 
   return (
-    <section className="py-0 bg-white relative">
+    <section className="py-0 relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
 
         {/* Grid - 2x2 layout matching RFPAgentSection */}
@@ -356,7 +359,7 @@ const SecurityAgentSection = () => {
               minHeight="min-h-[150px]"
               icon={<feature.icon />}
               watermark={
-                <feature.icon className="h-48 w-48 -rotate-12 text-[#2A1638]" />
+                <feature.icon className="h-48 w-48 -rotate-12 text-[#2A1638] opacity-[0.05]" />
               }
               isActive={activeIndex === idx}
               duration={4000}

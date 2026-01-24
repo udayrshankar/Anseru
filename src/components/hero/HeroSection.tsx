@@ -20,7 +20,7 @@ export default function HeroSection({ activeIndex, onIndexChange, isPaused }: He
           {/* Main Title -> H1 */}
           <h1 className="max-w-6xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
             Win deals faster with AI agents for <br/>
-            RFPs and security questionnaires
+            RFPs and Security Questionnaires
           </h1>
 
           {/* Subtitle -> Text Body */}

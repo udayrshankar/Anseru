@@ -117,7 +117,7 @@ const Testimonials = () => {
     <section className="bg-white overflow-hidden mt-12 mb-12">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] text-center">
         <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
-          Trusted by fast-growing teams
+          Trusted by fast-growing enterprise teams
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
           See how companies are automating their trust and sales workflows.

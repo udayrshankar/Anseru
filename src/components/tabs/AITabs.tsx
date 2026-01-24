@@ -66,14 +66,14 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full"
              >
                {/* Left Side: Content */}
-               <div className="lg:col-span-4 space-y-6">
+               <div className="lg:col-span-4 space-y-3">
                   <div className="space-y-1">
-                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 w-fit">
+                     <div className="inline-flex items-center gap-2 py-1 rounded-full bg-purple-50 border border-purple-100 w-fit">
                         <span className="relative flex h-2 w-2">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
                         </span>
-                        <p className="text-purple-700 uppercase tracking-widest text-[10px] font-bold">
+                        <p className="text-purple-700 uppercase tracking-widest text-[15px] font-bold">
                            {tabContent[activeTab].subtitle}
                         </p>
                      </div>
@@ -114,7 +114,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                   </div>
 
                   {/* CTA Button - Shimmer Effect */}
-                  <button className="relative overflow-hidden bg-[#2A1638] hover:bg-[#3d2151] text-white px-9 h-[52px] rounded-2xl font-bold text-[15px] transition-all shadow-[0_10px_30px_rgba(42,22,56,0.2)] hover:shadow-[0_20px_40px_rgba(42,22,56,0.3)] hover:-translate-y-1 flex items-center gap-3 w-fit group">
+                  <button className="relative mx-12 overflow-hidden bg-[#2A1638] hover:bg-[#3d2151] text-white px-9 h-[52px] rounded-2xl font-bold text-[15px] transition-all shadow-[0_10px_30px_rgba(42,22,56,0.2)] hover:shadow-[0_20px_40px_rgba(42,22,56,0.3)] hover:-translate-y-1 flex items-center gap-3 w-fit group">
                      {tabContent[activeTab].buttonText}
                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
                   </button>

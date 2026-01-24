@@ -1,160 +1,218 @@
 import { motion } from "framer-motion";
-import { Shield, FileText, Database, Lock, RefreshCw, Clock } from "lucide-react";
+import { ShieldCheck, Lock, FileText, CheckCircle2, RefreshCw, Zap, Server } from "lucide-react";
 
+// --- 1. THE DIGITAL VAULT (Source-Backed) ---
+// Concept: Clean, secure scanning. A question enters, connects to a secure node, and yields a verified result.
 export const SudResponse = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center p-8 bg-slate-900/50 rounded-2xl relative overflow-hidden">
-        {/* Abstract Background */}
-        <div className="absolute inset-0 opacity-10">
-             {Array.from({ length: 5 }).map((_, i) => (
-                 <motion.div 
-                    key={i}
-                    className="absolute h-px bg-white w-full"
-                    style={{ top: `${20 * i}%` }}
-                    initial={{ x: "-100%" }}
-                    animate={{ x: "100%" }}
-                    transition={{ duration: 3, delay: i * 0.5, repeat: Infinity, ease: "linear" }}
-                 />
-             ))}
-        </div>
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-gray-50/50">
+      
+      {/* Background Subtle Grid */}
+      <div className="absolute inset-0" 
+           style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px', opacity: 0.3 }} 
+      />
 
-      <div className="relative w-full max-w-md flex items-center justify-between gap-4 z-10">
-         
-         {/* Question Card */}
-         <motion.div 
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            className="w-48 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20"
-         >
-             <div className="flex items-center gap-2 mb-3">
-                 <div className="w-6 h-6 rounded bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">Q</div>
-                 <div className="h-2 w-20 bg-white/20 rounded" />
-             </div>
-             <div className="space-y-2">
-                 <div className="h-1.5 w-full bg-white/10 rounded" />
-                 <div className="h-1.5 w-3/4 bg-white/10 rounded" />
-             </div>
-         </motion.div>
+      <div className="relative flex items-center gap-8">
+          
+          {/* 1. The Query (Left) */}
+          <motion.div 
+             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-purple-100 flex items-center gap-3 z-10"
+             initial={{ x: -20, opacity: 0 }}
+             animate={{ x: 0, opacity: 1 }}
+             transition={{ duration: 0.5 }}
+          >
+              <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
+                  <span className="text-xs font-bold text-purple-600">Q</span>
+              </div>
+              <div className="space-y-1.5">
+                  <div className="h-2 w-24 bg-gray-100 rounded-full" />
+                  <div className="h-2 w-16 bg-gray-100 rounded-full" />
+              </div>
+          </motion.div>
 
-         {/* Connection */}
-         <div className="flex-1 h-px bg-blue-500/50 relative">
+          {/* Connection Beam */}
+          <div className="w-16 h-px bg-purple-200 relative overflow-hidden">
              <motion.div 
-                className="absolute inset-0 bg-blue-400 blur-sm"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1, repeat: Infinity }}
+                className="absolute inset-0 bg-purple-500"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
              />
-         </div>
+          </div>
 
-         {/* Source/Answer Card */}
-         <motion.div 
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="w-48 bg-white rounded-xl p-4 shadow-xl border-l-4 border-green-500 relative overflow-hidden"
-         >
-             <div className="flex items-center gap-2 mb-3">
-                 <Shield className="text-green-600" size={16} />
-                 <span className="text-xs font-bold text-gray-800">Verified Answer</span>
-             </div>
-             <div className="space-y-2">
-                 <div className="h-1.5 w-full bg-gray-100 rounded" />
-                 <div className="h-1.5 w-full bg-gray-100 rounded" />
-                 <div className="h-1.5 w-5/6 bg-gray-100 rounded" />
-             </div>
+          {/* 2. The Vault Core (Center) */}
+          <div className="relative">
+              <div className="w-16 h-16 bg-white rounded-2xl shadow-xl border border-purple-100 flex items-center justify-center relative z-10">
+                  <Server size={24} className="text-purple-600" />
+              </div>
+              {/* Pulse Ring */}
+              <motion.div 
+                  className="absolute inset-0 bg-purple-500/20 rounded-2xl -z-10"
+                  animate={{ scale: [1, 1.4], opacity: [0.5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+              />
+          </div>
 
-             {/* Source Badge */}
+           {/* Connection Beam 2 */}
+           <div className="w-16 h-px bg-purple-200 relative overflow-hidden">
              <motion.div 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-3 flex items-center gap-1.5 text-[10px] text-gray-500 bg-gray-50 px-2 py-1 rounded w-fit"
-             >
-                 <Database size={10} />
-                 <span>Source: ISO_27001_Policy.pdf</span>
-             </motion.div>
-         </motion.div>
+                className="absolute inset-0 bg-purple-500"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ duration: 1.5, delay: 0.75, repeat: Infinity, ease: "linear" }}
+             />
+          </div>
+
+          {/* 3. Verified Answer (Right) */}
+          <motion.div 
+             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-green-100 flex items-center gap-3 z-10"
+             initial={{ x: 20, opacity: 0 }}
+             animate={{ x: 0, opacity: 1 }}
+             transition={{ duration: 0.5, delay: 0.4 }}
+          >
+              <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
+                  <ShieldCheck size={16} className="text-green-600" />
+              </div>
+              <div className="space-y-1.5">
+                  <div className="h-2 w-28 bg-gray-100 rounded-full" />
+                  <div className="h-2 w-20 bg-gray-100 rounded-full" />
+              </div>
+          </motion.div>
       </div>
     </div>
   );
 };
 
+// --- 2. THE STATUS BOARD (Real-Time Updates) ---
+// Concept: A clean UI list where a row updates smoothly. No tilting or 3D angles.
 export const SudUpdates = () => {
-    return (
-      <div className="w-full h-full flex items-center justify-center p-8 bg-slate-900/50 rounded-2xl relative">
-          <div className="relative w-full max-w-sm bg-white rounded-xl shadow-2xl p-6 overflow-hidden">
-              <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                      <Lock className="text-gray-700" size={20} />
-                      <div className="font-bold text-gray-800">Security Policy</div>
-                  </div>
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="text-blue-500"
-                  >
-                      <RefreshCw size={18} />
-                  </motion.div>
-              </div>
+  return (
+    <div className="w-full h-full flex items-center justify-center p-8">
+        <div className="w-full max-w-sm bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex flex-col">
+            {/* Header */}
+            <div className="h-10 border-b border-gray-50 flex items-center justify-between px-4 bg-gray-50/30">
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Policy Monitor</span>
+                <div className="flex gap-1">
+                    <div className="w-2 h-2 rounded-full bg-gray-200" />
+                    <div className="w-2 h-2 rounded-full bg-gray-200" />
+                </div>
+            </div>
 
-              <div className="space-y-4">
-                  {[1, 2].map((i) => (
-                      <div key={i} className="flex flex-col gap-1">
-                          <div className="flex justify-between text-xs text-gray-400">
-                             <span>Control 1.{i}</span>
-                             <span className="text-green-600 font-bold">Updated</span>
-                          </div>
-                          <div className="h-2 w-full bg-gray-100 rounded overflow-hidden">
-                              <motion.div 
-                                className="h-full bg-green-500"
-                                initial={{ width: "0%" }}
-                                animate={{ width: "100%" }}
-                                transition={{ duration: 1.5, delay: i * 0.5, repeat: Infinity, repeatDelay: 2 }}
-                              />
-                          </div>
-                      </div>
-                  ))}
-              </div>
-              
-              <motion.div 
-                 initial={{ y: 50, opacity: 0 }}
-                 animate={{ y: 0, opacity: 1 }}
-                 transition={{ delay: 0.5 }}
-                 className="absolute bottom-0 left-0 right-0 bg-blue-50 p-2 text-center text-xs font-medium text-blue-700 border-t border-blue-100"
-              >
-                  Auto-flagging 3 stale responses...
-              </motion.div>
-          </div>
-      </div>
-    );
+            {/* List */}
+            <div className="p-4 space-y-3">
+                {[1, 2, 3].map((i) => (
+                    <motion.div 
+                        key={i}
+                        className="flex items-center justify-between p-3 rounded-lg border border-transparent"
+                        animate={i === 1 ? { backgroundColor: "#faf5ff", borderColor: "#f3e8ff" } : { backgroundColor: "#ffffff" }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-purple-500' : 'bg-green-500'}`} />
+                            <div className="space-y-1">
+                                <div className="h-1.5 w-24 bg-gray-100 rounded-full" />
+                                <div className="h-1.5 w-16 bg-gray-50 rounded-full" />
+                            </div>
+                        </div>
+                        
+                        {i === 1 && (
+                            <motion.div 
+                                className="flex items-center gap-1.5 text-[10px] font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded-md"
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1 }}
+                            >
+                                <RefreshCw size={10} className="animate-spin" />
+                                Syncing
+                            </motion.div>
+                        )}
+                         {i !== 1 && (
+                            <div className="text-[10px] font-medium text-gray-400">Fixed</div>
+                        )}
+                    </motion.div>
+                ))}
+            </div>
+            
+            {/* Notification Toast */}
+            <motion.div 
+                className="mx-4 mb-4 bg-gray-900 text-white p-3 rounded-lg flex items-center gap-3 shadow-xl"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: [20, 0, 0, 20], opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
+            >
+                <CheckCircle2 size={16} className="text-green-400" />
+                <div>
+                   <div className="text-[10px] font-bold">Update Complete</div>
+                   <div className="text-[9px] text-gray-400">Knowledge base synced</div>
+                </div>
+            </motion.div>
+        </div>
+    </div>
+  );
 };
 
+// --- 3. THE PROGRESS FLOW (Speed) ---
+// Concept: A horizontal timeline. Clean, linear, professional progress.
 export const SudSpeed = () => {
     return (
-      <div className="w-full h-full flex items-center justify-center p-8 bg-slate-900/50 rounded-2xl relative overflow-hidden">
-          {/* Fast Moving Pipeline */}
-          <div className="flex items-center gap-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                  <motion.div 
-                    key={i}
-                    className="w-16 h-20 bg-white/10 backdrop-blur rounded-lg border border-white/10 flex items-center justify-center"
-                    animate={{ x: ["100%", "-200%"], opacity: [0, 1, 0] }}
-                    transition={{ duration: 2, delay: i * 0.3, repeat: Infinity, ease: "linear" }}
-                  >
-                      <FileText className="text-white/50" />
-                  </motion.div>
+      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
+          
+          <div className="w-full max-w-xs space-y-6">
+              {[1, 2, 3].map((step, i) => (
+                  <div key={i} className="relative">
+                      {/* Connector Line */}
+                      {i !== 2 && (
+                          <div className="absolute left-[15px] top-8 bottom-[-24px] w-0.5 bg-gray-100">
+                              <motion.div 
+                                  className="w-full bg-purple-500"
+                                  initial={{ height: "0%" }}
+                                  animate={{ height: "100%" }}
+                                  transition={{ duration: 0.5, delay: i * 0.8 + 0.5, ease: "linear" }}
+                              />
+                          </div>
+                      )}
+
+                      <div className="flex items-center gap-4">
+                          <motion.div 
+                             className="w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white z-10"
+                             animate={{ 
+                                 borderColor: ["#e5e7eb", "#a855f7", "#22c55e"],
+                                 color: ["#9ca3af", "#a855f7", "#22c55e"],
+                                 scale: [1, 1.1, 1]
+                             }}
+                             transition={{ duration: 0.5, delay: i * 0.8 }}
+                          >
+                              {i === 0 ? <FileText size={14} /> : i === 1 ? <Zap size={14} /> : <CheckCircle2 size={14} />}
+                          </motion.div>
+                          
+                          <div className="flex-1 space-y-1.5">
+                              <div className="flex justify-between">
+                                  <motion.div 
+                                      className="h-2 w-20 bg-gray-100 rounded-full"
+                                      animate={{ backgroundColor: ["#f3f4f6", "#2A1638"] }}
+                                      transition={{ duration: 0.5, delay: i * 0.8 }}
+                                  />
+                                  <motion.div 
+                                      className="text-[10px] font-mono text-gray-400"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      transition={{ delay: i * 0.8 }}
+                                  >
+                                      {0.2 * (i+1)}s
+                                  </motion.div>
+                              </div>
+                              <div className="h-1.5 w-12 bg-gray-50 rounded-full" />
+                          </div>
+                      </div>
+                  </div>
               ))}
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-64 h-32 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent blur-xl" />
+          <div className="flex items-center gap-2 text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1.5 rounded-full mt-4">
+              <Zap size={12} className="text-purple-500" />
+              <span>Total Time: <span className="text-gray-900 font-bold">0.6s</span></span>
           </div>
 
-          <div className="absolute bottom-8 flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-lg">
-              <Clock className="text-blue-600" size={16} />
-              <div className="text-sm font-bold text-gray-800">
-                  <span className="text-blue-600">90%</span> Faster
-              </div>
-          </div>
       </div>
     );
 };

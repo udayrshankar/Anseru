@@ -186,7 +186,7 @@ export default function Card({
 
       {/* 3. Visual Layer: Watermark */}
       {watermark && (
-        <div className="absolute -right-6 -bottom-6 opacity-[0.07] scale-110 transition-transform duration-700 group-hover:scale-125 pointer-events-none -z-10 mix-blend-multiply origin-bottom-right">
+        <div className="absolute -right-6 -bottom-6 scale-110 transition-transform duration-700 group-hover:scale-125 pointer-events-none -z-10 mix-blend-multiply origin-bottom-right">
           {watermark}
         </div>
       )}

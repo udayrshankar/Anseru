@@ -22,8 +22,8 @@ export const tabContent: Record<string, TabItem> = {
   maya: {
     label: "Sud",
     subtitle: "Security Questionnaire Agent",
-    title: "Meet Sud, Your Security Expert",
-    highlightWord: "Security Expert",
+    title: "Meet Sud",
+    highlightWord: "Meet Sud",
     description: "Sud instantly parses unwanted questionnaires and maps them to your knowledge base. She flags critical gaps before human review and generates remediation roadmaps instantly.",
     bullets: [
       {
@@ -51,8 +51,8 @@ export const tabContent: Record<string, TabItem> = {
   jane: {
     label: "KG",
     subtitle: "RFP Agent",
-    title: "Meet KG, Your RFP Expert",
-    highlightWord: "RFP Expert",
+    title: "Meet KG",
+    highlightWord: "Meet KG",
     description: "KG drafts complex RFP responses in minutes, not days. She contextually retrieves previous winning answers to ensure your brand voice remains consistent across every bid.",
     bullets: [
       {

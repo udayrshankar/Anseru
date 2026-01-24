@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const FEATURES = [
-  "11X faster responses",
-  "80% time saved on RFPs and SecQ",
-  "75% questions auto-answered"
+  "11X Faster Responses",
+  "80% Time Saved on RFPs and SecQ",
+  "75% Questions Auto-Answered"
 ];
 
 const SmartCTA = () => {
