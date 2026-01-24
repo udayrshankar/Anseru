@@ -33,7 +33,7 @@ export default function ConnectAnimation() {
   );
 }
 
-const OrbitingIcon = ({ angle, delay, icon: Icon, color }: { angle: number, delay: number, icon: any, color: string }) => {
+const OrbitingIcon = ({ angle, icon: Icon, color }: { angle: number, delay: number, icon: any, color: string }) => {
     return (
         <motion.div
             className="absolute z-10"
