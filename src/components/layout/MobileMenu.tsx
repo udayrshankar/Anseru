@@ -13,7 +13,7 @@ export default function MobileMenu({ open }: Props) {
         </a>
       ))}
       <button className="w-full mt-4 px-6 py-3.5 bg-black text-white rounded-full">
-        Book a Demo
+        Talk to Founders
       </button>
     </div>
   );

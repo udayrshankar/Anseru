@@ -73,7 +73,7 @@ const SmartCTA = () => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
-        <span className="relative z-10">Book a Demo</span>
+        <span className="relative z-10">Talk to Founders</span>
         {/* Subtle shine effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
       </motion.button>

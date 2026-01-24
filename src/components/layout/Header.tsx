@@ -13,7 +13,7 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
-          {["HOME", "FEATURES", "PRODUCT", "COMPANY", "PRICING"].map((item) => (
+          {["HOME", "PRODUCT", "FEATURES", "COMPANY", "PRICING"].map((item) => (
             <a
               key={item}
               href={"/"+item.toLowerCase()}
@@ -26,7 +26,7 @@ export default function Header() {
 
         <div className="flex items-center gap-4">
           <button className="hidden md:block px-6 py-3.5 bg-black text-white rounded-full text-smalls">
-            Book a Demo
+            Talk to Founders
           </button>
 
           <button

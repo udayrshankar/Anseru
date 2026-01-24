@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Database, Zap, Brain } from "lucide-react";
 import Card from "../Card";
+import { useSequentialAnimation } from "../../hooks/useSequentialAnimation";
 
 const HowItWorks = () => {
   const steps = [
@@ -27,6 +28,8 @@ const HowItWorks = () => {
     }
   ];
 
+  const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(steps.length);
+
   return (
     <section className="py-0 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
@@ -48,7 +51,11 @@ const HowItWorks = () => {
         </div>
 
         {/* Steps - Horizontal on desktop, vertical on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
            {/* Connecting Line (Desktop) */}
            <div className="hidden lg:block absolute top-[50px] left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-200 to-transparent -z-10" />
 
@@ -73,12 +80,28 @@ const HowItWorks = () => {
                     </span>
                  }
                  className="pt-12" // Extra padding for the number/icon alignment if needed
+                 isActive={activeIndex === idx}
+                 duration={4000}
+                 withMovingOrbs={true}
+                 onMouseEnter={() => setActiveIndex(idx)}
               />
               
               {/* Floating Number Badge */}
               <div className="absolute top-0 left-8 -translate-y-1/2 bg-white border border-purple-100 shadow-lg px-4 py-1.5 rounded-full z-20">
                   <span className="text-sm font-bold text-purple-600 tracking-widest">{step.number}</span>
               </div>
+              
+               {/* Transfer Particle: Flows between active cards (Moved here to avoid clipping) */}
+               {activeIndex === idx && (
+                  <motion.div
+                    layoutId="active-transfer-particle"
+                    className="absolute top-8 right-8 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shadow-[0_0_20px_rgba(168,85,247,0.6)] z-30 pointer-events-none"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+               )}
             </motion.div>
           ))}
         </div>

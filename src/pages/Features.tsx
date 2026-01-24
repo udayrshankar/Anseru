@@ -10,7 +10,7 @@ import SmartCTA from "../components/SmartCTA";
 
 const Features = () => {
   return (
-    <div className="bg-white w-full -z-5">
+    <div className="bg-gradient-to-b from-white via-[#FBF9FD] to-white w-full -z-5">
       <Header />
       
       <main className="flex flex-col gap-20">

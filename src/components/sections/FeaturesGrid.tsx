@@ -7,6 +7,7 @@ import {
   MdSupportAgent 
 } from "react-icons/md";
 import Card from "../Card";
+import { useSequentialAnimation } from "../../hooks/useSequentialAnimation";
 
 // --- Types ---
 interface Feature {
@@ -42,8 +43,10 @@ export default function FeaturesGrid() {
     },
   ];
 
+  const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(features.length);
+
   return (
-    <section className="py-0 px-6 bg-white">
+    <section className="py-0 px-6 bg-gradient-to-b from-[#FFFFFF] to-[#F8F6FA]">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Header */}
         <div className="mb-10">
@@ -63,7 +66,11 @@ export default function FeaturesGrid() {
         </div>
 
         {/* Grid - Uniform 2x2 on Desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {features.map((feature, idx) => (
             <Card
               key={idx}
@@ -75,6 +82,9 @@ export default function FeaturesGrid() {
               watermark={
                 <feature.icon className="h-48 w-48 -rotate-12 text-[#2A1638]" />
               }
+              isActive={activeIndex === idx}
+              duration={4000}
+              onMouseEnter={() => setActiveIndex(idx)}
             />
           ))}
         </div>

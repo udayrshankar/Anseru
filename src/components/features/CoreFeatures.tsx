@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { 
   Users, FileCheck, AlertTriangle, 
-  Plug, Shield, CheckCircle 
+  Plug, Shield, CheckCircle, Workflow
 } from "lucide-react";
 
 const CoreFeatures = () => {
   const features = [
     {
-      icon: Plug, // Using Plug as placeholder/generic if specific icon not found, or matching original logic
+      icon: Plug,
       title: "Living Knowledge Graph",
       goal: "Anseru connects directly to your real sources of truth: content, past RFPs, security documents, and public content.",
       capabilities: [
@@ -45,7 +45,7 @@ const CoreFeatures = () => {
       ]
     },
     {
-      icon: Plug,
+      icon: Workflow,
       title: "Enterprise Integrations",
       goal: "Integrate effortlessly with your existing revenue and security stack.",
       capabilities: [
@@ -67,9 +67,9 @@ const CoreFeatures = () => {
 
   return (
     <section className="py-0 bg-[#FAFAFA] relative">
-      <div className="max-w-[1000px] mx-auto px-6 xl:px-[120px] py-20">
+      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] py-12 md:py-20">
         {/* Section Header */}
-        <div className="mb-30 text-center sticky top-20 z-0">
+        <div className="mb-12 lg:mb-20 text-center relative lg:sticky lg:top-24 z-0">
           <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
             Platform Capabilities
           </p>
@@ -79,7 +79,7 @@ const CoreFeatures = () => {
         </div>
 
         {/* Features Stacking List */}
-        <div className="flex flex-col gap-8 pb-32">
+        <div className="flex flex-col gap-6 lg:gap-8 pb-20">
           {features.map((feature, idx) => (
             <motion.div
               key={idx}
@@ -87,35 +87,38 @@ const CoreFeatures = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="sticky"
+              className="relative lg:sticky"
               style={{
-                top: `${260 + idx * 40}px`, // Staggered sticky top position - Increased to avoid header overlap
+                // We apply the top offset logic but it only takes effect when position: sticky is active (lg screens)
+                top: `${180 + idx * 40}px`, 
                 zIndex: idx + 1,
               }}
             >
-              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white to-purple-50/30 backdrop-blur-md border border-purple-400/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(159,90,240,0.15)] hover:border-purple-200/80 transition-all duration-500 min-h-[300px]">
+              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white to-purple-50/30 backdrop-blur-md border border-purple-200/80 shadow-[0_40px_80px_-20px_rgba(42,22,56,0.12),0_0_0_1px_rgba(255,255,255,0.8)_inset] transition-all duration-500 min-h-[300px]">
                 
                 {/* Watermark Number */}
-                <span className="absolute -top-6 -right-6 text-[180px] font-bold text-black/[0.02] leading-none select-none pointer-events-none transition-colors duration-500 group-hover:text-purple-500/[0.03]">
+                <span className="absolute -top-6 -right-6 text-[180px] font-bold text-black/[0.02] leading-none select-none pointer-events-none transition-colors duration-500 text-purple-500/[0.03]">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
 
                 {/* Icon & Title Section */}
                 <div className="md:w-1/3 flex flex-col items-start relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-lg shadow-purple-500/10 border border-white/50">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mb-6 scale-110 rotate-3 transition-transform duration-500 shadow-lg shadow-purple-500/10 border border-white/50">
                     <feature.icon className="w-8 h-8 text-purple-600" />
                   </div>
-                  <h3 className="font-onest text-2xl font-bold text-[#2A1638] mb-4 leading-tight group-hover:text-purple-900 transition-colors duration-300">{feature.title}</h3>
-                  <div className="h-1 w-12 bg-purple-200 rounded-full group-hover:w-20 group-hover:bg-purple-400 transition-all duration-500" />
+                  <h3 className="font-onest text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-900 transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <div className="h-1 w-20 bg-purple-400 rounded-full transition-all duration-500" />
                 </div>
 
                 {/* Content Section */}
                 <div className="md:w-2/3 flex flex-col relative z-10">
-                   <p className="text-lg text-[#2A1638]/70 mb-8 leading-relaxed font-medium group-hover:text-[#2A1638]/90 transition-colors duration-300">{feature.goal}</p>
+                   <p className="text-lg text-[#2A1638]/90 mb-8 leading-relaxed font-medium transition-colors duration-300">{feature.goal}</p>
                    
                    <ul className="space-y-4 mt-auto">
                     {feature.capabilities.map((cap, i) => (
-                      <li key={i} className="flex items-start gap-3 text-base text-[#2A1638]/80 group-hover:text-[#2A1638] transition-colors duration-300 delay-[50ms]">
+                      <li key={i} className="flex items-start gap-3 text-base text-[#2A1638] transition-colors duration-300">
                         <div className="mt-1 p-0.5 rounded-full bg-purple-100/80">
                           <CheckCircle className="w-4 h-4 text-purple-600 shrink-0" />
                         </div>

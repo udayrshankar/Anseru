@@ -289,7 +289,7 @@ export default function Workflow() {
 
       <div className="relative z-10 max-w-7xl mx-auto pt-8">
         {/* Section Header */}
-        <div className="text-center relative z-20">
+        <div className="text-center relative z-20 mt-8">
           <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
             we are building the next generation of
           </p>
@@ -313,13 +313,13 @@ export default function Workflow() {
               progress={smoothProgress}
             />
 
-            <div className="space-y-20 pt-16 relative z-10">
+            <div className="space-y-25 pt-10 relative z-10">
               {STEPS.map((step, index) => (
                 <FeatureRow key={step.id} step={step} index={index} />
               ))}
               
               {/* FINAL CTA - Connected by Pipe */}
-              <div className="flex justify-center pt-10">
+              <div className="flex justify-center pt-10 scale-125 origin-top -translate-y-19">
                  <SmartCTA />
               </div>
             </div>

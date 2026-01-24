@@ -4,6 +4,7 @@ import SmartCTA from "../components/SmartCTA";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Card from "../components/Card";
+import { useSequentialAnimation } from "../hooks/useSequentialAnimation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Lock, Search, BarChart, Zap, Users, Shield, CheckCircle, Clock, Database } from "lucide-react";
 
@@ -19,7 +20,7 @@ const Products = () => {
       
       <main className={`flex flex-col ${SECTION_GAP}`}>
         <ProductsHero />
-        <AgentCardsSection />
+        <AgentCardsSection setActiveProduct={setActiveProduct} />
         
         {/* Toggle Control */}
         <div className="flex justify-center -mt-10 relative z-20">
@@ -118,7 +119,7 @@ const ProductsHero = () => {
 };
 
 // Modern split-panel agent showcase - distinct from Card-based sections
-const AgentCardsSection = () => {
+const AgentCardsSection = ({ setActiveProduct }: { setActiveProduct: (product: 'rfp' | 'security') => void }) => {
   return (
     <section className="py-0 px-6 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
@@ -135,7 +136,10 @@ const AgentCardsSection = () => {
         {/* Split Panel Design */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[32px] overflow-hidden border border-black/[0.05] shadow-2xl">
           {/* RFP Agent Panel */}
-          <div className="relative bg-gradient-to-br from-[#F8F5FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group">
+          <div 
+            onMouseEnter={() => setActiveProduct('rfp')}
+            className="relative bg-gradient-to-br from-[#F8F5FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group transition-colors duration-300 hover:bg-[#F0EBFA] cursor-default"
+          >
             {/* Decorative gradient orb */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200/30 rounded-full blur-[80px] pointer-events-none" />
             
@@ -171,7 +175,10 @@ const AgentCardsSection = () => {
           </div>
 
           {/* Security Agent Panel */}
-          <div className="relative bg-gradient-to-br from-[#F0F7FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group">
+          <div 
+            onMouseEnter={() => setActiveProduct('security')}
+            className="relative bg-gradient-to-br from-[#F0F7FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group transition-colors duration-300 hover:bg-[#E6F0FA] cursor-default"
+          >
             {/* Decorative gradient orb */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-blue-200/30 rounded-full blur-[80px] pointer-events-none" />
             
@@ -208,7 +215,7 @@ const AgentCardsSection = () => {
   );
 };
 
-// RFP Agent Section - Professional card-based layout matching home page
+// RFP Agent Section
 const RFPAgentSection = () => {
   const steps = [
     {
@@ -237,6 +244,8 @@ const RFPAgentSection = () => {
     }
   ];
 
+  const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(steps.length);
+
   return (
     <section className="py-0 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
@@ -257,18 +266,25 @@ const RFPAgentSection = () => {
         </div>
 
         {/* Grid - 2x2 layout like FeaturesGrid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {steps.map((step, idx) => (
             <Card
               key={idx}
               title={step.title}
               description={step.desc}
               index={idx}
-              minHeight="min-h-[200px]"
+              minHeight="min-h-[150px]"
               icon={<step.icon />}
               watermark={
                 <step.icon className="h-48 w-48 -rotate-12 text-[#2A1638]" />
               }
+              isActive={activeIndex === idx}
+              duration={4000}
+              onMouseEnter={() => setActiveIndex(idx)}
             />
           ))}
         </div>
@@ -302,6 +318,8 @@ const SecurityAgentSection = () => {
     }
   ];
 
+  const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(features.length);
+
   return (
     <section className="py-0 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
@@ -322,18 +340,25 @@ const SecurityAgentSection = () => {
         </div>
 
         {/* Grid - 2x2 layout matching RFPAgentSection */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {features.map((feature, idx) => (
             <Card
               key={idx}
               title={feature.title}
               description={feature.desc}
               index={idx}
-              minHeight="min-h-[280px]"
+              minHeight="min-h-[150px]"
               icon={<feature.icon />}
               watermark={
                 <feature.icon className="h-48 w-48 -rotate-12 text-[#2A1638]" />
               }
+              isActive={activeIndex === idx}
+              duration={4000}
+              onMouseEnter={() => setActiveIndex(idx)}
             />
           ))}
         </div>
