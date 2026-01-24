@@ -1,50 +1,60 @@
 import { motion } from "framer-motion";
-import { Book, RotateCw } from "lucide-react";
+import { Book, RotateCw, Database } from "lucide-react";
 
 export default function ReviewAnimation() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 relative overflow-hidden">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50/50 relative overflow-hidden p-6">
         
-       {/* Knowledge Vault */}
-       <div className="flex flex-col gap-3 relative z-10 perspective-1000">
-             {/* Rows of Knowledge */}
-             {[0, 1, 2].map((i) => (
-                 <div key={i} className="flex gap-3">
-                     {[0, 1, 2].map((j) => (
-                         <div 
-                           key={j} 
-                           className={`w-20 h-10 rounded-lg border ${
-                               i === 1 && j === 1 ? 'border-transparent' : 'bg-white/40 border-white/60'
-                           } shadow-sm backdrop-blur-sm`} 
-                         />
-                     ))}
-                 </div>
-             ))}
-
-             {/* The New Knowledge Card Inserting */}
-             <motion.div
-                className="absolute top-[52px] left-[92px] w-20 h-10 bg-white rounded-lg shadow-[0_0_20px_rgba(168,85,247,0.4)] border border-purple-200 flex items-center justify-center gap-1.5 z-20"
-                initial={{ x: -100, opacity: 0, scale: 0.8 }}
-                animate={{ x: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-             >
-                 <Book className="text-purple-600" size={14} />
-                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-             </motion.div>
-       </div>
-
-       {/* Reuse Cycle Indicator */}
-       <div className="absolute bottom-6 flex items-center gap-3">
-            <motion.div
-               animate={{ rotate: 360 }}
-               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-                <RotateCw className="text-purple-300" size={32} />
-            </motion.div>
-            <div className="px-3 py-1.5 bg-white/80 backdrop-blur border border-purple-100 rounded-full shadow-sm text-xs font-medium text-purple-700">
-                Knowledge Reused
+       {/* Central Vault Container */}
+       <div className="relative z-10 p-4 bg-white rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col gap-3 items-center">
+            
+            <div className="flex items-center gap-2 mb-1 opacity-50">
+                <Database size={12} className="text-gray-400" />
+                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Knowledge Vault</span>
             </div>
+
+            {/* Grid of Knowledge */}
+            <div className="grid grid-cols-3 gap-2">
+                 {[...Array(6)].map((_, i) => (
+                     <div key={i} className="w-12 h-8 rounded bg-gray-50 border border-gray-100" />
+                 ))}
+                 
+                 {/* Empty Slot */}
+                 <div className="w-12 h-8 rounded border-2 border-dashed border-gray-100 flex items-center justify-center relative overflow-hidden bg-gray-50/50">
+                    <motion.div 
+                        className="absolute inset-0 bg-green-500/10" 
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    />
+                 </div>
+                 
+                 <div className="w-12 h-8 rounded bg-gray-50 border border-gray-100" />
+            </div>
+
+            {/* Ingesting Item */}
+            <motion.div
+               className="absolute w-12 h-8 bg-purple-600 rounded shadow-lg flex items-center justify-center text-white z-20"
+               style={{ top: "60%", left: "50%", marginLeft: "-24px" }}
+               initial={{ y: 60, opacity: 0, scale: 0.8 }}
+               animate={{ y: 0, opacity: 1, scale: 1 }}
+               transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 }}
+            >
+                <Book size={14} />
+            </motion.div>
        </div>
+
+       {/* Floating Success Indicator */}
+       <motion.div 
+          className="absolute top-8 right-8 flex flex-col items-center gap-1"
+          animate={{ y: [-5, 5, -5] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+       >
+           <div className="w-8 h-8 rounded-full bg-white shadow-lg border border-purple-50 flex items-center justify-center text-purple-500">
+               <RotateCw size={14} />
+           </div>
+           <span className="text-[9px] font-bold text-purple-400">Syncing</span>
+       </motion.div>
+
     </div>
   );
 }

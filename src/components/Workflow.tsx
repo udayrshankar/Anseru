@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
-import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat } from "lucide-react";
+import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat, Link, Clock, TrendingUp } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
 import ConnectAnimation from "./animation/ConnectAnimation";
 import UploadAnimation from "./animation/UploadAnimation";
@@ -17,7 +17,8 @@ const STEPS = [
     description:
       "Securely connect policies, controls, evidence, internal docs, and past RFP or security responses.",
     label: "Knowledge Integrations",
-    metric: "🔐 100% source traceability",
+    metric: "100% source traceability",
+    metricIcon: Link,
     icon: Lock,
     component: ConnectAnimation,
   },
@@ -27,7 +28,8 @@ const STEPS = [
     description:
       "Upload RFPs or security questionnaires in any format (PDF, Word, Excel).",
     label: "Universal Parser",
-    metric: "⏱️ < 2 minutes to get started",
+    metric: "< 2 minutes to get started",
+    metricIcon: Clock,
     icon: UploadCloud,
     component: UploadAnimation,
   },
@@ -37,7 +39,8 @@ const STEPS = [
     description:
       "The AI agent understands intent, maps questions to your knowledge, and drafts responses. Confident answers are ready instantly; risky ones are flagged.",
     label: "Smart Drafting Engine",
-    metric: "🤖 70-75% auto-answered",
+    metric: "70-75% auto-answered",
+    metricIcon: Sparkles,
     icon: Sparkles,
     component: GenerateAnimation,
   },
@@ -47,7 +50,8 @@ const STEPS = [
     description:
       "Review only what matters, submit with confidence, and reuse approved answers across future requests.",
     label: "Continuous Learning",
-    metric: "♻️ Compounding time savings",
+    metric: "Compounding time savings",
+    metricIcon: TrendingUp,
     icon: Repeat,
     component: ReviewAnimation,
   },
@@ -369,6 +373,7 @@ const FeatureRow = ({
                     {step.description}
                 </p>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                    <step.metricIcon className="w-3.5 h-3.5" />
                     {step.metric}
                 </div>
             </div>
@@ -381,7 +386,7 @@ const FeatureRow = ({
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className={`lg:col-span-6 space-y-4 ${isEven ? "relative order-2 lg:order-2" : "lg:text-right lg:pr-12 order-1 lg:order-2"}`}>
+      <div className={`lg:col-span-6 space-y-4 ${isEven ? "relative order-2" : "order-2"}`}>
         {isEven ? (
             // EVEN (0): Card on Right
             <div className="relative">
@@ -389,14 +394,15 @@ const FeatureRow = ({
             </div>
         ) : (
              // ODD (1): Text on Right
-             <div className="relative flex flex-col items-end">
-                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-gray-400"}`}>
+             <div className="relative flex flex-col items-start">
+                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-[#181818"}`}>
                     {step.title}
                 </h3>
                 <p className="text-lg text-[#483953] leading-relaxed mb-4">
                      {step.description}
                 </p>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                    <step.metricIcon className="w-3.5 h-3.5" />
                     {step.metric}
                 </div>
              </div>

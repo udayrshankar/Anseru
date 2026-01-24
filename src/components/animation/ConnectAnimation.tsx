@@ -3,72 +3,86 @@ import { Database, FolderKanban, FileText, Lock } from "lucide-react";
 
 export default function ConnectAnimation() {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-50 to-white relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-purple-200/30 rounded-full blur-[100px]" />
-      <div className="absolute bottom-[-20%] right-[-20%] w-[80%] h-[80%] bg-blue-200/30 rounded-full blur-[100px]" />
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 relative overflow-hidden">
+      
+       {/* Background Ripple */}
+       <div className="absolute inset-0 flex items-center justify-center">
+            {[1, 2, 3].map((i) => (
+                <motion.div 
+                    key={i}
+                    className="absolute border border-purple-100 rounded-full"
+                    style={{ width: `${i * 150}px`, height: `${i * 150}px` }}
+                    animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.2, 0.5] }}
+                    transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
+                />
+            ))}
+       </div>
 
       {/* Central Hub */}
-      <div className="relative z-10 w-24 h-24 bg-white/60 backdrop-blur-xl rounded-[24px] shadow-[0_8px_32px_rgba(31,38,135,0.15)] border border-white/50 flex items-center justify-center">
-        <Lock className="text-purple-600" size={32} />
-        {/* Hub Glow */}
-        <motion.div 
-            className="absolute inset-0 bg-purple-500/10 rounded-[24px]"
-            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity }}
-        />
+      <div className="relative z-20 w-20 h-20 bg-white shadow-[0_10px_40px_rgba(124,58,237,0.15)] rounded-2xl flex items-center justify-center border border-purple-100">
+          <Lock className="text-purple-600" size={28} />
+          {/* Inner Pulse */}
+          <motion.div 
+            className="absolute inset-0 bg-purple-500/5 rounded-2xl"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
       </div>
 
-      {/* Orbiting Satellites */}
-      <OrbitingIcon angle={0} delay={0} icon={Database} color="text-blue-500" />
-      <OrbitingIcon angle={90} delay={1} icon={FolderKanban} color="text-orange-500" />
-      <OrbitingIcon angle={180} delay={2} icon={FileText} color="text-green-500" />
-      <OrbitingIcon angle={270} delay={3} icon={Lock} color="text-purple-500" />
+      {/* Sources feeding in */}
+      <SourceItem icon={Database} angle={0} color="text-blue-500" bg="bg-blue-50" />
+      <SourceItem icon={FolderKanban} angle={72} color="text-orange-500" bg="bg-orange-50" />
+      <SourceItem icon={FileText} angle={144} color="text-green-500" bg="bg-green-50" />
+      <SourceItem icon={Lock} angle={216} color="text-red-500" bg="bg-red-50" />
+      <SourceItem icon={FileText} angle={288} color="text-purple-500" bg="bg-purple-50" />
 
-      {/* Particles Flowing In */}
-      {[0, 90, 180, 270].map((angle, i) => (
-         <Particle key={i} angle={angle} delay={i * 0.5} />
-      ))}
     </div>
   );
 }
 
-const OrbitingIcon = ({ angle, icon: Icon, color }: { angle: number, delay: number, icon: any, color: string }) => {
-    return (
-        <motion.div
-            className="absolute z-10"
-            initial={{ rotate: angle }}
-            animate={{ rotate: angle + 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{ width: "200px", height: "200px" }} // Orbit diameter
-        >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                <motion.div 
-                    animate={{ rotate: -(angle + 360) }} // Counter-rotate to keep icon upright
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="w-12 h-12 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/50 flex items-center justify-center"
-                >
-                    <Icon className={color} size={20} />
-                </motion.div>
-            </div>
-        </motion.div>
-    )
-}
+const SourceItem = ({ icon: Icon, angle, color, bg }: { icon: any, angle: number, color: string, bg: string }) => {
+    const radius = 120;
+    const x = Math.cos((angle * Math.PI) / 180) * radius;
+    const y = Math.sin((angle * Math.PI) / 180) * radius;
 
-const Particle = ({ angle, delay }: { angle: number, delay: number }) => {
     return (
-        <motion.div
-            className="absolute w-1.5 h-1.5 bg-purple-500 rounded-full z-0"
-            style={{ 
-                top: "50%", 
-                left: "50%",
-                transform: `rotate(${angle}deg) translate(80px) rotate(-${angle}deg)` // Start at orbit
-            }}
-            animate={{ 
-                transform: `rotate(${angle}deg) translate(0px) rotate(-${angle}deg)`, // Move to center
-                opacity: [0, 1, 0] 
-            }}
-            transition={{ duration: 2, delay, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <>
+            {/* The Icon */}
+            <motion.div 
+                className={`absolute w-10 h-10 ${bg} rounded-xl shadow-sm flex items-center justify-center border border-white/50 z-10`}
+                style={{ x, y }}
+                animate={{ y: [y, y - 5, y] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: Math.random() }}
+            >
+                <Icon className={color} size={18} />
+            </motion.div>
+
+            {/* Connecting Line */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                <motion.line 
+                    x1="50%" y1="50%"
+                    x2={`calc(50% + ${x}px)`} y2={`calc(50% + ${y}px)`}
+                    stroke="#E9D5FF"
+                    strokeWidth="1"
+                    strokeDasharray="4 4"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1 }}
+                />
+            </svg>
+
+            {/* Data Packet */}
+            <motion.div 
+                className="absolute w-2 h-2 bg-purple-500 rounded-full z-10"
+                initial={{ x, y, opacity: 0 }}
+                animate={{ 
+                    x: [x, 0], 
+                    y: [y, 0],
+                    opacity: [1, 1, 0],
+                    scale: [1, 0.5]
+                }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", repeatDelay: Math.random() * 2 }}
+            />
+        </>
     )
 }

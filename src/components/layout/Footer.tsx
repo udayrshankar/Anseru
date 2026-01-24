@@ -19,12 +19,11 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="lg:col-span-6 space-y-6">
-            <h3 className="text-3xl font-medium text-[#2A1638] tracking-tight">
-              Anseru
+            <h3 className="font-onest text-3xl font-bold text-[#090909] tracking-tight">
+              ANSERU
             </h3>
             <p className="text-lg text-[#483953]/70 max-w-sm leading-relaxed">
-              Your edge in RFPs & Reviews. Powered by agentic AI to build trust and accelerate deals.
-            </p>
+Your edge in RFPs & Security Reviews. Powered by agentic AI to build trust <br/> and accelerate deals.            </p>
           </div>
 
           {[
@@ -54,7 +53,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-[#483953]/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm text-[#483953]/60">
-            © 2024 Anseru Inc. All rights reserved.
+            © 2026 Anseru Inc. All rights reserved.
           </p>
 
           <div className="flex gap-8 text-sm text-[#483953]/60">

@@ -1,63 +1,65 @@
 import { motion } from "framer-motion";
-import { UploadCloud, FileText, Check } from "lucide-react";
+import { UploadCloud, FileText, FileSpreadsheet, File } from "lucide-react";
 
 export default function UploadAnimation() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white relative overflow-hidden p-8">
-       {/* Drop Zone */}
-       <div className="w-full max-w-[280px] h-[180px] bg-white/40 backdrop-blur-md rounded-[32px] border-2 border-dashed border-purple-200 flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50/50 relative overflow-hidden p-6">
+       
+       {/* Scanner Base */}
+       <div className="w-[200px] h-[140px] bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center relative z-10 border border-gray-100">
            
-           {/* Upload Icon */}
-           <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-           >
-               <UploadCloud className="text-purple-300 mb-2" size={40} />
-           </motion.div>
-           <p className="text-purple-400 font-medium text-sm">Drop PDF, Word, or Excel</p>
+           {/* Drop Target */}
+           <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-purple-100" />
+           
+           <UploadCloud className="text-purple-200 mb-2" size={32} />
+           <p className="text-[10px] font-bold text-purple-300 uppercase tracking-widest">Drop Zone</p>
 
-           {/* Dropping File */}
-           <motion.div
-              className="absolute top-[-60px] w-16 h-20 bg-white shadow-xl rounded-xl flex items-center justify-center border border-gray-100 z-20"
-              animate={{ 
-                  y: [0, 100], 
-                  scale: [1, 0.8],
-                  opacity: [1, 0]
-              }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-           >
-               <FileText className="text-blue-500" size={32} />
-               <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-400 rounded-full flex items-center justify-center">
-                   <Check size={10} className="text-white" />
-               </div>
-           </motion.div>
-
-           {/* Scan Beam */}
+           {/* Scanning Light */}
            <motion.div 
-             className="absolute left-0 right-0 h-1 bg-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.5)] z-10"
-             style={{ top: "50%" }}
-             animate={{ scaleX: [0, 1.5, 0], opacity: [0, 1, 0] }}
-             transition={{ duration: 2, repeat: Infinity, repeatDelay: 1, delay: 0.5 }}
+             className="absolute left-1 right-1 h-0.5 bg-purple-400 shadow-[0_0_10px_#a855f7]"
+             animate={{ top: ["10%", "90%", "10%"] }}
+             transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
            />
        </div>
 
-       {/* Processing Badges */}
-       <div className="mt-6 flex gap-3">
-           <Badge text="Parsing..." color="bg-blue-100 text-blue-600" delay={0.5} />
-           <Badge text="Structuring" color="bg-purple-100 text-purple-600" delay={1.0} />
-           <Badge text="Ready" color="bg-green-100 text-green-600" delay={1.5} />
-       </div>
+       {/* Files Falling In */}
+       <FloatingFile delay={0} icon={FileText} color="text-blue-500" xOffset={-60} />
+       <FloatingFile delay={1.2} icon={FileSpreadsheet} color="text-green-500" xOffset={0} />
+       <FloatingFile delay={2.5} icon={File} color="text-red-500" xOffset={60} />
+
+       {/* Success Toast */}
+       <motion.div 
+         className="absolute bottom-6 bg-white pl-1 pr-3 py-1 rounded-full shadow-lg border border-green-100 flex items-center gap-2 z-20"
+         initial={{ y: 20, opacity: 0 }}
+         animate={{ y: 0, opacity: 1 }}
+         transition={{ delay: 0.5, duration: 0.5 }}
+       >
+           <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
+               <motion.div 
+                 initial={{ scale: 0 }} 
+                 animate={{ scale: 1 }} 
+                 transition={{ delay: 0.8 }} 
+                 className="text-white text-[8px] font-bold"
+               >✓</motion.div>
+           </div>
+           <span className="text-xs font-semibold text-gray-700">Analysis Complete</span>
+       </motion.div>
     </div>
   );
 }
 
-const Badge = ({ text, color, delay }: { text: string, color: string, delay: number }) => (
-    <motion.div 
-        className={`px-3 py-1.5 rounded-full text-xs font-bold ${color} shadow-sm backdrop-blur-sm bg-opacity-80`}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay, duration: 0.5 }}
+const FloatingFile = ({ delay, icon: Icon, color, xOffset }: { delay: number, icon: any, color: string, xOffset: number }) => (
+    <motion.div
+        className="absolute w-12 h-14 bg-white rounded-lg shadow-md border border-gray-100 flex items-center justify-center z-20"
+        style={{ x: xOffset }}
+        initial={{ y: -150, opacity: 0, scale: 0.8 }}
+        animate={{ 
+            y: [ -150, -20, 0 ], 
+            opacity: [0, 1, 0],
+            scale: [0.8, 1, 0.5]
+        }}
+        transition={{ duration: 2.5, delay, repeat: Infinity, repeatDelay: 1 }}
     >
-        {text}
+        <Icon className={color} size={24} />
     </motion.div>
 )

@@ -105,6 +105,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                                     {b.description}
                                 </p>
                                 <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-md mt-1 border border-purple-100/50">
+                                    <b.icon className="w-3.5 h-3.5" />
                                     {b.metric}
                                 </div>
                             </div>

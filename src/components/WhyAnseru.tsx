@@ -1,26 +1,27 @@
 import Card from "./Card";
 import { useSequentialAnimation } from "../hooks/useSequentialAnimation";
+import { ShieldCheck, Database, Plug, TrendingUp } from "lucide-react";
 
 const cards = [
   {
-    title: "Close Deals Faster",
-    desc: "We answer most RFP and security questions automatically",
-    path: "M109.62 99.2827L109.548 99.8462H150.368L84.271 178.989L92.8071 120.518L92.8911 119.946H57.8823L117.936 33.3892L109.62 99.2827ZM109.045 55.3228L68.3843 114.007L67.8403 114.792H98.769L92.2573 159.937L92.0054 161.683L93.1362 160.329L138.633 105.821L139.318 105H103.651L109.953 55.6704L109.045 55.3228Z",
+    title: "Smart automation you can trust",
+    desc: "Automatically drafts answers where confidence is high and flags anything unclear or sensitive for review. Nothing is auto-submitted blindly.",
+    icon: ShieldCheck,
   },
   {
-    title: "Build Instant Trust",
-    desc: "We accelerate deal velocity by 3×",
-    path: "M163.904 52.2168V97.5879C163.904 117.12 158.331 134.601 147.185 150.045C136.066 165.451 122.172 175.768 105.499 181.022C88.8272 175.768 74.9338 165.451 63.8154 150.045C52.6692 134.601 47.0958 117.12 47.0957 97.5879V52.2168L105.5 30.4248L163.904 52.2168ZM137.321 87.0371L96.2686 128.091L73.6777 105.5L77.3662 101.811L96.2686 120.713L96.6221 120.359L133.633 83.3477L137.321 87.0371ZM158.75 55.6992L158.424 55.5781L105.674 36.0166L105.5 35.9521L105.326 36.0166L52.5762 55.5781L52.25 55.6992V97.5879C52.2501 115.418 57.2618 131.635 67.2832 146.225C77.3034 160.813 89.9929 170.558 105.349 175.431L105.5 175.479L105.651 175.431C121.007 170.558 133.696 160.813 143.716 146.225C153.737 131.635 158.75 115.418 158.75 97.5879V55.6992Z",
+    title: "One source of truth for sales and security",
+    desc: "RFPs and security questionnaires use the same connected knowledge base so teams stay aligned and responses stay consistent.",
+    icon: Database,
   },
   {
-    title: "Accelerated Onboarding",
-    desc: "We reclaim hours of manual work every day",
-    path: "M109.62 99.2827L109.548 99.8462H150.368L84.271 178.989L92.8071 120.518L92.8911 119.946H57.8823L117.936 33.3892L109.62 99.2827ZM109.045 55.3228L68.3843 114.007L67.8403 114.792H98.769L92.2573 159.937L92.0054 161.683L93.1362 160.329L138.633 105.821L139.318 105H103.651L109.953 55.6704L109.045 55.3228Z",
+    title: "Seamless integrations into your existing stack",
+    desc: "Integrate with favorite business tools across document repositories, ticketing systems and collaboration tools.",
+    icon: Plug,
   },
   {
-    title: "Smarter Support",
-    desc: "We ensure every response is accurate, consistent, and compliant",
-    path: "M163.904 52.2168V97.5879C163.904 117.12 158.331 134.601 147.185 150.045C136.066 165.451 122.172 175.768 105.499 181.022C88.8272 175.768 74.9338 165.451 63.8154 150.045C52.6692 134.601 47.0958 117.12 47.0957 97.5879V52.2168L105.5 30.4248L163.904 52.2168ZM137.321 87.0371L96.2686 128.091L73.6777 105.5L77.3662 101.811L96.2686 120.713L96.6221 120.359L133.633 83.3477L137.321 87.0371ZM158.75 55.6992L158.424 55.5781L105.674 36.0166L105.5 35.9521L105.326 36.0166L52.5762 55.5781L52.25 55.6992V97.5879C52.2501 115.418 57.2618 131.635 67.2832 146.225C77.3034 160.813 89.9929 170.558 105.349 175.431L105.5 175.479L105.651 175.431C121.007 170.558 133.696 160.813 143.716 146.225C153.737 131.635 158.75 115.418 158.75 97.5879V55.6992Z",
+    title: "Gets better with every response",
+    desc: "Every approved answer improves future drafts, reducing manual effort over time and increasing automation where it’s safe.",
+    icon: TrendingUp,
   }
 ];
 
@@ -38,7 +39,7 @@ const WhyAnseru = () => {
                 Why Anseru?
               </h2>
               <p className="text-lg text-[#483953]/70">
-                Transform your RPF and security workflows with agentic AI that delivers speed, accuracy, and trust at scale.
+                Transform your RFP and security workflows with agentic AI that delivers speed, accuracy, and trust at scale.
               </p>
             </div>
   
@@ -55,15 +56,9 @@ const WhyAnseru = () => {
                   description={card.desc}
                   index={idx}
                   minHeight="min-h-[220px] md:min-h-[260px]"
-                  icon={
-                    <svg viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d={card.path} fill="currentColor" />
-                    </svg>
-                  }
+                  icon={<card.icon className="w-12 h-12" />}
                   watermark={
-                     <svg className="w-56 h-56 -rotate-12" viewBox="0 0 211 211" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d={card.path} stroke="currentColor" className="text-[#2A1638]" strokeWidth="2" />
-                    </svg>
+                     <card.icon className="w-56 h-56 -rotate-12 text-[#2A1638] opacity-[0.03]" />
                   }
                   isActive={activeIndex === idx}
                   duration={4000}

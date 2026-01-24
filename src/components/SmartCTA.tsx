@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const FEATURES = [
-  "11× faster responses",
+  "11X faster responses",
   "80% time saved on RFPs and SecQ",
   "75% questions auto-answered"
 ];

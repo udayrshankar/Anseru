@@ -1,7 +1,10 @@
+import { ShieldCheck, History, Zap, Clock, FileText, Users, type LucideIcon } from "lucide-react";
+
 export interface TabFeature {
   title: string;
   description: string;
   metric: string;
+  icon: LucideIcon;
 }
 
 export interface TabItem {
@@ -26,17 +29,20 @@ export const tabContent: Record<string, TabItem> = {
       {
         title: "Answers grounded in your real security posture",
         description: "Responds using your policies, controls, evidence, and historical answers",
-        metric: "95% response accuracy"
+        metric: "95% response accuracy",
+        icon: ShieldCheck
       },
       {
         title: "Always current, always defensible",
         description: "Flags outdated or impacted answers when controls or policies change",
-        metric: "Zero stale responses"
+        metric: "Zero stale responses",
+        icon: History
       },
       {
         title: "Removes security reviews as a sales bottleneck",
         description: "Eliminates repetitive Q&A across deals so sales and GRC teams move faster.",
-        metric: "70–90% faster security reviews"
+        metric: "70–90% faster security reviews",
+        icon: Zap
       }
     ],
     buttonText: "Meet Sud",
@@ -52,17 +58,20 @@ export const tabContent: Record<string, TabItem> = {
       {
         title: "Instant, deal-ready first drafts",
         description: "Generates tailored RFP responses using your approved content and past wins.",
-        metric: "80% reduction in drafting time"
+        metric: "80% reduction in drafting time",
+        icon: Clock
       },
       {
         title: "Built for real RFP complexity",
         description: "Handles messy formats, duplicate questions, and vague asks while preserving context and intent.",
-        metric: "Any format supported (PDF, Word, Excel, portals)"
+        metric: "Any format supported",
+        icon: FileText
       },
       {
         title: "Human review only where it matters",
         description: "High-confidence answers go through automatically and low-confidence answers are auto-routed to experts for review.",
-        metric: "75% fewer SME touchpoints"
+        metric: "75% fewer SME touchpoints",
+        icon: Users
       }
     ],
     buttonText: "Meet KG",
