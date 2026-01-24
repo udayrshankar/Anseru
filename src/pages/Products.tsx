@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Background from "../components/Background";
 import SmartCTA from "../components/SmartCTA";
 import Header from "../components/layout/Header";
@@ -13,76 +13,94 @@ const SECTION_GAP = "gap-20";
 
 const Products = () => {
   const [activeProduct, setActiveProduct] = useState<'rfp' | 'security'>('rfp');
+  const detailsRef = useRef<HTMLDivElement>(null);
+
+  const handleProductSelect = (product: 'rfp' | 'security') => {
+    setActiveProduct(product);
+    // Smooth scroll to the details section with a small offset for the header
+    setTimeout(() => {
+        const yOffset = -100; // Header offset
+        const element = detailsRef.current;
+        if (element) {
+            const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    }, 50);
+  };
 
   return (
-    <div className="bg-white w-full -z-5">
+    <div className=" w-full -z-5 bg-white">
       <Header />
       
-      <main className={`flex flex-col ${SECTION_GAP}`}>
-        <ProductsHero />
-        <AgentCardsSection setActiveProduct={setActiveProduct} />
+      
+        <main className={`flex flex-col ${SECTION_GAP} `}>
+          <ProductsHero />
+          <AgentCardsSection onHover={setActiveProduct} onSelect={handleProductSelect} />
         
-        {/* Toggle Control */}
-        <div className="flex justify-center -mt-10 relative z-20">
-          <div className="bg-[#F4F4F5] p-1.5 rounded-full flex items-center shadow-inner gap-1">
-            <button
-              onClick={() => setActiveProduct('rfp')}
-              className={`relative px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
-                activeProduct === 'rfp' ? 'text-white' : 'text-[#2A1638]/60 hover:text-[#2A1638]'
-              }`}
-            >
-              {activeProduct === 'rfp' && (
-                <motion.div
-                  layoutId="active-product-pill"
-                  className="absolute inset-0 bg-[#2A1638] rounded-full shadow-lg"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">RFP Agent</span>
-            </button>
-            
-            <button
-              onClick={() => setActiveProduct('security')}
-              className={`relative px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${
-                activeProduct === 'security' ? 'text-white' : 'text-[#2A1638]/60 hover:text-[#2A1638]'
-              }`}
-            >
-              {activeProduct === 'security' && (
-                <motion.div
-                  layoutId="active-product-pill"
-                  className="absolute inset-0 bg-[#2A1638] rounded-full shadow-lg"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">Security Agent</span>
-            </button>
+          {/* Toggle Control / Details Start Anchor */}
+          <div ref={detailsRef} className="flex justify-center -mt-10 relative z-20">
+            <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full py-2 px-2 flex gap-1 items-center ring-1 ring-black/[0.03]">
+              <button
+                onClick={() => setActiveProduct('rfp')}
+                className={`relative px-12 md:px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  activeProduct === 'rfp'
+                    ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]"
+                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeProduct === 'rfp' && (
+                  <motion.div
+                    layoutId="active-product-pill"
+                    className="absolute inset-0 bg-[#2A1638] rounded-full"
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  />
+                )}
+                <span className="relative z-10 whitespace-nowrap tracking-wide">RFP Agent</span>
+              </button>
+        
+              <button
+                onClick={() => setActiveProduct('security')}
+                className={`relative px-12 md:px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  activeProduct === 'security'
+                    ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]"
+                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"
+                }`}
+              >
+                {activeProduct === 'security' && (
+                  <motion.div
+                    layoutId="active-product-pill"
+                    className="absolute inset-0 bg-[#2A1638] rounded-full"
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  />
+                )}
+                <span className="relative z-10 whitespace-nowrap tracking-wide">Security Agent</span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        <AnimatePresence mode="wait">
-          {activeProduct === 'rfp' ? (
-            <motion.div
-              key="rfp"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <RFPAgentSection />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="security"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <SecurityAgentSection />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
+          <AnimatePresence mode="wait">
+            {activeProduct === 'rfp' ? (
+              <motion.div
+                key="rfp"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <RFPAgentSection />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="security"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <SecurityAgentSection />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
 
       <Footer />
     </div>
@@ -122,7 +140,13 @@ const ProductsHero = () => {
 };
 
 // Modern split-panel agent showcase - distinct from Card-based sections
-const AgentCardsSection = ({ setActiveProduct }: { setActiveProduct: (product: 'rfp' | 'security') => void }) => {
+const AgentCardsSection = ({ 
+  onHover, 
+  onSelect 
+}: { 
+  onHover: (product: 'rfp' | 'security') => void;
+  onSelect: (product: 'rfp' | 'security') => void;
+}) => {
   return (
     <section className="py-0 px-6 bg-white">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
@@ -137,81 +161,67 @@ const AgentCardsSection = ({ setActiveProduct }: { setActiveProduct: (product: '
         </div>
 
         {/* Split Panel Design */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[32px] overflow-hidden border border-black/[0.05] shadow-2xl">
-          {/* RFP Agent Panel */}
-          <div 
-            onMouseEnter={() => setActiveProduct('rfp')}
-            className="relative bg-gradient-to-br from-[#F8F5FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group transition-colors duration-300 hover:bg-[#F0EBFA] cursor-default"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* RFP Agent Panel - Using Card Component */}
+          <Card
+            title="RFP Agent"
+            description="Built for sales, pre-sales, and proposal teams responding to complex enterprise RFPs. Removes chaos by breaking it into a clear, repeatable flow."
+            icon={<FileText />}
+            minHeight="min-h-[450px]"
+            withMovingOrbs={true}
+            onMouseEnter={() => onHover('rfp')}
+            onClick={() => onSelect('rfp')} 
+            className="group cursor-pointer"
           >
-            {/* Decorative gradient orb */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200/30 rounded-full blur-[80px] pointer-events-none" />
-            
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center shadow-lg">
-                  <FileText className="w-7 h-7 text-white" />
-                </div>
-                <span className="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-100 px-3 py-1 rounded-full">
-                  For Proposals
-                </span>
-              </div>
-              
-              <h3 className="text-2xl md:text-3xl font-bold text-[#2A1638] mb-4">
-                RFP Agent
-              </h3>
-              
-              <p className="text-lg text-[#2A1638]/70 leading-relaxed mb-8 max-w-md">
-                Built for sales, pre-sales, and proposal teams responding to complex enterprise RFPs. Removes chaos by breaking it into a clear, repeatable flow.
-              </p>
+            {/* Custom Children: Badge & Tags */}
+            <div className="mt-6">
+               <div className="inline-flex items-center gap-2 mb-6 bg-purple-100 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold text-purple-600 uppercase tracking-widest">
+                    For Proposals
+                  </span>
+               </div>
+               
+               <div className="flex flex-wrap gap-3 mt-4">
+                  {["Ingestion", "Mapping", "Drafting", "Review"].map((tag) => (
+                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
+                      {tag}
+                    </span>
+                  ))}
+               </div>
             </div>
             
-            <div className="relative z-10 flex flex-wrap gap-3">
-              {["Ingestion", "Mapping", "Drafting", "Review"].map((tag) => (
-                <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Divider line on desktop */}
+            {/* Divider line on desktop (preserved from original) */}
             <div className="hidden lg:block absolute right-0 top-10 bottom-10 w-px bg-gradient-to-b from-transparent via-purple-200 to-transparent" />
-          </div>
+          </Card>
 
-          {/* Security Agent Panel */}
-          <div 
-            onMouseEnter={() => setActiveProduct('security')}
-            className="relative bg-gradient-to-br from-[#F0F7FF] to-white p-10 lg:p-14 flex flex-col justify-between min-h-[450px] group transition-colors duration-300 hover:bg-[#E6F0FA] cursor-default"
+          {/* Security Agent Panel - Using Card Component */}
+          <Card
+            title="Security Agent"
+            description="Built for accuracy, consistency, and auditability. Answer security questions perfectly, using approved evidence from your compliance documentation."
+            icon={<Lock />}
+            minHeight="min-h-[450px]"
+            withMovingOrbs={true}
+            onMouseEnter={() => onHover('security')}
+            onClick={() => onSelect('security')}
+            className="group cursor-pointer"
           >
-            {/* Decorative gradient orb */}
-            <div className="absolute top-0 left-0 w-64 h-64 bg-blue-200/30 rounded-full blur-[80px] pointer-events-none" />
-            
-            <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg">
-                  <Lock className="w-7 h-7 text-white" />
-                </div>
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">
-                  For Security
-                </span>
-              </div>
-              
-              <h3 className="text-2xl md:text-3xl font-bold text-[#2A1638] mb-4">
-                Security Agent
-              </h3>
-              
-              <p className="text-lg text-[#2A1638]/70 leading-relaxed mb-8 max-w-md">
-                Built for accuracy, consistency, and auditability. Answer security questions perfectly, using approved evidence from your compliance documentation.
-              </p>
+             {/* Custom Children: Badge & Tags */}
+             <div className="mt-6">
+               <div className="inline-flex items-center gap-2 mb-6 bg-blue-100 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">
+                    For Security
+                  </span>
+               </div>
+               
+               <div className="flex flex-wrap gap-3 mt-4">
+                  {["Evidence", "Freshness", "Consistency", "Audit"].map((tag) => (
+                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-blue-100 shadow-sm">
+                      {tag}
+                    </span>
+                  ))}
+               </div>
             </div>
-            
-            <div className="relative z-10 flex flex-wrap gap-3">
-              {["Evidence", "Freshness", "Consistency", "Audit"].map((tag) => (
-                <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-blue-100 shadow-sm">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          </Card>
         </div>
       </div>
     </section>
@@ -250,7 +260,7 @@ const RFPAgentSection = () => {
   const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(steps.length);
 
   return (
-    <section className="py-0 bg-white relative">
+    <section className="py-0 relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         <div className="mb-16">
           <motion.div

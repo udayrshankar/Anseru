@@ -20,6 +20,8 @@ export interface CardProps {
   isActive?: boolean; // Controls the "Timer" border
   duration?: number;  // Duration of the timer loop
   onMouseEnter?: () => void; // To snap focus
+  onClick?: () => void;
+  children?: React.ReactNode;
 }
 
 // -- Sub-Components --
@@ -58,7 +60,7 @@ const TimerBorder = ({ duration }: { duration: number }) => {
 
 
 // -- Lively Background Orbs --
-const MovingOrbs = () => {
+export const MovingOrbs = () => {
     // Generate random positions/movements for a "lively" feel
     // Use useMemo to keep values stable across re-renders within the same mount
     const orbs = React.useMemo(() => {
@@ -119,10 +121,13 @@ export default function Card({
   withMovingOrbs = false,
   duration = 4000,
   onMouseEnter,
+  onClick,
+  children,
 }: CardProps & { withMovingOrbs?: boolean }) {
   return (
     <motion.div
       // Animation Logic
+      onClick={onClick}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ 
         opacity: 1, 
@@ -205,6 +210,8 @@ export default function Card({
         <p className="font-onest text-[15px] md:text-base text-[#2A1638] leading-relaxed opacity-90">
           {description}
         </p>
+        
+        {children}
       </div>
 
       {/* 6. Decorative Bottom Line */}
