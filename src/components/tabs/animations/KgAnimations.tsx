@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { FileText, Wand2, FileSpreadsheet, File, Check, User, Sparkles, Zap, ArrowRight, LayoutTemplate } from "lucide-react";
+import { FileText, FileSpreadsheet, File, Check, User, Sparkles, Zap, LayoutTemplate } from "lucide-react";
 
 // --- 1. THE INTELLIGENT EDITOR (Instant Drafts) ---
 // Concept: A minimalist document editor. Text appears smoothly line by line (skeleton).
 export const KgDrafting = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center p-8 bg-gray-50/30">
+    <div className="w-full h-full flex items-center justify-center p-8 bg-gray-50/30" aria-hidden="true">
        
        <div className="w-[260px] h-[340px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-gray-100 flex flex-col overflow-hidden">
           {/* Editor Header */}
@@ -68,7 +68,7 @@ export const KgDrafting = () => {
 // Concept: Iconic representation of formats merging into a unified document.
 export const KgFormats = () => {
     return (
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center" aria-hidden="true">
          
          <div className="relative w-full max-w-[200px] aspect-square flex items-center justify-center">
              
@@ -135,7 +135,7 @@ export const KgFormats = () => {
 // Concept: A node passing through a scanner. Visualizing confidence-based routing.
 export const KgReview = () => {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50/30">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50/30" aria-hidden="true">
          
          <div className="relative w-full max-w-md h-32 flex items-center justify-between px-8">
              

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, FileText, CheckCircle2, RefreshCw, Zap, Server } from "lucide-react";
+import { ShieldCheck, FileText, CheckCircle2, RefreshCw, Zap, Server } from "lucide-react";
 
 // --- 1. THE DIGITAL VAULT (Source-Backed) ---
 // Concept: Clean, secure scanning. A question enters, connects to a secure node, and yields a verified result.
 export const SudResponse = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-gray-50/50">
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden bg-gray-50/50" aria-hidden="true">
       
       {/* Background Subtle Grid */}
       <div className="absolute inset-0" 
@@ -87,7 +87,7 @@ export const SudResponse = () => {
 // Concept: A clean UI list where a row updates smoothly. No tilting or 3D angles.
 export const SudUpdates = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center p-8">
+    <div className="w-full h-full flex items-center justify-center p-8" aria-hidden="true">
         <div className="w-full max-w-sm bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex flex-col">
             {/* Header */}
             <div className="h-10 border-b border-gray-50 flex items-center justify-between px-4 bg-gray-50/30">
@@ -153,12 +153,14 @@ export const SudUpdates = () => {
 
 // --- 3. THE PROGRESS FLOW (Speed) ---
 // Concept: A horizontal timeline. Clean, linear, professional progress.
+// --- 3. THE PROGRESS FLOW (Speed) ---
+// Concept: A horizontal timeline. Clean, linear, professional progress.
 export const SudSpeed = () => {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8">
+      <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-8" aria-hidden="true">
           
           <div className="w-full max-w-xs space-y-6">
-              {[1, 2, 3].map((step, i) => (
+              {[1, 2, 3].map((_, i) => (
                   <div key={i} className="relative">
                       {/* Connector Line */}
                       {i !== 2 && (
