@@ -12,7 +12,7 @@ const Pricing = () => {
     <div className="bg-white w-full -z-5">
       <Header />
       
-      <main className="flex flex-col gap-20">
+      <main className="flex flex-col gap-10">
         <PricingHero />
         <BenchmarkTable />
         <PricingTiers />
@@ -93,7 +93,7 @@ const BenchmarkTable = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-onest text-center text-lg font-medium text-black tracking-wide uppercase opacity-70">
+            <p className="font-onest mb-3 font-bold text-center text-lg text-black tracking-wide uppercase opacity-70">
               Pricing & Value Comparison
             </p>
             <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
