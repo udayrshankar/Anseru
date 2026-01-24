@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
-import { type LucideIcon, Bot, User, Shield, Layers } from "lucide-react";
+import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
 import SmartDraftingAnimation from "./animation/SmartDraftingAnimation";
 import SmartPersonalizationAnimation from "./animation/SmartPersonalizationAnimation";
@@ -13,39 +13,43 @@ import SmartCTA from "./SmartCTA";
 const STEPS = [
   {
     id: 1,
-    title: "AI-Drafted Responses",
+    title: "Connect your knowledge",
     description:
-      "Generate clear, context-aware replies instantly using your knowledge base.",
-    label: "Smart Drafting Engine",
-    icon: Bot,
-    component: SmartDraftingAnimation,
+      "Securely connect policies, controls, evidence, internal docs, and past RFP or security responses.",
+    label: "Knowledge Integrations",
+    metric: "🔐 100% source traceability",
+    icon: Lock,
+    component: IntegrationsAnimation,
   },
   {
     id: 2,
-    title: "Smart Personalization",
+    title: "Upload the request",
     description:
-      "Tone-aware and intent-driven responses that feel human and engaging.",
-    label: "Personalization Core",
-    icon: User,
-    component: SmartPersonalizationAnimation,
+      "Upload RFPs or security questionnaires in any format (PDF, Word, Excel).",
+    label: "Universal Parser",
+    metric: "⏱️ < 2 minutes to get started",
+    icon: UploadCloud,
+    component: SmartPersonalizationAnimation, // Using Personalization/User icon animation as placeholder for Upload
   },
   {
     id: 3,
-    title: "Team Consistency",
+    title: "Generate answers with confidence",
     description:
-      "Maintain a unified brand voice across teams without manual reviews.",
-    label: "Brand Voice Guard",
-    icon: Shield,
-    component: BrandVoiceAnimation,
+      "The AI agent understands intent, maps questions to your knowledge, and drafts responses. Confident answers are ready instantly; risky ones are flagged.",
+    label: "Smart Drafting Engine",
+    metric: "🤖 70-75% auto-answered",
+    icon: Sparkles,
+    component: SmartDraftingAnimation,
   },
   {
     id: 4,
-    title: "Workflow Integration",
+    title: "Review, submit, and reuse",
     description:
-      "Seamlessly integrate into your CRM and tools without disrupting habits.",
-    label: "Integrations",
-    icon: Layers,
-    component: IntegrationsAnimation,
+      "Review only what matters, submit with confidence, and reuse approved answers across future requests.",
+    label: "Continuous Learning",
+    metric: "♻️ Compounding time savings",
+    icon: Repeat,
+    component: BrandVoiceAnimation,
   },
 ];
 
@@ -358,12 +362,15 @@ const FeatureRow = ({
         {isEven ? (
             // EVEN (0): Text on Left
             <div className="relative">
-                <h3 className={`text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-gray-400"}`}>
                     {step.title}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-[#483953] leading-relaxed mb-4">
                     {step.description}
                 </p>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                    {step.metric}
+                </div>
             </div>
         ) : (
             // ODD (1): Card on Left
@@ -382,13 +389,16 @@ const FeatureRow = ({
             </div>
         ) : (
              // ODD (1): Text on Right
-             <div className="relative">
-                <h3 className={`text-2xl md:text-3xl font-semibold tracking-tight transition-colors duration-500 ${isInView ? "text-black" : "text-gray-400"}`}>
+             <div className="relative flex flex-col items-end">
+                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-gray-400"}`}>
                     {step.title}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-[#483953] leading-relaxed mb-4">
                      {step.description}
                 </p>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                    {step.metric}
+                </div>
              </div>
         )}
       </div>

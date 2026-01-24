@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Header from "../components/layout/Header";
 import HeroSection from "../components/hero/HeroSection";
 import AITabs from "../components/tabs/AITabs";
+import { type TabKey } from "../components/tabs/TabContents";
 import LovedByTeams from "../components/sections/LovedByTeams";
 import FeaturesGrid from "../components/sections/FeaturesGrid";
 import Workflow from "../components/Workflow";
@@ -13,6 +15,18 @@ import Footer from "../components/layout/Footer";
 const SECTION_GAP = "gap-5";
 
 export default function Home() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Mapping: 0 -> maya, 1 -> jane
+  const tabKeys: TabKey[] = ["maya", "jane"];
+  const activeTab = tabKeys[activeIndex];
+
+  const handleTabChange = (tab: TabKey) => {
+    const index = tabKeys.indexOf(tab);
+    if (index !== -1) setActiveIndex(index);
+  };
+
   return (
     <div className="bg-white w-full -z-5">
       {/* Header */}
@@ -20,10 +34,18 @@ export default function Home() {
 
       {/* Hero */}
       <main className={`flex flex-col ${SECTION_GAP}`}>
-        <HeroSection />
+        <HeroSection 
+          activeIndex={activeIndex} 
+          onIndexChange={setActiveIndex} 
+          isPaused={isPaused} 
+        />
 
         {/* AI Strategy Tabs */}
-        <AITabs />
+        <AITabs 
+          activeTab={activeTab} 
+          onTabChange={handleTabChange} 
+          setPaused={setIsPaused} 
+        />
 
         {/* Logos */}
         <LovedByTeams />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import GlowCard from "../GlowCard";
 
@@ -17,15 +17,24 @@ const CARDS = [
   },
 ];
 
-export default function HeroCards() {
-  const [activeIndex, setActiveIndex] = useState(0);
+// NEW: Props for lifting state up
+interface HeroCardsProps {
+  activeIndex: number;
+  onIndexChange: (index: number) => void;
+  isPaused: boolean;
+}
+
+export default function HeroCards({ activeIndex, onIndexChange, isPaused }: HeroCardsProps) {
+  // Removed local activeIndex state
 
   useEffect(() => {
+    if (isPaused) return; // Stop timer on hover
+    
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % CARDS.length);
-    }, 4000);
+      onIndexChange((activeIndex + 1) % CARDS.length); // Cycle safely
+    }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [activeIndex, isPaused, onIndexChange]);
 
   // NEW LOGIC: Only two states needed: "front" and "back"
   const getCardState = (index: number, activeIndex: number) => {
@@ -70,7 +79,7 @@ export default function HeroCards() {
             variants={variants}
             initial="back" // Start from back state
             animate={position}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => onIndexChange(index)}
             className="absolute cursor-pointer"
             style={{ 
               transformOrigin: "center center", // Changed to center for better stacking

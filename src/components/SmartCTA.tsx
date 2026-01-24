@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const FEATURES = [
-  "Workflows",
-  "Responses"
+  "11× faster responses",
+  "80% time saved on RFPs and SecQ",
+  "75% questions auto-answered"
 ];
 
 const SmartCTA = () => {
@@ -55,9 +56,15 @@ const SmartCTA = () => {
       <div className="flex items-center gap-2 bg-white border border-[#EE00FF]/30 rounded-[15px] px-6 h-[42px] shadow-[0_0_15px_rgba(238,0,255,0.15)] min-w-[180px] w-full sm:w-auto overflow-hidden relative">
          <span className="text-xl">✨</span>
          <div className="flex items-center text-[#393939] font-medium text-[15px] font-onest">
-            <span className="mr-1">Automate</span>
-            <span className="text-[#EE00FF] font-semibold relative">
-                {displayedText}
+            <span className="relative">
+                {displayedText.indexOf(' ') === -1 ? (
+                    <span className="text-[#EE00FF] font-semibold">{displayedText}</span>
+                ) : (
+                    <>
+                        <span className="text-[#EE00FF] font-semibold">{displayedText.slice(0, displayedText.indexOf(' '))}</span>
+                        <span>{displayedText.slice(displayedText.indexOf(' '))}</span>
+                    </>
+                )}
                 {/* Cursor */}
                 <span className="absolute -right-[2px] top-0 h-full w-[2px] bg-[#EE00FF] animate-blink" />
             </span>

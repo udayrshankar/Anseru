@@ -1,13 +1,21 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Check, Play } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check } from "lucide-react";
+import AnimationCarousel from "./AnimationCarousel";
 import { tabContent, type TabKey } from "./TabContents";
 
-export default function AITabs() {
-  const [activeTab, setActiveTab] = useState<TabKey>("maya");
+interface AITabsProps {
+  activeTab: TabKey;
+  onTabChange: (tab: TabKey) => void;
+  setPaused: (paused: boolean) => void;
+}
 
+export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProps) {
   return (
-    <section className="w-full px-6 xl:px-[120px]">
+    <section 
+      className="w-full px-6 xl:px-[120px]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="max-w-[1400px] mx-auto relative">
         
        {/* Card Container - Enhanced Glassmorphism & Depth */}
@@ -25,7 +33,7 @@ export default function AITabs() {
                   {(Object.keys(tabContent) as TabKey[]).map((tab) => (
                   <button
                       key={tab}
-                      onClick={() => setActiveTab(tab)}
+                      onClick={() => onTabChange(tab)}
                       className={`relative px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 z-10 ${
                       activeTab === tab 
                           ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]" 
@@ -85,11 +93,21 @@ export default function AITabs() {
                   {/* Bullets - Modernized */}
                   <div>
                       {tabContent[activeTab].bullets.map((b, i) => (
-                         <div key={i} className="flex items-start gap-4 p-2 rounded-xl hover:bg-white/60 transition-colors duration-300 border border-transparent hover:border-purple-100/50">
-                            <div className="mt-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#2A1638] to-[#4c2d61] flex items-center justify-center shrink-0 shadow-md">
+                         <div key={i} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/60 transition-colors duration-300 border border-transparent hover:border-purple-100/50 group/item">
+                            <div className="mt-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#2A1638] to-[#4c2d61] flex items-center justify-center shrink-0 shadow-md group-hover/item:scale-110 transition-transform">
                                <Check className="w-3.5 h-3.5 text-white stroke-[3px]" />
                             </div>
-                            <span className="text-[15px] font-medium text-[#483953] leading-relaxed">{b}</span>
+                            <div className="space-y-1">
+                                <p className="text-[15px] font-medium text-[#2A1638] leading-tight">
+                                    {b.title}
+                                </p>
+                                <p className="text-sm text-[#483953]/80 leading-relaxed">
+                                    {b.description}
+                                </p>
+                                <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-md mt-1 border border-purple-100/50">
+                                    {b.metric}
+                                </div>
+                            </div>
                          </div>
                       ))}
                   </div>
@@ -101,64 +119,9 @@ export default function AITabs() {
                   </button>
                </div>
 
-               {/* Right Side: Media - Realistic Player Header/Footer */}
-               <div className="lg:col-span-8 relative aspect-[16/10] rounded-[24px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.15)] border-[6px] border-white/50 bg-gray-950 group transition-all duration-500 hover:shadow-[0_40px_90px_rgba(0,0,0,0.18)]">
-                  <motion.img
-                    initial={{ scale: 1.05 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.7 }}
-                    src={tabContent[activeTab].image}
-                    alt={tabContent[activeTab].title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                  
-                  {/* Top Bar (Mock UI) */}
-                  <div className="absolute top-0 left-0 right-0 h-14 bg-gradient-to-b from-black/60 to-transparent flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                       <span className="text-white/80 text-xs font-mono bg-black/30 px-2 py-1 rounded backdrop-blur-md">REC ● Anseru Pilot</span>
-                       <div className="flex gap-3">
-                           <div className="w-2 h-2 rounded-full bg-red-500/80" />
-                           <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
-                           <div className="w-2 h-2 rounded-full bg-green-500/80" />
-                       </div>
-                  </div>
-
-                  {/* Video Interface Overlay */}
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300" />
-                  
-                  {/* Play Button - Frosted Glass */}
-                  <div className="absolute inset-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500 cursor-pointer">
-                      <div className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/30 shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:bg-white/20 transition-all">
-                         <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg relative left-0.5">
-                             <Play className="w-7 h-7 text-[#2A1638] fill-[#2A1638]" />
-                         </div>
-                      </div>
-                  </div>
-
-                  {/* Bottom Bar Controls - Detailed Mockup */}
-                  <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-3 pointer-events-none opacity-90">
-                      {/* Timeline */}
-                      <div className="h-1.5 w-full bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
-                          <div className="h-full w-[35%] bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full relative">
-                              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full shadow-md" />
-                          </div>
-                      </div>
-                      
-                      {/* Controls Row */}
-                      <div className="flex items-center justify-between text-white/90">
-                          <div className="flex items-center gap-4 text-xs font-mono">
-                             <span className="font-bold">01:24</span>
-                             <span className="text-white/50">/</span>
-                             <span>02:30</span>
-                          </div>
-                          
-                          {/* Fake Icons */}
-                          <div className="flex gap-4 opacity-70">
-                             <div className="w-4 h-4 border-2 border-current rounded-[2px]" /> {/* CC */}
-                             <div className="w-4 h-4 border-2 border-current rounded-full border-t-transparent animate-spin-slow" /> {/* Settings */}
-                             <div className="w-4 h-4 border-2 border-current" /> {/* Fullscreen */}
-                          </div>
-                      </div>
-                  </div>
+               {/* Right Side: Media - Animation Carousel */}
+               <div className="lg:col-span-8 relative mt-5 aspect-[16/10] rounded-[24px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.15)] border-[6px] border-white/50 bg-gray-900 group transition-all duration-500 hover:shadow-[0_40px_90px_rgba(0,0,0,0.18)]">
+                  <AnimationCarousel activeTab={activeTab} />
                </div>
 
              </motion.div>
