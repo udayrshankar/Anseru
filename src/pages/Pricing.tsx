@@ -93,7 +93,7 @@ const BenchmarkTable = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-onest text-center text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
+            <p className="font-onest text-center text-lg font-medium text-black tracking-wide uppercase opacity-70">
               Pricing & Value Comparison
             </p>
             <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
