@@ -21,12 +21,12 @@ export default function AITabs() {
          
           {/* Floating Island Tabs Navigation */}
           <div className="absolute left-0 right-0 top-[-32px] z-30 flex justify-center px-4">
-              <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full p-2 flex gap-1 items-center max-w-full overflow-x-auto no-scrollbar ring-1 ring-black/[0.03]">
+              <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full py-2 flex gap-1 items-center max-w-full overflow-x-auto no-scrollbar ring-1 ring-black/[0.03]">
                   {(Object.keys(tabContent) as TabKey[]).map((tab) => (
                   <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`relative px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 z-10 ${
+                      className={`relative px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 z-10 ${
                       activeTab === tab 
                           ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]" 
                           : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"

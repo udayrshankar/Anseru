@@ -2,11 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const FEATURES = [
-  "Drafts",
-  "Responses",
   "Workflows",
-  "Insights",
-  "Compliance"
+  "Responses"
 ];
 
 const SmartCTA = () => {

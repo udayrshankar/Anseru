@@ -5,20 +5,20 @@ import GlowCard from "../GlowCard";
 const CARDS = [
   {
     id: 0,
-    title: "Maya here!",
+    title: "Sud here!",
     subtitle: "Security review specialist",
     color: "#FDA4AF",
   },
   {
     id: 1,
-    title: "Jane here!",
+    title: "KG here!",
     subtitle: "Your deal-closing RFP Agent",
     color: "#D8B4FE",
   },
   {
     id: 2,
-    title: "Alex here!",
-    subtitle: "Trust & compliance expert",
+    title: "Sud here!",
+    subtitle: "Security review specialist",
     color: "#93C5FD",
   },
 ];

@@ -19,7 +19,8 @@ export default function HeroSection() {
 
           {/* Subtitle -> Text Body */}
           <p className="text-base md:text-body text-[#2A1638]/70 max-w-3xl mb-10">
-            Agents autonomously research your approved knowledge base, provide contextually accurate, auditable responses governed by human-in-the loop workflows with evidence traceability for security, sales, and compliance teams.
+            Agents autonomously research your approved knowledge base, provide contextually accurate, auditable responses governed by human-in-the loop workflows with evidence traceability for <br/>
+            <span className="font-bold italic">enterprise sales and security teams.</span>
           </p>
 
           <div className="mb-12">
