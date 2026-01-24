@@ -37,8 +37,9 @@ const Products = () => {
           <ProductsHero />
           <AgentCardsSection onHover={setActiveProduct} onSelect={handleProductSelect} />
         
+          <div className="flex flex-col gap-12">
           {/* Toggle Control / Details Start Anchor */}
-          <div ref={detailsRef} className="flex justify-center -mt-10 relative z-20">
+          <div ref={detailsRef} className="flex justify-center relative z-20 bg-white">
             <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full py-2 px-2 flex gap-1 items-center ring-1 ring-black/[0.03]">
               <button
                 onClick={() => setActiveProduct('rfp')}
@@ -100,6 +101,7 @@ const Products = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          </div>
         </main>
 
       <Footer />
@@ -228,6 +230,21 @@ const AgentCardsSection = ({
   );
 };
 
+// -- VISUAL COMPONENT: Grid Lines --
+const GridLines = () => (
+  <div className="absolute inset-0 pointer-events-none hidden md:block select-none">
+    {/* Vertical Line */}
+    <div className="absolute left-1/2 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-[#2A1638]/10 to-transparent -translate-x-1/2" />
+    {/* Horizontal Line */}
+    <div className="absolute top-1/2 left-4 right-4 h-px bg-gradient-to-r from-transparent via-[#2A1638]/10 to-transparent -translate-y-1/2" />
+    
+    {/* Center Intersection Node */}
+    <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-white border border-purple-100 rounded-full -translate-x-1/2 -translate-y-1/2 shadow-sm flex items-center justify-center z-10">
+       <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" />
+    </div>
+  </div>
+);
+
 // RFP Agent Section
 const RFPAgentSection = () => {
   const steps = [
@@ -262,28 +279,13 @@ const RFPAgentSection = () => {
   return (
     <section className="py-0 relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
-        <div className="mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
-              Complexity Tamer
-            </p>
-            <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-              RFP Agent <span className="text-[#2A1638]">Workflow.</span>
-            </h2>
-          </motion.div>
-        </div>
-
         {/* Grid - 2x2 layout like FeaturesGrid */}
         <div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 relative"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
+          <GridLines />
           {steps.map((step, idx) => (
             <Card
               key={idx}
@@ -298,6 +300,7 @@ const RFPAgentSection = () => {
               isActive={activeIndex === idx}
               duration={4000}
               onMouseEnter={() => setActiveIndex(idx)}
+              className="z-10"
             />
           ))}
         </div>
@@ -336,28 +339,14 @@ const SecurityAgentSection = () => {
   return (
     <section className="py-0 bg-white relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
-        <div className="mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
-              Precision First
-            </p>
-            <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-              Security Questionnaire <span className="text-[#2A1638]">Agent.</span>
-            </h2>
-          </motion.div>
-        </div>
 
         {/* Grid - 2x2 layout matching RFPAgentSection */}
         <div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 relative"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
+          <GridLines />
           {features.map((feature, idx) => (
             <Card
               key={idx}
@@ -372,6 +361,7 @@ const SecurityAgentSection = () => {
               isActive={activeIndex === idx}
               duration={4000}
               onMouseEnter={() => setActiveIndex(idx)}
+              className="z-10"
             />
           ))}
         </div>

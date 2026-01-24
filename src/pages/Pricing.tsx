@@ -168,7 +168,7 @@ const PricingTiers = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           
           {/* Starter Card */}
-          <div className="rounded-[32px] text-[#402e4c] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#7e43ca] transition-shadow relative flex flex-col">
+          <div className="rounded-[32px] text-[#402e4c] hover:scale-[1.05] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#7e43ca] transition-all relative flex flex-col">
             <div className="mb-6">
               <span className="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-100 px-3 py-1 rounded-full">
                 Starter

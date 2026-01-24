@@ -23,11 +23,13 @@ export default function HeroSection() {
             <span className="font-bold italic">enterprise sales and security teams.</span>
           </p>
 
-          <div className="mb-12">
+          <div className="mb-8  ">
             <SmartCTA />
           </div>
 
-          <HeroCards />
+          <div className="-translate-y-5">
+            <HeroCards />
+          </div>
         </div>
       </div>
     </section>
