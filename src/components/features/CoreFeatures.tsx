@@ -150,7 +150,7 @@ const CoreFeatures = () => {
 };
 
 const FeatureBackground = ({ index }: { index: number }) => {
-  const commonProps = "absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-[0.1] text-white pointer-events-none p-10 select-none";
+  const commonProps = "absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-[0.05] text-white pointer-events-none p-10 select-none";
   
   switch (index) {
     case 0: // Living Knowledge Graph (Network/Nodes)
