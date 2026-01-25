@@ -1,23 +1,27 @@
 import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
-import GlowCard from "../GlowCard";
+import { Shield, FileText } from "lucide-react";
+import { AgentCard, type ColorTheme } from "./AgentNotificationCards";
 
 const CARDS = [
+
   {
-    id: 0,
-    title: "Sud here!",
-    subtitle: "Security review specialist",
-    color: "#FDA4AF",
-  },
+  id: 0,
+  title: "Sud",
+  description: "Your security agent for safe, compliant data.",
+  icon: Shield,
+  colorTheme: "blue" as ColorTheme,
+},
   {
     id: 1,
-    title: "KG here!",
-    subtitle: "Your deal-closing RFP Agent",
-    color: "#D8B4FE",
-  },
+    title: "KG",
+    description: "Your deal-closing RFP Agent, accelerating your sales cycles.",
+    icon: FileText,
+    colorTheme: "purple" as ColorTheme,
+  }
+
 ];
 
-// NEW: Props for lifting state up
 interface HeroCardsProps {
   activeIndex: number;
   onIndexChange: (index: number) => void;
@@ -25,18 +29,15 @@ interface HeroCardsProps {
 }
 
 export default function HeroCards({ activeIndex, onIndexChange, isPaused }: HeroCardsProps) {
-  // Removed local activeIndex state
-
+  
   useEffect(() => {
-    if (isPaused) return; // Stop timer on hover
-    
+    if (isPaused) return;
     const interval = setInterval(() => {
-      onIndexChange((activeIndex + 1) % CARDS.length); // Cycle safely
-    }, 3000);
+      onIndexChange((activeIndex + 1) % CARDS.length);
+    }, 4000);
     return () => clearInterval(interval);
   }, [activeIndex, isPaused, onIndexChange]);
 
-  // NEW LOGIC: Only two states needed: "front" and "back"
   const getCardState = (index: number, activeIndex: number) => {
     return index === activeIndex ? "front" : "back";
   };
@@ -45,53 +46,61 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
     front: {
       zIndex: 10,
       opacity: 1,
-      scale: 1.1,
-      y: 0,          // Centered vertically
+      scale: 1,
+      y: 0,
+      rotateX: 0,
       filter: "blur(0px)",
       transition: { 
         type: "spring", 
-        stiffness: 200, 
-        damping: 25 
+        stiffness: 180, 
+        damping: 20,
+        mass: 1
       },
     },
     back: {
       zIndex: 1,
-      opacity: 0.5,
-      scale: 0.95,   // Slightly smaller
-      y: -15,        // Peeks out from the top slightly (Stack effect)
-      filter: "blur(2px)",
+      opacity: 0.5, 
+      scale: 0.9,
+      y: 40, // Slips down/behind
+      rotateX: 0, 
+      filter: "blur(4px)", // Quantum blur effect
       transition: { 
         type: "spring", 
-        stiffness: 200, 
-        damping: 25 
+        stiffness: 180, 
+        damping: 20,
+        mass: 1
       },
     },
   };
 
   return (
-    <div className="relative mt-32 flex h-[350px] w-full items-center justify-center -translate-x-15">
+    <div className="relative mt-24 flex h-[350px] w-full items-center justify-center perspective-1000">
       {CARDS.map((card, index) => {
         const position = getCardState(index, activeIndex);
-
+        
         return (
           <motion.div
             key={card.id}
             variants={variants}
-            initial="back" // Start from back state
+            initial="back"
             animate={position}
-            onClick={() => onIndexChange(index)}
-            className="absolute cursor-pointer"
+            onClick={() => {
+              onIndexChange(index);
+              document.getElementById('ai-tabs')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="absolute cursor-pointer w-[320px] md:w-[500px] h-[400px]"
             style={{ 
-              transformOrigin: "center center", // Changed to center for better stacking
+              transformOrigin: "bottom center",
+              perspective: "2000px" // Adds depth to the rotation
             }}
           >
-            <div className="w-[300px] md:w-[400px]">
-              <GlowCard 
-                title={card.title} 
-                subtitle={card.subtitle} 
-                color={card.color} 
-              />
-            </div>
+            <AgentCard
+              title={card.title}
+              description={card.description}
+              icon={card.icon}
+              colorTheme={card.colorTheme}
+              className="h-full shadow-lg" // Ensure full height of container
+            />
           </motion.div>
         );
       })}

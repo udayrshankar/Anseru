@@ -12,6 +12,7 @@ interface AITabsProps {
 export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProps) {
   return (
     <section 
+      id="ai-tabs"
       className="w-full px-6 xl:px-[120px]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

@@ -2,10 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat, Link, Clock, TrendingUp } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
-import ConnectAnimation from "./animation/ConnectAnimation";
-import UploadAnimation from "./animation/UploadAnimation";
-import GenerateAnimation from "./animation/GenerateAnimation";
-import ReviewAnimation from "./animation/ReviewAnimation";
+import { NewConnectAnimation, NewUploadAnimation } from "./animation/NewConnectUploadAnimations";
+import { NewGenerateAnimation, NewReviewAnimation } from "./animation/NewGenerateReviewAnimations";
 import bgImage from "../assets/bg2.png";
 import SmartCTA from "./SmartCTA";
 
@@ -20,7 +18,7 @@ const STEPS = [
     metric: "100% source traceability",
     metricIcon: Link,
     icon: Lock,
-    component: ConnectAnimation,
+    component: NewConnectAnimation,
   },
   {
     id: 2,
@@ -31,7 +29,7 @@ const STEPS = [
     metric: "< 2 minutes to get started",
     metricIcon: Clock,
     icon: UploadCloud,
-    component: UploadAnimation,
+    component: NewUploadAnimation,
   },
   {
     id: 3,
@@ -42,7 +40,7 @@ const STEPS = [
     metric: "70-75% auto-answered",
     metricIcon: Sparkles,
     icon: Sparkles,
-    component: GenerateAnimation,
+    component: NewGenerateAnimation,
   },
   {
     id: 4,
@@ -53,7 +51,7 @@ const STEPS = [
     metric: "Compounding time savings",
     metricIcon: TrendingUp,
     icon: Repeat,
-    component: ReviewAnimation,
+    component: NewReviewAnimation,
   },
 ];
 
@@ -101,7 +99,7 @@ const FeatureCard = ({
     </div>
 
     {/* Label Overlay - Reduced blur here too */}
-    <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1 rounded-full border border-gray-100 shadow-sm z-10 flex items-center gap-2">
+    <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1 rounded-full border border-gray-100 shadow-sm z-30 flex items-center gap-2">
         <Icon className="w-4 h-4 text-gray-700" />
         <span className="text-xs font-semibold text-gray-700">
         {label}

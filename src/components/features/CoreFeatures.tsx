@@ -3,6 +3,12 @@ import {
   Users, FileCheck, AlertTriangle, 
   Plug, Shield, CheckCircle, Workflow
 } from "lucide-react";
+import graph from "../../assets/graph-svgrepo-com.svg";
+import collaborate from "../../assets/collaborate-svgrepo-com.svg";
+import connect from "../../assets/data-integration-hub-svgrepo-com.svg";
+import chart from "../../assets/chart-mixed-alt-svgrepo-com.svg";
+import health from "../../assets/health-svgrepo-com.svg";
+import openBook from "../../assets/open-book-svgrepo-com.svg";
 
 const CoreFeatures = () => {
   const features = [
@@ -12,7 +18,8 @@ const CoreFeatures = () => {
       goal: "Anseru connects directly to your real sources of truth: content, past RFPs, security documents, and public content.",
       capabilities: [
         "Each source is indexed with ownership, freshness, and expiry",
-        "Improves accuracy with usage instead of decaying over time"
+        "Improves accuracy with usage instead of decaying over time",
+        "Shifts the problem from 'Did AI hallucinate?' to 'Which document needs updating?'",
       ]
     },
     {
@@ -33,6 +40,7 @@ const CoreFeatures = () => {
         "Automatic source citations",
         "Secure document links instead of attachments",
         "Full traceability from answer to underlying document"
+
       ]
     },
     {
@@ -41,7 +49,8 @@ const CoreFeatures = () => {
       goal: "Expose risk before submission, not after.",
       capabilities: [
         "Monitors expiring certifications, outdated policies, and missing ownership",
-        "Shifts the problem from 'Did AI hallucinate?' to 'Which document needs updating?'"
+        "Shifts the problem from 'Did AI hallucinate?' to 'Which document needs updating?'",
+        "Shifts the problem from 'Did AI hallucinate?' to 'Which document needs updating?'",
       ]
     },
     {
@@ -50,6 +59,7 @@ const CoreFeatures = () => {
       goal: "Integrate effortlessly with your existing revenue and security stack.",
       capabilities: [
         "Connects with CRM systems, cloud storage providers, and communication tools",
+        "Fits into existing workflows instead of forcing teams to change",
         "Fits into existing workflows instead of forcing teams to change"
       ]
     },
@@ -79,7 +89,7 @@ const CoreFeatures = () => {
         </div>
 
         {/* Features Stacking List */}
-        <div className="flex flex-col gap-6 lg:gap-3 pb-20">
+        <div className="flex flex-col gap-6 lg:gap-30 pb-20">
           {features.map((feature, idx) => (
             <motion.div
               key={idx}
@@ -94,8 +104,11 @@ const CoreFeatures = () => {
                 zIndex: idx + 1,
               }}
             >
-              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white to-purple-50/30 backdrop-blur-md border border-purple-200/80 shadow-[0_40px_80px_-20px_rgba(42,22,56,0.12),0_0_0_1px_rgba(255,255,255,0.8)_inset] transition-all duration-500 min-h-[300px]">
+              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white to-purple-50/30 bg-white border border-purple-200/80 shadow-[0_0px_80px_-20px_rgba(202,168,232,0.5),0_0_0_1px_rgba(255,255,255,0.8)_inset] transition-all duration-500 h-[300px]">
                 
+                {/* Decorative Background SVG */}
+                <FeatureBackground index={idx} />
+
                 {/* Watermark Number */}
                 <span className="absolute -top-6 -right-6 text-[180px] font-bold text-black/[0.02] leading-none select-none pointer-events-none transition-colors duration-500 text-purple-500/[0.03]">
                   {String(idx + 1).padStart(2, '0')}
@@ -134,6 +147,39 @@ const CoreFeatures = () => {
       </div>
     </section>
   );
+};
+
+const FeatureBackground = ({ index }: { index: number }) => {
+  const commonProps = "absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-[0.1] text-white pointer-events-none p-10 select-none";
+  
+  switch (index) {
+    case 0: // Living Knowledge Graph (Network/Nodes)
+      return (
+        <img src={graph} alt="" className={commonProps} />
+      );
+    case 1: // Collaboration (Connected Users)
+      return (
+        <img src={collaborate} alt="" className={commonProps} />
+      );
+    case 2: // Evidence (Document/Check)
+      return (
+        <img src={openBook} alt="" className={commonProps} />
+      );
+    case 3: // Health/Risk (Pulse/Shield)
+      return (
+        <img src={health} alt="" className={commonProps} />
+      );
+    case 4: // Integrations (Circuit/Connect)
+      return (
+        <img src={connect} alt="" className={commonProps} />
+      );
+    case 5: // Analytics (Charts)
+      return (
+        <img src={chart} alt="" className={commonProps} />
+      );
+    default:
+      return null;
+  }
 };
 
 export default CoreFeatures;

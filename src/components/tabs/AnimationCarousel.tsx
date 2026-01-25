@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SudResponse, SudUpdates, SudSpeed } from "./animations/SudAnimations";
-import { KgDrafting, KgFormats, KgReview } from "./animations/KgAnimations";
+import { SudResponse, SudUpdates, SudSpeed } from "./animations/NewSudAnimations";
+import { KgDrafting, KgFormats, KgReview } from "./animations/NewKgAnimations";
 import { type TabKey } from "./TabContents";
 
 interface AnimationCarouselProps {

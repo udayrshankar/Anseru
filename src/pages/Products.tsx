@@ -37,70 +37,99 @@ const Products = () => {
           <ProductsHero />
           <AgentCardsSection onHover={setActiveProduct} onSelect={handleProductSelect} />
         
-          <div className="flex flex-col gap-12 bg-white shadow-[10px_10px_40px_rgba(0,0,0,0.3)] rounded-[50px] py-8 mx-25">
-          {/* Toggle Control / Details Start Anchor */}
-          <div ref={detailsRef} className="flex justify-center relative z-20 -translate-y-15">
-            <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60 rounded-full py-2 px-2 flex gap-1 items-center ring-1 ring-black/[0.03]">
-              <button
-                onClick={() => setActiveProduct('rfp')}
-                className={`relative px-12 md:px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeProduct === 'rfp'
-                    ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]"
-                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"
-                }`}
-              >
-                {activeProduct === 'rfp' && (
-                  <motion.div
-                    layoutId="active-product-pill"
-                    className="absolute inset-0 bg-[#2A1638] rounded-full"
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                  />
-                )}
-                <span className="relative z-10 whitespace-nowrap tracking-wide">RFP Agent</span>
-              </button>
-        
-              <button
-                onClick={() => setActiveProduct('security')}
-                className={`relative px-12 md:px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeProduct === 'security'
-                    ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.3)]"
-                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"
-                }`}
-              >
-                {activeProduct === 'security' && (
-                  <motion.div
-                    layoutId="active-product-pill"
-                    className="absolute inset-0 bg-[#2A1638] rounded-full"
-                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                  />
-                )}
-                <span className="relative z-10 whitespace-nowrap tracking-wide">Security Agent</span>
-              </button>
+          
+          {/* Main "Window" Container */}
+          <div className="relative max-w-[1300px] mx-auto px-4 md:px-8 pb-24">
+            
+            {/* Floating Toggle - Positioned closely on top of the window border */}
+            <div ref={detailsRef} className="absolute left-1/2 -translate-x-1/2 -top-6 z-30">
+              <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white/60 rounded-full py-1.5 px-1.5 flex gap-1 items-center ring-1 ring-black/[0.03]">
+                <button
+                  onClick={() => setActiveProduct('rfp')}
+                  className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    activeProduct === 'rfp'
+                      ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
+                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/50"
+                  }`}
+                >
+                  {activeProduct === 'rfp' && (
+                    <motion.div
+                      layoutId="active-product-pill"
+                      className="absolute inset-0 bg-[#2A1638] rounded-full"
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                    />
+                  )}
+                  <span className="relative z-10 whitespace-nowrap tracking-wide">RFP Agent</span>
+                </button>
+          
+                <button
+                  onClick={() => setActiveProduct('security')}
+                  className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    activeProduct === 'security'
+                      ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
+                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/50"
+                  }`}
+                >
+                  {activeProduct === 'security' && (
+                    <motion.div
+                      layoutId="active-product-pill"
+                      className="absolute inset-0 bg-[#2A1638] rounded-full"
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                    />
+                  )}
+                  <span className="relative z-10 whitespace-nowrap tracking-wide">Security Agent</span>
+                </button>
+              </div>
             </div>
-          </div>
-          <AnimatePresence mode="wait">
-            {activeProduct === 'rfp' ? (
-              <motion.div
-                key="rfp"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <RFPAgentSection />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="security"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <SecurityAgentSection />
-              </motion.div>
-            )}
-          </AnimatePresence>
+
+            {/* The Window Frame */}
+            <div className="bg-white rounded-2xl shadow-[0_50px_100px_-20px_rgba(50,50,93,0.15)] border border-slate-200/60 overflow-hidden relative z-10 ring-1 ring-slate-900/5">
+                
+                {/* Window Header */}
+                <div className="h-14 bg-slate-50/80 backdrop-blur-md border-b border-slate-100 flex items-center px-6 justify-between select-none">
+                    <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-[#FF5F57] border border-[#E0443E]/50 shadow-inner" />
+                        <div className="w-3 h-3 rounded-full bg-[#FEBC2E] border border-[#D89E24]/50 shadow-inner" />
+                        <div className="w-3 h-3 rounded-full bg-[#28C840] border border-[#1AAB29]/50 shadow-inner" />
+                    </div>
+                    
+                 
+
+                    <div className="w-16" /> {/* Spacer */}
+                </div>
+
+                {/* Content Area */}
+                <div className="p-8 lg:p-12 pt-16 bg-gradient-to-b from-white to-slate-50/50 min-h-[600px] relative">
+                   {/* Background Decor */}
+                   <div className="absolute inset-0 opacity-[0.4] pointer-events-none" 
+                        style={{ backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(120, 119, 198, 0.1), transparent 40%)' }} 
+                   />
+
+                  <AnimatePresence mode="wait">
+                    {activeProduct === 'rfp' ? (
+                      <motion.div
+                        key="rfp"
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <RFPAgentSection />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="security"
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                      >
+                        <SecurityAgentSection />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+            </div>
           </div>
         </main>
 
@@ -280,8 +309,7 @@ const RFPAgentSection = () => {
   const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(steps.length);
 
   return (
-    <section className="py-0 relative">
-      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
+    <div className="relative">
         {/* Grid - 2x2 layout like FeaturesGrid */}
         <div 
           className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 relative"
@@ -303,12 +331,11 @@ const RFPAgentSection = () => {
               isActive={activeIndex === idx}
               duration={4000}
               onMouseEnter={() => setActiveIndex(idx)}
-              className="z-10"
+              className="z-10 shadow-sm border-slate-100 bg-white/80 hover:bg-white transition-colors"
             />
           ))}
         </div>
-      </div>
-    </section>
+    </div>
   );
 };
 
@@ -340,9 +367,7 @@ const SecurityAgentSection = () => {
   const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(features.length);
 
   return (
-    <section className="py-0 relative">
-      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
-
+    <div className="relative">
         {/* Grid - 2x2 layout matching RFPAgentSection */}
         <div 
           className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 relative"
@@ -364,12 +389,11 @@ const SecurityAgentSection = () => {
               isActive={activeIndex === idx}
               duration={4000}
               onMouseEnter={() => setActiveIndex(idx)}
-              className="z-10"
+              className="z-10 shadow-sm border-slate-100 bg-white/80 hover:bg-white transition-colors"
             />
           ))}
         </div>
-      </div>
-    </section>
+    </div>
   );
 };
 

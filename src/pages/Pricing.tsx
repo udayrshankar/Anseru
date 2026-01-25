@@ -295,10 +295,10 @@ const ClosingCTA = () => {
           />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            <h2 className="font-onest text-3xl md:text-[45px] font-medium text-[#2A1638] mb-8 max-w-[971px] leading-tight">
+            <span className="font-onest text-2xl md:text-4xl font-medium text-[#2A1638] mb-8 max-w-[971px] leading-tight">
               Anseru is not just helping teams respond faster.
 We're building intelligence that compounds deal after deal.
-            </h2>
+            </span>
 
             <SmartCTA />
           </div>
