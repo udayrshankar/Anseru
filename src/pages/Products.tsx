@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Background from "../components/Background";
 import SmartCTA from "../components/SmartCTA";
 import Header from "../components/layout/Header";
@@ -12,11 +12,15 @@ import { FileText, Lock, Search, BarChart, Zap, Users, Shield, CheckCircle, Cloc
 const SECTION_GAP = "gap-20";
 
 const Products = () => {
-  const [activeProduct, setActiveProduct] = useState<'rfp' | 'security'>('rfp');
+  // Use sequential animation hook for auto-cycling
+  // 0 -> 'rfp', 1 -> 'security'
+  const { activeIndex, setActiveIndex, onMouseEnter, onMouseLeave } = useSequentialAnimation(2, 8000); // 8000ms duration
+  
+  const activeProduct = activeIndex === 0 ? 'rfp' : 'security';
   const detailsRef = useRef<HTMLDivElement>(null);
 
   const handleProductSelect = (product: 'rfp' | 'security') => {
-    setActiveProduct(product);
+    setActiveIndex(product === 'rfp' ? 0 : 1);
     // Smooth scroll to the details section with a small offset for the header
     setTimeout(() => {
         const yOffset = -100; // Header offset
@@ -35,17 +39,23 @@ const Products = () => {
       
         <main className={`flex flex-col ${SECTION_GAP} `}>
           <ProductsHero />
-          <AgentCardsSection onHover={setActiveProduct} onSelect={handleProductSelect} />
+          <AgentCardsSection 
+            activeProduct={activeProduct} 
+            onHover={(p) => setActiveIndex(p === 'rfp' ? 0 : 1)} 
+            onSelect={handleProductSelect}
+            onPause={onMouseEnter}
+            onResume={onMouseLeave}
+          />
         
           
           {/* Main "Window" Container */}
           <div className="relative max-w-[1300px] mx-auto px-4 md:px-8 pb-24">
             
             {/* Floating Toggle - Positioned closely on top of the window border */}
-            <div ref={detailsRef} className="absolute left-1/2 -translate-x-1/2 -top-6 z-30">
-              <div className="bg-white/90 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white/60 rounded-full py-1.5 px-1.5 flex gap-1 items-center ring-1 ring-black/[0.03]">
+            <div ref={detailsRef} className="absolute left-1/2 -translate-x-1/2 -top-6 z-30 ">
+              <div className="bg-white backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-black/80 rounded-full py-1.5 px-1.5 flex gap-1 items-center ring-1 ring-black/[0.03]">
                 <button
-                  onClick={() => setActiveProduct('rfp')}
+                  onClick={() => setActiveIndex(0)}
                   className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     activeProduct === 'rfp'
                       ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
@@ -63,7 +73,7 @@ const Products = () => {
                 </button>
           
                 <button
-                  onClick={() => setActiveProduct('security')}
+                  onClick={() => setActiveIndex(1)}
                   className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     activeProduct === 'security'
                       ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
@@ -83,7 +93,7 @@ const Products = () => {
             </div>
 
             {/* The Window Frame */}
-            <div className="bg-white rounded-2xl shadow-[0_50px_100px_-20px_rgba(50,50,93,0.15)] border border-slate-200/60 overflow-hidden relative z-10 ring-1 ring-slate-900/5">
+            <div className="bg-white rounded-2xl shadow-[0_50px_100px_-20px_rgba(50,50,93,0.3)] border border-black/10 overflow-hidden relative z-10 ring-1 ring-slate-900/5">
                 
                 {/* Window Header */}
                 <div className="h-14 bg-slate-50/80 backdrop-blur-md border-b border-slate-100 flex items-center px-6 justify-between select-none">
@@ -172,14 +182,24 @@ const ProductsHero = () => {
 
 // Modern split-panel agent showcase - distinct from Card-based sections
 const AgentCardsSection = ({ 
+  activeProduct,
   onHover, 
-  onSelect 
+  onSelect,
+  onPause,
+  onResume
 }: { 
+  activeProduct: 'rfp' | 'security';
   onHover: (product: 'rfp' | 'security') => void;
   onSelect: (product: 'rfp' | 'security') => void;
+  onPause: () => void;
+  onResume: () => void;
 }) => {
   return (
-    <section className="py-0 px-6 bg-white">
+    <section 
+      className="py-0 px-6 bg-white"
+      onMouseEnter={onPause}
+      onMouseLeave={onResume}
+    >
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Section Header */}
         <div className="mb-16 text-center">
@@ -200,6 +220,8 @@ const AgentCardsSection = ({
             icon={<FileText />}
             minHeight="min-h-[500px]"
             withMovingOrbs={true}
+            isActive={activeProduct === 'rfp'}
+            duration={8000}
             onMouseEnter={() => onHover('rfp')}
             onClick={() => onSelect('rfp')} 
             className="group cursor-pointer relative"
@@ -207,7 +229,7 @@ const AgentCardsSection = ({
             {/* Custom Children: Badge & Tags */}
             <div className="mt-auto pt-6">
                <div className="inline-flex items-center gap-2 mb-6 bg-purple-100 px-3 py-1 rounded-full">
-                  <span className="text-sm font-bold text-purple-600 uppercase tracking-widest">
+                  <span className="text-md font-bold text-purple-600 uppercase tracking-widest">
                     For GTM and Sales Teams
                   </span>
                </div>
@@ -232,14 +254,16 @@ const AgentCardsSection = ({
             icon={<Lock />}
             minHeight="min-h-[500px]"
             withMovingOrbs={true}
+            isActive={activeProduct === 'security'}
+            duration={8000}
             onMouseEnter={() => onHover('security')}
             onClick={() => onSelect('security')} 
             className="group cursor-pointer relative"
           >
             {/* Custom Children: Badge & Tags */}
             <div className="mt-auto pt-6">
-               <div className="inline-flex items-center gap-2 mb-6 bg-blue-100 px-3 py-1 rounded-full">
-                  <span className="text-sm font-bold text-blue-600 uppercase tracking-widest">
+               <div className="inline-flex items-center gap-2 mb-6 bg-purple-100 px-3 py-1 rounded-full">
+                  <span className="text-md font-bold text-purple-600 uppercase tracking-widest">
                     For Compliance and Security Teams
                   </span>
                </div>

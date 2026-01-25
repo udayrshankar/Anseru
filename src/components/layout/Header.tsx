@@ -13,7 +13,7 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
-          {["HOME", "PRODUCT", "FEATURES", "PRICING"].map((item) => (
+          {["HOME", "PRODUCT", "FEATURES", "PRICING","RESOURCES"].map((item) => (
             <a
               key={item}
               href={"/"+item.toLowerCase()}

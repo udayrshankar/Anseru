@@ -75,20 +75,18 @@ export const AgentCard: React.FC<CardProps> = ({
       onClick={onClick}
       className={cn(
         "group relative w-full h-[320px] overflow-hidden cursor-pointer",
-        "rounded-[24px] border border-white/40",
+        "rounded-t-[24px] border border-white/40",
         "bg-white backdrop-blur-xl shadow-sm",
         "transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]", // Permanent shadow
         className
       )}
     >
         
-      {/* --- Border Gradient (The "Glow" on edge) - Always visible --- */}
       <div className={cn(
         "absolute inset-0 rounded-[24px] pointer-events-none z-20",
         theme.borderColor.replace('group-hover:', '') // Remove hover prefix
       )} />
 
-      {/* --- Atmospheric Background Layer - Always visible --- */}
       <div className="absolute inset-0 w-full h-full overflow-hidden opacity-100">
         <motion.div
           className={cn("absolute -top-[20%] -right-[20%] w-[80%] h-[80%] rounded-full blur-[100px]", theme.gradient[0])}
@@ -128,8 +126,43 @@ export const AgentCard: React.FC<CardProps> = ({
         </div>
         {/* Center: AI Orb Visual */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-             <div className="w-[180px] h-[180px] opacity-80 -translate-y-8">
-                 <AIOrb className="w-full h-full" theme={colorTheme === 'purple' ? 'purple' : 'blue'} />
+             <div className="relative w-[180px] h-[180px] -translate-y-8">
+                 {/* Signal Animation - Centered on Orb */}
+                 <motion.div
+                   className={cn(
+                     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-25 h-25 rounded-full border-2",
+                     colorTheme === 'purple' ? "border-purple-500" : 
+                     colorTheme === 'blue' ? "border-blue-500" :
+                     colorTheme === 'green' ? "border-emerald-500" : "border-orange-500"
+                   )}
+                   initial={{ opacity: 0.8, scale: 0.5 }}
+                   animate={{ opacity: 0, scale: 2 }}
+                   transition={{
+                       duration: 2,
+                       repeat: Infinity,
+                       ease: "easeOut"
+                   }}
+                 />
+                 
+                 {/* Second delayed ripple for richer effect */}
+                 <motion.div
+                   className={cn(
+                     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border",
+                     colorTheme === 'purple' ? "border-purple-400/50" : 
+                     colorTheme === 'blue' ? "border-blue-400/50" :
+                     colorTheme === 'green' ? "border-emerald-400/50" : "border-orange-400/50"
+                   )}
+                   initial={{ opacity: 0.6, scale: 0.5 }}
+                   animate={{ opacity: 0, scale: 2 }}
+                   transition={{
+                       duration: 2,
+                       repeat: Infinity,
+                       ease: "easeOut",
+                       delay: 0.5
+                   }}
+                 />
+
+                 <AIOrb className="w-full h-full relative z-10" theme={colorTheme === 'purple' ? 'purple' : 'blue'} />
              </div>
         </div>
 
