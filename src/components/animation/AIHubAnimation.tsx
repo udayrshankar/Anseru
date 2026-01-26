@@ -85,7 +85,7 @@ const AIHubAnimation = React.memo(() => {
         {[...leftApps, ...rightApps].map((app, i) => {
           const side = i < leftApps.length ? "left" : "right";
           const index = i < leftApps.length ? i : i - leftApps.length;
-          const { path, endX, endY } = getCircuitPath(side, index, leftApps.length);
+          const { path } = getCircuitPath(side, index, leftApps.length);
           
           const gradientId = `grad-${side}-${i}`;
           
@@ -113,7 +113,6 @@ const AIHubAnimation = React.memo(() => {
               />
               
               {/* Terminal Dot */}
-              <circle cx={endX} cy={endY} r="3" fill="white" stroke={app.color} strokeWidth="2" />
 
               {/* FLOWING PARTICLE - Removed direct offset-path animation if it causes issues, but standard framer-motion path animation is usually ok on GPU. 
                   Removed 'filter' prop to speed up rendering.
