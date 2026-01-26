@@ -274,7 +274,7 @@ export default function Workflow() {
   });
 
   return (
-    <div className="relative pb-5 overflow-hidden ">
+    <div className="relative pb-5 pt-5 overflow-hidden ">
       {/* BACKGROUND */}
       {/* <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
         <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">

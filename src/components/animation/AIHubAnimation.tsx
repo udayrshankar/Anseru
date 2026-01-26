@@ -93,8 +93,8 @@ const AIHubAnimation = React.memo(() => {
             <React.Fragment key={i}>
               <defs>
                 <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor={side === 'left' ? app.color : '#cbd5e1'} stopOpacity="0.8" />
-                    <stop offset="100%" stopColor={side === 'right' ? app.color : '#cbd5e1'} stopOpacity="0.8" />
+                    <stop offset="0%" stopColor={side === 'left' ? app.color : app.color} stopOpacity="0.8" />
+                    <stop offset="100%" stopColor={side === 'right' ? app.color : app.color} stopOpacity="0.8" />
                 </linearGradient>
               </defs>
 
