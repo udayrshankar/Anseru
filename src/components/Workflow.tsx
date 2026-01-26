@@ -294,7 +294,7 @@ export default function Workflow() {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center relative z-20 mt-8">
+        <div className="text-center relative z-20 mt-10">
           <p className="font-onest text-lg font-medium text-black tracking-wide uppercase opacity-70">
             we are building the next generation of
           </p>
