@@ -64,7 +64,7 @@ const ComingSoon = () => {
                   Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">Amazing</span> is Coming
                 </h1>
                 <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto">
-                  Our first pilot case study with a mid-market enterprise.
+                  Our first pilot case study with a <span className="font-bold">Mid-Market Enterprise.</span>
                 </p>
               </div>
 

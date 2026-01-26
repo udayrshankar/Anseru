@@ -1,6 +1,6 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus, HelpCircle } from "lucide-react";
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -8,129 +8,178 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const TimerBorder = ({ duration }: { duration: number }) => {
-  const gradientId = useId();
-  
-  return (
-    <div className="absolute inset-0 z-50 pointer-events-none rounded-2xl">
-      <svg className="absolute inset-0 w-full h-full overflow-visible">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#9F5AF0" />
-            <stop offset="100%" stopColor="#7038BA" />
-          </linearGradient>
-        </defs>
-        <motion.rect
-          x="1.5"
-          y="1.5"
-          width="calc(100% - 3px)"
-          height="calc(100% - 3px)"
-          rx="14" 
-          fill="none"
-          stroke={`url(#${gradientId})`}
-          strokeWidth="2"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: duration / 1000, ease: "easeOut" }}
-        />
-      </svg>
-    </div>
-  );
-};
+// --- Professional Color Themes ---
+type FAQTheme = 'purple' | 'blue' | 'emerald' | 'orange' | 'pink';
 
-const FAQS = [
+interface FAQItem {
+  question: string;
+  answer: string;
+  theme: FAQTheme;
+}
+
+const FAQS: FAQItem[] = [
   {
     question: "How does Anseru ensure data security?",
     answer: "Anseru is built with security-first architecture. We use enterprise-grade encryption for all data in transit and at rest. Your data is isolated and never used to train public models. We are SOC 2 Type II compliant.",
+    theme: 'blue',
   },
   {
     question: "Can I integrate Anseru with my existing tools?",
     answer: "Yes! Anseru integrates seamlessly with popular CRMs like Salesforce and HubSpot, as well as communication tools like Slack and Microsoft Teams, ensuring smooth workflows for your team.",
+    theme: 'purple',
   },
   {
     question: "What makes Anseru different from other AI tools?",
     answer: "Unlike generic AI wrappers, Anseru provides specialized agents (like Sud and KG) that are purpose-built for specific workflows—RFP automation and security questionnaires—delivering higher accuracy and simpler adoption.",
+    theme: 'emerald',
   },
   {
     question: "How long does it take to get started?",
     answer: "You can get started in minutes. Simply connect your knowledge base, and our agents will immediately start learning from your existing documentation to provide accurate responses.",
+    theme: 'orange',
   },
   {
     question: "Do you offer custom enterprise plans?",
     answer: "Absolutely. We offer tailored enterprise plans with dedicated support, custom integrations, and volume-based pricing. Contact our sales team to discuss your specific needs.",
+    theme: 'pink',
   },
 ];
+
+const THEME_STYLES: Record<FAQTheme, {
+    border: string;
+    bgHover: string;
+    iconBg: string;
+    iconColor: string;
+    gradient: string;
+}> = {
+    blue: {
+        border: "hover:border-blue-200",
+        bgHover: "hover:bg-blue-50/50",
+        iconBg: "bg-blue-100",
+        iconColor: "text-blue-600",
+        gradient: "from-blue-500/10 to-cyan-500/10"
+    },
+    purple: {
+        border: "hover:border-purple-200",
+        bgHover: "hover:bg-purple-50/50",
+        iconBg: "bg-purple-100",
+        iconColor: "text-purple-600",
+        gradient: "from-purple-500/10 to-indigo-500/10"
+    },
+    emerald: {
+        border: "hover:border-emerald-200",
+        bgHover: "hover:bg-emerald-50/50",
+        iconBg: "bg-emerald-100",
+        iconColor: "text-emerald-600",
+        gradient: "from-emerald-500/10 to-teal-500/10"
+    },
+    orange: {
+        border: "hover:border-orange-200",
+        bgHover: "hover:bg-orange-50/50",
+        iconBg: "bg-orange-100",
+        iconColor: "text-orange-600",
+        gradient: "from-orange-500/10 to-amber-500/10"
+    },
+    pink: {
+        border: "hover:border-pink-200",
+        bgHover: "hover:bg-pink-50/50",
+        iconBg: "bg-pink-100",
+        iconColor: "text-pink-600",
+        gradient: "from-pink-500/10 to-rose-500/10"
+    }
+};
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="px-6 bg-white">
-      <div className="max-w-[1000px] w-full mx-auto">
+    <section className="px-6 py-24 bg-white relative overflow-hidden">
+        {/* Subtle Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-purple-50/50 to-transparent pointer-events-none" />
+
+      <div className="max-w-[900px] w-full mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="font-onest text-4xl md:text-5xl font-bold text-[#090909] tracking-tight mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-sm font-medium mb-6"
+          >
+             <HelpCircle size={16} />
+             <span>Support Center</span>
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-onest text-4xl md:text-5xl font-bold text-[#090909] tracking-tight mb-4"
+          >
             Frequently Asked Questions
-          </h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Everything you need to know about Anseru and our agents.
-          </p>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-slate-500 text-lg max-w-2xl mx-auto"
+          >
+            Everything you need to know about Anseru's capabilities, security, and pricing.
+          </motion.p>
         </div>
 
         <div className="space-y-4">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
+            const theme = THEME_STYLES[faq.theme];
 
             return (
-
               <motion.div
                 key={index}
-                initial={false}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: index * 0.1 }}
                 className={cn(
-                  "relative rounded-2xl overflow-hidden transition-all duration-300",
-                  "bg-white/90 backdrop-blur-md", // Base
-                  "border border-white/60",       // Subtle white border
-                  "shadow-[0_10px_30px_-5px_rgba(42,22,56,0.05),0_0_0_1px_rgba(255,255,255,0.8)_inset]", // Soft premium shadow
-                  isOpen ? "scale-[1.02] shadow-[0_20px_50px_-10px_rgba(42,22,56,0.12),0_0_0_1px_rgba(255,255,255,0.8)_inset]" : "hover:scale-[1.01]"
+                  "relative rounded-2xl overflow-hidden transition-all duration-500",
+                  "bg-white border border-slate-100",
+                  "shadow-sm hover:shadow-md",
+                  theme.border,
+                  isOpen ? "ring-1 ring-offset-2 " + theme.border.replace('hover:', '') : ""
                 )}
               >
-                 {isOpen && <TimerBorder duration={3000} />}
-
-                 {/* Gradient Background - Animated & Textured */}
-                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <motion.div 
-                      className="absolute top-[-50%] right-[-20%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px]" 
-                      animate={{ scale: [1, 1.2, 1], rotate: [0, 15, 0] }}
-                      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                    <motion.div 
-                      className="absolute bottom-[-50%] left-[-20%] w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-[100px]"
-                      animate={{ scale: [1.2, 1, 1.2], rotate: [0, -15, 0] }}
-                      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                 </div>
-                 
-                 {/* Noise Texture */}
-                 <div className="absolute inset-0 opacity-[0.3] mix-blend-overlay pointer-events-none"
-                    style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
-                 />
+                 {/* Animated Background Gradient on Hover/Active */}
+                 <div className={cn(
+                     "absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none bg-gradient-to-r",
+                     theme.gradient,
+                     isOpen ? "opacity-100" : "group-hover:opacity-30"
+                 )} />
 
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="relative w-full flex items-center justify-between p-6 text-left z-20"
+                  className="relative w-full flex items-start justify-between p-6 text-left z-20"
                 >
-                  <span className={cn(
-                    "font-onest text-lg font-bold transition-all duration-300",
-                    isOpen 
-                      ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-indigo-700"
-                      : "text-[#090909]"
-                  )}>
-                    {faq.question}
-                  </span>
+                  <div className="flex items-center gap-4">
+                      {/* Decorative Dot */}
+                      <div className={cn(
+                          "w-2 h-2 rounded-full shrink-0 transition-colors duration-300",
+                          isOpen ? theme.iconColor.replace('text-', 'bg-') : "bg-slate-300"
+                      )} />
+                      
+                      <span className={cn(
+                        "font-onest text-lg font-bold transition-colors duration-300",
+                        isOpen ? "text-[#090909]" : "text-slate-700"
+                      )}>
+                        {faq.question}
+                      </span>
+                  </div>
+
                   <div className={cn(
-                    "p-2 rounded-full transition-colors duration-300",
-                    isOpen ? "bg-purple-100/50 text-purple-700" : "bg-transparent text-slate-400"
+                    "p-2 rounded-full transition-all duration-300 shrink-0 ml-4",
+                    isOpen ? `${theme.iconBg} ${theme.iconColor} rotate-180` : "bg-slate-50 text-slate-400 group-hover:bg-slate-100"
                   )}>
-                    {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                     <Plus size={20} className={cn("transition-transform duration-300", isOpen && "rotate-45")} />
                   </div>
                 </button>
 
@@ -143,7 +192,7 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="relative z-20"
                     >
-                      <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                      <div className="px-6 pb-6 pt-0 pl-[3.25rem] text-slate-600 leading-relaxed max-w-[90%]">
                         {faq.answer}
                       </div>
                     </motion.div>

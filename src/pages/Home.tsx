@@ -13,7 +13,7 @@ import FAQ from "../components/sections/FAQ";
 import bgImage from "../assets/bg2.png";
 
 // Control the vertical spacing between sections here
-const SECTION_GAP = "gap-2";
+const SECTION_GAP = "gap-5";
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -59,11 +59,13 @@ export default function Home() {
           {/* AI Strategy Tabs */}
           <Workflow />
         </div>
-        <AITabs 
-          activeTab={activeTab} 
-          onTabChange={handleTabChange} 
-          setPaused={setIsPaused} 
-        />
+        <div className="mt-10">
+          <AITabs
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            setPaused={setIsPaused}
+          />
+        </div>
 
         {/* Logos */}
         <LovedByTeams />

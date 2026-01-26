@@ -324,7 +324,7 @@ export default function Workflow() {
               ))}
               
               {/* FINAL CTA - Connected by Pipe */}
-              <div className="flex justify-center pt-10 scale-150 origin-top -translate-y-20  ">
+              <div className="flex justify-center pt-10 scale-150 origin-top -translate-y-20 mt-30 ">
                  <SmartCTA />
               </div>
             </div>
@@ -356,7 +356,7 @@ const FeatureRow = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start relative"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
     >
       {/* LEFT COLUMN */}
       <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:text-left lg:pl-12 order-1 lg:order-1" : "relative order-2 lg:order-1"}`}>

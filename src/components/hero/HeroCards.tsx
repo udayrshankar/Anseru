@@ -38,7 +38,7 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
     if (isPaused) return;
     const interval = setInterval(() => {
       onIndexChange((activeIndex + 1) % CARDS.length);
-    }, 4000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [activeIndex, isPaused, onIndexChange]);
 

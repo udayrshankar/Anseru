@@ -17,6 +17,17 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      <div className="mb-15 text-center max-w-2xl mx-auto">
+              <p className="text-sm text-[#2A1638]/60 mb-3 uppercase tracking-widest font-medium">
+                Proven Results
+              </p>
+              <h2 className="text-[#2A1638] text-3xl md:text-5xl font-medium tracking-tight mb-4">
+                Our Agentic Products
+              </h2>
+              <p className="text-lg text-[#483953]/70">
+                Transform your RFP and security workflows with agentic AI that delivers speed, accuracy, and trust at scale.
+              </p>
+            </div>
       <div className="max-w-[1400px] mx-auto relative">
         
        {/* Card Container - Enhanced Glassmorphism & Depth */}
@@ -67,7 +78,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center h-full"
              >
                {/* Left Side: Content */}
-               <div className="lg:col-span-4 space-y-3">
+               <div className="lg:col-span-6 space-y-3">
                   <div className="space-y-1">
                      <div className="inline-flex items-center gap-2 py-1 rounded-full bg-purple-50 border border-purple-100 w-fit">
                         <span className="relative flex h-2 w-2">
@@ -122,7 +133,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                </div>
 
                {/* Right Side: Media - Animation Carousel */}
-               <div className="lg:col-span-8 relative mt-5 aspect-[16/10] rounded-[24px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.15)] border-[6px] border-white/50 bg-gray-900 group transition-all duration-500 hover:shadow-[0_40px_90px_rgba(0,0,0,0.18)]">
+               <div className="lg:col-span-6 relative mt-5 aspect-[12/10] rounded-[24px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.15)] border-[6px] border-white/50 bg-black group transition-all duration-500 hover:shadow-[0_40px_90px_rgba(0,0,0,0.18)]">
                   <AnimationCarousel activeTab={activeTab} />
                </div>
 
