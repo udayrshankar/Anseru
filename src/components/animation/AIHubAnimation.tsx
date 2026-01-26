@@ -24,7 +24,7 @@ const rightApps = [
 
 /* --- 2. MAIN COMPONENT --- */
 const AIHubAnimation = React.memo(() => {
-  const containerWidth = 900;
+  const containerWidth = 1200;
   const containerHeight = 450;
   const centerX = containerWidth / 2;
   const centerY = containerHeight / 2;

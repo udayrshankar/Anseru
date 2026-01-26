@@ -1,5 +1,4 @@
-import Background from "../Background";
-import HeroCards from "./HeroCards";
+
 import SmartCTA from "../SmartCTA";
 
 interface HeroSectionProps {
@@ -8,13 +7,13 @@ interface HeroSectionProps {
   isPaused: boolean;
 }
 
-export default function HeroSection({ activeIndex, onIndexChange, isPaused }: HeroSectionProps) {
+export default function HeroSection(_: HeroSectionProps) {
   return (
-    <section className="relative pt-4 pb-12 w-full overflow-hidden">
+    <section className="relative  w-full overflow-hidden">
       <div className="relative mx-auto w-full">
-        <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[40px] overflow-hidden">
+        {/* <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[40px] overflow-hidden">
           <Background />
-        </div>
+        </div> */}
 
         <div className="relative z-10 flex flex-col items-center text-center pt-32 md:pt-50 overflow-hidden px-6 xl:px-[120px]">
           {/* Main Title -> H1 */}
@@ -29,13 +28,13 @@ export default function HeroSection({ activeIndex, onIndexChange, isPaused }: He
             Automate the grunt work, keep humans in loop, and close deals faster without compromising trust.
           </p>
 
-          <div className="mb-8  ">
+          <div className="">
             <SmartCTA />
           </div>
 
-          <div className="-translate-y-5">
+          {/* <div className="-translate-y-5">
             <HeroCards activeIndex={activeIndex} onIndexChange={onIndexChange} isPaused={isPaused} />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

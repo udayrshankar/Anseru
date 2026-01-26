@@ -4,7 +4,6 @@ import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat, Link, Clock, Tren
 import AIHubAnimation from "./animation/AIHubAnimation";
 import { NewConnectAnimation, NewUploadAnimation } from "./animation/NewConnectUploadAnimations";
 import { NewGenerateAnimation, NewReviewAnimation } from "./animation/NewGenerateReviewAnimations";
-import bgImage from "../assets/bg2.png";
 import SmartCTA from "./SmartCTA";
 
 // --- DATA ---
@@ -275,9 +274,9 @@ export default function Workflow() {
   });
 
   return (
-    <div className="relative pb-5 overflow-hidden bg-white mt-5">
+    <div className="relative pb-5 overflow-hidden ">
       {/* BACKGROUND */}
-      <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
         <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
           <div className="flex flex-col w-full">
              {[...Array(6)].map((_, i) => (
@@ -291,12 +290,12 @@ export default function Workflow() {
              ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="relative z-10 max-w-7xl mx-auto pt-8">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center relative z-20 mt-8">
-          <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
+          <p className="font-onest text-lg font-medium text-black tracking-wide uppercase opacity-70">
             we are building the next generation of
           </p>
           <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
@@ -304,7 +303,7 @@ export default function Workflow() {
           </h2>
         </div>
 
-        <div className="hidden lg:block pb-0 flex justify-center relative z-20 -mt-24">
+        <div className="hidden lg:block pb-0 flex justify-center relative z-20 -mt-40">
           <AIHubAnimation />
         </div>
 
@@ -393,7 +392,7 @@ const FeatureRow = ({
         ) : (
              // ODD (1): Text on Right
              <div className="relative flex flex-col items-start">
-                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-[#181818"}`}>
+                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-[#181818]"}`}>
                     {step.title}
                 </h3>
                 <p className="text-lg text-[#483953] leading-relaxed mb-4">

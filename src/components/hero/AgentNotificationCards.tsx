@@ -142,13 +142,13 @@ export const AgentCard: React.FC<CardProps> = React.memo(({
                     key={i}
                     className={cn(
                       "absolute top-1/2 left-1/2 w-[100px] h-[100px] rounded-full border will-change-transform",
-                      colorTheme === 'purple' ? "border-purple-500/40" : 
-                      colorTheme === 'blue' ? "border-blue-500/40" :
-                      colorTheme === 'green' ? "border-emerald-500/40" : "border-orange-500/40"
+                      colorTheme === 'purple' ? "border-purple-500/80" : 
+                      colorTheme === 'blue' ? "border-blue-500/80" :
+                      colorTheme === 'green' ? "border-emerald-500/80" : "border-orange-500/80"
                     )}
                     initial={{ x: "-50%", y: "-50%", opacity: 0, scale: 0.8 }}
                     animate={{ 
-                      opacity: [0, 0.5, 0],
+                      opacity: [0, 0.8, 0],
                       scale: [0.8, 2.2],
                       borderWidth: ["1px", "0px"]
                     }}
@@ -162,25 +162,6 @@ export const AgentCard: React.FC<CardProps> = React.memo(({
                   />
                 ))}
                 
-                {/* Core Glow Pulse */}
-                 <motion.div
-                    className={cn(
-                      "absolute top-1/2 left-1/2 w-[110px] h-[110px] rounded-full opacity-20 blur-xl will-change-transform",
-                      colorTheme === 'purple' ? "bg-purple-500" : 
-                      colorTheme === 'blue' ? "bg-blue-500" :
-                      colorTheme === 'green' ? "bg-emerald-500" : "bg-orange-500"
-                    )}
-                     animate={{ 
-                       x: "-50%", y: "-50%",
-                       opacity: [0.1, 0.3, 0.1],
-                       scale: [0.9, 1.1, 0.9] 
-                     }}
-                     transition={{
-                       duration: 4,
-                       repeat: Infinity,
-                       ease: "easeInOut"
-                     }}
-                 />
 
                  <AIOrb className="w-full h-full relative z-10" theme={colorTheme === 'purple' ? 'purple' : 'blue'} />
              </div>

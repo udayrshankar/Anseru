@@ -10,9 +10,10 @@ import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 import FAQ from "../components/sections/FAQ";
+import bgImage from "../assets/bg2.png";
 
 // Control the vertical spacing between sections here
-const SECTION_GAP = "gap-5";
+const SECTION_GAP = "gap-2";
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -34,13 +35,30 @@ export default function Home() {
 
       {/* Hero */}
       <main className={`flex flex-col ${SECTION_GAP}`}>
-        <HeroSection 
-          activeIndex={activeIndex} 
-          onIndexChange={setActiveIndex} 
-          isPaused={isPaused} 
-        />
-
-        {/* AI Strategy Tabs */}
+        <div className="relative">
+          <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
+          <div className="flex flex-col w-full">
+             {[...Array(6)].map((_, i) => (
+                <img 
+                  key={i}
+                  src={bgImage} 
+                  alt="" 
+                  className="w-full h-auto select-none pointer-events-none -mt-[18px]"
+                  style={{ transform: i % 2 !== 0 ? 'scaleY(-1)' : 'none' }}
+                />
+             ))}
+          </div>
+        </div>
+      </div>
+          <HeroSection
+            activeIndex={activeIndex}
+            onIndexChange={setActiveIndex}
+            isPaused={isPaused}
+          />
+          {/* AI Strategy Tabs */}
+          <Workflow />
+        </div>
         <AITabs 
           activeTab={activeTab} 
           onTabChange={handleTabChange} 
@@ -54,7 +72,6 @@ export default function Home() {
         {/* <FeaturesGrid /> */}
 
         {/* AI-Drafted Responses */}
-        <Workflow />
 
         {/* Why Anseru */}
         <WhyAnseru />
