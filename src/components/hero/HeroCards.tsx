@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
 import { Shield, FileText } from "lucide-react";
 import { AgentCard, type ColorTheme } from "./AgentNotificationCards";
@@ -28,7 +29,10 @@ interface HeroCardsProps {
   isPaused: boolean;
 }
 
+
+
 export default function HeroCards({ activeIndex, onIndexChange, isPaused }: HeroCardsProps) {
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (isPaused) return;
@@ -52,23 +56,23 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
       filter: "blur(0px)",
       transition: { 
         type: "spring", 
-        stiffness: 180, 
+        stiffness: 100, // Reduced from 180 for softer feel
         damping: 20,
-        mass: 1
+        mass: 1.2 // Added mass for momentum
       },
     },
     back: {
       zIndex: 1,
-      opacity: 0.5, 
-      scale: 0.9,
-      y: 40, // Slips down/behind
+      opacity: 0.4, // Reduced from 0.5 for more focus on front
+      scale: 0.92, // Slight increase from 0.9
+      y: 30, // Reduced slip distance (was 40)
       rotateX: 0, 
-      filter: "blur(4px)", // Quantum blur effect
+      filter: "blur(2px)", // Reduced blur for cleaner look
       transition: { 
         type: "spring", 
-        stiffness: 180, 
+        stiffness: 100, 
         damping: 20,
-        mass: 1
+        mass: 1.2
       },
     },
   };
@@ -85,8 +89,7 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
             initial="back"
             animate={position}
             onClick={() => {
-              onIndexChange(index);
-              document.getElementById('ai-tabs')?.scrollIntoView({ behavior: 'smooth' });
+              navigate('/product');
             }}
             className="absolute cursor-pointer w-[320px] md:w-[500px] h-[400px]"
             style={{ 

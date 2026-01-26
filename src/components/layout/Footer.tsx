@@ -29,7 +29,7 @@ Your edge in RFPs & Security Reviews. Powered by agentic AI to build trust <br/>
           {[
             ["Product", ["Features", "Security", "Integrations", "Pricing"]],
             ["Company", ["About", "Careers", "Blog", "Contact"]],
-            ["Resources", ["Help Center", "API Docs", "ROI Calculator", "Status"]],
+            ["Case Studies", ["Help Center", "API Docs", "ROI Calculator", "Status"]],
           ].map(([title, items]) => (
             <div key={title as string} className="lg:col-span-2">
               <h4 className="text-base font-semibold text-[#2A1638] mb-6 uppercase tracking-wider opacity-80">

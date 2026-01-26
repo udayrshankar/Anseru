@@ -118,48 +118,68 @@ export const AgentCard: React.FC<CardProps> = ({
             <Icon size={24} className={theme.iconColor} strokeWidth={2} />
           </div>
 
-          <div className={cn(
+          <motion.div 
+            className={cn(
             "w-10 h-10 rounded-full flex items-center justify-center opacity-100 translate-x-0 bg-white shadow-md text-gray-900"
-          )}>
+          )}
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <ArrowUpRight size={18} />
-          </div>
+          </motion.div>
         </div>
         {/* Center: AI Orb Visual */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
              <div className="relative w-[180px] h-[180px] -translate-y-8">
                  {/* Signal Animation - Centered on Orb */}
+                {/* Modern Radar/Wave Animation */}
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className={cn(
+                      "absolute top-1/2 left-1/2 w-[100px] h-[100px] rounded-full border will-change-transform",
+                      colorTheme === 'purple' ? "border-purple-500/40" : 
+                      colorTheme === 'blue' ? "border-blue-500/40" :
+                      colorTheme === 'green' ? "border-emerald-500/40" : "border-orange-500/40"
+                    )}
+                    initial={{ x: "-50%", y: "-50%", opacity: 0, scale: 0.8 }}
+                    animate={{ 
+                      opacity: [0, 0.5, 0],
+                      scale: [0.8, 2.2],
+                      borderWidth: ["1px", "0px"]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                      delay: i * 0.8, // Staggered delay for wave effect
+                      times: [0, 0.2, 1] // Quick fade in, long fade out
+                    }}
+                  />
+                ))}
+                
+                {/* Core Glow Pulse */}
                  <motion.div
-                   className={cn(
-                     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-25 h-25 rounded-full border-2",
-                     colorTheme === 'purple' ? "border-purple-500" : 
-                     colorTheme === 'blue' ? "border-blue-500" :
-                     colorTheme === 'green' ? "border-emerald-500" : "border-orange-500"
-                   )}
-                   initial={{ opacity: 0.8, scale: 0.5 }}
-                   animate={{ opacity: 0, scale: 2 }}
-                   transition={{
-                       duration: 2,
+                    className={cn(
+                      "absolute top-1/2 left-1/2 w-[110px] h-[110px] rounded-full opacity-20 blur-xl will-change-transform",
+                      colorTheme === 'purple' ? "bg-purple-500" : 
+                      colorTheme === 'blue' ? "bg-blue-500" :
+                      colorTheme === 'green' ? "bg-emerald-500" : "bg-orange-500"
+                    )}
+                     animate={{ 
+                       x: "-50%", y: "-50%",
+                       opacity: [0.1, 0.3, 0.1],
+                       scale: [0.9, 1.1, 0.9] 
+                     }}
+                     transition={{
+                       duration: 4,
                        repeat: Infinity,
-                       ease: "easeOut"
-                   }}
-                 />
-                 
-                 {/* Second delayed ripple for richer effect */}
-                 <motion.div
-                   className={cn(
-                     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border",
-                     colorTheme === 'purple' ? "border-purple-400/50" : 
-                     colorTheme === 'blue' ? "border-blue-400/50" :
-                     colorTheme === 'green' ? "border-emerald-400/50" : "border-orange-400/50"
-                   )}
-                   initial={{ opacity: 0.6, scale: 0.5 }}
-                   animate={{ opacity: 0, scale: 2 }}
-                   transition={{
-                       duration: 2,
-                       repeat: Infinity,
-                       ease: "easeOut",
-                       delay: 0.5
-                   }}
+                       ease: "easeInOut"
+                     }}
                  />
 
                  <AIOrb className="w-full h-full relative z-10" theme={colorTheme === 'purple' ? 'purple' : 'blue'} />

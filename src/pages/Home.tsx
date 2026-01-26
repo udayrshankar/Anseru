@@ -9,6 +9,7 @@ import WhyAnseru from "../components/WhyAnseru";
 import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
+import FAQ from "../components/sections/FAQ";
 
 // Control the vertical spacing between sections here
 const SECTION_GAP = "gap-5";
@@ -60,6 +61,9 @@ export default function Home() {
 
         {/* Testimonials */}
         <Testimonials />
+
+        {/* FAQ - Added per user request */}
+        <FAQ />
 
         {/* Call to Action */}
         <CTASection />

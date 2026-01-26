@@ -13,13 +13,19 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
-          {["HOME", "PRODUCT", "FEATURES", "PRICING","RESOURCES"].map((item) => (
+          {[
+            { name: "HOME", path: "/home" },
+            { name: "PRODUCT", path: "/product" },
+            { name: "FEATURES", path: "/features" },
+            { name: "PRICING", path: "/pricing" },
+            { name: "CASE STUDIES", path: "/coming-soon" },
+          ].map((item) => (
             <a
-              key={item}
-              href={"/"+item.toLowerCase()}
+              key={item.name}
+              href={item.path}
               className="text-smalls text-[#090909] hover:opacity-70 uppercase"
             >
-              {item}
+              {item.name}
             </a>
           ))}
         </div>
