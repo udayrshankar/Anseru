@@ -142,7 +142,7 @@ const ResponsivePipe = ({
 
   // Path Construction: Orthogonal with Rounded Corners
   // Start: Top Center (above) -> Vertical Down -> Turn Right
-  let path = `M ${centerX} -200`;
+  let path = `M ${centerX} -140`;
   
   // 0. Drop down and turn Right
   path += ` L ${centerX} -${radius}`;
@@ -310,7 +310,7 @@ export default function Workflow() {
         <div className="relative">
           <div
             ref={containerRef}
-            className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10"
+            className="max-w-[1400px] mx-auto px-6 xl:px-[120px] relative z-10 -mt-20"
           >
             {/* PIPE BACKGROUND (Snake Path) */}
             <ResponsivePipe
@@ -356,7 +356,7 @@ const FeatureRow = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-20% 0px -20% 0px" }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start relative"
     >
       {/* LEFT COLUMN */}
       <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:text-left lg:pl-12 order-1 lg:order-1" : "relative order-2 lg:order-1"}`}>
