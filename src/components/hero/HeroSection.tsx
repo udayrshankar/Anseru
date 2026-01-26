@@ -15,7 +15,7 @@ export default function HeroSection(_: HeroSectionProps) {
           <Background />
         </div> */}
 
-        <div className="relative z-10 flex flex-col items-center text-center pt-32 md:pt-50 overflow-hidden px-6 xl:px-[120px]">
+        <div className="relative z-10 flex flex-col items-center text-center pt-32 md:pt-40 overflow-hidden px-6 xl:px-[120px]">
           {/* Main Title -> H1 */}
           <h1 className="max-w-6xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
             Win deals faster with AI agents for <br/>
