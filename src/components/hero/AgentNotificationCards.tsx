@@ -56,7 +56,7 @@ const THEMES: Record<ColorTheme, {
   },
 };
 
-export const AgentCard: React.FC<CardProps> = ({ 
+export const AgentCard: React.FC<CardProps> = React.memo(({ 
   title, 
   description, 
   icon: Icon, 
@@ -207,4 +207,4 @@ export const AgentCard: React.FC<CardProps> = ({
       </div>
     </motion.div>
   );
-};
+});

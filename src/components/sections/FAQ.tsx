@@ -8,7 +8,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const TimerBorder = ({ duration = 4000 }: { duration?: number }) => {
+const TimerBorder = ({ duration }: { duration: number }) => {
   const gradientId = useId();
   
   return (
@@ -31,7 +31,7 @@ const TimerBorder = ({ duration = 4000 }: { duration?: number }) => {
           strokeWidth="2"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: duration / 1000, ease: "easeOut" }}
         />
       </svg>
     </div>

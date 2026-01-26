@@ -1,26 +1,30 @@
 // src/App.tsx
+import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Features from './pages/Features';
-import Products from './pages/Products';
-import Pricing from './pages/Pricing';
-import ComingSoon from './pages/ComingSoon';
+
+// Lazy load pages for better initial load performance
+const Home = lazy(() => import('./pages/Home'));
+const Features = lazy(() => import('./pages/Features'));
+const Products = lazy(() => import('./pages/Products'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 
 function App() {
   return (
     <div className="app-container">
-      {/* Navbar typically goes here so it stays on every page */}
-      
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/product" element={<Products />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/coming-soon" element={<ComingSoon />} />
-        {/* Catch-all for 404 Not Found */}
-        <Route path="*" element={<div>404 Page Not Found</div>} />
-      </Routes>
+      {/* Suspense wrapper for lazy loaded components */}
+      <Suspense fallback={<div className="min-h-screen bg-white" />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/product" element={<Products />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
+          {/* Catch-all for 404 Not Found */}
+          <Route path="*" element={<div>404 Page Not Found</div>} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }

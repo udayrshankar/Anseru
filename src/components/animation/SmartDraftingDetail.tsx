@@ -1,8 +1,9 @@
 
+import React from "react";
 import { motion } from "framer-motion";
 import { Bot, FileText, Sparkles, User, CheckCircle2 } from "lucide-react";
 
-export default function SmartDraftingDetail() {
+const SmartDraftingDetail = React.memo(() => {
   return (
     <div className="relative w-full h-full min-h-[400px] flex items-center justify-center bg-transparent overflow-hidden">
       {/* --- Ambient Background Glow --- */}
@@ -16,7 +17,7 @@ export default function SmartDraftingDetail() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 w-[90%] max-w-[420px] bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 overflow-hidden"
+        className="relative z-10 w-[90%] max-w-[420px] bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/50 overflow-hidden will-change-transform"
       >
         {/* Header */}
         <div className="bg-gray-50/80 border-b border-gray-100 p-4 flex items-center gap-3">
@@ -98,11 +99,13 @@ export default function SmartDraftingDetail() {
       <motion.div 
         animate={{ y: [-10, 10, -10] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 right-10 w-16 h-16 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg flex items-center justify-center z-0 rotate-12"
+        className="absolute top-10 right-10 w-16 h-16 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg flex items-center justify-center z-0 rotate-12 will-change-transform"
       >
          <FileText className="w-8 h-8 text-purple-600/50" />
       </motion.div>
 
     </div>
   );
-}
+});
+
+export default SmartDraftingDetail;

@@ -175,7 +175,7 @@ const Testimonials = () => {
                              </div>
 
                              <div className="flex items-center gap-4 mt-6">
-                                 <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full object-cover border border-gray-100" />
+                                 <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full object-cover border border-gray-100" loading="lazy" />
                                  <div>
                                      <h4 className="font-bold text-gray-900">{t.author}</h4>
                                      <p className="text-sm text-gray-500">{t.role}, {t.company}</p>

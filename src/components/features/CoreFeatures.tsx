@@ -163,19 +163,19 @@ const FeatureBackground = ({ index }: { index: number }) => {
       );
     case 2: // Evidence (Document/Check)
       return (
-        <img src={openBook} alt="" className={commonProps} />
+        <img src={openBook} alt="" className={commonProps} loading="lazy" />
       );
     case 3: // Health/Risk (Pulse/Shield)
       return (
-        <img src={health} alt="" className={commonProps} />
+        <img src={health} alt="" className={commonProps} loading="lazy" />
       );
     case 4: // Integrations (Circuit/Connect)
       return (
-        <img src={connect} alt="" className={commonProps} />
+        <img src={connect} alt="" className={commonProps} loading="lazy" />
       );
     case 5: // Analytics (Charts)
       return (
-        <img src={chart} alt="" className={commonProps} />
+        <img src={chart} alt="" className={commonProps} loading="lazy" />
       );
     default:
       return null;

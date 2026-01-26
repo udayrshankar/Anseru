@@ -1,8 +1,9 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Database,  FileText, CheckCircle2, Link2, Globe, MessageSquare } from "lucide-react";
 
 // --- 1. THE NEURAL HUB (Connect) ---
-export const NewConnectAnimation = () => {
+export const NewConnectAnimation = React.memo(() => {
     return (
         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-50/50 to-emerald-50/50 relative overflow-hidden">
             {/* Noise Texture */}
@@ -21,7 +22,7 @@ export const NewConnectAnimation = () => {
                 {/* Central Hub (Anseru Core) */}
                 <div className="relative z-20">
                     <motion.div 
-                        className="w-20 h-20 bg-white rounded-2xl shadow-[0_0_40px_rgba(168,85,247,0.3)] flex items-center justify-center border border-purple-100 relative z-20"
+                        className="w-20 h-20 bg-white rounded-2xl shadow-[0_0_40px_rgba(168,85,247,0.3)] flex items-center justify-center border border-purple-100 relative z-20 will-change-transform"
                         animate={{ 
                             boxShadow: ["0 0 40px rgba(168,85,247,0.3)", "0 0 60px rgba(168,85,247,0.5)", "0 0 40px rgba(168,85,247,0.3)"],
                             scale: [1, 1.05, 1]
@@ -32,7 +33,7 @@ export const NewConnectAnimation = () => {
                          
                          {/* Spinning Rings */}
                          <motion.div 
-                            className="absolute inset-[-6px] rounded-[22px] border border-purple-200/60 border-dashed"
+                            className="absolute inset-[-6px] rounded-[22px] border border-purple-200/60 border-dashed will-change-transform"
                             animate={{ rotate: 360 }}
                             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                          />
@@ -48,7 +49,7 @@ export const NewConnectAnimation = () => {
             </div>
         </div>
     )
-}
+});
 
 const IntegrationNode = ({ icon: Icon, angle, color, bg, delay }: { icon: any, angle: number, color: string, bg: string, delay: number }) => {
     const distance = 100; // Distance from center
@@ -77,7 +78,7 @@ const IntegrationNode = ({ icon: Icon, angle, color, bg, delay }: { icon: any, a
 
             {/* Icon Node */}
             <motion.div 
-                className="absolute top-1/2 left-1/2 z-10"
+                className="absolute top-1/2 left-1/2 z-10 will-change-transform"
                 initial={{ x, y }} 
                 animate={{ 
                     x: x, 
@@ -93,11 +94,11 @@ const IntegrationNode = ({ icon: Icon, angle, color, bg, delay }: { icon: any, a
     )
 }
 
-import React from "react"; // Added to support Fragment usage if needed, though <> is usually sufficient in modern config.
+
 
 
 // --- 2. THE DIGITAL SCANNER (Upload) ---
-export const NewUploadAnimation = () => {
+export const NewUploadAnimation = React.memo(() => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-purple-50/20 relative overflow-hidden">
              {/* Noise Texture */}
@@ -109,7 +110,7 @@ export const NewUploadAnimation = () => {
                  
                  {/* The Document - 3D Tilt */}
                  <motion.div 
-                    className="w-full h-full bg-white rounded-xl shadow-xl border border-slate-200 p-6 flex flex-col gap-3 relative overflow-hidden"
+                    className="w-full h-full bg-white rounded-xl shadow-xl border border-slate-200 p-6 flex flex-col gap-3 relative overflow-hidden will-change-transform"
                     animate={{ rotateX: [10, 0, 10] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                  >
@@ -144,7 +145,7 @@ export const NewUploadAnimation = () => {
                  
                  {/* The Laser Scanner */}
                  <motion.div
-                    className="absolute left-[-20%] right-[-20%] h-1 bg-purple-500 shadow-[0_0_20px_#a855f7] z-20"
+                    className="absolute left-[-20%] right-[-20%] h-1 bg-purple-500 shadow-[0_0_20px_#a855f7] z-20 will-change-transform"
                     initial={{ top: 0, opacity: 0 }}
                     animate={{ top: ["0%", "100%"], opacity: [0, 1, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity, repeatDelay: 1, ease: "linear" }}
@@ -167,4 +168,4 @@ export const NewUploadAnimation = () => {
 
         </div>
     )
-}
+});

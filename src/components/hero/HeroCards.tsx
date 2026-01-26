@@ -91,7 +91,7 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
             onClick={() => {
               navigate('/product');
             }}
-            className="absolute cursor-pointer w-[320px] md:w-[500px] h-[400px]"
+            className="absolute cursor-pointer w-[320px] md:w-[500px] h-[400px] will-change-transform"
             style={{ 
               transformOrigin: "bottom center",
               perspective: "2000px" // Adds depth to the rotation
