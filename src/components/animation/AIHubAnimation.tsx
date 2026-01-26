@@ -178,8 +178,13 @@ const AIHubAnimation = React.memo(() => {
             ANSERU
           </h1>
           <div className="absolute -bottom-3 flex items-center gap-2 px-3 py-1 bg-white/80 backdrop-blur shadow-sm rounded-full border border-gray-100">
-             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-             <span className="text-[10px] uppercase tracking-wider font-semibold text-gray-500 font-sans">System Active</span>
+             <motion.div 
+               className="w-2 h-2 rounded-full bg-green-500"
+               style={{ boxShadow: "0 0 10px 2px rgba(34, 197, 94, 0.6), 0 0 20px 4px rgba(34, 197, 94, 0.4)" }}
+               animate={{ opacity: [0.4, 1, 0.4], scale: [0.9, 1.2, 0.9] }}
+               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+             />
+             <span className="text-[10px] uppercase tracking-wider font-semibold text-gray-500 font-sans">Agents Active</span>
           </div>
         </motion.div>
       </div>
