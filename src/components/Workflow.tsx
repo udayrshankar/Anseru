@@ -299,7 +299,7 @@ export default function Workflow() {
             we are building the next generation of
           </p>
           <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-            Deal Infrastructure
+            Deal Infrastructure<sup>&trade;</sup>
           </h2>
         </div>
 

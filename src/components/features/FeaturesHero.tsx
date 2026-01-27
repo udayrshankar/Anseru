@@ -13,7 +13,7 @@ const FeaturesHero = () => {
 
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20">
         <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
-          Deal Infrastructure for <br className="hidden md:block"/>
+          Deal Infrastructure<sup>&trade;</sup> for <br className="hidden md:block"/>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
             Enterprise Sales
           </span>
