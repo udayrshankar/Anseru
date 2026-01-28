@@ -51,28 +51,22 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
       zIndex: 10,
       opacity: 1,
       scale: 1,
-      y: 0,
-      rotateX: 0,
-      filter: "blur(0px)",
+      display: "block",
       transition: { 
-        type: "spring", 
-        stiffness: 100, // Reduced from 180 for softer feel
-        damping: 20,
-        mass: 1.2 // Added mass for momentum
+        duration: 0.5,
+        ease: "easeInOut"
       },
     },
     back: {
       zIndex: 1,
-      opacity: 0.4, // Reduced from 0.5 for more focus on front
-      scale: 0.92, // Slight increase from 0.9
-      y: 30, // Reduced slip distance (was 40)
-      rotateX: 0, 
-      filter: "blur(2px)", // Reduced blur for cleaner look
+      opacity: 0,
+      scale: 0.95,
+      transitionEnd: {
+        display: "none"
+      },
       transition: { 
-        type: "spring", 
-        stiffness: 100, 
-        damping: 20,
-        mass: 1.2
+        duration: 0.5,
+        ease: "easeInOut"
       },
     },
   };

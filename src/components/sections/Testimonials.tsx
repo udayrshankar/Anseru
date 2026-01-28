@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, Play, ChevronLeft, ChevronRight } from "lucide-react";
 
 const TESTIMONIALS = [
   {
@@ -9,7 +9,8 @@ const TESTIMONIALS = [
     author: "Sarah Jenkins",
     role: "VP of Sales Engineering",
     company: "CloudScale",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d"
+    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+    video: "https://www.youtube.com/watch?v=J98pT19u84Y" // Example tech/office stock video on YouTube
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ const TESTIMONIALS = [
     author: "David Chen",
     role: "Chief Information Security Officer",
     company: "FinTech Global",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-man-working-on-his-laptop-308-large.mp4"
   },
   {
     id: 3,
@@ -25,7 +27,8 @@ const TESTIMONIALS = [
     author: "Elena Rodriguez",
     role: "Director of Compliance",
     company: "HealthVault",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026302d"
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026302d",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-laptop-at-home-office-268-large.mp4"
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ const TESTIMONIALS = [
     author: "Mark Thompson",
     role: "Head of Revenue Operations",
     company: "SaaSify",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026708c"
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026708c",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-group-of-people-working-together-in-an-office-4896-large.mp4"
   },
   {
     id: 5,
@@ -41,162 +45,152 @@ const TESTIMONIALS = [
     author: "Jessica Lee",
     role: "Sales Enablement Lead",
     company: "TechFlow",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702f"
+    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702f",
+    video: "https://assets.mixkit.co/videos/preview/mixkit-man-typing-on-laptop-keyboard-4893-large.mp4"
   }
 ];
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const duration = 5000; // 5 seconds per slide
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, duration);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Calculate the position for *every* card to ensure smooth animating
-  // We want to render all of them, but hidden ones should be positioned logically
-  // so they can slide in from the correct side.
-  
-  const getCardStyle = (index: number) => {
-      // Calculate circular distance from active index
-      // e.g. active=0. index=4 (length 5). Distance should be -1 (Left), not +4.
-      const len = TESTIMONIALS.length;
-      
-      // We want a result between -floor(len/2) and +floor(len/2)
-      let diff = (index - activeIndex) % len;
-      if (diff > len / 2) diff -= len;
-      if (diff < -len / 2) diff += len;
-
-      // Determine visual state based on diff
-      // 0 = Center
-      // -1 = Left
-      // 1 = Right
-      // Others = Hidden (but positioned behind for smooth entry)
-      
-      let x = "0%";
-      let scale = 1;
-      let opacity = 1;
-      let zIndex = 10;
-      let filter = "blur(0px)";
-
-      if (diff === 0) {
-          x = "0%";
-          scale = 1;
-          opacity = 1;
-          zIndex = 20;
-          filter = "blur(0px)";
-      } else if (diff === -1) {
-          x = "-65%"; // Slightly more spacing
-          scale = 0.8;
-          opacity = 0.4;
-          zIndex = 10;
-          filter = "blur(0px)";
-      } else if (diff === 1) {
-          x = "65%";
-          scale = 0.8;
-          opacity = 0.4;
-          zIndex = 10;
-          filter = "blur(0px)";
-      } else {
-          // Cards further away.
-          // Position them behind the center/side cards so they can "flow" through
-          // If diff is -2, it should be way left. If +2, way right.
-          x = diff < 0 ? "-120%" : "120%";
-          scale = 0.6;
-          opacity = 0;
-          zIndex = 0;
-      }
-
-      return { x, scale, opacity, zIndex, filter };
+  // Helper to extract YouTube ID
+  const getYouTubeId = (url: string) => {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
   };
 
+  const isYouTube = (url: string) => !!getYouTubeId(url);
+
+  const nextSlide = () => setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
+  const prevSlide = () => setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+
   return (
-    <section className="bg-white overflow-hidden mt-12 mb-12">
-      <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px] text-center">
-        <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
-          Trusted by fast-growing enterprise teams
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
-          See how companies are automating their trust and sales workflows.
-        </p>
-      </div>
-
-      <div className="relative h-[400px] flex items-center justify-center mt-5">
-        <div className="relative w-full max-w-5xl h-full flex items-center justify-center">
-             <AnimatePresence initial={false} mode="popLayout">
-                 {TESTIMONIALS.map((t, i) => {
-                     const style = getCardStyle(i);
-                     
-                     // Optimization: Only render items relevant to the transition (visible + immediate neighbors)
-                     // But for perfect smoothness on wraps, rendering all with computed positions is safer usually.
-                     // Let's render all and let Framer handle the shared layout animations.
-                     
-                     return (
-                         <motion.div
-                            key={t.id}
-                            initial={false} // Let it interpolate from previous state
-                            animate={style}
-                            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }} // Custom bezier for premium feel
-                            className="absolute w-[90%] md:w-[600px] bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col justify-between h-[320px]"
-                         >
-                             {/* Timer Border for Active Card (only render if Active) */}
-                             {i === activeIndex && (
-                                 <svg className="absolute inset-0 w-full h-full pointer-events-none rounded-3xl overflow-visible">
-                                     <rect 
-                                        x="0" y="0" width="100%" height="100%" 
-                                        rx="24" ry="24" 
-                                        fill="none" 
-                                        stroke="#E8D4F5" 
-                                        strokeWidth="4" 
-                                        className="opacity-30"
-                                     />
-                                     <motion.rect 
-                                        x="0" y="0" width="100%" height="100%" 
-                                        rx="24" ry="24" 
-                                        fill="none" 
-                                        stroke="#C084FC" 
-                                        strokeWidth="4"
-                                        initial={{ pathLength: 0 }}
-                                        animate={{ pathLength: 1 }}
-                                        transition={{ duration: duration / 1000, ease: "linear" }}
-                                        key={activeIndex} 
-                                     />
-                                 </svg>
-                             )}
-
-                             <div className="relative">
-                                 <Quote className="w-10 h-10 text-purple-100 absolute -top-2 -left-2 -z-10" fill="currentColor" />
-                                 <p className="text-xl md:text-2xl font-medium text-[#2A1638] leading-relaxed relative z-10">
-                                     "{t.quote}"
-                                 </p>
-                             </div>
-
-                             <div className="flex items-center gap-4 mt-6">
-                                 <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full object-cover border border-gray-100" loading="lazy" />
-                                 <div>
-                                     <h4 className="font-bold text-gray-900">{t.author}</h4>
-                                     <p className="text-sm text-gray-500">{t.role}, {t.company}</p>
-                                 </div>
-                             </div>
-                         </motion.div>
-                     );
-                 })}
-             </AnimatePresence>
+    <section className="bg-white scale-80 overflow-hidden mt-0 mb-20 px-6 xl:px-[120px]">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
+            Trusted by fast-growing teams
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+            See how companies are automating their trust and sales workflows.
+          </p>
         </div>
-      </div>
 
-      {/* Manual Indicators */}
-      <div className="flex justify-center gap-3">
-          {TESTIMONIALS.map((_, i) => (
-              <button 
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${i === activeIndex ? "w-8 bg-[#C084FC]" : "w-2 bg-gray-200"}`}
-              />
-          ))}
+        <div 
+            className="relative bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden min-h-[500px]"
+        >
+            <div className="grid lg:grid-cols-2 h-full">
+                {/* Left Side: Content */}
+                <div className="p-10 md:p-16 flex flex-col justify-center relative bg-white z-10">
+                   <AnimatePresence mode="wait">
+                       <motion.div
+                           key={activeIndex}
+                           initial={{ opacity: 0, x: -20 }}
+                           animate={{ opacity: 1, x: 0 }}
+                           exit={{ opacity: 0, x: 20 }}
+                           transition={{ duration: 0.5 }}
+                           className="space-y-8"
+                       >
+                           <Quote className="w-12 h-12 text-[#C084FC] opacity-50" fill="currentColor" />
+                           <p className="text-xl md:text-3xl font-medium text-[#2A1638] leading-relaxed">
+                               "{TESTIMONIALS[activeIndex].quote}"
+                           </p>
+                           
+                           <div className="flex items-center gap-4 pt-4">
+                               <img 
+                                   src={TESTIMONIALS[activeIndex].avatar} 
+                                   alt={TESTIMONIALS[activeIndex].author} 
+                                   className="w-14 h-14 rounded-full object-cover border-2 border-gray-100" 
+                               />
+                               <div>
+                                   <h4 className="font-bold text-lg text-gray-900">{TESTIMONIALS[activeIndex].author}</h4>
+                                   <p className="text-gray-500">{TESTIMONIALS[activeIndex].role}, {TESTIMONIALS[activeIndex].company}</p>
+                               </div>
+                           </div>
+                       </motion.div>
+                   </AnimatePresence>
+                   
+                   {/* Navigation Controls */}
+                   <div className="flex items-center gap-6 mt-12">
+                       {/* Prev Button */}
+                       <button 
+                         onClick={prevSlide}
+                         className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+                       >
+                         <ChevronLeft className="w-5 h-5 text-gray-600" />
+                       </button>
+
+                       {/* Dots */}
+                       <div className="flex gap-3">
+                           {TESTIMONIALS.map((_, i) => (
+                               <button 
+                                   key={i}
+                                   onClick={() => setActiveIndex(i)}
+                                   className={`h-2.5 rounded-full transition-all duration-300 ${i === activeIndex ? "w-8 bg-[#C084FC]" : "w-2.5 bg-gray-200 hover:bg-gray-300"}`}
+                               />
+                           ))}
+                       </div>
+
+                       {/* Next Button */}
+                       <button 
+                         onClick={nextSlide}
+                         className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+                       >
+                         <ChevronRight className="w-5 h-5 text-gray-600" />
+                       </button>
+                   </div>
+                </div>
+
+                {/* Right Side: Video */}
+                <div className="relative h-[400px] lg:h-auto bg-black overflow-hidden group">
+                   <AnimatePresence mode="wait">
+                       <motion.div
+                           key={activeIndex}
+                           initial={{ opacity: 0 }}
+                           animate={{ opacity: 1 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.5 }}
+                           className="absolute inset-0 w-full h-full"
+                       >
+                           <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
+                           
+                           {isYouTube(TESTIMONIALS[activeIndex].video) ? (
+                               <iframe
+                                   src={`https://www.youtube.com/embed/${getYouTubeId(TESTIMONIALS[activeIndex].video)}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeId(TESTIMONIALS[activeIndex].video)}&controls=0&showinfo=0&rel=0`}
+                                   className="w-full h-full object-cover pointer-events-auto"
+                                   title="Testimonial Video"
+                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                   allowFullScreen
+                               />
+                           ) : (
+                               <video 
+                                   src={TESTIMONIALS[activeIndex].video}
+                                   className="w-full h-full object-cover"
+                                   autoPlay
+                                   muted
+                                   loop
+                                   playsInline
+                               />
+                           )}
+                           
+                           {/* Play Button Overlay (Optional - YouTube usually has its own, but we can keep for consistency or visual flair if needed. 
+                               For YouTube, clicking the overlay might not play the iframe unless we use JS API. 
+                               For now, we rely on iframe's own click/autoplay.
+                               I will hide this overlay for YouTube to avoid blocking the iframe interaction) 
+                           */}
+                           {!isYouTube(TESTIMONIALS[activeIndex].video) && (
+                               <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                                   <div className="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/50">
+                                       <Play className="w-6 h-6 md:w-8 md:h-8 text-white fill-white ml-1" />
+                                   </div>
+                               </div>
+                           )}
+                       </motion.div>
+                   </AnimatePresence>
+                </div>
+            </div>
+        </div>
       </div>
     </section>
   );

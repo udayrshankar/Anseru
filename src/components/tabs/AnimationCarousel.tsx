@@ -10,11 +10,11 @@ export default function AnimationCarousel({ activeTab: _activeTab }: AnimationCa
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full h-full relative group flex items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative group flex items-center justify-center">
       {/* Solid Brand-Aligned Background */}
       <div className="absolute inset-0 bg-[#FBF7FF]" />
       
-      {/* Hero Cards Component - Oscillates between KG and SUD independently */}
+      {/* Hero Cards Component - Independent Rotation */}
       <div className="w-full h-full flex items-center justify-center scale-90 md:scale-100">
          <HeroCards 
            activeIndex={activeIndex} 

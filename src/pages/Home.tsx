@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/layout/Header";
 import HeroSection from "../components/hero/HeroSection";
 import AITabs from "../components/tabs/AITabs";
@@ -27,6 +27,16 @@ export default function Home() {
     const index = tabKeys.indexOf(tab);
     if (index !== -1) setActiveIndex(index);
   };
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % tabKeys.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, tabKeys.length]);
 
   return (
     <div className="bg-white w-full -z-5">
@@ -59,11 +69,14 @@ export default function Home() {
           {/* AI Strategy Tabs */}
           <Workflow />
         </div>
-        <div className="mt-10">
+        <div 
+          className="mt-10"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <AITabs
             activeTab={activeTab}
             onTabChange={handleTabChange}
-            setPaused={setIsPaused}
           />
         </div>
 

@@ -6,16 +6,14 @@ import { tabContent, type TabKey } from "./TabContents";
 interface AITabsProps {
   activeTab: TabKey;
   onTabChange: (tab: TabKey) => void;
-  setPaused: (paused: boolean) => void;
+  // setPaused removed as it will be handled by parent
 }
 
-export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProps) {
+export default function AITabs({ activeTab, onTabChange }: AITabsProps) {
   return (
     <section 
       id="ai-tabs"
       className="w-full px-6 xl:px-[120px]"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <div className="mb-15 text-center max-w-2xl mx-auto">
               <p className="text-sm text-[#2A1638]/60 mb-3 uppercase tracking-widest font-medium">
@@ -31,7 +29,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
       <div className="max-w-[1400px] mx-auto relative">
         
        {/* Card Container - Enhanced Glassmorphism & Depth */}
-        <div className="relative rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.12),0_10px_40px_rgba(0,0,0,0.04)] p-8 md:p-10 min-h-[500px] border border-black/10 bg-white/40 backdrop-blur-xl">
+        <div className="relative rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.12),0_10px_40px_rgba(0,0,0,0.04)] p-8 md:p-10 min-h-[750px] border border-black/10 bg-white/40 backdrop-blur-xl">
           
           {/* Decorative Gradient Orbs - Animated & Softer */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-200/30 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow" />
@@ -46,7 +44,7 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                   <button
                       key={tab}
                       onClick={() => onTabChange(tab)}
-                      className={`relative px-20 py-3 rounded-full text-sm font-semibold transition-all duration-300 z-10 ${
+                      className={`relative px-32 py-3 rounded-full text-sm font-semibold transition-all duration-300 z-10 ${
                       activeTab === tab 
                           ? "text-white " 
                           : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"
@@ -133,8 +131,10 @@ export default function AITabs({ activeTab, onTabChange, setPaused }: AITabsProp
                </div>
 
                {/* Right Side: Media - Animation Carousel */}
-               <div className="lg:col-span-6 relative mt-5 aspect-[12/10] rounded-[24px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.15)] border-[6px] border-white/50 bg-black group transition-all duration-500 hover:shadow-[0_40px_90px_rgba(0,0,0,0.18)]">
-                  <AnimationCarousel activeTab={activeTab} />
+               <div className="lg:col-span-6 relative mt-5 aspect-[13/10] border-5 border-white rounded-[24px] overflow-hidden ">
+                  <div className="scale-115 -translate-y-12">
+                    <AnimationCarousel activeTab={activeTab} />
+                  </div>
                </div>
 
              </motion.div>
