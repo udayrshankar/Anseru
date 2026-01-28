@@ -1,13 +1,15 @@
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Header from "../components/layout/Header";
+
 import Slide1 from "../components/investors/Slide1";
 import Slide2 from "../components/investors/Slide2";
 import Slide3 from "../components/investors/Slide3";
 import Slide4 from "../components/investors/Slide4";
 import Slide5 from "../components/investors/Slide5";
+import Slide6 from "../components/investors/Slide6";
 
-const TOTAL_SLIDES = 5;
+const TOTAL_SLIDES = 6;
+const TABS = ["Vision", "Problem", "Solution", "Market", "Technology", "Contact"];
 
 export default function Investors() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -79,7 +81,10 @@ export default function Investors() {
 
   return (
     <div className="w-full h-screen overflow-hidden bg-white relative">
-      <Header />
+      {/* Custom Logo for Investors Page */}
+      <a href="/" className="fixed top-8 left-8 z-50 font-onest text-2xl font-bold text-[#090909] tracking-tight hover:opacity-70 transition-opacity">
+        ANSERU
+      </a>
       
       {/* Horizontal Scroll Container */}
       <main 
@@ -92,6 +97,7 @@ export default function Investors() {
         <div className="min-w-full"><Slide3 /></div>
         <div className="min-w-full"><Slide4 /></div>
         <div className="min-w-full"><Slide5 /></div>
+        <div className="min-w-full"><Slide6 /></div>
       </main>
 
       {/* Navigation Buttons */}
@@ -105,18 +111,7 @@ export default function Investors() {
               <ChevronLeft className="w-6 h-6 text-black" />
           </button>
 
-           {/* Dots */}
-           <div className="flex bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-gray-100 shadow-sm gap-3 pointer-events-auto">
-                {[...Array(TOTAL_SLIDES)].map((_, i) => (
-                    <button 
-                        key={i} 
-                        onClick={() => scrollToSlide(i)}
-                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentSlide ? 'bg-black scale-125' : 'bg-gray-300 hover:bg-gray-400'}`}
-                    />
-                ))}
-           </div>
-
-          {/* Right Arrow */}
+           {/* Right Arrow */}
           <button 
             onClick={() => scrollToSlide(currentSlide + 1)}
             disabled={currentSlide === TOTAL_SLIDES - 1}
@@ -124,6 +119,25 @@ export default function Investors() {
           >
               <ChevronRight className="w-6 h-6" />
           </button>
+      </div>
+
+      {/* Top Tabs Navigation */}
+      <div className="absolute top-5 left-0 right-0 z-40 flex justify-center pointer-events-none">
+          <div className="bg-white/80 backdrop-blur-md px-2 py-1.5 rounded-full border border-gray-200 shadow-sm flex gap-1 pointer-events-auto">
+                {TABS.map((tab, i) => (
+                    <button 
+                        key={i} 
+                        onClick={() => scrollToSlide(i)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                            i === currentSlide 
+                            ? 'bg-black text-white shadow-md' 
+                            : 'text-gray-500 hover:bg-gray-100 hover:text-black'
+                        }`}
+                    >
+                        {tab}
+                    </button>
+                ))}
+          </div>
       </div>
       
       <style>{`

@@ -29,7 +29,7 @@ export default function AITabs({ activeTab, onTabChange }: AITabsProps) {
       <div className="max-w-[1400px] mx-auto relative">
         
        {/* Card Container - Enhanced Glassmorphism & Depth */}
-        <div className="relative rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.12),0_10px_40px_rgba(0,0,0,0.04)] p-8 md:p-10 min-h-[750px] border border-black/10 bg-white/40 backdrop-blur-xl">
+        <div className="relative rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.12),0_10px_40px_rgba(0,0,0,0.04)] p-8 md:p-10 min-h-[650px] border border-black/10 bg-white/40 backdrop-blur-xl">
           
           {/* Decorative Gradient Orbs - Animated & Softer */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-200/30 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow" />

@@ -66,7 +66,7 @@ const Testimonials = () => {
   const prevSlide = () => setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   return (
-    <section className="bg-white scale-80 overflow-hidden mt-0 mb-20 px-6 xl:px-[120px]">
+    <section className="bg-white overflow-hidden mt-0 mb-0 px-6 xl:px-[120px]">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
@@ -78,7 +78,7 @@ const Testimonials = () => {
         </div>
 
         <div 
-            className="relative bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden min-h-[500px]"
+            className="relative scale-80 bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden"
         >
             <div className="grid lg:grid-cols-2 h-full">
                 {/* Left Side: Content */}
@@ -111,36 +111,7 @@ const Testimonials = () => {
                        </motion.div>
                    </AnimatePresence>
                    
-                   {/* Navigation Controls */}
-                   <div className="flex items-center gap-6 mt-12">
-                       {/* Prev Button */}
-                       <button 
-                         onClick={prevSlide}
-                         className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors"
-                       >
-                         <ChevronLeft className="w-5 h-5 text-gray-600" />
-                       </button>
-
-                       {/* Dots */}
-                       <div className="flex gap-3">
-                           {TESTIMONIALS.map((_, i) => (
-                               <button 
-                                   key={i}
-                                   onClick={() => setActiveIndex(i)}
-                                   className={`h-2.5 rounded-full transition-all duration-300 ${i === activeIndex ? "w-8 bg-[#C084FC]" : "w-2.5 bg-gray-200 hover:bg-gray-300"}`}
-                               />
-                           ))}
-                       </div>
-
-                       {/* Next Button */}
-                       <button 
-                         onClick={nextSlide}
-                         className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors"
-                       >
-                         <ChevronRight className="w-5 h-5 text-gray-600" />
-                       </button>
                    </div>
-                </div>
 
                 {/* Right Side: Video */}
                 <div className="relative h-[400px] lg:h-auto bg-black overflow-hidden group">
@@ -174,11 +145,7 @@ const Testimonials = () => {
                                />
                            )}
                            
-                           {/* Play Button Overlay (Optional - YouTube usually has its own, but we can keep for consistency or visual flair if needed. 
-                               For YouTube, clicking the overlay might not play the iframe unless we use JS API. 
-                               For now, we rely on iframe's own click/autoplay.
-                               I will hide this overlay for YouTube to avoid blocking the iframe interaction) 
-                           */}
+                           {/* Play Button Overlay */}
                            {!isYouTube(TESTIMONIALS[activeIndex].video) && (
                                <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                                    <div className="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/50">
@@ -190,6 +157,40 @@ const Testimonials = () => {
                    </AnimatePresence>
                 </div>
             </div>
+        </div>
+
+        {/* Navigation Controls - Below Card */}
+        <div className="flex items-center justify-center gap-8 mt-10">
+            {/* Prev Button */}
+            <button 
+                onClick={prevSlide}
+                className="p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-black/20 transition-all shadow-sm group"
+            >
+                <ChevronLeft className="w-6 h-6 text-gray-400 group-hover:text-black transition-colors" />
+            </button>
+
+            {/* Big Dots */}
+            <div className="flex gap-4">
+                {TESTIMONIALS.map((_, i) => (
+                    <button 
+                        key={i}
+                        onClick={() => setActiveIndex(i)}
+                        className={`rounded-full transition-all duration-300 border border-transparent ${
+                            i === activeIndex 
+                            ? "w-4 h-4 bg-[#C084FC] scale-125 shadow-md" 
+                            : "w-4 h-4 bg-gray-200 hover:bg-gray-300 hover:scale-110"
+                        }`}
+                    />
+                ))}
+            </div>
+
+            {/* Next Button */}
+            <button 
+                onClick={nextSlide}
+                className="p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:border-black/20 transition-all shadow-sm group"
+            >
+                <ChevronRight className="w-6 h-6 text-gray-400 group-hover:text-black transition-colors" />
+            </button>
         </div>
       </div>
     </section>
