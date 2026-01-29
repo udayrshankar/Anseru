@@ -133,7 +133,7 @@ export default function AITabs({ activeTab, onTabChange }: AITabsProps) {
                {/* Right Side: Media - Animation Carousel */}
                <div className="lg:col-span-6 relative mt-5 aspect-[13/10] border-5 border-white rounded-[24px] overflow-hidden ">
                   <div className="scale-115 -translate-y-12">
-                    <AnimationCarousel activeTab={activeTab} />
+                    <AnimationCarousel />
                   </div>
                </div>
 

@@ -32,6 +32,12 @@ const AIHubAnimation = React.memo(() => {
   const boxWidth = 240;
   const boxHeight = 80;
 
+  const [delays, setDelays] = React.useState<number[]>([]);
+
+  React.useEffect(() => {
+    setDelays(Array.from({ length: 6 }).map(() => Math.random() * 1.5));
+  }, []);
+
   // --- PATH GENERATOR ---
   const getCircuitPath = (side: "left" | "right", index: number, total: number) => {
     const spacing = 90;
@@ -130,7 +136,7 @@ const AIHubAnimation = React.memo(() => {
                   duration: 2.5,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: Math.random() * 1.5 
+                  delay: delays[i] 
                 }}
                 style={{ offsetPath: `path('${path}')`, willChange: "offset-distance, opacity" }} 
               />

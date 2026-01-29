@@ -56,10 +56,10 @@ export default function Investors() {
         <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
           <motion.path
             d="M-50 400 
-         C 300 100, 700 700, 1100 200 
+         C 300 100, 700 700, 1100 400 
          S 1500 400, 1900 100 
-         S 2300 500, 2700 300 
-         S 3100 700, 3500 500
+         S 2400 200, 2480 600 
+         S 3200 700, 3500 500
          S 3900 900, 4300 700
          S 4700 1000, 5100 800"
             stroke="url(#gradient)"

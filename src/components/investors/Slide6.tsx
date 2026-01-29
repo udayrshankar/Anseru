@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Slide6() {
   return (
-    <section className="w-full max-w-7xl h-full mx-auto px-24 pt-10 flex flex-col justify-center relative">
+    <section className="w-full h-full mx-auto px-24 pt-20 flex flex-col justify-center relative">
       {/* Heading with staggered animation */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ export default function Slide6() {
             transition={{ duration: 0.2 }}
           >
             <div className="px-5 py-2 border border-gray-200 rounded-full">
-              <h3 className="text-[10px] font-bold uppercase tracking-[0.35em] text-gray-400">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.35em] text-black/50">
                 Before Anseru
               </h3>
             </div>
@@ -66,20 +66,20 @@ export default function Slide6() {
           {[
             { value: "Weeks", label: "Time per RFP" },
             { value: "Heavy", label: "SME involvement" },
-            { value: "Delayed", label: "Deal velocity" }
+            { value: "Last Stage", label: "Deal Delays" }
           ].map((item, i) => (
             <motion.div 
               key={i} 
               className="space-y-2"
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 0.35, x: 0 }}
+              animate={{ opacity: 0.4, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
               whileHover={{ opacity: 0.5, scale: 1.02 }}
             >
-              <div className="text-[44px] font-bold text-gray-500 tracking-tight">
+              <div className="text-[56px] font-bold text-black tracking-tight">
                 {item.value}
               </div>
-              <div className="text-[11px] uppercase tracking-[0.15em] text-gray-400 font-semibold">
+              <div className="text-[20px] uppercase tracking-[0.15em] text-black font-semibold">
                 {item.label}
               </div>
             </motion.div>
@@ -107,8 +107,8 @@ export default function Slide6() {
 
           {[
             { value: "Minutes", label: "To first draft", gradient: "from-purple-500 via-pink-500 to-orange-500" },
-            { value: "80% Less", label: "SME effort required", gradient: "from-purple-600 via-pink-500 to-orange-500" },
-            { value: "Accelerated", label: "Revenue realization", gradient: "from-purple-500 via-pink-600 to-orange-600" }
+            { value: "70-80% Less", label: "SME effort reduction", gradient: "from-purple-600 via-pink-500 to-orange-500" },
+            { value: "Faster", label: "Deals Cycles", gradient: "from-purple-500 via-pink-600 to-orange-600" }
           ].map((item, i) => (
             <motion.div 
               key={i} 
@@ -128,7 +128,7 @@ export default function Slide6() {
                 {item.value}
               </motion.div>
               <div className="flex items-center gap-2">
-                <div className="text-[11px] uppercase tracking-[0.15em] font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 text-transparent bg-clip-text">
+                <div className="text-[20px] uppercase tracking-[0.15em] font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 text-transparent bg-clip-text">
                   {item.label}
                 </div>
                 <motion.div 

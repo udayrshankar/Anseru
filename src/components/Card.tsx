@@ -60,22 +60,33 @@ const TimerBorder = ({ duration }: { duration: number }) => {
 
 
 // -- Lively Background Orbs --
+interface OrbType {
+  id: number;
+  size: number;
+  initialX: number;
+  initialY: number;
+  duration: number;
+  delay: number;
+  moveX: number[];
+  moveY: number[];
+}
+
 export const MovingOrbs = () => {
     // Generate random positions/movements for a "lively" feel
     // Use useMemo to keep values stable across re-renders within the same mount
-    const orbs = React.useMemo(() => {
-      return Array.from({ length: 12 }).map((_, i) => ({
-        id: i,
-        // Size: 30px to 70px for visibility
-        size: Math.random() * 40 + 5, 
-        initialX: Math.random() * 100,
-        initialY: Math.random() * 100,
-        duration: Math.random() * 20 + 10, // 10s to 30s for slow, smooth drift
-        delay: Math.random() * 5,
-        // Pre-calculate paths for stability
-        moveX: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0], // Larger movement range
-        moveY: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
-      }));
+    const [orbs, setOrbs] = React.useState<OrbType[]>([]);
+
+    React.useEffect(() => {
+        setOrbs(Array.from({ length: 12 }).map((_, i) => ({
+            id: i,
+            size: Math.random() * 40 + 5, 
+            initialX: Math.random() * 100,
+            initialY: Math.random() * 100,
+            duration: Math.random() * 20 + 10,
+            delay: Math.random() * 5,
+            moveX: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
+            moveY: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
+        })));
     }, []);
   
     return (

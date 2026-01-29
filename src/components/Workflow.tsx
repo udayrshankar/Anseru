@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useSpring, useInView } from "framer-motion";
+import { motion, useScroll, useSpring, useInView, MotionValue } from "framer-motion";
 import { type LucideIcon, Lock, UploadCloud, Sparkles, Repeat, Link, Clock, TrendingUp } from "lucide-react";
 import AIHubAnimation from "./animation/AIHubAnimation";
 import { NewConnectAnimation, NewUploadAnimation } from "./animation/NewConnectUploadAnimations";
@@ -113,7 +113,7 @@ const ResponsivePipe = ({
   progress,
 }: {
   containerRef: React.RefObject<HTMLDivElement | null>;
-  progress: any;
+  progress: MotionValue<number>;
 }) => {
   const { width, height } = useDimensions(containerRef);
 

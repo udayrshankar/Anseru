@@ -30,17 +30,17 @@ export default function ConnectAnimation() {
       </div>
 
       {/* Sources feeding in */}
-      <SourceItem icon={Database} angle={0} color="text-blue-500" bg="bg-blue-50" />
-      <SourceItem icon={FolderKanban} angle={72} color="text-orange-500" bg="bg-orange-50" />
-      <SourceItem icon={FileText} angle={144} color="text-green-500" bg="bg-green-50" />
-      <SourceItem icon={Lock} angle={216} color="text-red-500" bg="bg-red-50" />
-      <SourceItem icon={FileText} angle={288} color="text-purple-500" bg="bg-purple-50" />
+      <SourceItem icon={Database} angle={0} color="text-blue-500" bg="bg-blue-50" delay={0.1} repeatDelay={1} />
+      <SourceItem icon={FolderKanban} angle={72} color="text-orange-500" bg="bg-orange-50" delay={0.3} repeatDelay={1.5} />
+      <SourceItem icon={FileText} angle={144} color="text-green-500" bg="bg-green-50" delay={0.5} repeatDelay={0.8} />
+      <SourceItem icon={Lock} angle={216} color="text-red-500" bg="bg-red-50" delay={0.7} repeatDelay={1.2} />
+      <SourceItem icon={FileText} angle={288} color="text-purple-500" bg="bg-purple-50" delay={0.9} repeatDelay={0.5} />
 
     </div>
   );
 }
 
-const SourceItem = ({ icon: Icon, angle, color, bg }: { icon: any, angle: number, color: string, bg: string }) => {
+const SourceItem = ({ icon: Icon, angle, color, bg, delay, repeatDelay }: { icon: React.ElementType, angle: number, color: string, bg: string, delay: number, repeatDelay: number }) => {
     const radius = 120;
     const x = Math.cos((angle * Math.PI) / 180) * radius;
     const y = Math.sin((angle * Math.PI) / 180) * radius;
@@ -52,7 +52,7 @@ const SourceItem = ({ icon: Icon, angle, color, bg }: { icon: any, angle: number
                 className={`absolute w-10 h-10 ${bg} rounded-xl shadow-sm flex items-center justify-center border border-white/50 z-10`}
                 style={{ x, y }}
                 animate={{ y: [y, y - 5, y] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: Math.random() }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: delay }}
             >
                 <Icon className={color} size={18} />
             </motion.div>
@@ -81,7 +81,7 @@ const SourceItem = ({ icon: Icon, angle, color, bg }: { icon: any, angle: number
                     opacity: [1, 1, 0],
                     scale: [1, 0.5]
                 }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", repeatDelay: Math.random() * 2 }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear", repeatDelay: repeatDelay }}
             />
         </>
     )

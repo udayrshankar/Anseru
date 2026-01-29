@@ -2,7 +2,13 @@ import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Target, TrendingUp, Network } from 'lucide-react';
 
-const ExpansionCard = ({ step, index }: { step: any; index: number }) => {
+interface ExpansionStep {
+  icon: React.ElementType;
+  title: string;
+  bullets: string[];
+}
+
+const ExpansionCard = ({ step, index }: { step: ExpansionStep; index: number }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x, { stiffness: 100, damping: 20 });
@@ -39,7 +45,7 @@ const ExpansionCard = ({ step, index }: { step: any; index: number }) => {
              style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }}></div>
 
         {/* Professional Iconography */}
-        <div className="mb-10 p-4 bg-lavender-50 rounded-xl border border-pink-50 group-hover:bg-pink-50 group-hover:border-pink-100 transition-colors duration-500">
+        <div className="mb-8 p-4 bg-lavender-50 rounded-xl border border-pink-50 group-hover:bg-pink-50 group-hover:border-pink-100 transition-colors duration-500">
           <step.icon size={24} className="text-pink-400 group-hover:text-pink-600 transition-colors duration-500" strokeWidth={1.2} />
         </div>
 
@@ -50,9 +56,11 @@ const ExpansionCard = ({ step, index }: { step: any; index: number }) => {
           <h3 className="text-2xl font-semibold text-slate-800 tracking-tight mb-4">
             {step.title}
           </h3>
-          <p className="text-sm text-slate-500 leading-relaxed font-light">
-            {step.desc}
-          </p>
+          <ul className="text-[16px] text-slate-500 leading-relaxed font-light space-y-2 list-disc pl-4">
+            {step.bullets.map((bullet: string, i: number) => (
+                <li key={i}>{bullet}</li>
+            ))}
+          </ul>
         </div>
 
         {/* Visual Progress/Metric */}
@@ -79,22 +87,32 @@ export default function Slide7() {
     {
       icon: Target,
       title: "Initial Focus",
-      desc: "Deep penetration into regulated B2B SaaS. Solving high-stakes document friction in RFP-heavy procurement cycles."
+      bullets: [
+        "B2B SaaS & services",
+        "Enterprise & regulated buyers",
+        "RFP and security-heavy sales motions"
+      ]
     },
     {
       icon: TrendingUp,
-      title: "Workflow Expansion",
-      desc: "Horizontal growth across established accounts by automating adjacent deal negotiation and approval loops."
+      title: "Expansion",
+      bullets: [
+        "More workflows",
+        "More teams",
+        "Same customers"
+      ]
     },
     {
       icon: Network,
-      title: "Core Infrastructure",
-      desc: "Transitioning into the definitive enterprise system of record for proprietary deal execution and decision logic."
+      title: "Long-term",
+      bullets: [
+        "Deal execution and intelligence infrastructure for enterprise sales."
+      ]
     }
   ];
 
   return (
-    <section className="relative w-full h-full flex flex-col items-center justify-center px-12 overflow-hidden">
+    <section className="relative w-full h-full flex flex-col items-center justify-center px-12 overflow-hidden pt-10">
       
       {/* Global Grain Filter */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02] mix-blend-overlay" 
@@ -111,7 +129,7 @@ export default function Slide7() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-6xl font-medium text-slate-900 tracking-tighter"
           >
-            Clear Expansion <span className="text-pink-400 font-light italic">Path</span>
+            A large market with a <span className="text-pink-400 font-light italic">clear expansion path.</span>
           </motion.h2>
           <motion.div 
              initial={{ opacity: 0 }}

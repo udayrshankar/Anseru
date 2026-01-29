@@ -22,8 +22,8 @@ export default function Slide5() {
   const steps = [
     { id: "01", t: "Understand", d: "Auto-structure requirements.", c: "text-purple-500", bg: "hover:shadow-purple-500/20" },
     { id: "02", t: "Know", d: "Map to approved internal knowledge.", c: "text-pink-500", bg: "hover:shadow-pink-500/20" },
-    { id: "03", t: "Respond", d: "Draft answers with confidence scores.", c: "text-fuchsia-500", bg: "hover:shadow-fuchsia-500/20" },
-    { id: "04", t: "Learn", d: "Update graph with every approval.", c: "text-indigo-500", bg: "hover:shadow-indigo-500/20" }
+    { id: "03", t: "Respond", d: "Draft answers with evidence and confidence scores.", c: "text-fuchsia-500", bg: "hover:shadow-fuchsia-500/20" },
+    { id: "04", t: "Learn", d: "Update the knowledge graph with every approval.", c: "text-indigo-500", bg: "hover:shadow-indigo-500/20" }
   ];
 
   return (

@@ -42,7 +42,7 @@ export default function Slide3() {
             initial={{ opacity: 0, x: -28, filter: "blur(4px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="w-[40%] pr-12"
+            className="w-[60%] pr-12"
           >
             <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-8">
               Structural constraints
@@ -51,7 +51,7 @@ export default function Slide3() {
             <ul className="space-y-7">
               <li>
                 <h3 className="text-base font-semibold text-gray-500">
-                  Fragmented execution paths
+                  Unstructured workflows
                 </h3>
                 <p className="text-sm text-gray-400 mt-1 leading-relaxed">
                   Systems operated in isolation.
@@ -60,7 +60,7 @@ export default function Slide3() {
 
               <li>
                 <h3 className="text-base font-semibold text-gray-500">
-                  Diffuse accountability
+                  Cross-functional ownership
                 </h3>
                 <p className="text-sm text-gray-400 mt-1 leading-relaxed">
                   Humans and AI deferred responsibility.
@@ -69,7 +69,7 @@ export default function Slide3() {
 
               <li>
                 <h3 className="text-base font-semibold text-gray-500">
-                  Probabilistic behavior
+                  AI lacked reliability under risk
                 </h3>
                 <p className="text-sm text-gray-400 mt-1 leading-relaxed">
                   Intelligence without reliability.
@@ -92,15 +92,15 @@ export default function Slide3() {
             <ul className="space-y-9">
               {[
                 {
-                  title: "Deterministic reasoning layers",
+                  title: "Long-context reasoning",
                   desc: "Systems behave consistently across long contexts.",
                 },
                 {
-                  title: "Confidence-aware intelligence",
+                  title: "Confidence-scored outputs",
                   desc: "Models know when to stop and escalate.",
                 },
                 {
-                  title: "Governed human–AI loops",
+                  title: "Human-in-the-loop control at scale",
                   desc: "Oversight becomes a native capability.",
                 },
               ].map((item, i) => (

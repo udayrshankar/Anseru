@@ -33,7 +33,7 @@ export const KgDrafting = () => {
                       <div className="flex items-center">
                           <motion.div 
                             className="h-2 bg-gray-100 rounded-full"
-                            style={{ width: `${Math.max(40, Math.random() * 80)}%` }}
+                            style={{ width: `${40 + (i * 13) % 41}%` }}
                              initial={{ width: 0 }}
                              animate={{ width: "70%" }}
                              transition={{ duration: 0.8, delay: i * 1 + 0.4, ease: "easeOut" }}

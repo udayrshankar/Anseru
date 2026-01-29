@@ -48,7 +48,7 @@ export default function UploadAnimation() {
   );
 }
 
-const FloatingFile = ({ delay, icon: Icon, color, xOffset }: { delay: number, icon: any, color: string, xOffset: number }) => (
+const FloatingFile = ({ delay, icon: Icon, color, xOffset }: { delay: number, icon: React.ElementType, color: string, xOffset: number }) => (
     <motion.div
         className="absolute w-12 h-14 bg-white rounded-lg shadow-md border border-gray-100 flex items-center justify-center z-20"
         style={{ x: xOffset }}

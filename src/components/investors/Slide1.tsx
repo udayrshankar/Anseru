@@ -1,8 +1,6 @@
-import { useState } from "react";
+
 
 export default function Slide1() {
-  const [flipped, setFlipped] = useState({ 1: false, 2: false });
-
   const founders = {
     goutham:
       "https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=687&auto=format&fit=crop",
@@ -34,8 +32,6 @@ export default function Slide1() {
           name="Goutham Kumaresan"
           role="Co-Founder · GTM"
           image={founders.goutham}
-          flipped={flipped[1]}
-          onClick={() => setFlipped(p => ({ ...p, 1: !p[1] }))}
           backTitle="Enterprise GTM Reality"
           bullets={[
             "Founder-led enterprise sales",
@@ -49,8 +45,18 @@ export default function Slide1() {
           name="Sudarshan Balakrishna"
           role="Co-Founder · Product"
           image={founders.sudarshan}
-          flipped={flipped[2]}
-          onClick={() => setFlipped(p => ({ ...p, 2: !p[2] }))}
+          backTitle="Risk-First Product Reality"
+          bullets={[
+            "Security-driven architecture",
+            "GRC & audit-ready systems",
+            "Enterprise risk modeling",
+          ]}
+        />
+
+         <FounderCard
+          name="Tamil"
+          role="CTO · AI"
+          image={founders.sudarshan}
           backTitle="Risk-First Product Reality"
           bullets={[
             "Security-driven architecture",
@@ -73,25 +79,24 @@ export default function Slide1() {
 
 /* ================= CARD ================= */
 
+interface FounderCardProps {
+  name: string;
+  role: string;
+  image: string;
+  backTitle: string;
+  bullets: string[];
+}
+
 function FounderCard({
   name,
   role,
   image,
-  flipped,
-  onClick,
   backTitle,
   bullets,
-}: any) {
+}: FounderCardProps) {
   return (
-    <div
-      className="w-[320px] h-[380px] cursor-pointer"
-      onClick={onClick}
-    >
-      <div
-        className={`relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(.4,0,.2,1)] preserve-3d ${
-          flipped ? "rotate-y-180" : ""
-        }`}
-      >
+    <div className="w-[320px] h-[380px] group cursor-pointer">
+      <div className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(.4,0,.2,1)] preserve-3d group-hover:rotate-y-180">
         {/* ---------- FRONT ---------- */}
         <div className="absolute inset-0 backface-hidden rounded-[28px] overflow-hidden
           border border-black/10
@@ -150,7 +155,7 @@ function FounderCard({
             </ul>
 
             <div className="pt-4 border-t border-white/10 text-xs text-white/40">
-              Click to return
+              Hover to view details
             </div>
           </div>
         </div>

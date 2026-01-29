@@ -1,13 +1,7 @@
 
 import SmartCTA from "../SmartCTA";
 
-interface HeroSectionProps {
-  activeIndex: number;
-  onIndexChange: (index: number) => void;
-  isPaused: boolean;
-}
-
-export default function HeroSection(_: HeroSectionProps) {
+export default function HeroSection() {
   return (
     <section className="relative  w-full overflow-hidden">
       <div className="relative mx-auto w-full">

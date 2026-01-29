@@ -51,7 +51,7 @@ export const NewConnectAnimation = React.memo(() => {
     )
 });
 
-const IntegrationNode = ({ icon: Icon, angle, color, bg, delay }: { icon: any, angle: number, color: string, bg: string, delay: number }) => {
+const IntegrationNode = ({ icon: Icon, angle, color, bg, delay }: { icon: React.ElementType, angle: number, color: string, bg: string, delay: number }) => {
     const distance = 100; // Distance from center
     // Convert angle to rads for positioning
     const rad = (angle * Math.PI) / 180;

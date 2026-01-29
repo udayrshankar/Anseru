@@ -1,12 +1,8 @@
 import { useState } from "react";
 import HeroCards from "../hero/HeroCards";
-import { type TabKey } from "./TabContents";
 
-interface AnimationCarouselProps {
-  activeTab: TabKey;
-}
 
-export default function AnimationCarousel({ activeTab: _activeTab }: AnimationCarouselProps) {
+export default function AnimationCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (

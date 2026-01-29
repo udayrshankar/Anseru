@@ -66,7 +66,7 @@ const Testimonials = () => {
   const prevSlide = () => setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   return (
-    <section className="bg-white overflow-hidden mt-0 mb-0 px-6 xl:px-[120px]">
+    <section className="bg-white overflow-hidden mt-20 mb-0 px-6 xl:px-[120px]">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-5xl font-semibold text-[#2A1638]">
