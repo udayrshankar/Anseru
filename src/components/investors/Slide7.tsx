@@ -43,7 +43,7 @@ const ExpansionCard = ({ step, index }: { step: any; index: number }) => {
           <step.icon size={24} className="text-pink-400 group-hover:text-pink-600 transition-colors duration-500" strokeWidth={1.2} />
         </div>
 
-        <div style={{ translateZ: "40px" }} className="flex-1 z-10">
+        <div style={{ transform: "translateZ(40px)" }} className="flex-1 z-10">
           <div className="text-[10px] font-bold text-pink-500 uppercase tracking-[0.4em] mb-3">
             Expansion Step 0{index + 1}
           </div>

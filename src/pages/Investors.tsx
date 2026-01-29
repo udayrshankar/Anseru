@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Slide1 from "../components/investors/Slide1";
 import Slide2 from "../components/investors/Slide2";
