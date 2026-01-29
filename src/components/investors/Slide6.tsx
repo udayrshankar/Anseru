@@ -98,7 +98,7 @@ export default function Slide6() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="px-5 py-2 border border-pink-300 rounded-full">
+            <div className="px-5 py-2 border border-pink-300 bg-white/50 backdrop-blur-4xl rounded-full">
               <h3 className="text-[10px] font-bold uppercase tracking-[0.35em] bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 text-transparent bg-clip-text">
                 With Anseru
               </h3>

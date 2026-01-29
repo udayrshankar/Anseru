@@ -52,16 +52,22 @@ export default function Investors() {
     <div className="w-full h-screen overflow-hidden bg-[#FDFCFE] relative font-sans selection:bg-pink-200">
       
       {/* --- SCROLLYTELLING DASHED LINE --- */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
         <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
           <motion.path
-            d="M-50 400 C 300 100, 700 700, 1100 200 S 1500 400, 1900 100"
+            d="M-50 400 
+         C 300 100, 700 700, 1100 200 
+         S 1500 400, 1900 100 
+         S 2300 500, 2700 300 
+         S 3100 700, 3500 500
+         S 3900 900, 4300 700
+         S 4700 1000, 5100 800"
             stroke="url(#gradient)"
             strokeWidth="4"
             strokeDasharray="12 12"
             animate={{ 
                 strokeDashoffset: [0, -100],
-                x: -currentSlide * 200 // Moves line as you scroll
+                x: -currentSlide * 400 // Moves line as you scroll
             }}
             transition={{ 
                 strokeDashoffset: { duration: 10, repeat: Infinity, ease: "linear" },
