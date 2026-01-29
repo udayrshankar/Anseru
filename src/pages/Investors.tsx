@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 import Slide1 from "../components/investors/Slide1";
 import Slide2 from "../components/investors/Slide2";
@@ -10,13 +11,31 @@ import Slide7 from "../components/investors/Slide7";
 import Slide8 from "../components/investors/Slide8";
 import Slide9 from "../components/investors/Slide9";
 
-const TOTAL_SLIDES = 9;
+const SLIDES = [Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8, Slide9];
+const TOTAL_SLIDES = SLIDES.length;
 const TABS = ["Founders", "Problem", "Why Now", "Product", "How It Works", "ROI", "Market", "Vision", "Ask"];
 
 export default function Investors() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const isScrolling = useRef(false);
+
+  // --- MOTION MAGIC ---
+  const { scrollXProgress } = useScroll({ container: scrollContainerRef });
+  
+  // Smoothing the scroll progress for the dashed line
+  const smoothProgress = useSpring(scrollXProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
+
+  // Dynamic Background Colors based on scroll
+  const background = useTransform(
+    scrollXProgress,
+    [0, 0.5, 1],
+    ["#FDFCFE", "#F5F3FF", "#FFF1F2"]
+  );
 
   const scrollToSlide = (index: number) => {
     if (index < 0 || index >= TOTAL_SLIDES) return;
@@ -32,41 +51,93 @@ export default function Investors() {
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
+
     const handleWheel = (evt: WheelEvent) => {
       if (isScrolling.current) return;
       if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
         evt.preventDefault();
-        if (Math.abs(evt.deltaY) > 20) {
-            isScrolling.current = true;
-            if (evt.deltaY > 0) { if (currentSlide < TOTAL_SLIDES - 1) scrollToSlide(currentSlide + 1); } 
-            else { if (currentSlide > 0) scrollToSlide(currentSlide - 1); }
-            setTimeout(() => { isScrolling.current = false; }, 800);
+        if (Math.abs(evt.deltaY) > 30) {
+          isScrolling.current = true;
+          if (evt.deltaY > 0) {
+            if (currentSlide < TOTAL_SLIDES - 1) scrollToSlide(currentSlide + 1);
+          } else {
+            if (currentSlide > 0) scrollToSlide(currentSlide - 1);
+          }
+          setTimeout(() => { isScrolling.current = false; }, 1000);
         }
       }
     };
+
     container.addEventListener("wheel", handleWheel, { passive: false });
     return () => container.removeEventListener("wheel", handleWheel);
   }, [currentSlide]);
 
   return (
-    <div className="w-full h-screen overflow-hidden bg-[#FDFCFE] relative font-sans selection:bg-pink-200">
+    <motion.div 
+      style={{ backgroundColor: background }}
+      className="w-full h-screen overflow-hidden relative font-sans selection:bg-pink-200"
+    >
       
-      {/* --- GLOBAL LAVENDER ATMOSPHERE --- */}
-      <div className="absolute inset-0 pointer-events-none transition-all duration-[1500ms] ease-in-out z-0">
-          {/* Top Left Blob */}
-          <div className={`absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full blur-[120px] mix-blend-multiply opacity-60 animate-[pulse_8s_infinite] transition-colors duration-1000
-            ${currentSlide % 2 === 0 ? 'bg-purple-200' : 'bg-pink-200'}`} 
+      {/* --- ANIMATED DASHED SCROLL-PATH --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+          {/* Background Track */}
+          <path
+            d="M -100 500 C 200 100, 400 900, 1100 500"
+            fill="transparent"
+            stroke="#E9D5FF"
+            strokeWidth="4"
+            strokeDasharray="12 12"
           />
-          {/* Bottom Right Blob */}
-          <div className={`absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[120px] mix-blend-multiply opacity-60 animate-[pulse_10s_infinite_reverse] transition-colors duration-1000
-            ${currentSlide % 2 === 0 ? 'bg-pink-200' : 'bg-indigo-200'}`} 
+          {/* Animated "Drawing" Line */}
+          <motion.path
+            d="M -100 500 C 200 100, 400 900, 1100 500"
+            fill="transparent"
+            stroke="url(#deck-gradient)"
+            strokeWidth="6"
+            strokeDasharray="12 12"
+            style={{ pathLength: smoothProgress }}
           />
-          {/* Texture Overlay */}
-          <div className="absolute inset-0 opacity-40 bg-[linear-gradient(rgba(230,200,250,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(230,200,250,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+          <defs>
+            <linearGradient id="deck-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#A855F7" />
+              <stop offset="100%" stopColor="#EC4899" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
 
-      {/* Navigation & Logo */}
-      <a href="/" className="fixed top-8 left-8 z-50 font-onest text-2xl font-bold text-gray-900 tracking-tight hover:opacity-70 transition-opacity">ANSERU</a>
+      {/* --- FLOATING AMBIENCE BLOBS --- */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <motion.div 
+          animate={{ 
+            x: [0, 50, 0], 
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full blur-[140px] bg-purple-200/50 mix-blend-multiply" 
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -40, 0], 
+            y: [0, -60, 0],
+            scale: [1, 1.2, 1] 
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[140px] bg-pink-200/50 mix-blend-multiply" 
+        />
+      </div>
+
+      {/* --- LOGO --- */}
+      <motion.a 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        href="/" 
+        className="fixed top-8 left-8 z-50 font-onest text-2xl font-bold text-gray-900 tracking-tight hover:opacity-70 transition-opacity"
+      >
+        ANSERU
+      </motion.a>
 
       {/* --- MAIN SCROLL CONTAINER --- */}
       <main 
@@ -74,31 +145,54 @@ export default function Investors() {
         className="w-full h-screen overflow-x-hidden flex scrollbar-hide relative z-10"
         style={{ scrollBehavior: 'smooth' }}
       >
-        {/* SAFE ZONE ENFORCEMENT: 15% Top / 70% Content / 15% Bottom */}
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide1 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide2 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide3 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide4 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide5 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide6 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide7 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide8 /></div></div>
-        <div className="min-w-full h-full flex flex-col justify-center"><div className="h-[70vh] flex items-center justify-center"><Slide9 /></div></div>
+        {SLIDES.map((Slide, index) => (
+          <div key={index} className="min-w-full h-full flex flex-col justify-center items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -30 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-6xl h-[70vh] flex items-center justify-center p-8"
+            >
+              <Slide />
+            </motion.div>
+          </div>
+        ))}
       </main>
 
+      {/* --- INTERACTIVE TABS --- */}
+      <nav className="absolute top-8 left-0 right-0 z-40 flex justify-center pointer-events-none">
+        <motion.div 
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="bg-white/40 backdrop-blur-2xl px-3 py-2 rounded-full border border-white/60 shadow-2xl flex gap-1 pointer-events-auto overflow-x-auto max-w-[90vw] scrollbar-hide"
+        >
+          {TABS.map((tab, i) => {
+            const isActive = i === currentSlide;
+            return (
+              <button 
+                key={i} 
+                onClick={() => scrollToSlide(i)} 
+                className="relative px-5 py-2 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-300 whitespace-nowrap outline-none"
+              >
+                <span className={`relative z-10 ${isActive ? 'text-white' : 'text-gray-500 hover:text-purple-600'}`}>
+                  {tab}
+                </span>
+                {isActive && (
+                  <motion.div 
+                    layoutId="active-pill"
+                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-lg shadow-purple-200"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </motion.div>
+      </nav>
 
 
-      {/* Tabs */}
-      <div className="absolute top-8 left-0 right-0 z-40 flex justify-center pointer-events-none">
-          <div className="bg-white/40 backdrop-blur-xl px-2 py-2 rounded-full border border-white/60 shadow-sm flex gap-1 pointer-events-auto overflow-x-auto max-w-[80vw] scrollbar-hide">
-                {TABS.map((tab, i) => (
-                    <button key={i} onClick={() => scrollToSlide(i)} className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-500 whitespace-nowrap ${i === currentSlide ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-pink-200' : 'text-gray-500 hover:bg-white/50 hover:text-purple-600'}`}>
-                        {tab}
-                    </button>
-                ))}
-          </div>
-      </div>
       <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
-    </div>
+    </motion.div>
   );
 }
