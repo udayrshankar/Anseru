@@ -35,14 +35,6 @@ export default function Slide3() {
       {/* ---------- MAIN CONTENT ---------- */}
       <div className="relative w-full max-w-6xl flex-1 flex items-center">
 
-        {/* Vertical evolution spine */}
-        <div className="absolute left-1/2 top-6 bottom-6 w-px 
-          bg-gradient-to-b from-transparent via-gray-300/70 to-transparent" />
-
-        {/* Nodes */}
-        <div className="absolute left-1/2 top-[22%] -translate-x-1/2 w-2 h-2 rounded-full bg-gray-300" />
-        <div className="absolute left-1/2 bottom-[22%] -translate-x-1/2 w-2 h-2 rounded-full bg-violet-400" />
-
         <div className="w-full flex gap-16 items-center relative z-10">
 
           {/* ---------- BEFORE ---------- */}
