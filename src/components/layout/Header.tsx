@@ -19,7 +19,7 @@ export default function Header() {
             { name: "FEATURES", path: "/features" },
             { name: "PRICING", path: "/pricing" },
             { name: "CASE STUDIES", path: "/coming-soon" },
-            { name: "INVESTORS PITCH", path: "/investors" },
+            // { name: "INVESTORS PITCH", path: "/investors" },
           ].map((item) => (
             <a
               key={item.name}
