@@ -55,19 +55,25 @@ export default function Investors() {
       <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
         <svg width="100%" height="100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
           <motion.path
-            d="M-50 400 
-         C 300 100, 700 700, 1100 400 
-         S 1500 400, 1900 100 
-         S 2400 200, 2480 600 
-         S 3200 700, 3500 500
-         S 3900 900, 4300 700
-         S 4700 1000, 5100 800"
+        //     d="M-50 200
+        //  C 300 800, 700 500, 1100 200 
+        //  S 1500 500, 1900 100 
+        //  S 2400 200, 2480 600 
+        //  S 3200 700, 3500 500
+        //  S 3900 900, 4300 700
+        //  S 4700 1000, 5100 800"
+        d={`M-50 200
+        C 300 800, 700 500, 1100 500 
+        S 1500 800, 1900 200
+        S 2100 200, 3300 500
+        S
+        `}
             stroke="url(#gradient)"
             strokeWidth="4"
             strokeDasharray="12 12"
             animate={{ 
                 strokeDashoffset: [0, -100],
-                x: -currentSlide * 400 // Moves line as you scroll
+                x: -currentSlide * 1000 // Moves line as you scroll 400
             }}
             transition={{ 
                 strokeDashoffset: { duration: 10, repeat: Infinity, ease: "linear" },
@@ -95,7 +101,7 @@ export default function Investors() {
           />
       </div>
 
-      <a href="/" className="fixed top-8 left-8 z-50 font-bold text-2xl tracking-tighter text-gray-900">ANSERU</a>
+      <a href="/" className="fixed top-10 left-32 z-50 font-bold text-2xl tracking-tighter text-gray-900">ANSERU</a>
 
       <main ref={scrollContainerRef} className="w-full h-screen overflow-x-hidden flex scrollbar-hide relative z-10">
         {[Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8, Slide9].map((SlideComponent, idx) => (
@@ -118,13 +124,13 @@ export default function Investors() {
       </main>
 
       {/* --- FLOATING TABS --- */}
-      <div className="absolute top-8 left-0 right-0 z-40 flex justify-center">
-          <div className="bg-white/40 backdrop-blur-2xl px-2 py-2 rounded-full border border-white/60 shadow-xl flex gap-1">
+      <div className="absolute top-4 left-0 right-0 z-40 flex justify-center">
+          <div className="bg-white/40 backdrop-blur-2xl px-3 py-3 rounded-full border border-white/60 shadow-xl flex gap-1">
                 {TABS.map((tab, i) => (
                     <button 
                         key={i} 
                         onClick={() => scrollToSlide(i)} 
-                        className="relative px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-colors duration-300"
+                        className="relative px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-colors duration-300"
                     >
                         {i === currentSlide && (
                             <motion.div 

@@ -1,8 +1,9 @@
+import React from "react";
 import { motion } from "framer-motion";
 
 interface Level {
   title: string;
-  desc: string;
+  desc: React.ReactNode;
   status: string;
   style: string;
   titleColor: string;
@@ -10,6 +11,10 @@ interface Level {
   accentText: string;
   badgeStyle: string;
   glow: string;
+  tractionContent?: {
+      title: string;
+      items: string[];
+  };
 }
 
 const Stage = ({ level, index }: { level: Level; index: number }) => {
@@ -26,11 +31,11 @@ const Stage = ({ level, index }: { level: Level; index: number }) => {
         <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply contrast-125" 
              style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }} />
 
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col h-full">
           {/* Phase Header */}
-          <div className="flex justify-between items-center mb-12">
-            <span className={`text-3xl font-light italic ${level.accentText}`}>0{index + 1}</span>
-            <div className={`px-3 py-1 rounded-full border ${level.badgeStyle} text-[8px] font-black uppercase tracking-[0.2em] backdrop-blur-md`}>
+          <div className="flex justify-between items-center mb-8">
+            <span className={`text-3xl font-bold italic ${level.accentText}`}>0{index + 1}</span>
+            <div className={`px-3 py-1 rounded-full border ${level.badgeStyle} text-xs font-black uppercase tracking-[0.2em] backdrop-blur-md`}>
               {level.status}
             </div>
           </div>
@@ -43,6 +48,23 @@ const Stage = ({ level, index }: { level: Level; index: number }) => {
             <p className={`text-lg font-light leading-relaxed ${level.textColor}`}>
               {level.desc}
             </p>
+
+            {/* Traction Content (if present) */}
+            {level.tractionContent && (
+                <div className="mt-6 pt-6 border-t border-pink-100/50">
+                    <p className="text-xs font-bold uppercase tracking-widest text-pink-500 mb-3">
+                        {level.tractionContent.title}
+                    </p>
+                    <ul className="space-y-2">
+                        {level.tractionContent.items.map((item, i) => (
+                            <li key={i} className="flex items-center gap-2 text-sm text-slate-600 font-light">
+                                <div className="w-1.5 h-1.5 rounded-full bg-pink-400" />
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
           </div>
         </div>
 
@@ -59,18 +81,25 @@ export default function Slide8() {
   const levels = [
     { 
         title: "Today", 
-        desc: "RFPs and security questionnaires", 
+        desc: "RFPs and Security Questionnaires", 
         status: "Operational",
         style: "bg-white border-pink-100/40",
         titleColor: "text-slate-900",
         textColor: "text-black",
         accentText: "text-pink-300",
         badgeStyle: "border-pink-100 text-pink-500",
-        glow: "bg-pink-400"
+        glow: "bg-pink-400",
+        tractionContent: {
+            title: "TRACTION GAINED TODAY - 2 ONGOING PILOTS:",
+            items: [
+                "APAC - based HRMS B2B SaaS (Mid-Market)",
+                "US - based Healthcare AI B2B SaaS (Mid-Market)"
+            ]
+        }
     },
     { 
-        title: "What this unlocks", 
-        desc: "A system that learns how enterprise deals are executed and approved.", 
+        title: "What This Unlocks", 
+        desc: "A System That Learns How Enterprise Deals are Executed And Approved.", 
         status: "Roadmap",
         style: "bg-white border-purple-100/40",
         titleColor: "text-slate-900",
@@ -80,16 +109,15 @@ export default function Slide8() {
         glow: "bg-purple-400"
     },
     { 
-        title: "FInal Step", 
-        desc: "This becomes the first layer of deal infrastructure.", 
+        title: "Final Step", 
+        desc: <>This Becomes the First Layer of <span className="font-bold">Vertically Integrated</span> Deal Infrastructure.</>, 
         status: "Vision",
-        // Dark Box Theme with Light Text
-        style: "bg-slate-900 border-slate-800 shadow-2xl",
-        titleColor: "text-white",
-        textColor: "text-white",
-        accentText: "text-pink-400/50",
-        badgeStyle: "border-slate-700 text-pink-400",
-        glow: "bg-pink-500"
+        style: "bg-white border-pink-100/40",
+        titleColor: "text-slate-900",
+        textColor: "text-black",
+        accentText: "text-pink-300",
+        badgeStyle: "border-pink-100 text-pink-500",
+        glow: "bg-pink-400"
     },
   ];
 
@@ -115,26 +143,28 @@ export default function Slide8() {
         >
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.6em] mb-2 block">Strategic Vision</span>
           <h2 className="text-5xl font-semibold text-slate-900 tracking-tighter leading-none">
-            From RFP automation to <span className="text-purple-600 font-light italic">deal infrastructure.</span>
+            From RFP Automation to <span className="text-purple-600 font-light italic">Deal Infrastructure.</span>
           </h2>
         </motion.header>
 
         {/* Horizontal Stages Section */}
-        <div className="flex-1 flex gap-2 items-center">
+        <div className="flex-1 flex gap-4 items-center">
           {levels.map((level, i) => (
-            <div key={i} className="flex-1 h-full flex items-center">
-                <Stage level={level} index={i} />
+            <React.Fragment key={i}>
+                <div className="flex-1 h-full flex items-center">
+                    <Stage level={level} index={i} />
+                </div>
                 {i < levels.length - 1 && (
                     <motion.div 
                         initial={{ opacity: 0, x: -10 }}
                         animate = {{ opacity: 0.8, x: 0 }}
                         transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse" }}
-                        className="px-4 text-black"
+                        className="flex-none px-2 text-black"
                     >
                         <ChevronRight size={32} strokeWidth={1} />
                     </motion.div>
                 )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </div>

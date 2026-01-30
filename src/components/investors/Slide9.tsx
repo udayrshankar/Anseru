@@ -4,6 +4,8 @@ import { CheckCircle2 } from "lucide-react";
 interface MetricItem {
   t: string;
   d: string;
+  lineColor?: string;
+  gradient?: string;
 }
 
 const MetricCard = ({ item, index }: { item: MetricItem; index: number }) => {
@@ -15,13 +17,13 @@ const MetricCard = ({ item, index }: { item: MetricItem; index: number }) => {
       transition={{ delay: index * 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="relative flex-1 group"
     >
-      <div className="h-full w-full relative p-8 rounded-[2rem] border border-black/20 bg-white/50 backdrop-blur-sm flex flex-col justify-between overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(236,72,153,0.08)] hover:bg-white hover:border-pink-100/50">
+      <div className={`h-full w-full relative p-8 rounded-[2rem] border border-black/20 ${item.gradient || 'bg-white/50'} backdrop-blur-sm flex flex-col justify-between overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(236,72,153,0.08)] hover:bg-white hover:border-pink-100/50`}>
         {/* Grain Texture Overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply contrast-125" 
              style={{ backgroundImage: `url("https://grainy-gradients.vercel.app/noise.svg")` }} />
 
         <div className="relative z-10 space-y-4">
-             <div className="w-12 h-1 bg-slate-900 rounded-full group-hover:bg-pink-500 transition-colors duration-500" />
+             <div className={`w-12 h-1 rounded-full ${item.lineColor || 'bg-pink-500'} group-hover:scale-110 transition-all duration-500`} />
              <h3 className="text-xl font-bold text-slate-900 tracking-tight">{item.t}</h3>
              <p className="text-[20px] font-light text-black leading-relaxed group-hover:text-slate-600 transition-colors">{item.d}</p>
         </div>
@@ -55,9 +57,8 @@ export default function Slide9() {
                 className="text-center mb-16 relative"
             >
                 <div className="absolute -inset-10 bg-gradient-to-r from-purple-100/20 to-pink-100/20 blur-3xl -z-10 rounded-full" />
-                <span className="text-sm font-bold text-slate-400 uppercase tracking-[0.6em] block">The Ask</span>
                 <h2 className="text-[100px] font-black text-slate-900 leading-none tracking-tighter">
-                    $3–4M <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Seed</span>
+                    Early <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Seed Funding</span>
                 </h2>
                 <p className="text-2xl text-slate-500 font-light tracking-tight max-w-2xl mx-auto">
                     We’re raising to scale what’s already working.
@@ -67,9 +68,9 @@ export default function Slide9() {
             {/* "Why" Cards */}
             <div className="grid grid-cols-3 gap-6 w-full mb-16">
                 {[
-                    {t:"Convert Pilots", d:"Turn live enterprise pilots into revenue."},
-                    {t:"Repeatedable GTM", d:"Build a repeatable sales motion."},
-                    {t:"Scale Product", d:"Enterprise-grade security & reliability."}
+                    {t:"Convert Pilots → Revenue", d:"Turn Early Traction Into Paying Contracts.", lineColor: "bg-purple-500", gradient: "bg-gradient-to-br from-purple-50/80 via-white/80 to-purple-100/80"},
+                    {t:"Build Repeatable GTM, Customer Success", d:"Standardize the Sales Motion for Scale.", lineColor: "bg-fuchsia-500", gradient: "bg-gradient-to-br from-fuchsia-50/80 via-white/80 to-fuchsia-100/80"},
+                    {t:"Scale Enterprise-Grade Product", d:"Infrastructure, Security & Compliance.", lineColor: "bg-pink-500", gradient: "bg-gradient-to-br from-pink-50/80 via-white/80 to-pink-100/80"}
                 ].map((item, i) => (
                     <MetricCard key={i} item={item} index={i} />
                 ))}
@@ -85,9 +86,9 @@ export default function Slide9() {
                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em] mb-8">Target Milestones</div>
                  <div className="flex gap-16 items-center">
                      {[
-                         "Paying customers",
-                         "Clear ARR signal",
-                         "Expansion inside accounts"
+                         "Paying Customers",
+                         "Clear ARR Signal",
+                         "Expansion Inside Accounts"
                      ].map((milestone, i) => (
                          <div key={i} className="flex items-center gap-3">
                              <div className="p-1 rounded-full bg-green-100 text-green-600">

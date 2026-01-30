@@ -207,7 +207,7 @@ export const AgentCard: React.FC<CardProps> = React.memo(({
 
                 <div className="mt-6 pt-6 border-t border-slate-200/60 flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                    Agent Workflow
+                    Agentic Workflow
                     </span>
                     <div className={cn("h-1.5 w-6 rounded-full", theme.gradient[0].replace('/30', ''))} />
                 </div>

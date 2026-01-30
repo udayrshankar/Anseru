@@ -20,59 +20,68 @@ export default function Slide3() {
         className="relative text-center mb-12 max-w-3xl"
       >
         <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
-          The problem{" "}
+          The Problem{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-            always existed
+            Always Existed
             <span className="absolute left-0 -bottom-1 w-full h-[6px] bg-violet-200/40 rounded-full" />
           </span>
           .
         </h2>
         <p className="text-lg md:text-xl text-gray-500 mt-4 font-light">
-          The infrastructure to solve it did not.
+          The Infrastructure to Solve it Did Not.
         </p>
       </motion.div>
 
       {/* ---------- MAIN CONTENT ---------- */}
       <div className="relative w-full max-w-6xl flex-1 flex items-center">
 
-        <div className="w-full flex gap-16 items-center relative z-10">
+        <div className="w-full flex gap-12 items-start relative z-10">
 
           {/* ---------- BEFORE ---------- */}
           <motion.div
             initial={{ opacity: 0, x: -28, filter: "blur(4px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="w-[60%] pr-12"
+            className="w-1/2 pr-6" // balanced padding
           >
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-8">
-              Structural constraints
+            <p className="text-sm uppercase tracking-[0.3em] text-gray-400 mb-10 h-6">
+              Structural Constraints
             </p>
 
-            <ul className="space-y-7">
+            <ul className="space-y-12">
               <li>
-                <h3 className="text-base font-semibold text-gray-500">
-                  Unstructured workflows
-                </h3>
-                <p className="text-sm text-gray-400 mt-1 leading-relaxed">
-                  Systems operated in isolation.
+                <div className="flex items-center gap-4">
+                    <div className="w-2 h-2 rounded-full bg-gray-300 shrink-0" />
+                    <h3 className="text-xl font-semibold text-gray-500">
+                    Unstructured Workflows
+                    </h3>
+                </div>
+                <p className="text-md text-gray-400 mt-2 leading-relaxed pl-6">
+                  Fragmented Document Based Workflows
                 </p>
               </li>
 
               <li>
-                <h3 className="text-base font-semibold text-gray-500">
-                  Cross-functional ownership
-                </h3>
-                <p className="text-sm text-gray-400 mt-1 leading-relaxed">
-                  Humans and AI deferred responsibility.
+                <div className="flex items-center gap-4">
+                    <div className="w-2 h-2 rounded-full bg-gray-300 shrink-0" />
+                    <h3 className="text-xl font-semibold text-gray-500">
+                    Manual Review Everywhere
+                    </h3>
+                </div>
+                <p className="text-md text-gray-400 mt-2 leading-relaxed pl-6">
+                  No Automation Intelligence
                 </p>
               </li>
 
               <li>
-                <h3 className="text-base font-semibold text-gray-500">
-                  AI lacked reliability under risk
-                </h3>
-                <p className="text-sm text-gray-400 mt-1 leading-relaxed">
-                  Intelligence without reliability.
+                <div className="flex items-center gap-4">
+                    <div className="w-2 h-2 rounded-full bg-gray-300 shrink-0" />
+                    <h3 className="text-xl font-semibold text-gray-500">
+                    Unsafe AI
+                    </h3>
+                </div>
+                <p className="text-md text-gray-400 mt-2 leading-relaxed pl-6">
+                  Intelligence Without Reliability.
                 </p>
               </li>
             </ul>
@@ -83,25 +92,25 @@ export default function Slide3() {
             initial={{ opacity: 0, x: 28, filter: "blur(4px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-            className="w-[60%] pl-12"
+            className="w-1/2 pl-6 border-l border-gray-100" // balanced padding + separator
           >
-            <p className="text-xs uppercase tracking-[0.3em] text-violet-600 mb-8">
-              Structural breakthrough
+            <p className="text-sm uppercase tracking-[0.3em] text-violet-600 mb-10 h-6">
+              Structural Breakthrough
             </p>
 
-            <ul className="space-y-9">
+            <ul className="space-y-12">
               {[
                 {
-                  title: "Long-context reasoning",
-                  desc: "Systems behave consistently across long contexts.",
+                  title: "Context - Aware Reasoning",
+                  desc: "Answers Grounded in Context, not Guesswork",
                 },
                 {
-                  title: "Confidence-scored outputs",
-                  desc: "Models know when to stop and escalate.",
+                  title: "Confidence-Scored Outputs",
+                  desc: "Models Know When to Stop and Escalate.",
                 },
                 {
-                  title: "Human-in-the-loop control at scale",
-                  desc: "Oversight becomes a native capability.",
+                  title: "Human-in-the-Loop",
+                  desc: "Oversight Becomes a Native Capability.",
                 },
               ].map((item, i) => (
                 <motion.li
@@ -114,17 +123,19 @@ export default function Slide3() {
                     delay: 0.45 + i * 0.12,
                   }}
                 >
-                  <h3 className="text-xl font-bold text-gray-900">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-2 max-w-md leading-relaxed">
+                  <div className="flex items-center gap-4">
+                      <div className="w-2 h-2 rounded-full bg-violet-600 shrink-0" />
+                      <h3 className="text-xl font-bold text-gray-900">
+                        {item.title}
+                      </h3>
+                  </div>
+                  <p className="text-md text-gray-600 mt-2 max-w-md leading-relaxed pl-6">
                     {item.desc}
                   </p>
                 </motion.li>
               ))}
             </ul>
           </motion.div>
-
         </div>
       </div>
 

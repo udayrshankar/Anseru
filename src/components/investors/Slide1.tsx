@@ -1,67 +1,84 @@
-
+import React, { useState } from "react";
 
 export default function Slide1() {
+  const [flipped, setFlipped] = useState({ 1: false, 2: false, 3: false });
+
   const founders = {
     goutham:
-      "https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=687&auto=format&fit=crop",
+      "bg-gradient-to-br from-white via-pink-50 to-pink-200",
     sudarshan:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=687&auto=format&fit=crop",
+      "bg-gradient-to-br from-white via-pink-50 to-pink-200",
+    tamil:
+      "bg-gradient-to-br from-white via-pink-50 to-pink-200",
   };
 
   return (
     <section className="w-full h-full flex flex-col items-center justify-center px-6">
       
       {/* ---------- HEADER ---------- */}
-      <div className="text-center mb-6 max-w-4xl">
+      <div className="text-center mb-8 max-w-5xl">
         <h1 className="text-7xl md:text-8xl font-bold tracking-tighter text-gray-900 mt-5">
-          Founders who’ve &nbsp;
+          Founders Who’ve{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400">
-            lived the problem.
+            Lived the Problem.
           </span>
         </h1>
         <p className="text-xl text-gray-500 font-light leading-relaxed">
-          Enterprise deals fail at the intersection of sales velocity and trust.  
-          We’ve operated on both sides of the table.
+          Enterprise Deals Fail at the Intersection of Sales Velocity and Trust.  
+          We’ve Operated on Both Sides of the Table.
         </p>
       </div>
 
       {/* ---------- CARDS ---------- */}
       <div className="flex gap-20 perspective-1000">
-        {/* ================= GOUTHAM ================= */}
+        {/* ================= SUDARSHAN ================= */}
         <FounderCard
-          name="Goutham Kumaresan"
-          role="Co-Founder · GTM"
-          image={founders.goutham}
-          backTitle="Enterprise GTM Reality"
+          name="Sudarshan Balakrishna R"
+          role="Co-founder & Product"
+          image={founders.sudarshan}
+          flipped={flipped[1]}
+          onClick={() => setFlipped(p => ({ ...p, 1: !p[1] }))}
+          backTitle="Product, Compliance & Operations"
           bullets={[
-            "Founder-led enterprise sales",
-            "RFP-heavy procurement cycles",
-            "Live pilots before scale",
+            "Cybersecurity & Compliance Expert",
+            "Deep Exposure to Security Questionnaires & Audits",
+            "Owns Product Direction, Customer Feedback & Ops",
+            "Ex - Big 4; Finance Professional (CA)",
           ]}
         />
 
-        {/* ================= SUDARSHAN ================= */}
+        {/* ================= GOUTHAM ================= */}
         <FounderCard
-          name="Sudarshan Balakrishna"
-          role="Co-Founder · Product"
-          image={founders.sudarshan}
-          backTitle="Risk-First Product Reality"
+          name="Goutham Kumaresan"
+          role="Co-founder, Head of GTM & Sales"
+          image={founders.goutham}
+          flipped={flipped[2]}
+          onClick={() => setFlipped(p => ({ ...p, 2: !p[2] }))}
+          backTitle={
+            <>
+              GTM, Sales & Customer <br /> Success
+            </>
+          }
           bullets={[
-            "Security-driven architecture",
-            "GRC & audit-ready systems",
-            "Enterprise risk modeling",
+            "Revenue Growth Hacking",
+            "PPP - Strategy and Transaction Advisor (RFP and Proposals)",
+            "Customer Relationships and Partnerships",
+            "IIT Madras, Ex - Big 4, Flipkart, Meesho, Unacademy (CoS)",
           ]}
         />
 
          <FounderCard
-          name="Tamil"
-          role="CTO · AI"
-          image={founders.sudarshan}
-          backTitle="Risk-First Product Reality"
+          name="Tamilarasan Ramasamy"
+          role="CTO & Chief AI Officer"
+          image={founders.tamil}
+          flipped={flipped[3]}
+          onClick={() => setFlipped(p => ({ ...p, 3: !p[3] }))}
+          backTitle="Infrastructure, AI Systems & Architecture"
           bullets={[
-            "Security-driven architecture",
-            "GRC & audit-ready systems",
-            "Enterprise risk modeling",
+            "Product Architecture, Building AI Agents and Testing Models",
+            "Owns Development & Infrastructure",
+            "Mentoring and Growing the Core Engineering Team",
+            "Tech and AI/ML Leader (Healthcare)"
           ]}
         />
       </div>
@@ -83,7 +100,9 @@ interface FounderCardProps {
   name: string;
   role: string;
   image: string;
-  backTitle: string;
+  flipped: boolean;
+  onClick: () => void;
+  backTitle: React.ReactNode;
   bullets: string[];
 }
 
@@ -91,35 +110,40 @@ function FounderCard({
   name,
   role,
   image,
+  flipped,
+  onClick,
   backTitle,
   bullets,
 }: FounderCardProps) {
   return (
-    <div className="w-[320px] h-[380px] group cursor-pointer">
-      <div className="relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(.4,0,.2,1)] preserve-3d group-hover:rotate-y-180">
+    <div
+      className="w-[320px] h-[380px] cursor-pointer"
+      onClick={onClick}
+    >
+      <div
+        className={`relative w-full h-full transition-transform duration-700 ease-[cubic-bezier(.4,0,.2,1)] preserve-3d ${
+          flipped ? "rotate-y-180" : ""
+        }`}
+      >
         {/* ---------- FRONT ---------- */}
         <div className="absolute inset-0 backface-hidden rounded-[28px] overflow-hidden
           border border-black/10
           shadow-[0_30px_80px_rgba(0,0,0,0.25)]
         ">
-          <img
-            src={image}
-            alt={name}
-            className="absolute inset-0 w-full h-full object-cover "
-          />
+          <div className={`absolute inset-0 w-full h-full ${image}`} />
 
-          {/* Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+          {/* Vignette removed for light theme */}
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" /> */}
 
           <div className="relative z-10 h-full flex flex-col justify-end p-6">
-            <h3 className="text-lg font-semibold text-white tracking-tight">
+            <h3 className="text-lg font-semibold text-slate-900 tracking-tight">
               {name}
             </h3>
-            <p className="mt-1 text-sm text-white/80">
+            <p className="mt-1 text-sm text-slate-600">
               {role}
             </p>
 
-            <div className="mt-5 text-xs text-white/50">
+            <div className="mt-5 text-xs text-slate-400">
               View operating reality →
             </div>
           </div>
@@ -127,36 +151,32 @@ function FounderCard({
 
         {/* ---------- BACK ---------- */}
         <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-[28px] overflow-hidden
-          border border-black/10
-          shadow-[0_30px_80px_rgba(0,0,0,0.25)]
+          border border-pink-200
+          bg-white
+          shadow-[0_30px_80px_rgba(0,0,0,0.1)]
         ">
-          <img
-            src={image}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
-          />
+          <div className={`absolute inset-0 w-full h-full ${image} opacity-30`} />
 
-          <div className="absolute inset-0 bg-black/70" />
-
-          <div className="relative z-10 h-full p-6 flex flex-col justify-between text-white">
+          <div className="relative z-10 h-full p-6 flex flex-col justify-start text-slate-800">
             <div>
-              <p className="text-xs uppercase tracking-widest text-white/40">
+              <p className="text-xs uppercase tracking-widest text-slate-400">
                 Operating Reality
               </p>
-              <h4 className="mt-2 text-lg font-semibold">
+              <h4 className="mt-2 text-lg font-semibold text-slate-900">
                 {backTitle}
               </h4>
             </div>
 
-            <ul className="space-y-4 text-sm text-white/75 leading-relaxed">
+            <ul className="space-y-4 mt-8 text-sm text-slate-600 leading-relaxed font-medium">
               {bullets.map((b: string) => (
-                <li key={b}>{b}</li>
+                <li key={b} className="flex gap-2">
+                  <span className="text-pink-500">•</span>
+                  {b}
+                </li>
               ))}
             </ul>
 
-            <div className="pt-4 border-t border-white/10 text-xs text-white/40">
-              Hover to view details
-            </div>
+          
           </div>
         </div>
       </div>

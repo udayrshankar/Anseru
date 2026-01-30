@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Target, TrendingUp, Network } from 'lucide-react';
+import { Target, TrendingUp, Network, ChevronRight } from 'lucide-react';
 
 interface ExpansionStep {
   icon: React.ElementType;
@@ -32,7 +32,7 @@ const ExpansionCard = ({ step, index }: { step: ExpansionStep; index: number }) 
       onMouseMove={handleMouseMove}
       onMouseLeave={() => { x.set(0); y.set(0); }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className="relative w-80 h-[450px] group"
+      className="relative w-120 h-[450px] group"
     >
       {/* Background Layer: Deep Glow */}
       <div className="absolute inset-10 bg-pink-400/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -50,13 +50,13 @@ const ExpansionCard = ({ step, index }: { step: ExpansionStep; index: number }) 
         </div>
 
         <div style={{ transform: "translateZ(40px)" }} className="flex-1 z-10">
-          <div className="text-[10px] font-bold text-pink-500 uppercase tracking-[0.4em] mb-3">
+          <div className="text-[15px] font-bold text-pink-500 uppercase tracking-[0.4em] mb-3">
             Expansion Step 0{index + 1}
           </div>
           <h3 className="text-2xl font-semibold text-slate-800 tracking-tight mb-4">
             {step.title}
           </h3>
-          <ul className="text-[16px] text-slate-500 leading-relaxed font-light space-y-2 list-disc pl-4">
+          <ul className="text-[16px] text-slate-500 leading-relaxed space-y-2 list-disc pl-4">
             {step.bullets.map((bullet: string, i: number) => (
                 <li key={i}>{bullet}</li>
             ))}
@@ -65,7 +65,7 @@ const ExpansionCard = ({ step, index }: { step: ExpansionStep; index: number }) 
 
         {/* Visual Progress/Metric */}
         <div className="w-full pt-6 border-t border-pink-50 flex flex-col gap-3">
-            <div className="flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+            <div className="flex justify-between items-center text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                 <span>Infrastructure Readiness</span>
                 <span>{(index + 1) * 33}%</span>
             </div>
@@ -86,27 +86,29 @@ export default function Slide7() {
   const steps = [
     {
       icon: Target,
-      title: "Initial Focus",
+      title: "Initial SAM",
       bullets: [
-        "B2B SaaS & services",
-        "Enterprise & regulated buyers",
-        "RFP and security-heavy sales motions"
+        "B2B SaaS & Services Selling to Enterprises",
+        "RFP & Security-Heavy Sales Motions",
+        "Multi-Billion $$ Market"
       ]
     },
     {
       icon: TrendingUp,
       title: "Expansion",
       bullets: [
-        "More workflows",
-        "More teams",
-        "Same customers"
+        "More Deal Execution Workflows",
+        "More Teams, Same Customers",
+        "Land and Expand Strategy"
       ]
     },
     {
       icon: Network,
-      title: "Long-term",
+      title: "Long-Term TAM",
       bullets: [
-        "Deal execution and intelligence infrastructure for enterprise sales."
+        "AI - Native Deal Infrastructure for Enterprise Sales",
+        "Matured Deal Execution Workflows",
+        "Institutional Memory and Compounding Intelligence"
       ]
     }
   ];
@@ -122,14 +124,13 @@ export default function Slide7() {
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-pink-100/40 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-violet-100/30 rounded-full blur-[120px]" />
 
-      <div className="relative z-10 max-w-6xl w-full">
         <header className="mb-5 text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-6xl font-medium text-slate-900 tracking-tighter"
           >
-            A large market with a <span className="text-pink-400 font-light italic">clear expansion path.</span>
+            A Massive Market With a <span className="text-pink-400 font-light italic">Clear Expansion Path.</span>
           </motion.h2>
           <motion.div 
              initial={{ opacity: 0 }}
@@ -141,12 +142,23 @@ export default function Slide7() {
           </motion.div>
         </header>
 
-        <div className="flex items-center justify-center gap-8 perspective-1000">
+        <div className="flex items-center justify-center gap-2 perspective-1000 max-w-7xl w-full">
           {steps.map((step, i) => (
-            <ExpansionCard key={i} step={step} index={i} />
+            <React.Fragment key={i}>
+                <ExpansionCard step={step} index={i} />
+                {i < steps.length - 1 && (
+                    <motion.div 
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 0.8, x: 0 }}
+                        transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse" }}
+                        className="px-2 text-pink-300"
+                    >
+                        <ChevronRight size={48} strokeWidth={1} />
+                    </motion.div>
+                )}
+            </React.Fragment>
           ))}
         </div>
-      </div>
 
       <style>{`
         .perspective-1000 { perspective: 2000px; }
