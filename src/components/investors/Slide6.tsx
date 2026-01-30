@@ -22,7 +22,7 @@ export default function Slide6() {
       </motion.div>
 
       {/* Comparison grid */}
-      <div className="relative grid grid-cols-[1fr_auto_1fr] -translate-y-10 gap-8 items-start scale-80">
+      <div className="relative grid grid-cols-[1fr_auto_1fr] -translate-y-4 gap-8 items-start scale-80">
         
         {/* BEFORE - Muted state */}
         <motion.div 

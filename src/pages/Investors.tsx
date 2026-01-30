@@ -66,7 +66,16 @@ export default function Investors() {
         C 300 800, 700 500, 1100 500 
         S 1500 800, 1900 200
         S 2100 200, 3300 500
-        S
+        S 3800 500, 3900 400
+        S 4200 700, 4500 400
+        S 4600 500, 4800 200
+        S 5000 500, 5200 200
+        S 5400 200, 5600 100
+        S 6000 100, 6200 300
+        S 7000 200, 7500 400
+        S 7800 400, 8300 200
+        S 8500 500, 8900 800
+      
         `}
             stroke="url(#gradient)"
             strokeWidth="4"
@@ -101,7 +110,7 @@ export default function Investors() {
           />
       </div>
 
-      <a href="/" className="fixed top-10 left-32 z-50 font-bold text-2xl tracking-tighter text-gray-900">ANSERU</a>
+      <a href="/" className="fixed top-10 left-8 z-50 font-bold text-2xl tracking-tighter text-gray-900">ANSERU</a>
 
       <main ref={scrollContainerRef} className="w-full h-screen overflow-x-hidden flex scrollbar-hide relative z-10">
         {[Slide1, Slide2, Slide3, Slide4, Slide5, Slide6, Slide7, Slide8, Slide9].map((SlideComponent, idx) => (
