@@ -11,14 +11,14 @@ export default function HeroSection() {
 
         <div className="relative z-10 flex flex-col items-center text-center pt-32 md:pt-40 overflow-hidden px-6 xl:px-[120px]">
           {/* Main Title -> H1 */}
-          <h1 className="max-w-6xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
-            Win deals faster with AI agents for <br/>
+          <h1 className="max-w-6xl text-4xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5 font-bold tracking-tight">
+            Win deals faster with AI agents for <br className="hidden md:block"/>
             RFPs and Security Questionnaires
           </h1>
 
           {/* Subtitle -> Text Body */}
-          <p className="text-base md:text-body text-[#2A1638]/70 max-w-3xl mb-10">
-            AI agents that draft accurate, context-aware responses grounded in your knowledge base. <br/>
+          <p className="text-base md:text-body text-[#2A1638]/70 max-w-3xl mb-8 md:mb-10 leading-relaxed">
+            AI agents that draft accurate, context-aware responses grounded in your knowledge base. <br className="hidden md:block"/>
             Automate the grunt work, keep humans in loop, and close deals faster without compromising trust.
           </p>
 

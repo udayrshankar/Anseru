@@ -3,7 +3,7 @@ import { Twitter, Linkedin, Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#483953]/10 overflow-hidden mt-32">
+    <footer className="relative border-t border-[#483953]/10 overflow-hidden mt-16 md:mt-32">
       {/* Background Image - Preserved */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none opacity-60"
@@ -15,8 +15,8 @@ export default function Footer() {
       />
       
       {/* Content */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 xl:px-[120px] pt-24 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 xl:px-[120px] pt-12 md:pt-24 pb-8 md:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 lg:gap-8 mb-12 md:mb-24">
           
           {/* Brand Column - Wider */}
           <div className="lg:col-span-4 space-y-8">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
+import { NAVIGATION_ITEMS } from "../../constants/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,14 +14,7 @@ export default function Header() {
         </div>
 
         <div className="hidden lg:flex items-center gap-8">
-          {[
-            { name: "HOME", path: "/home" },
-            { name: "PRODUCT", path: "/product" },
-            { name: "FEATURES", path: "/features" },
-            { name: "PRICING", path: "/pricing" },
-            { name: "CASE STUDIES", path: "/coming-soon" },
-            // { name: "INVESTORS PITCH", path: "/investors" },
-          ].map((item) => (
+          {NAVIGATION_ITEMS.map((item) => (
             <a
               key={item.name}
               href={item.path}
@@ -41,15 +35,16 @@ export default function Header() {
          
 
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 relative z-[101]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            ☰
+            {mobileMenuOpen ? '✕' : '☰'}
           </button>
         </div>
       </nav>
 
-      <MobileMenu open={mobileMenuOpen} />
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </header>
   );
 }

@@ -303,7 +303,7 @@ export default function Workflow() {
           </h2>
         </div>
 
-        <div className="hidden lg:block pb-0 flex justify-center relative z-20 -mt-40">
+        <div className=" pb-0 flex justify-center relative z-20 -mt-40">
           <AIHubAnimation />
         </div>
 
