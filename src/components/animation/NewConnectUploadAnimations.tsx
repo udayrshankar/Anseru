@@ -27,7 +27,7 @@ export const NewConnectAnimation = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[400px] bg-[#FDFCFE] rounded-xl overflow-hidden flex items-center justify-center border border-slate-100 shadow-sm font-sans">
+    <div className="relative w-full h-[300px] bg-[#FDFCFE] rounded-xl overflow-hidden flex items-center justify-center border border-slate-100 shadow-sm font-sans">
       
       {/* Background Grid */}
       <div className="absolute inset-0 opacity-[0.4]"
