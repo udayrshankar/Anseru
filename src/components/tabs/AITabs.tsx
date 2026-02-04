@@ -20,7 +20,7 @@ export default function AITabs({ activeTab, onTabChange }: AITabsProps) {
                 Proven Results
               </p>
               <h2 className="text-[#2A1638] text-3xl md:text-5xl font-medium tracking-tight mb-4">
-                Our Agentic Products
+                Two Agents. One Mission
               </h2>
               <p className="text-lg text-[#483953]/70">
                 Transform your RFP and security workflows with agentic AI that delivers speed, accuracy, and trust at scale.

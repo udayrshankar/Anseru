@@ -31,7 +31,7 @@ const   HowItWorks = () => {
   const { activeIndex, onMouseEnter, onMouseLeave, setActiveIndex } = useSequentialAnimation(steps.length);
 
   return (
-    <section className="py-0 bg-white relative">
+    <section className="py-0 mt-10 relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Section Header */}
         <div className="mb-16">

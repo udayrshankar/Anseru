@@ -1,4 +1,5 @@
 import bgImage from "../../assets/bg2.png";
+import logo from "../../assets/logo.png";
 import { Twitter, Linkedin, Github } from "lucide-react";
 
 export default function Footer() {
@@ -20,10 +21,10 @@ export default function Footer() {
           
           {/* Brand Column - Wider */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="space-y-4">
-                <h3 className="font-onest text-3xl font-bold text-[#090909] tracking-tight">
-                ANSERU
-                </h3>
+            <div className="space-y-6">
+                <a href="/" className="block">
+                  <img src={logo} alt="Anseru" className="h-[35px] w-auto opacity-90" />
+                </a>
                 <p className="text-lg text-[#483953]/70 leading-relaxed font-medium max-w-xs">
                     Accelerating trust in every deal with agentic AI for RFPs and security reviews.
                 </p>

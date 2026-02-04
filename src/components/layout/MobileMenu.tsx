@@ -1,4 +1,4 @@
-import { NAVIGATION_ITEMS } from "../../constants/navigation";
+// import { NAVIGATION_ITEMS } from "../../constants/navigation";
 import { useEffect } from "react";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   onClose: () => void;
 }
 
-export default function MobileMenu({ open, onClose }: Props) {
+export default function MobileMenu({ open }: Props) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -22,7 +22,7 @@ export default function MobileMenu({ open, onClose }: Props) {
 
   return (
     <div className="lg:hidden fixed inset-0 z-[100] bg-white/95 backdrop-blur-md flex flex-col pt-24 px-6 animate-in fade-in duration-200">
-      <nav className="flex flex-col gap-6">
+      {/* <nav className="flex flex-col gap-6">
         {NAVIGATION_ITEMS.map((item) => (
           <a 
             key={item.name} 
@@ -33,7 +33,7 @@ export default function MobileMenu({ open, onClose }: Props) {
             {item.name}
           </a>
         ))}
-      </nav>
+      </nav> */}
 
       <div className="flex flex-col gap-4 mt-8 pt-8 border-t border-black/5">
         <button className="w-full py-4 text-lg font-medium hover:opacity-70 text-left">

@@ -200,7 +200,7 @@ const AIHubAnimation = React.memo(() => {
         return (
           <motion.div
             key={app.id}
-            className="absolute z-20 flex items-center justify-center rounded-2xl border border-white/70 bg-white/80 backdrop-blur-xl shadow-sm"
+            className="absolute z-20 flex items-center justify-center rounded-2xl border border-white/70 bg-white/80 backdrop-blur-xl shadow-sm -translate-x-2 -translate-y-6"
             style={{
               left: startX,
               top: startY,

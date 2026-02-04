@@ -1,6 +1,7 @@
 import { useState } from "react";
+import logo from "../../assets/logo.png";
 import MobileMenu from "./MobileMenu";
-import { NAVIGATION_ITEMS } from "../../constants/navigation";
+// import { NAVIGATION_ITEMS } from "../../constants/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -8,28 +9,28 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-2 px-4">
       <nav className="w-full max-w-[1400px] min-h-[72px] rounded-full border border-black/10 bg-white/10 backdrop-blur-[50px] shadow-lg flex items-center justify-between px-6 py-4">
-        {/* Logo */}
-        <div className="font-onest text-2xl font-bold text-[#090909] tracking-tight">
-          ANSERU
-        </div>
+  {/* Logo */}
+        <a href="/" className="hover:opacity-80 transition-opacity overflow-hidden">
+          <img src={logo} alt="Anseru" className="h-[35px] w-auto" />
+        </a>
 
-        <div className="hidden lg:flex items-center gap-8">
+        {/* <div className="hidden lg:flex items-center gap-8">
           {NAVIGATION_ITEMS.map((item) => (
             <a
               key={item.name}
               href={item.path}
-              className="text-smalls text-[#090909] hover:opacity-70 uppercase"
+              className="text-smalls font-medium text-[#090909] hover:opacity-70 uppercase tracking-wide"
             >
               {item.name}
             </a>
           ))}
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-4">
-          <button className="hidden md:block text-smalls font-medium hover:opacity-70 mx-4">
+          <button className="hidden md:block text-smalls font-medium text-[#090909] hover:opacity-70 px-4">
             LOGIN
           </button>
-          <button className="hidden md:block px-6 py-3.5 bg-black text-white rounded-full text-smalls hover:opacity-80">
+          <button className="hidden md:block px-5 py-2.5 bg-[#090909] text-white rounded-full text-smalls font-medium hover:bg-[#090909]/80 transition-colors">
             Talk to Founders
           </button>
          

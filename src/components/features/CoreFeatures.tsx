@@ -76,7 +76,7 @@ const CoreFeatures = () => {
   ];
 
   return (
-    <section className="py-0 bg-[#FAFAFA] relative">
+    <section className="py-0 mt-10 bg-[#FAFAFA] relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Section Header */}
         <div className="mb-12 lg:mb-20 text-center relative lg:sticky lg:top-25 z-0">

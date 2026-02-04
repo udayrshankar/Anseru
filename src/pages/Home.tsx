@@ -5,12 +5,14 @@ import AITabs from "../components/tabs/AITabs";
 import { type TabKey } from "../components/tabs/TabContents";
 import LovedByTeams from "../components/sections/LovedByTeams";
 import Workflow from "../components/Workflow";
-import WhyAnseru from "../components/WhyAnseru";
+// import WhyAnseru from "../components/WhyAnseru";
 import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 import FAQ from "../components/sections/FAQ";
 import bgImage from "../assets/bg2.png";
+import HowItWorks from "../components/sections/HowItWorks";
+import CoreFeatures from "../components/features/CoreFeatures";
 
 // Control the vertical spacing between sections here
 const SECTION_GAP = "gap-5";
@@ -85,7 +87,9 @@ export default function Home() {
         {/* AI-Drafted Responses */}
 
         {/* Why Anseru */}
-        <WhyAnseru />
+        {/* <WhyAnseru /> */}
+        <HowItWorks />
+        <CoreFeatures />
 
         {/* Testimonials */}
         <Testimonials />
