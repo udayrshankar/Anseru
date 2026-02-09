@@ -36,13 +36,13 @@ export default function MobileMenu({ open }: Props) {
       </nav> */}
 
       <div className="flex flex-col gap-4 mt-8 pt-8 border-t border-black/5">
-        <button className="w-full py-4 text-lg font-medium hover:opacity-70 text-left">
+        <button className="w-full py-4 text-lg font-medium hover:opacity-70 text-left text-[#1C32E6]">
           Login
         </button>
-        <button className="w-full px-6 py-4 bg-black text-white rounded-full font-medium text-lg">
+        <button className="w-full px-6 py-4 bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] text-white rounded-full font-medium text-lg shadow-md">
           Start a free trial
         </button>
-        <button className="w-full px-6 py-4 bg-white text-black border border-black/10 rounded-full font-medium text-lg">
+        <button className="w-full px-6 py-4 bg-white text-[#1C32E6] border border-[#1C32E6]/20 rounded-full font-medium text-lg">
           Talk to Founders
         </button>
       </div>

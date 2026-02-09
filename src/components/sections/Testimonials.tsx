@@ -177,8 +177,8 @@ const Testimonials = () => {
                         onClick={() => setActiveIndex(i)}
                         className={`rounded-full transition-all duration-300 border border-transparent ${
                             i === activeIndex 
-                            ? "w-4 h-4 bg-[#C084FC] scale-125 shadow-md" 
-                            : "w-4 h-4 bg-gray-200 hover:bg-gray-300 hover:scale-110"
+                            ? "w-4 h-4 bg-[#1C32E6] scale-125 shadow-md" 
+                            : "w-4 h-4 bg-gray-200 hover:bg-[#60C2FF] hover:scale-110"
                         }`}
                     />
                 ))}

@@ -50,30 +50,30 @@ const SmartCTA = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col sm:flex-row items-center gap-3 bg-white/80 backdrop-blur-md rounded-[20px] p-[11px] h-auto sm:h-[60px] shadow-sm border border-white/50 w-fit mx-auto"
+      className="flex flex-col sm:flex-row items-center gap-3 bg-white/20 backdrop-blur-md rounded-[20px] p-[11px] h-auto sm:h-[60px] shadow-sm border border-white/40 w-fit mx-auto"
     >
       {/* Typewriter Container */}
-      <div className="flex items-center gap-2 bg-white border border-[#EE00FF]/30 rounded-[15px] px-6 h-[42px] shadow-[0_0_15px_rgba(238,0,255,0.15)] min-w-[180px] w-full sm:w-auto overflow-hidden relative">
+      <div className="flex items-center gap-2 bg-white/95 border border-[#1C32E6]/30 rounded-[15px] px-6 h-[42px] shadow-[0_0_18px_rgba(28,50,230,0.2)] min-w-[180px] w-full sm:w-auto overflow-hidden relative">
          <span className="text-xl">✨</span>
          <div className="flex items-center text-[#393939] font-medium text-[15px] font-onest">
             <span className="relative">
                 {displayedText.indexOf(' ') === -1 ? (
-                    <span className="text-[#EE00FF] font-semibold">{displayedText}</span>
+                    <span className="text-[#FF3F49] font-semibold">{displayedText}</span>
                 ) : (
                     <>
-                        <span className="text-[#EE00FF] font-semibold">{displayedText.slice(0, displayedText.indexOf(' '))}</span>
+                        <span className="text-[#FF3F49] font-semibold">{displayedText.slice(0, displayedText.indexOf(' '))}</span>
                         <span>{displayedText.slice(displayedText.indexOf(' '))}</span>
                     </>
                 )}
                 {/* Cursor */}
-                <span className="absolute -right-[2px] top-0 h-full w-[2px] bg-[#EE00FF] animate-blink" />
+                <span className="absolute -right-[2px] top-0 h-full w-[2px] bg-[#FF3F49] animate-blink" />
             </span>
          </div>
       </div>
 
       {/* Book Demo Button */}
       <motion.button 
-        className="px-6 h-[42px] rounded-[15px] bg-gradient-to-b from-[#222] to-[#000] text-white font-onest text-[15px] font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 group relative overflow-hidden w-full sm:w-auto justify-center"
+        className="px-6 h-[42px] rounded-[15px] bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] text-white font-onest text-[15px] font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 group relative overflow-hidden w-full sm:w-auto justify-center"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >

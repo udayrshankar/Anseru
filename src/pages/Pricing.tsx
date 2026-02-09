@@ -4,7 +4,6 @@ import Footer from "../components/layout/Footer";
 import Background from "../components/Background";
 import { Check, X } from "lucide-react";
 import SmartCTA from "../components/SmartCTA";
-import image from "../assets/bg2.png"
 
 
 const Pricing = () => {
@@ -34,16 +33,16 @@ const PricingHero = () => {
         </div>
       </div>
 
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20">
-        <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20 text-white">
+        <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-white mb-5 drop-shadow-sm">
           Pricing That Scales With
  <br className="hidden md:block"/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#60C2FF]">
             Deal Value, Not Seat Count
           </span>
         </h1>
 
-        <p className="text-base md:text-lg text-[#2A1638]/70 max-w-3xl mb-10">
+        <p className="text-base md:text-lg text-white/80 max-w-3xl mb-10">
           Choose a plan based on deal volume and complexity. All plans include core intelligence, governance, and evidence-first workflows.
         </p>
 
@@ -74,12 +73,12 @@ const BenchmarkTable = () => {
 
   const renderCell = (val: string | boolean) => {
     if (typeof val === 'boolean') {
-      return val ? <Check className="w-5 h-5 text-green-600" /> : <X className="w-5 h-5 text-[#2A1638]/20" />;
+      return val ? <Check className="w-5 h-5 text-[#1C32E6]" /> : <X className="w-5 h-5 text-[#1C32E6]/20" />;
     }
     if (val === 'Poor' || val === 'Limited') {
-      return <span className="text-sm text-[#2A1638]/50">{val}</span>;
+      return <span className="text-sm text-[#1C32E6]/50">{val}</span>;
     }
-    return <span className="font-medium text-sm text-[#2A1638]">{val}</span>;
+    return <span className="font-medium text-sm text-[#1C32E6]">{val}</span>;
   };
 
   return (
@@ -96,10 +95,10 @@ const BenchmarkTable = () => {
             <p className="font-onest mb-3 font-bold text-center text-lg text-black tracking-wide uppercase opacity-70">
               Pricing & Value Comparison
             </p>
-            <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#2A1638] tracking-tight leading-tight mb-4">
-              Why Teams Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">Anseru</span>
+            <h2 className="font-onest text-center text-3xl md:text-4xl font-medium text-[#1C32E6] tracking-tight leading-tight mb-4">
+              Why Teams Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C32E6] to-[#7D23F7]">Anseru</span>
             </h2>
-            <p className="text-center text-[#2A1638]/60 max-w-2xl mx-auto">
+            <p className="text-center text-[#1C32E6]/60 max-w-2xl mx-auto">
               The table below highlights how Anseru compares across the capabilities that matter in enterprise RFP and security workflows.
             </p>
           </motion.div>
@@ -118,12 +117,12 @@ const BenchmarkTable = () => {
             <table className="w-full min-w-[700px] border-collapse bg-white">
               <thead>
                 <tr className="border-b border-black/[0.05]">
-                  <th className="p-5 text-left w-2/5 text-sm font-semibold text-[#2A1638]/60 uppercase tracking-wider pl-8">Capability</th>
-                  <th className="p-5 text-center w-1/5 bg-gradient-to-b from-purple-50 to-transparent border-x border-purple-100/50">
-                    <span className="font-onest font-black text-lg text-[#2A1638] tracking-tight">ANSERU</span>
+                  <th className="p-5 text-left w-2/5 text-sm font-semibold text-[#1C32E6]/60 uppercase tracking-wider pl-8">Capability</th>
+                  <th className="p-5 text-center w-1/5 bg-gradient-to-b from-[#1C32E6]/10 to-transparent border-x border-[#1C32E6]/20">
+                    <span className="font-onest font-black text-lg text-[#1C32E6] tracking-tight">ANSERU</span>
                   </th>
-                  <th className="p-5 text-center text-sm font-medium text-[#483953]/50 w-1/5">Security-only Tools</th>
-                  <th className="p-5 text-center text-sm font-medium text-[#483953]/50 w-1/5">Traditional RFP Tools</th>
+                  <th className="p-5 text-center text-sm font-medium text-[#1C32E6]/50 w-1/5">Security-only Tools</th>
+                  <th className="p-5 text-center text-sm font-medium text-[#1C32E6]/50 w-1/5">Traditional RFP Tools</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,7 +131,7 @@ const BenchmarkTable = () => {
                     key={idx} 
                     className="group transition-all duration-300 ease-out hover:scale-[1.01] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:bg-[#e3d1f2] hover:z-10 relative"
                   >
-                    <td className="p-4 pl-8 text-sm font-medium text-[#2A1638]">
+                    <td className="p-4 pl-8 text-sm font-medium text-[#1C32E6]">
                       {row.feature}
                     </td>
                     <td className="p-4 text-center">
@@ -163,14 +162,14 @@ const BenchmarkTable = () => {
 
 const PricingTiers = () => {
   return (
-    <section className="py-12 bg-[#FAFAFA] relative">
+    <section className="py-12 bg-[#F7F8FF] relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
           
           {/* Starter Card */}
-          <div className="rounded-[32px] text-[#402e4c] hover:scale-[1.05] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#7e43ca] transition-all relative flex flex-col">
+          <div className="rounded-[32px] text-[#1C32E6] hover:scale-[1.05] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#1C32E6]/30 transition-all relative flex flex-col">
             <div className="mb-6">
-              <span className="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-100 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#1C32E6] uppercase tracking-widest bg-[#1C32E6]/10 px-3 py-1 rounded-full">
                 Starter
               </span>
             </div>
@@ -182,7 +181,7 @@ const PricingTiers = () => {
               Usage-based <span className="text-base">/pay per use</span>
             </p>
             
-            <button className="w-full py-3.5 rounded-full border-2 border-[#2A1638] text-[#2A1638] font-semibold hover:bg-[#2A1638] hover:text-white transition-colors mb-8">
+            <button className="w-full py-3.5 rounded-full border-2 border-[#1C32E6] text-[#1C32E6] font-semibold hover:bg-[#1C32E6] hover:text-white transition-colors mb-8">
               Get Started
             </button>
 
@@ -203,12 +202,12 @@ const PricingTiers = () => {
           </div>
 
           {/* Growth Card (Highlighted) */}
-          <div className="rounded-[32px] text-white hover:scale-[1.05] p-8 bg-[#2a1638] border-2 border-[#7e43ca] shadow-lg hover:shadow-xl transition-all relative flex flex-col">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#9F5AF0] to-[#7038BA] text-white text-[10px] uppercase font-bold tracking-widest py-1.5 px-4 rounded-full shadow-lg">
+          <div className="rounded-[32px] text-white hover:scale-[1.05] p-8 bg-gradient-to-br from-[#1C32E6] to-[#7D23F7] border-2 border-[#1C32E6]/40 shadow-lg hover:shadow-xl transition-all relative flex flex-col">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FF3F49] text-white text-[10px] uppercase font-bold tracking-widest py-1.5 px-4 rounded-full shadow-lg">
               Most Popular
             </div>
             <div className="mb-6">
-              <span className="text-xs font-bold text-purple-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-white uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">
                 Growth/Mid Market
               </span>
             </div>
@@ -220,7 +219,7 @@ const PricingTiers = () => {
               Volume-based <span className="text-base">/fixed pricing</span>
             </p>
             
-            <button className="w-full text-black py-3.5 rounded-full bg-white font-semibold hover:bg-gray-100 transition-colors mb-8">
+            <button className="w-full text-[#1C32E6] py-3.5 rounded-full bg-white font-semibold hover:bg-gray-100 transition-colors mb-8">
               Talk to Sales
             </button>
 
@@ -234,7 +233,7 @@ const PricingTiers = () => {
                 "Analytics & coverage insights"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm">
-                  <Check className="w-4 h-4 text-purple-300 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-white/80 mt-0.5 shrink-0" />
                   {item}
                 </li>
               ))}
@@ -242,9 +241,9 @@ const PricingTiers = () => {
           </div>
 
           {/* Enterprise Card */}
-          <div className="rounded-[32px] text-[#402e4c] p-8 bg-white hover:scale-[1.05] shadow-lg border-2 border-[#7e43ca] hover:shadow-xl transition-all relative flex flex-col">
+          <div className="rounded-[32px] text-[#1C32E6] p-8 bg-white hover:scale-[1.05] shadow-lg border-2 border-[#1C32E6]/30 hover:shadow-xl transition-all relative flex flex-col">
             <div className="mb-6">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#1C32E6] uppercase tracking-widest bg-[#1C32E6]/10 px-3 py-1 rounded-full">
                 Enterprise
               </span>
             </div>
@@ -256,7 +255,7 @@ const PricingTiers = () => {
               Custom <span className="text-base">/enterprise pricing</span>
             </p>
             
-            <button className="w-full py-3.5 rounded-full border-2 border-[#2A1638] text-[#2A1638] font-semibold hover:bg-[#2A1638] hover:text-white transition-colors mb-8">
+            <button className="w-full py-3.5 rounded-full border-2 border-[#1C32E6] text-[#1C32E6] font-semibold hover:bg-[#1C32E6] hover:text-white transition-colors mb-8">
               Request a Demo
             </button>
 
@@ -287,15 +286,10 @@ const ClosingCTA = () => {
 
     <section className="py-0 px-6">
       <div className="max-w-[1400px] w-full mx-auto px-6">
-        <div className="relative rounded-[48px] overflow-hidden">
-          <img
-            src={image}
-            alt="CTA Background"
-            className="w-full h-[400px] object-cover"
-          />
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            <span className="font-onest text-2xl md:text-4xl font-medium text-[#2A1638] mb-8 max-w-[971px] leading-tight">
+        <div className="relative rounded-[48px] overflow-hidden bg-gradient-to-br from-[#7D23F7] via-[#E54763] to-[#FF3F49]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(96,194,255,0.35),_transparent_55%)]" />
+          <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-20 min-h-[400px]">
+            <span className="font-onest text-2xl md:text-4xl font-medium text-white mb-8 max-w-[971px] leading-tight drop-shadow-sm">
               Anseru is not just helping teams respond faster.
 We're building intelligence that compounds deal after deal.
             </span>

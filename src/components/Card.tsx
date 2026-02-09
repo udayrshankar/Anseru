@@ -34,8 +34,8 @@ const TimerBorder = ({ duration }: { duration: number }) => {
       <svg className="absolute inset-0 w-full h-full overflow-visible">
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#9F5AF0" />
-            <stop offset="100%" stopColor="#7038BA" />
+            <stop offset="0%" stopColor="#1C32E6" />
+            <stop offset="100%" stopColor="#7D23F7" />
           </linearGradient>
         </defs>
         <motion.rect
@@ -169,7 +169,7 @@ export default function Card({
         "border border-white/60",       // Subtle border
         
         // Shadows: Deep and layered for "Pop"
-        "shadow-[0_40px_80px_-20px_rgba(42,22,56,0.12),0_0_0_1px_rgba(255,255,255,0.8)_inset]",
+        "shadow-[0_40px_80px_-20px_rgba(28,50,230,0.15),0_0_0_1px_rgba(255,255,255,0.8)_inset]",
         
         minHeight,
         className
@@ -184,10 +184,10 @@ export default function Card({
         <div className="absolute inset-0 opacity-100" />
         
         {/* Top-Right Purple Orb */}
-        <div className="absolute top-[-20%] right-[-20%] w-80 h-80 bg-[#d0b2ec] rounded-full blur-[100px] transition-transform duration-700 hover:scale-110" />
+        <div className="absolute top-[-20%] right-[-20%] w-80 h-80 bg-[#7D23F7]/20 rounded-full blur-[100px] transition-transform duration-700 hover:scale-110" />
         
         {/* Bottom-Left Blue Orb */}
-        <div className="absolute bottom-[-20%] left-[-20%] w-72 h-72 bg-[#f4dfec] rounded-full blur-[90px]" />
+        <div className="absolute bottom-[-20%] left-[-20%] w-72 h-72 bg-[#1C32E6]/20 rounded-full blur-[90px]" />
 
         {/* Dynamic Moving Orbs */}
         {withMovingOrbs && <MovingOrbs />}

@@ -1,16 +1,9 @@
-import image from "../assets/bg2.png"
 const Background = () => {
   return (
-    <div className="flex flex-col w-full">
-         {[...Array(6)].map((_, i) => (
-            <img 
-              key={i}
-              src={image} 
-              alt="" 
-              className="w-full h-auto select-none pointer-events-none -mt-[18px]"
-              style={{ transform: i % 2 !== 0 ? 'scaleY(-1)' : 'none' }}
-            />
-         ))}
+    <div className="relative h-full w-full bg-gradient-to-br from-[#1C32E6] via-[#2C39F0] to-[#7D23F7]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(96,194,255,0.4),_transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(125,35,247,0.35),_transparent_60%)]" />
+      <div className="absolute inset-0 bg-black/10" />
     </div>
   )
 }

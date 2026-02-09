@@ -10,7 +10,6 @@ import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 import FAQ from "../components/sections/FAQ";
-import bgImage from "../assets/bg2.png";
 import HowItWorks from "../components/sections/HowItWorks";
 import CoreFeatures from "../components/features/CoreFeatures";
 
@@ -50,19 +49,11 @@ export default function Home() {
         <div className="relative">
           <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
             <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
-          <div className="flex flex-col w-full">
-             {[...Array(6)].map((_, i) => (
-                <img 
-                  key={i}
-                  src={bgImage} 
-                  alt="" 
-                  className="w-full h-auto select-none pointer-events-none -mt-[18px]"
-                  style={{ transform: i % 2 !== 0 ? 'scaleY(-1)' : 'none' }}
-                />
-             ))}
+              <div className="h-full w-full bg-gradient-to-br from-[#1C32E6] via-[#2C39F0] to-[#7D23F7] opacity-95" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(96,194,255,0.35),_transparent_55%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(125,35,247,0.35),_transparent_60%)]" />
+            </div>
           </div>
-        </div>
-      </div>
           <HeroSection />
           {/* AI Strategy Tabs */}
           <Workflow />

@@ -58,14 +58,14 @@ const Products = () => {
                   onClick={() => setActiveIndex(0)}
                   className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     activeProduct === 'rfp'
-                      ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
+                      ? "text-white shadow-[0_4px_12px_rgba(28,50,230,0.25)]"
                       : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/50"
                   }`}
                 >
                   {activeProduct === 'rfp' && (
                     <motion.div
                       layoutId="active-product-pill"
-                      className="absolute inset-0 bg-[#2A1638] rounded-full"
+                      className="absolute inset-0 bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] rounded-full"
                       transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     />
                   )}
@@ -76,14 +76,14 @@ const Products = () => {
                   onClick={() => setActiveIndex(1)}
                   className={`relative px-8 md:px-16 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     activeProduct === 'security'
-                      ? "text-white shadow-[0_4px_12px_rgba(42,22,56,0.2)]"
+                      ? "text-white shadow-[0_4px_12px_rgba(28,50,230,0.25)]"
                       : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/50"
                   }`}
                 >
                   {activeProduct === 'security' && (
                     <motion.div
                       layoutId="active-product-pill"
-                      className="absolute inset-0 bg-[#2A1638] rounded-full"
+                      className="absolute inset-0 bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] rounded-full"
                       transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     />
                   )}
@@ -159,16 +159,16 @@ const ProductsHero = () => {
         </div>
       </div>
 
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20">
-        <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-[#2A1638] mb-5">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 xl:px-[120px] pt-32 pb-20 text-white">
+        <h1 className="max-w-5xl text-3xl md:text-5xl lg:text-[64px] leading-tight text-white mb-5 drop-shadow-sm">
          Two agents. One shared
  <br className="hidden md:block"/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#60C2FF]">
             Intelligence Layer.
           </span>
         </h1>
 
-        <p className="text-base md:text-lg text-[#2A1638]/70 max-w-3xl mb-10">
+        <p className="text-base md:text-lg text-white/80 max-w-3xl mb-10">
           Anseru is designed as deal infrastructure, not just RFP automation. Every feature exists to improve speed, accuracy, collaboration, and auditability across enterprise sales workflows.
         </p>
 
@@ -236,7 +236,7 @@ const AgentCardsSection = ({
                
                <div className="flex flex-wrap gap-3">
                   {["Ingestion", "Mapping", "Drafting", "Review"].map((tag) => (
-                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
+                    <span key={tag} className="text-sm font-medium text-[#1C32E6]/80 bg-[#1C32E6]/10 px-4 py-2 rounded-full border border-[#1C32E6]/20 shadow-sm">
                       {tag}
                     </span>
                   ))}
@@ -270,7 +270,7 @@ const AgentCardsSection = ({
                
                <div className="flex flex-wrap gap-3">
                   {["Evidence", "Freshness", "Accuracy", "Audit"].map((tag) => (
-                    <span key={tag} className="text-sm font-medium text-[#2A1638]/80 bg-white px-4 py-2 rounded-full border border-purple-100 shadow-sm">
+                    <span key={tag} className="text-sm font-medium text-[#1C32E6]/80 bg-[#1C32E6]/10 px-4 py-2 rounded-full border border-[#1C32E6]/20 shadow-sm">
                       {tag}
                     </span>
                   ))}

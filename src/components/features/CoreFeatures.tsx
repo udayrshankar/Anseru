@@ -76,15 +76,15 @@ const CoreFeatures = () => {
   ];
 
   return (
-    <section className="py-0 mt-10 bg-[#FAFAFA] relative">
+    <section className="py-0 mt-10 bg-[#F7F8FF] relative">
       <div className="max-w-[1400px] mx-auto px-6 xl:px-[120px]">
         {/* Section Header */}
         <div className="mb-12 lg:mb-20 text-center relative lg:sticky lg:top-25 z-0">
-          <p className="font-onest text-lg font-medium text-black mb-3 tracking-wide uppercase opacity-70">
+          <p className="font-onest text-lg font-medium text-[#1C32E6] mb-3 tracking-wide uppercase opacity-70">
             Platform Capabilities
           </p>
-          <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-            Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">Features</span>
+          <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#1C32E6] tracking-tight leading-tight">
+            Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1C32E6] to-[#7D23F7]">Features</span>
           </h2>
         </div>
 
@@ -104,36 +104,36 @@ const CoreFeatures = () => {
                 zIndex: idx + 1,
               }}
             >
-              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white to-purple-50/30 bg-white border border-purple-200/80 shadow-[0_0px_80px_-20px_rgba(202,168,232,0.5),0_0_0_1px_rgba(255,255,255,0.8)_inset] transition-all duration-500 h-[300px]">
+              <div className="group relative flex flex-col md:flex-row gap-8 overflow-hidden rounded-[40px] p-8 md:p-12 bg-gradient-to-br from-white via-[#1C32E6]/10 to-[#7D23F7]/15 border border-[#1C32E6]/20 shadow-[0_0px_80px_-20px_rgba(28,50,230,0.35),0_0_0_1px_rgba(255,255,255,0.8)_inset] transition-all duration-500 h-[300px]">
                 
                 {/* Decorative Background SVG */}
                 <FeatureBackground index={idx} />
 
                 {/* Watermark Number */}
-                <span className="absolute -top-6 -right-6 text-[180px] font-bold text-black/[0.02] leading-none select-none pointer-events-none transition-colors duration-500 text-purple-500/[0.03]">
+                <span className="absolute -top-6 -right-6 text-[180px] font-bold text-black/[0.02] leading-none select-none pointer-events-none transition-colors duration-500 text-[#1C32E6]/10">
                   {String(idx + 1).padStart(2, '0')}
                 </span>
 
                 {/* Icon & Title Section */}
                 <div className="md:w-1/3 flex flex-col items-start relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mb-6 scale-110 rotate-3 transition-transform duration-500 shadow-lg shadow-purple-500/10 border border-white/50">
-                    <feature.icon className="w-8 h-8 text-purple-600" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1C32E6]/15 to-[#7D23F7]/20 flex items-center justify-center mb-6 scale-110 rotate-3 transition-transform duration-500 shadow-lg shadow-[#1C32E6]/20 border border-white/60">
+                    <feature.icon className="w-8 h-8 text-[#1C32E6]" />
                   </div>
-                  <h3 className="font-onest text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-indigo-900 transition-colors duration-300">
+                  <h3 className="font-onest text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <div className="h-1 w-20 bg-purple-400 rounded-full transition-all duration-500" />
+                  <div className="h-1 w-20 bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] rounded-full transition-all duration-500" />
                 </div>
 
                 {/* Content Section */}
                 <div className="md:w-2/3 flex flex-col relative z-10">
-                   <p className="text-lg text-[#2A1638]/90 mb-8 leading-relaxed font-medium transition-colors duration-300">{feature.goal}</p>
+                   <p className="text-lg text-[#1C32E6]/90 mb-8 leading-relaxed font-medium transition-colors duration-300">{feature.goal}</p>
                    
                    <ul className="space-y-4 mt-auto">
                     {feature.capabilities.map((cap, i) => (
-                      <li key={i} className="flex items-start gap-3 text-base text-[#2A1638] transition-colors duration-300">
-                        <div className="mt-1 p-0.5 rounded-full bg-purple-100/80">
-                          <CheckCircle className="w-4 h-4 text-purple-600 shrink-0" />
+                      <li key={i} className="flex items-start gap-3 text-base text-[#1C32E6] transition-colors duration-300">
+                        <div className="mt-1 p-0.5 rounded-full bg-[#1C32E6]/15">
+                          <CheckCircle className="w-4 h-4 text-[#1C32E6] shrink-0" />
                         </div>
                         {cap}
                       </li>

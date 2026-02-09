@@ -55,15 +55,15 @@ const ComingSoon = () => {
           <Header />
           
           <main className="flex-grow flex flex-col items-center justify-center text-center px-4 pt-40 pb-20">
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="max-w-4xl mx-auto space-y-8 text-white">
               <div className="space-y-4">
-                 <div className="inline-block px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100 text-purple-600 text-sm font-medium mb-4">
+                 <div className="inline-block px-4 py-1.5 rounded-full bg-[#FF3F49]/15 border border-[#FF3F49]/40 text-[#FF3F49] text-sm font-medium mb-4">
                   Coming Soon
                 </div>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900">
-                  Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">Amazing</span> is Coming
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-sm">
+                  Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#60C2FF]">Amazing</span> is Coming
                 </h1>
-                <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto">
+                <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
                   Our first pilot case study with a <span className="font-bold">Mid-Market Enterprise.</span>
                 </p>
               </div>
@@ -92,11 +92,11 @@ const ComingSoon = () => {
 };
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
-  <div className="flex flex-col items-center p-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-purple-100 min-w-[100px] md:min-w-[140px] shadow-sm">
-    <span className="text-4xl md:text-5xl font-bold text-slate-900 tab-num">
+  <div className="flex flex-col items-center p-4 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 min-w-[100px] md:min-w-[140px] shadow-sm text-white">
+    <span className="text-4xl md:text-5xl font-bold text-white tab-num">
       {value.toString().padStart(2, '0')}
     </span>
-    <span className="text-sm md:text-base text-purple-600 font-medium mt-2 uppercase tracking-wider">
+    <span className="text-sm md:text-base text-[#60C2FF] font-medium mt-2 uppercase tracking-wider">
       {label}
     </span>
   </div>

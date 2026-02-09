@@ -8,7 +8,7 @@ export default function AnimationCarousel() {
   return (
     <div className="w-full h-full relative group flex items-center justify-center">
       {/* Solid Brand-Aligned Background */}
-      <div className="absolute inset-0 bg-[#FBF7FF]" />
+      <div className="absolute inset-0 bg-[#F3F5FF]" />
       
       {/* Hero Cards Component - Independent Rotation */}
       <div className="w-full h-full flex items-center justify-center scale-90 md:scale-100">
