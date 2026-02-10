@@ -40,7 +40,7 @@ export const KgDrafting = () => {
                           />
                           {/* Cursor */}
                           <motion.div 
-                             className="w-0.5 h-3 bg-purple-500 ml-1"
+                             className="w-0.5 h-3 bg-[#FF3F49] ml-1"
                              animate={{ opacity: [1, 0] }}
                              transition={{ duration: 0.8, repeat: Infinity }}
                              style={{ display: i === 4 ? 'block' : 'none' }} // Only show on last active line
@@ -51,7 +51,7 @@ export const KgDrafting = () => {
           </div>
 
           <motion.div 
-             className="h-8 bg-purple-50 flex items-center justify-center gap-2 text-[10px] font-bold text-purple-600 border-t border-purple-100"
+             className="h-8 bg-[#FF3F49]/10 flex items-center justify-center gap-2 text-[10px] font-bold text-[#FF3F49] border-t border-[#FF3F49]/20"
              initial={{ y: 32 }}
              animate={{ y: 0 }}
              transition={{ delay: 5, duration: 0.5 }}
@@ -74,9 +74,9 @@ export const KgFormats = () => {
              
              {/* Input Formats (Orbiting / Floating) */}
              {[
-                 { icon: FileSpreadsheet, color: "text-emerald-600", bg: "bg-emerald-50", x: -80, y: 0 },
-                 { icon: FileText, color: "text-blue-600", bg: "bg-blue-50", x: 80, y: 0 },
-                 { icon: File, color: "text-red-600", bg: "bg-red-50", x: 0, y: -80 },
+                 { icon: FileSpreadsheet, color: "text-[#7D23F7]", bg: "bg-[#7D23F7]/10", x: -80, y: 0 },
+                 { icon: FileText, color: "text-[#1C32E6]", bg: "bg-[#1C32E6]/10", x: 80, y: 0 },
+                 { icon: File, color: "text-[#FF3F49]", bg: "bg-[#FF3F49]/10", x: 0, y: -80 },
              ].map((item, i) => (
                  <motion.div
                     key={i}
@@ -103,23 +103,23 @@ export const KgFormats = () => {
 
              {/* The Processing Ring */}
              <motion.div 
-                className="absolute inset-0 border-2 border-dashed border-purple-200 rounded-full"
+                className="absolute inset-0 border-2 border-dashed border-[#FF3F49]/20 rounded-full"
                 animate={{ rotate: 360, scale: [0.8, 1, 0.8] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
              />
 
              {/* Output Document (Center) */}
              <motion.div 
-                 className="w-24 h-32 bg-white rounded-xl shadow-xl border border-purple-100 flex flex-col items-center justify-center gap-2 relative z-0"
+                 className="w-24 h-32 bg-white rounded-xl shadow-xl border border-[#FF3F49]/20 flex flex-col items-center justify-center gap-2 relative z-0"
                  animate={{ scale: [0.9, 1.1, 0.9], y: [0, -10, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
              >
-                 <LayoutTemplate size={32} className="text-purple-600" />
+                 <LayoutTemplate size={32} className="text-[#FF3F49]" />
                  <div className="text-[10px] font-bold text-gray-800">Unified</div>
                  
                  {/* Success Badge */}
                  <motion.div 
-                    className="absolute -top-2 -right-2 bg-green-500 rounded-full p-1 border-2 border-white"
+                    className="absolute -top-2 -right-2 bg-[#60C2FF] rounded-full p-1 border-2 border-white"
                     animate={{ scale: [0, 1, 1, 0] }}
                     transition={{ duration: 4, repeat: Infinity, times: [0.4, 0.5, 0.9, 1] }}
                  >
@@ -154,9 +154,9 @@ export const KgReview = () => {
              {/* The Scanner Gate (Middle) */}
              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
                  <div className="text-[9px] text-gray-400 font-bold tracking-widest uppercase">Analysis</div>
-                 <div className="w-1 h-16 bg-gradient-to-b from-transparent via-purple-400 to-transparent blur-[1px]" />
+                 <div className="w-1 h-16 bg-gradient-to-b from-transparent via-[#FF3F49]/70 to-transparent blur-[1px]" />
                  <motion.div 
-                    className="absolute inset-0 bg-purple-500/10 blur-xl rounded-full"
+                    className="absolute inset-0 bg-[#FF3F49]/10 blur-xl rounded-full"
                     animate={{ opacity: [0, 1, 0] }}
                     transition={{ duration: 3, times: [0.4, 0.5, 0.6], repeat: Infinity }}
                  />
@@ -170,16 +170,16 @@ export const KgReview = () => {
                     animate={{ opacity: [0.3, 1, 0.3] }}
                     transition={{ duration: 3, times: [0.5, 0.6, 1], repeat: Infinity }}
                  >
-                     <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                         <Zap size={12} className="text-green-600" />
+                     <div className="w-6 h-6 rounded-full bg-[#60C2FF]/10 flex items-center justify-center">
+                         <Zap size={12} className="text-[#60C2FF]" />
                      </div>
                      <span className="text-[10px] font-bold text-gray-500">Auto</span>
                  </motion.div>
 
                  {/* Human Review (Faded out for this loop to simplify) */}
                  <div className="flex items-center gap-2 opacity-30 grayscale">
-                     <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center">
-                         <User size={12} className="text-orange-600" />
+                     <div className="w-6 h-6 rounded-full bg-[#FF3F49]/10 flex items-center justify-center">
+                         <User size={12} className="text-[#FF3F49]" />
                      </div>
                       <span className="text-[10px] font-bold text-gray-500">Human</span>
                  </div>

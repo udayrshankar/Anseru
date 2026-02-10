@@ -17,10 +17,10 @@ const ORB_THEMES: Record<OrbTheme, {
   blob3: string;
 }> = {
   purple: {
-    glow: 'bg-purple-500/20',
-    blob1: 'bg-indigo-600',
-    blob2: 'bg-fuchsia-400',
-    blob3: 'bg-purple-500',
+    glow: 'bg-[#fe3f48]/20',
+    blob1: 'bg-[#d62f37]',
+    blob2: 'bg-[#ff8f94]',
+    blob3: 'bg-[#fe3f48]',
   },
   blue: {
     glow: 'bg-blue-500/20',

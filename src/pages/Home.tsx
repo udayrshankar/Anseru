@@ -10,9 +10,10 @@ import Testimonials from "../components/sections/Testimonials";
 import CTASection from "../components/sections/CTASection";
 import Footer from "../components/layout/Footer";
 import FAQ from "../components/sections/FAQ";
-import bgImage from "../assets/bg2.png";
+
 import HowItWorks from "../components/sections/HowItWorks";
 import CoreFeatures from "../components/features/CoreFeatures";
+import GlassGridBackground from "../components/layout/GlassGridBackground";
 
 // Control the vertical spacing between sections here
 const SECTION_GAP = "gap-5";
@@ -48,18 +49,10 @@ export default function Home() {
       {/* Hero */}
       <main className={`flex flex-col ${SECTION_GAP}`}>
         <div className="relative">
-          <div className="absolute inset-0 max-w-[1400px] mx-auto overflow-hidden pointer-events-none">
-            <div className="absolute inset-0 max-w-[1400px] mx-auto rounded-[50px] overflow-hidden">
-          <div className="flex flex-col w-full">
-             {[...Array(6)].map((_, i) => (
-                <img 
-                  key={i}
-                  src={bgImage} 
-                  alt="" 
-                  className="w-full h-auto select-none pointer-events-none -mt-[18px]"
-                  style={{ transform: i % 2 !== 0 ? 'scaleY(-1)' : 'none' }}
-                />
-             ))}
+          <div className="absolute inset-0 mx-auto overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 rounded-[38px] overflow-hidden mx-14 my-2">
+          <div className="flex flex-col w-full h-full">
+             <GlassGridBackground />
           </div>
         </div>
       </div>

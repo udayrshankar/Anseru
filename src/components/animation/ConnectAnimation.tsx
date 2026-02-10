@@ -3,14 +3,14 @@ import { Database, FolderKanban, FileText, Lock } from "lucide-react";
 
 export default function ConnectAnimation() {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 relative overflow-hidden">
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#7D23F7]/5 via-white to-[#1C32E6]/5 relative overflow-hidden">
       
        {/* Background Ripple */}
        <div className="absolute inset-0 flex items-center justify-center">
             {[1, 2, 3].map((i) => (
                 <motion.div 
                     key={i}
-                    className="absolute border border-purple-100 rounded-full"
+                    className="absolute border border-[#7D23F7]/20 rounded-full"
                     style={{ width: `${i * 150}px`, height: `${i * 150}px` }}
                     animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.2, 0.5] }}
                     transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
@@ -19,8 +19,8 @@ export default function ConnectAnimation() {
        </div>
 
       {/* Central Hub */}
-      <div className="relative z-20 w-20 h-20 bg-white shadow-[0_10px_40px_rgba(124,58,237,0.15)] rounded-2xl flex items-center justify-center border border-purple-100">
-          <Lock className="text-purple-600" size={28} />
+      <div className="relative z-20 w-20 h-20 bg-white shadow-[0_10px_40px_rgba(124,58,237,0.15)] rounded-2xl flex items-center justify-center border border-[#7D23F7]/20">
+          <Lock className="text-[#7D23F7]" size={28} />
           {/* Inner Pulse */}
           <motion.div 
             className="absolute inset-0 bg-purple-500/5 rounded-2xl"
@@ -30,11 +30,11 @@ export default function ConnectAnimation() {
       </div>
 
       {/* Sources feeding in */}
-      <SourceItem icon={Database} angle={0} color="text-blue-500" bg="bg-blue-50" delay={0.1} repeatDelay={1} />
-      <SourceItem icon={FolderKanban} angle={72} color="text-orange-500" bg="bg-orange-50" delay={0.3} repeatDelay={1.5} />
-      <SourceItem icon={FileText} angle={144} color="text-green-500" bg="bg-green-50" delay={0.5} repeatDelay={0.8} />
-      <SourceItem icon={Lock} angle={216} color="text-red-500" bg="bg-red-50" delay={0.7} repeatDelay={1.2} />
-      <SourceItem icon={FileText} angle={288} color="text-purple-500" bg="bg-purple-50" delay={0.9} repeatDelay={0.5} />
+      <SourceItem icon={Database} angle={0} color="text-[#1C32E6]" bg="bg-[#1C32E6]/5" delay={0.1} repeatDelay={1} />
+      <SourceItem icon={FolderKanban} angle={72} color="text-[#FF3F49]" bg="bg-[#FF3F49]/5" delay={0.3} repeatDelay={1.5} />
+      <SourceItem icon={FileText} angle={144} color="text-[#60C2FF]" bg="bg-[#60C2FF]/5" delay={0.5} repeatDelay={0.8} />
+      <SourceItem icon={Lock} angle={216} color="text-[#FF3F49]" bg="bg-[#FF3F49]/5" delay={0.7} repeatDelay={1.2} />
+      <SourceItem icon={FileText} angle={288} color="text-[#7D23F7]" bg="bg-[#7D23F7]/5" delay={0.9} repeatDelay={0.5} />
 
     </div>
   );
@@ -73,7 +73,7 @@ const SourceItem = ({ icon: Icon, angle, color, bg, delay, repeatDelay }: { icon
 
             {/* Data Packet */}
             <motion.div 
-                className="absolute w-2 h-2 bg-purple-500 rounded-full z-10"
+                className="absolute w-2 h-2 bg-[#7D23F7] rounded-full z-10"
                 initial={{ x, y, opacity: 0 }}
                 animate={{ 
                     x: [x, 0], 

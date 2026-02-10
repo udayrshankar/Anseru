@@ -22,7 +22,7 @@ export default function ReviewAnimation() {
                  {/* Empty Slot */}
                  <div className="w-12 h-8 rounded border-2 border-dashed border-gray-100 flex items-center justify-center relative overflow-hidden bg-gray-50/50">
                     <motion.div 
-                        className="absolute inset-0 bg-green-500/10" 
+                        className="absolute inset-0 bg-[#60C2FF]/10"  
                         animate={{ opacity: [0, 1, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                     />
@@ -33,7 +33,7 @@ export default function ReviewAnimation() {
 
             {/* Ingesting Item */}
             <motion.div
-               className="absolute w-12 h-8 bg-purple-600 rounded shadow-lg flex items-center justify-center text-white z-20"
+               className="absolute w-12 h-8 bg-[#7D23F7] rounded shadow-lg flex items-center justify-center text-white z-20"
                style={{ top: "60%", left: "50%", marginLeft: "-24px" }}
                initial={{ y: 60, opacity: 0, scale: 0.8 }}
                animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -49,10 +49,10 @@ export default function ReviewAnimation() {
           animate={{ y: [-5, 5, -5] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
        >
-           <div className="w-8 h-8 rounded-full bg-white shadow-lg border border-purple-50 flex items-center justify-center text-purple-500">
+           <div className="w-8 h-8 rounded-full bg-white shadow-lg border border-[#7D23F7]/10 flex items-center justify-center text-[#7D23F7]">
                <RotateCw size={14} />
            </div>
-           <span className="text-[9px] font-bold text-purple-400">Syncing</span>
+           <span className="text-[9px] font-bold text-[#7D23F7]/70">Syncing</span>
        </motion.div>
 
     </div>

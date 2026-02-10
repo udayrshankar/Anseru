@@ -53,39 +53,39 @@ const THEME_STYLES: Record<FAQTheme, {
     gradient: string;
 }> = {
     blue: {
-        border: "hover:border-blue-200",
-        bgHover: "hover:bg-blue-50/50",
-        iconBg: "bg-blue-100",
-        iconColor: "text-blue-600",
-        gradient: "from-blue-500/10 to-cyan-500/10"
+        border: "hover:border-[#1C32E6]/20",
+        bgHover: "hover:bg-[#1C32E6]/5",
+        iconBg: "bg-[#1C32E6]/10",
+        iconColor: "text-[#1C32E6]",
+        gradient: "from-[#1C32E6]/10 to-[#60C2FF]/10"
     },
     purple: {
-        border: "hover:border-purple-200",
-        bgHover: "hover:bg-purple-50/50",
-        iconBg: "bg-purple-100",
-        iconColor: "text-purple-600",
-        gradient: "from-purple-500/10 to-indigo-500/10"
+        border: "hover:border-[#7D23F7]/20",
+        bgHover: "hover:bg-[#7D23F7]/5",
+        iconBg: "bg-[#7D23F7]/10",
+        iconColor: "text-[#7D23F7]",
+        gradient: "from-[#7D23F7]/10 to-[#E54763]/10"
     },
     emerald: {
-        border: "hover:border-emerald-200",
-        bgHover: "hover:bg-emerald-50/50",
-        iconBg: "bg-emerald-100",
-        iconColor: "text-emerald-600",
-        gradient: "from-emerald-500/10 to-teal-500/10"
+        border: "hover:border-[#60C2FF]/20",
+        bgHover: "hover:bg-[#60C2FF]/5",
+        iconBg: "bg-[#60C2FF]/10",
+        iconColor: "text-[#60C2FF]",
+        gradient: "from-[#60C2FF]/10 to-[#1C32E6]/10"
     },
     orange: {
-        border: "hover:border-orange-200",
-        bgHover: "hover:bg-orange-50/50",
-        iconBg: "bg-orange-100",
-        iconColor: "text-orange-600",
-        gradient: "from-orange-500/10 to-amber-500/10"
+        border: "hover:border-[#FF3F49]/20",
+        bgHover: "hover:bg-[#FF3F49]/5",
+        iconBg: "bg-[#FF3F49]/10",
+        iconColor: "text-[#FF3F49]",
+        gradient: "from-[#FF3F49]/10 to-[#E54763]/10"
     },
     pink: {
-        border: "hover:border-pink-200",
-        bgHover: "hover:bg-pink-50/50",
-        iconBg: "bg-pink-100",
-        iconColor: "text-pink-600",
-        gradient: "from-pink-500/10 to-rose-500/10"
+        border: "hover:border-[#E54763]/20",
+        bgHover: "hover:bg-[#E54763]/5",
+        iconBg: "bg-[#E54763]/10",
+        iconColor: "text-[#E54763]",
+        gradient: "from-[#E54763]/10 to-[#7D23F7]/10"
     }
 };
 
@@ -95,7 +95,7 @@ export default function FAQ() {
   return (
     <section className="px-6 py-24 bg-white relative overflow-hidden">
         {/* Subtle Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-purple-50/50 to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#fe3f48]/5 to-transparent pointer-events-none" />
 
       <div className="max-w-[900px] w-full mx-auto relative z-10">
         <div className="text-center mb-16">

@@ -41,9 +41,9 @@ const AnimationSequence = () => {
 const FileUploadPhase = () => {
     // 3 Files: PDF, Word, Excel converging
     const files = [
-        { label: "PDF", color: "bg-red-500", x: -80, y: -40, delay: 0 },
-        { label: "DOCX", color: "bg-blue-500", x: 80, y: -40, delay: 0.1 },
-        { label: "XLSX", color: "bg-green-500", x: 0, y: 60, delay: 0.2 },
+        { label: "PDF", color: "bg-[#FF3F49]", x: -80, y: -40, delay: 0 }, // Crimson
+        { label: "DOCX", color: "bg-[#1C32E6]", x: 80, y: -40, delay: 0.1 }, // Ultramarine
+        { label: "XLSX", color: "bg-[#7D23F7]", x: 0, y: 60, delay: 0.2 }, // Violet
     ];
 
     return (
@@ -91,9 +91,9 @@ const ProcessingPhase = () => {
             {/* Header */}
             <div className="h-10 bg-slate-50 border-b border-slate-100 flex items-center px-3 gap-2 shrink-0">
                  <div className="flex gap-1.5">
-                     <div className="w-2.5 h-2.5 rounded-full bg-red-400/20" />
-                     <div className="w-2.5 h-2.5 rounded-full bg-amber-400/20" />
-                     <div className="w-2.5 h-2.5 rounded-full bg-green-400/20" />
+                     <div className="w-2.5 h-2.5 rounded-full bg-[#FF3F49]/20" />
+                     <div className="w-2.5 h-2.5 rounded-full bg-[#60C2FF]/20" />
+                     <div className="w-2.5 h-2.5 rounded-full bg-[#7D23F7]/20" />
                  </div>
                  <div className="ml-2 h-2 w-20 bg-slate-200 rounded-full" />
             </div>
@@ -110,8 +110,8 @@ const ProcessingPhase = () => {
                      >
                          {/* Section Header */}
                          <div className="flex items-center gap-2">
-                             <div className="w-4 h-4 rounded bg-purple-100 flex items-center justify-center">
-                                 <Layers size={10} className="text-purple-600" />
+                             <div className="w-4 h-4 rounded bg-[#fe3f48]/10 flex items-center justify-center">
+                                 <Layers size={10} className="text-[#fe3f48]" />
                              </div>
                              <div className="h-2 w-16 bg-slate-200 rounded-full" />
                          </div>
@@ -124,7 +124,7 @@ const ProcessingPhase = () => {
                                      
                                      {/* Scan Effect */}
                                      <motion.div 
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent"
+                                         className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF3F49]/10 to-transparent"
                                         initial={{ x: "-100%" }}
                                         animate={{ x: "200%" }}
                                         transition={{ 
@@ -143,7 +143,7 @@ const ProcessingPhase = () => {
 
             {/* Floating Success Indicator */}
             <motion.div 
-                className="absolute bottom-4 right-4 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1"
+                className="absolute bottom-4 right-4 bg-[#7D23F7] text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1"
                 initial={{ opacity: 0, y: 10, scale: 0.8 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: 3.5, type: "spring" }}
@@ -162,10 +162,10 @@ export const KgDrafting = () => {
              
              {/* Central Knowledge Base Node (Abstract) */}
              <div className="absolute top-8 flex flex-col items-center z-10">
-                 <div className="w-10 h-10 bg-white rounded-lg border border-purple-200 shadow-sm flex items-center justify-center">
-                     <Database size={18} className="text-purple-600" />
+                 <div className="w-10 h-10 bg-white rounded-lg border border-[#FF3F49]/20 shadow-sm flex items-center justify-center">
+                     <Database size={18} className="text-[#FF3F49]" />
                  </div>
-                 <div className="h-8 w-0.5 bg-purple-200" />
+                 <div className="h-8 w-0.5 bg-[#FF3F49]/20" />
              </div>
 
              {/* Document being drafted */}
@@ -213,7 +213,7 @@ const DraftItem = ({ delay, confidence }: { delay: number, confidence: 'high' | 
 
                 {/* Connection Line from KB */}
                 <motion.div 
-                   className="absolute -top-6 left-1/2 w-0.5 bg-purple-300 origin-top"
+                   className="absolute -top-6 left-1/2 w-0.5 bg-[#FF3F49]/50 origin-top"
                    style={{ height: 24 }}
                    initial={{ scaleY: 0, opacity: 0 }}
                    animate={{ scaleY: 1, opacity: 1 }}
@@ -224,7 +224,7 @@ const DraftItem = ({ delay, confidence }: { delay: number, confidence: 'high' | 
                 <motion.div 
                     className={cn(
                         "absolute -right-2 -top-2 px-1.5 py-0.5 rounded-md text-[9px] font-bold shadow-sm flex items-center gap-1",
-                        confidence === 'high' ? "bg-green-100 text-green-700 border border-green-200" : "bg-orange-100 text-orange-700 border border-orange-200"
+                        confidence === 'high' ? "bg-[#60C2FF]/10 text-[#60C2FF] border border-[#60C2FF]/20" : "bg-[#FF3F49]/10 text-[#FF3F49] border border-[#FF3F49]/20"
                     )}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -256,13 +256,13 @@ export const KgReview = () => {
                   {/* Item being reviewed */}
                   <div className="space-y-2">
                        <div className="h-2 w-1/2 bg-slate-200 rounded-full" />
-                       <div className="relative p-2 bg-orange-50 rounded border border-orange-100 text-left">
+                       <div className="relative p-2 bg-[#FF3F49]/5 rounded border border-[#FF3F49]/20 text-left">
                             <div className="h-1.5 w-full bg-slate-300 rounded-full mb-1" />
                             <div className="h-1.5 w-4/5 bg-slate-300 rounded-full" />
                             
                             {/* Flag Badge */}
                             <motion.div 
-                                className="absolute -top-2 -right-2 bg-orange-500 text-white p-1 rounded-full shadow-sm z-10"
+                                className="absolute -top-2 -right-2 bg-[#FF3F49] text-white p-1 rounded-full shadow-sm z-10"
                                 initial={{ scale: 1 }}
                                 animate={{ scale: 0, opacity: 0 }}
                                 transition={{ delay: 1.5, duration: 0.3 }}
@@ -272,7 +272,7 @@ export const KgReview = () => {
 
                             {/* Success Badge (appears later) */}
                             <motion.div 
-                                className="absolute -top-2 -right-2 bg-green-500 text-white p-1 rounded-full shadow-sm z-10"
+                                className="absolute -top-2 -right-2 bg-[#60C2FF] text-white p-1 rounded-full shadow-sm z-10"
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 transition={{ delay: 1.6, type: "spring" }}
@@ -304,12 +304,12 @@ export const KgReview = () => {
                       transition={{ delay: 2.5, type: "spring" }}
                   >
                        <div className="flex items-center gap-2">
-                             <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
-                                 <FileText size={12} className="text-blue-600" />
+                             <div className="w-6 h-6 bg-[#1C32E6]/10 rounded flex items-center justify-center">
+                                 <FileText size={12} className="text-[#1C32E6]" />
                              </div>
                              <span className="text-[10px] font-bold text-slate-600">Final_RFP.pdf</span>
                        </div>
-                       <div className="text-blue-600">
+                       <div className="text-[#1C32E6]">
                            <Download size={14} />
                        </div>
                   </motion.div>
@@ -317,7 +317,7 @@ export const KgReview = () => {
 
              {/* Knowledge Loop Particle */}
              <motion.div
-                  className="absolute z-10 flex items-center gap-1 bg-purple-600 text-white px-2 py-1 rounded-full text-[9px] font-bold shadow-lg"
+                  className="absolute z-10 flex items-center gap-1 bg-[#FF3F49] text-white px-2 py-1 rounded-full text-[9px] font-bold shadow-lg"
                   initial={{ x: 0, y: 40, opacity: 0, scale: 0.5 }}
                   animate={{ 
                       y: -150, 
@@ -337,7 +337,7 @@ export const KgReview = () => {
                   transition={{ delay: 4 }}
              >
                   <span className="text-[9px] text-gray-400 uppercase tracking-wider">Speedup</span>
-                  <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-300">
+                  <span className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#60C2FF] to-[#7D23F7]">
                       11x Faster
                   </span>
              </motion.div>

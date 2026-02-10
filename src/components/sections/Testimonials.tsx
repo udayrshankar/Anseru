@@ -92,7 +92,7 @@ const Testimonials = () => {
                            transition={{ duration: 0.5 }}
                            className="space-y-8"
                        >
-                           <Quote className="w-12 h-12 text-[#C084FC] opacity-50" fill="currentColor" />
+                       <Quote className="w-12 h-12 text-[#fe3f48] opacity-50" fill="currentColor" />
                            <p className="text-xl md:text-3xl font-medium text-[#2A1638] leading-relaxed">
                                "{TESTIMONIALS[activeIndex].quote}"
                            </p>
@@ -177,7 +177,7 @@ const Testimonials = () => {
                         onClick={() => setActiveIndex(i)}
                         className={`rounded-full transition-all duration-300 border border-transparent ${
                             i === activeIndex 
-                            ? "w-4 h-4 bg-[#C084FC] scale-125 shadow-md" 
+                            ? "w-4 h-4 bg-[#fe3f48] scale-125 shadow-md" 
                             : "w-4 h-4 bg-gray-200 hover:bg-gray-300 hover:scale-110"
                         }`}
                     />

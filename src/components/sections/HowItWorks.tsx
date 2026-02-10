@@ -45,7 +45,7 @@ const   HowItWorks = () => {
               The Process
             </p>
             <h2 className="font-onest text-3xl md:text-5xl font-medium text-[#2A1638] tracking-tight leading-tight">
-              How <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9F5AF0] to-[#7038BA]">Anseru</span> Works
+              How <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#fe3f48] to-[#d62f37]">Anseru</span> Works
             </h2>
           </motion.div>
         </div>
@@ -57,7 +57,7 @@ const   HowItWorks = () => {
           onMouseLeave={onMouseLeave}
         >
            {/* Connecting Line (Desktop) */}
-           <div className="hidden lg:block absolute top-[50px] left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-200 to-transparent -z-10" />
+           <div className="hidden lg:block absolute top-[50px] left-0 w-full h-px bg-gradient-to-r from-transparent via-[#fe3f48]/20 to-transparent -z-10" />
 
           {steps.map((step, idx) => (
             <motion.div
@@ -87,8 +87,8 @@ const   HowItWorks = () => {
               />
               
               {/* Floating Number Badge */}
-              <div className="absolute top-0 left-8 -translate-y-1/2 bg-white border border-purple-100 shadow-lg px-4 py-1.5 rounded-full z-20">
-                  <span className="text-sm font-bold text-purple-600 tracking-widest">{step.number}</span>
+              <div className="absolute top-0 left-8 -translate-y-1/2 bg-white border border-[#fe3f48]/20 px-4 py-1.5 rounded-full z-20">
+                  <span className="text-sm font-bold text-[#fe3f48] tracking-widest">{step.number}</span>
               </div>
               
                {/* Transfer Particle: Flows between active cards (Moved here to avoid clipping) */}

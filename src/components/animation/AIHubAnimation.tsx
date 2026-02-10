@@ -11,15 +11,15 @@ import { BsMicrosoftTeams } from "react-icons/bs";
 
 /* --- 1. CONFIGURATION --- */
 const leftApps = [
-  { id: "teams", label: "Teams", icon: BsMicrosoftTeams, color: "#4C5BD6" },
-  { id: "jira", label: "Jira", icon: SiJira, color: "#2B6CB0" },
-  { id: "dropbox", label: "Dropbox", icon: SiDropbox, color: "#2563EB" },
+  { id: "teams", label: "Teams", icon: BsMicrosoftTeams, color: "#1C32E6" }, // Ultramarine
+  { id: "jira", label: "Jira", icon: SiJira, color: "#60C2FF" }, // Sky
+  { id: "dropbox", label: "Dropbox", icon: SiDropbox, color: "#1C32E6" }, // Ultramarine
 ];
 
 const rightApps = [
-  { id: "drive", label: "Drive", icon: SiGoogledrive, color: "#16A34A" },
-  { id: "sheets", label: "Sheets", icon: SiGooglesheets, color: "#22C55E" },
-  { id: "slack", label: "Slack", icon: SiSlack, color: "#E11D48" },
+  { id: "drive", label: "Drive", icon: SiGoogledrive, color: "#7D23F7" }, // Violet
+  { id: "sheets", label: "Sheets", icon: SiGooglesheets, color: "#7D23F7" }, // Violet
+  { id: "slack", label: "Slack", icon: SiSlack, color: "#E54763" }, // Accent Pink
 ];
 
 /* --- 2. MAIN COMPONENT --- */
@@ -133,13 +133,7 @@ const AIHubAnimation = React.memo(() => {
       className="relative mx-auto flex items-center justify-center font-sans overflow-hidden transition-all duration-300"
       style={{ width: containerWidth, height: containerHeight }}
     >
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-indigo-100/60 via-purple-100/60 to-rose-100/60 blur-[90px] rounded-full opacity-70 transition-all duration-500
-            ${isMobile ? "w-[320px] h-[520px]" : "w-[620px] h-[320px]"}`}
-          style={{ willChange: "transform" }}
-        />
-      </div>
+
 
       <svg className="absolute inset-0 pointer-events-none z-10 overflow-visible">
         {[...leftApps, ...rightApps].map((app, i) => {
@@ -235,8 +229,8 @@ const AIHubAnimation = React.memo(() => {
           </h1>
           <div className="absolute -bottom-3 flex items-center gap-2 px-3 py-1 bg-white/90 backdrop-blur shadow-sm rounded-full border border-gray-100">
             <motion.div
-              className="w-2 h-2 rounded-full bg-emerald-500"
-              style={{ boxShadow: "0 0 10px 2px rgba(16, 185, 129, 0.35)" }}
+              className="w-2 h-2 rounded-full bg-[#60C2FF]"
+              style={{ boxShadow: "0 0 10px 2px rgba(96, 194, 255, 0.35)" }}
               animate={{ opacity: [0.4, 1, 0.4], scale: [0.9, 1.15, 0.9] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
             />

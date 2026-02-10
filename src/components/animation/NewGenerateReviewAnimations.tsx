@@ -22,23 +22,23 @@ export const NewGenerateAnimation = () => {
       
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[10%] -left-[10%] w-[300px] h-[300px] bg-indigo-100/40 rounded-full blur-3xl" />
-        <div className="absolute top-[20%] -right-[10%] w-[250px] h-[250px] bg-emerald-100/40 rounded-full blur-3xl" />
+        <div className="absolute -top-[10%] -left-[10%] w-[300px] h-[300px] bg-[#1C32E6]/20 rounded-full blur-3xl" />
+        <div className="absolute top-[20%] -right-[10%] w-[250px] h-[250px] bg-[#7D23F7]/20 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 w-[260px]">
         {/* The AI Avatar (Top Center) */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-20">
             <motion.div 
-                className="w-12 h-12 bg-white rounded-2xl shadow-lg border border-indigo-50 flex items-center justify-center"
+                className="w-12 h-12 bg-white rounded-2xl shadow-lg border border-[#1C32E6]/10 flex items-center justify-center"
                 animate={step < 4 ? { y: [0, -4, 0] } : { y: 0 }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-                <Bot className={`w-6 h-6 ${step < 4 ? "text-indigo-500" : "text-emerald-500"}`} />
+                <Bot className={`w-6 h-6 ${step < 4 ? "text-[#1C32E6]" : "text-[#7D23F7]"}`} />
                 {/* Thinking Dots */}
                 {step < 4 && (
                     <motion.div 
-                        className="absolute -right-1 -top-1 w-3 h-3 bg-indigo-500 rounded-full border-2 border-white"
+                        className="absolute -right-1 -top-1 w-3 h-3 bg-[#1C32E6] rounded-full border-2 border-white"
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 0.8, repeat: Infinity }}
                     />
@@ -59,7 +59,7 @@ export const NewGenerateAnimation = () => {
                     <div key={i} className="h-3 w-full rounded-full bg-slate-100 overflow-hidden relative">
                          {step >= i && (
                              <motion.div 
-                                className="absolute inset-0 bg-gradient-to-r from-indigo-200 to-indigo-100"
+                                className="absolute inset-0 bg-gradient-to-r from-[#1C32E6]/20 to-[#1C32E6]/10"
                                 initial={{ x: "-100%" }}
                                 animate={{ x: "0%" }}
                                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -71,7 +71,7 @@ export const NewGenerateAnimation = () => {
                 <div className="h-3 w-2/3 rounded-full bg-slate-100 overflow-hidden relative">
                      {step >= 4 && (
                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-r from-indigo-200 to-indigo-100"
+                            className="absolute inset-0 bg-gradient-to-r from-[#1C32E6]/20 to-[#1C32E6]/10"
                             initial={{ x: "-100%" }}
                             animate={{ x: "0%" }}
                             transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -88,7 +88,7 @@ export const NewGenerateAnimation = () => {
                         animate={{ scale: 1, rotate: 0 }}
                         exit={{ scale: 0 }}
                         transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                        className="absolute -bottom-4 -right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 z-20"
+                        className="absolute -bottom-4 -right-4 bg-[#7D23F7] text-white px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 z-20"
                     >
                         <Sparkles size={12} fill="currentColor" />
                         <span className="text-[10px] font-bold uppercase tracking-wide">Perfect</span>
@@ -142,7 +142,7 @@ export const NewReviewAnimation = () => {
             {phase !== "exit" && (
                 <motion.div
                     key="doc"
-                    className={`relative w-48 h-56 bg-white rounded-xl shadow-lg border ${phase === "stamp" ? "border-emerald-200 bg-emerald-50/30" : "border-slate-200"} flex flex-col items-center justify-center gap-2 p-4`}
+                    className={`relative w-48 h-56 bg-white rounded-xl shadow-lg border ${phase === "stamp" ? "border-[#60C2FF]/30 bg-[#60C2FF]/10" : "border-slate-200"} flex flex-col items-center justify-center gap-2 p-4`}
                     initial={{ x: -200, rotate: -10, opacity: 0 }} // Fly in from left
                     animate={{ 
                         x: 0, 
@@ -172,7 +172,7 @@ export const NewReviewAnimation = () => {
                                 transition={{ type: "spring", stiffness: 500, damping: 20 }}
                                 className="absolute inset-0 flex items-center justify-center"
                             >
-                                <div className="border-4 border-emerald-500/50 text-emerald-600 px-4 py-1 rounded-lg -rotate-12 text-xl font-black uppercase tracking-widest bg-white/50 backdrop-blur-sm shadow-xl">
+                                <div className="border-4 border-[#60C2FF]/50 text-[#60C2FF] px-4 py-1 rounded-lg -rotate-12 text-xl font-black uppercase tracking-widest bg-white/50 backdrop-blur-sm shadow-xl">
                                     Approved
                                 </div>
                             </motion.div>
@@ -193,7 +193,7 @@ export const NewReviewAnimation = () => {
             }}
             transition={{ duration: 0.5 }}
         >
-             <div className="bg-indigo-600 text-white p-2 rounded-full shadow-xl shadow-indigo-600/30">
+             <div className="bg-[#1C32E6] text-white p-2 rounded-full shadow-xl shadow-[#1C32E6]/30">
                  {phase === "review" ? <UserCheck size={20} /> : <ShieldCheck size={20} />}
              </div>
         </motion.div>

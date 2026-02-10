@@ -16,13 +16,13 @@ export const SudResponse = () => {
           
           {/* 1. The Query (Left) */}
           <motion.div 
-             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-purple-100 flex items-center gap-3 z-10"
+             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-[#FF3F49]/20 flex items-center gap-3 z-10"
              initial={{ x: -20, opacity: 0 }}
              animate={{ x: 0, opacity: 1 }}
              transition={{ duration: 0.5 }}
           >
-              <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
-                  <span className="text-xs font-bold text-purple-600">Q</span>
+              <div className="w-8 h-8 rounded-full bg-[#FF3F49]/10 flex items-center justify-center">
+                  <span className="text-xs font-bold text-[#FF3F49]">Q</span>
               </div>
               <div className="space-y-1.5">
                   <div className="h-2 w-24 bg-gray-100 rounded-full" />
@@ -31,9 +31,9 @@ export const SudResponse = () => {
           </motion.div>
 
           {/* Connection Beam */}
-          <div className="w-16 h-px bg-purple-200 relative overflow-hidden">
+          <div className="w-16 h-px bg-[#FF3F49]/20 relative overflow-hidden">
              <motion.div 
-                className="absolute inset-0 bg-purple-500"
+                className="absolute inset-0 bg-[#FF3F49]"
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
@@ -42,21 +42,21 @@ export const SudResponse = () => {
 
           {/* 2. The Vault Core (Center) */}
           <div className="relative">
-              <div className="w-16 h-16 bg-white rounded-2xl shadow-xl border border-purple-100 flex items-center justify-center relative z-10">
-                  <Server size={24} className="text-purple-600" />
+              <div className="w-16 h-16 bg-white rounded-2xl shadow-xl border border-[#FF3F49]/20 flex items-center justify-center relative z-10">
+                  <Server size={24} className="text-[#FF3F49]" />
               </div>
               {/* Pulse Ring */}
               <motion.div 
-                  className="absolute inset-0 bg-purple-500/20 rounded-2xl -z-10"
+                  className="absolute inset-0 bg-[#FF3F49]/20 rounded-2xl -z-10"
                   animate={{ scale: [1, 1.4], opacity: [0.5, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
               />
           </div>
 
            {/* Connection Beam 2 */}
-           <div className="w-16 h-px bg-purple-200 relative overflow-hidden">
+           <div className="w-16 h-px bg-[#FF3F49]/20 relative overflow-hidden">
              <motion.div 
-                className="absolute inset-0 bg-purple-500"
+                className="absolute inset-0 bg-[#FF3F49]"
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{ duration: 1.5, delay: 0.75, repeat: Infinity, ease: "linear" }}
@@ -65,13 +65,13 @@ export const SudResponse = () => {
 
           {/* 3. Verified Answer (Right) */}
           <motion.div 
-             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-green-100 flex items-center gap-3 z-10"
+             className="bg-white px-4 py-3 rounded-xl shadow-lg border border-[#60C2FF]/20 flex items-center gap-3 z-10"
              initial={{ x: 20, opacity: 0 }}
              animate={{ x: 0, opacity: 1 }}
              transition={{ duration: 0.5, delay: 0.4 }}
           >
-              <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
-                  <ShieldCheck size={16} className="text-green-600" />
+              <div className="w-8 h-8 rounded-full bg-[#60C2FF]/10 flex items-center justify-center">
+                  <ShieldCheck size={16} className="text-[#60C2FF]" />
               </div>
               <div className="space-y-1.5">
                   <div className="h-2 w-28 bg-gray-100 rounded-full" />
@@ -108,7 +108,7 @@ export const SudUpdates = () => {
                         transition={{ duration: 0.5 }}
                     >
                         <div className="flex items-center gap-3">
-                            <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-purple-500' : 'bg-green-500'}`} />
+                            <div className={`w-2 h-2 rounded-full ${i === 1 ? 'bg-[#FF3F49]' : 'bg-[#60C2FF]'}`} />
                             <div className="space-y-1">
                                 <div className="h-1.5 w-24 bg-gray-100 rounded-full" />
                                 <div className="h-1.5 w-16 bg-gray-50 rounded-full" />
@@ -117,7 +117,7 @@ export const SudUpdates = () => {
                         
                         {i === 1 && (
                             <motion.div 
-                                className="flex items-center gap-1.5 text-[10px] font-medium text-purple-600 bg-purple-50 px-2 py-1 rounded-md"
+                                className="flex items-center gap-1.5 text-[10px] font-medium text-[#FF3F49] bg-[#FF3F49]/10 px-2 py-1 rounded-md"
                                 initial={{ opacity: 0, x: 10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1 }}
@@ -140,7 +140,7 @@ export const SudUpdates = () => {
                 animate={{ y: [20, 0, 0, 20], opacity: [0, 1, 1, 0] }}
                 transition={{ duration: 4, repeat: Infinity, repeatDelay: 1 }}
             >
-                <CheckCircle2 size={16} className="text-green-400" />
+                <CheckCircle2 size={16} className="text-[#60C2FF]" />
                 <div>
                    <div className="text-[10px] font-bold">Update Complete</div>
                    <div className="text-[9px] text-gray-400">Knowledge base synced</div>
@@ -178,8 +178,8 @@ export const SudSpeed = () => {
                           <motion.div 
                              className="w-8 h-8 rounded-full border-2 flex items-center justify-center bg-white z-10"
                              animate={{ 
-                                 borderColor: ["#e5e7eb", "#a855f7", "#22c55e"],
-                                 color: ["#9ca3af", "#a855f7", "#22c55e"],
+                                 borderColor: ["#e5e7eb", "#FF3F49", "#60C2FF"],
+                                 color: ["#9ca3af", "#FF3F49", "#60C2FF"],
                                  scale: [1, 1.1, 1]
                              }}
                              transition={{ duration: 0.5, delay: i * 0.8 }}
@@ -211,7 +211,7 @@ export const SudSpeed = () => {
           </div>
 
           <div className="flex items-center gap-2 text-xs font-medium text-gray-400 bg-gray-50 px-3 py-1.5 rounded-full mt-4">
-              <Zap size={12} className="text-purple-500" />
+              <Zap size={12} className="text-[#FF3F49]" />
               <span>Total Time: <span className="text-gray-900 font-bold">0.6s</span></span>
           </div>
 

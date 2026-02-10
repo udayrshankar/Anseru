@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-2 px-4">
-      <nav className="w-full max-w-[1400px] min-h-[72px] rounded-full border border-black/10 bg-white/10 backdrop-blur-[50px] shadow-lg flex items-center justify-between px-6 py-4">
+      <nav className="w-full max-w-[1400px] min-h-[72px] rounded-full border border-black/10 bg-white flex items-center justify-between px-6 py-4">
   {/* Logo */}
         <a href="/" className="hover:opacity-80 transition-opacity overflow-hidden">
           <img src={logo} alt="Anseru" className="h-[35px] w-auto" />

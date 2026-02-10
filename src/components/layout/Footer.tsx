@@ -33,7 +33,7 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex gap-4">
                 {[Twitter, Linkedin, Github].map((Icon, i) => (
-                    <a key={i} href="#" className="w-10 h-10 rounded-full bg-white border border-[#483953]/10 flex items-center justify-center text-[#483953] hover:bg-[#2A1638] hover:text-white hover:border-[#2A1638] transition-all duration-300 shadow-sm">
+                    <a key={i} href="#" className="w-10 h-10 rounded-full bg-white border border-[#483953]/10 flex items-center justify-center text-[#483953] hover:bg-[#1C32E6] hover:text-white hover:border-[#1C32E6] transition-all duration-300 shadow-sm">
                         <Icon size={18} />
                     </a>
                 ))}
@@ -56,7 +56,7 @@ export default function Footer() {
                       <li key={item}>
                         <a 
                           href="#" 
-                          className="text-[#483953]/70 hover:text-[#7038BA] font-medium text-[15px] transition-colors duration-200 block w-fit"
+                          className="text-[#483953]/70 hover:text-[#FF3F49] font-medium text-[15px] transition-colors duration-200 block w-fit"
                         >
                           {item}
                         </a>
@@ -75,10 +75,10 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-8 text-sm font-medium text-[#483953]/60">
-            <a href="#" className="hover:text-[#7038BA] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#7038BA] transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-[#7038BA] transition-colors">Security</a>
-            <a href="#" className="hover:text-[#7038BA] transition-colors">Cookies</a>
+            <a href="#" className="hover:text-[#FF3F49] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#FF3F49] transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-[#FF3F49] transition-colors">Security</a>
+            <a href="#" className="hover:text-[#FF3F49] transition-colors">Cookies</a>
           </div>
         </div>
       </div>

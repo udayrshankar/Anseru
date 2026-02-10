@@ -74,7 +74,7 @@ const BenchmarkTable = () => {
 
   const renderCell = (val: string | boolean) => {
     if (typeof val === 'boolean') {
-      return val ? <Check className="w-5 h-5 text-green-600" /> : <X className="w-5 h-5 text-[#2A1638]/20" />;
+      return val ? <Check className="w-5 h-5 text-[#60C2FF]" /> : <X className="w-5 h-5 text-[#2A1638]/20" />;
     }
     if (val === 'Poor' || val === 'Limited') {
       return <span className="text-sm text-[#2A1638]/50">{val}</span>;
@@ -170,7 +170,7 @@ const PricingTiers = () => {
           {/* Starter Card */}
           <div className="rounded-[32px] text-[#402e4c] hover:scale-[1.05] p-8 bg-white shadow-lg hover:shadow-xl border-2 border-[#7e43ca] transition-all relative flex flex-col">
             <div className="mb-6">
-              <span className="text-xs font-bold text-purple-600 uppercase tracking-widest bg-purple-100 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#7D23F7] uppercase tracking-widest bg-[#7D23F7]/10 px-3 py-1 rounded-full">
                 Starter
               </span>
             </div>
@@ -208,7 +208,7 @@ const PricingTiers = () => {
               Most Popular
             </div>
             <div className="mb-6">
-              <span className="text-xs font-bold text-purple-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#D4BBFC] uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
                 Growth/Mid Market
               </span>
             </div>
@@ -234,7 +234,7 @@ const PricingTiers = () => {
                 "Analytics & coverage insights"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm">
-                  <Check className="w-4 h-4 text-purple-300 mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-[#D4BBFC] mt-0.5 shrink-0" />
                   {item}
                 </li>
               ))}
@@ -244,7 +244,7 @@ const PricingTiers = () => {
           {/* Enterprise Card */}
           <div className="rounded-[32px] text-[#402e4c] p-8 bg-white hover:scale-[1.05] shadow-lg border-2 border-[#7e43ca] hover:shadow-xl transition-all relative flex flex-col">
             <div className="mb-6">
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#1C32E6] uppercase tracking-widest bg-[#1C32E6]/10 px-3 py-1 rounded-full">
                 Enterprise
               </span>
             </div>

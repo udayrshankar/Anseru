@@ -9,32 +9,32 @@ export default function UploadAnimation() {
        <div className="w-[200px] h-[140px] bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center relative z-10 border border-gray-100">
            
            {/* Drop Target */}
-           <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-purple-100" />
+           <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-[#7D23F7]/20" />
            
-           <UploadCloud className="text-purple-200 mb-2" size={32} />
-           <p className="text-[10px] font-bold text-purple-300 uppercase tracking-widest">Drop Zone</p>
+           <UploadCloud className="text-[#7D23F7]/30 mb-2" size={32} />
+           <p className="text-[10px] font-bold text-[#7D23F7]/50 uppercase tracking-widest">Drop Zone</p>
 
            {/* Scanning Light */}
            <motion.div 
-             className="absolute left-1 right-1 h-0.5 bg-purple-400 shadow-[0_0_10px_#a855f7]"
+             className="absolute left-1 right-1 h-0.5 bg-[#7D23F7] shadow-[0_0_10px_#7D23F7]"
              animate={{ top: ["10%", "90%", "10%"] }}
              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
            />
        </div>
 
        {/* Files Falling In */}
-       <FloatingFile delay={0} icon={FileText} color="text-blue-500" xOffset={-60} />
-       <FloatingFile delay={1.2} icon={FileSpreadsheet} color="text-green-500" xOffset={0} />
-       <FloatingFile delay={2.5} icon={File} color="text-red-500" xOffset={60} />
+       <FloatingFile delay={0} icon={FileText} color="text-[#1C32E6]" xOffset={-60} />
+       <FloatingFile delay={1.2} icon={FileSpreadsheet} color="text-[#60C2FF]" xOffset={0} />
+       <FloatingFile delay={2.5} icon={File} color="text-[#FF3F49]" xOffset={60} />
 
        {/* Success Toast */}
        <motion.div 
-         className="absolute bottom-6 bg-white pl-1 pr-3 py-1 rounded-full shadow-lg border border-green-100 flex items-center gap-2 z-20"
+         className="absolute bottom-6 bg-white pl-1 pr-3 py-1 rounded-full shadow-lg border border-[#60C2FF]/20 flex items-center gap-2 z-20"
          initial={{ y: 20, opacity: 0 }}
          animate={{ y: 0, opacity: 1 }}
          transition={{ delay: 0.5, duration: 0.5 }}
        >
-           <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
+           <div className="w-4 h-4 rounded-full bg-[#60C2FF] flex items-center justify-center">
                <motion.div 
                  initial={{ scale: 0 }} 
                  animate={{ scale: 1 }} 

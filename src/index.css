@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-ultramarine: #1C32E6;
+  --color-primary-violet: #7D23F7;
+  --color-secondary-crimson: #FF3F49;
+  --color-secondary-sky: #60C2FF;
+  --color-accent-pink: #E54763;
+
+  /* Named Gradients */
+  --image-gradient-deep-midnight: linear-gradient(135deg, #0A0F2C 0%, #1C32E6 100%);
+  --image-gradient-ocean-breeze: linear-gradient(135deg, #1C32E6 0%, #60C2FF 100%);
+  --image-gradient-sunset-mist: linear-gradient(135deg, #FF3F49 0%, #7D23F7 100%);
+  --image-gradient-morning-dew: linear-gradient(135deg, #ffffff 0%, #60C2FF 100%);
+
+  /* Opacity Stops */
+  --opacity-stop-100: 1;
+  --opacity-stop-80: 0.8;
+  --opacity-stop-50: 0.5;
+  --opacity-stop-30: 0.3;
+  --opacity-stop-10: 0.1;
+}
+
 :root {
   /* Typography System */
   --font-onest: 'Onest', system-ui, sans-serif;

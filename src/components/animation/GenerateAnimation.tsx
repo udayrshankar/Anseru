@@ -42,11 +42,11 @@ export default function GenerateAnimation() {
                  transition={{ delay: 0.5 }}
                >
                    <div className="flex items-center gap-2 mb-1">
-                        <Sparkles className="text-purple-500" size={12} />
-                        <span className="text-[9px] font-bold text-purple-500">Generating...</span>
+                        <Sparkles className="text-[#7D23F7]" size={12} />
+                        <span className="text-[9px] font-bold text-[#7D23F7]">Generating...</span>
                    </div>
                    
-                   <div className="space-y-1.5 rounded-lg border border-purple-50 p-3 bg-white shadow-sm">
+                   <div className="space-y-1.5 rounded-lg border border-[#7D23F7]/10 p-3 bg-white shadow-sm">
                         {[1, 2, 3, 4].map((i) => (
                             <motion.div 
                                 key={i}
@@ -62,7 +62,7 @@ export default function GenerateAnimation() {
 
                {/* Confidence Match - Floats clearly to the side */}
                <motion.div 
-                  className="absolute bottom-4 right-4 bg-green-500 text-white shadow-lg shadow-green-200 px-2.5 py-1 rounded-full flex items-center gap-1.5 z-20"
+                  className="absolute bottom-4 right-4 bg-[#60C2FF] text-white shadow-lg shadow-[#60C2FF]/30 px-2.5 py-1 rounded-full flex items-center gap-1.5 z-20"
                   initial={{ scale: 0, y: 10 }}
                   animate={{ scale: 1, y: 0 }}
                   transition={{ delay: 2.2, type: "spring", stiffness: 300 }}

@@ -363,13 +363,13 @@ const FeatureRow = ({
         {isEven ? (
             // EVEN (0): Text on Left
             <div className="relative">
-                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-gray-400"}`}>
+                <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 mb-3 ${isInView ? "text-[#2A1638]" : "text-[#181818]"}`}>
                     {step.title}
                 </h3>
                 <p className="text-lg text-[#483953] leading-relaxed mb-4">
                     {step.description}
                 </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#fe3f48] text-sm font-semibold rounded-full border border-[#fe3f48]/20">
                     <step.metricIcon className="w-3.5 h-3.5" />
                     {step.metric}
                 </div>
@@ -398,7 +398,7 @@ const FeatureRow = ({
                 <p className="text-lg text-[#483953] leading-relaxed mb-4">
                      {step.description}
                 </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-lg border border-purple-100/50">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#fe3f48] text-sm font-semibold rounded-full border border-[#fe3f48]/20">
                     <step.metricIcon className="w-3.5 h-3.5" />
                     {step.metric}
                 </div>

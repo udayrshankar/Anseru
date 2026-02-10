@@ -7,10 +7,10 @@ import { ShieldCheck, FileText, Lock, FileSpreadsheet, File } from "lucide-react
 // ==========================================
 
 const sources = [
-  { id: "policies", label: "Policies", angle: 210, color: "text-indigo-600", bg: "bg-indigo-50" },
-  { id: "controls", label: "Controls", angle: 330, color: "text-violet-600", bg: "bg-violet-50" },
-  { id: "evidence", label: "Evidence", angle: 150, color: "text-emerald-600", bg: "bg-emerald-50" },
-  { id: "rfps", label: "Past RFPs", angle: 30, color: "text-sky-600", bg: "bg-sky-50" },
+  { id: "policies", label: "Policies", angle: 210, color: "text-[#1C32E6]", bg: "bg-[#1C32E6]/5" }, // Ultramarine
+  { id: "controls", label: "Controls", angle: 330, color: "text-[#7D23F7]", bg: "bg-[#7D23F7]/5" }, // Violet
+  { id: "evidence", label: "Evidence", angle: 150, color: "text-[#60C2FF]", bg: "bg-[#60C2FF]/5" }, // Sky
+  { id: "rfps", label: "Past RFPs", angle: 30, color: "text-[#1C32E6]", bg: "bg-[#1C32E6]/5" }, // Ultramarine
 ];
 
 export const NewConnectAnimation = () => {
@@ -40,14 +40,14 @@ export const NewConnectAnimation = () => {
         <motion.div
           animate={activeNode ? { scale: [1, 1.1, 1] } : { scale: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          className="w-24 h-24 bg-white rounded-3xl shadow-[0_10px_40px_-10px_rgba(79,70,229,0.3)] flex flex-col items-center justify-center border border-indigo-50 z-10 relative"
+          className="w-24 h-24 bg-white rounded-3xl shadow-[0_10px_40px_-10px_rgba(28,50,230,0.3)] flex flex-col items-center justify-center border border-[#1C32E6]/10 z-10 relative"
         >
-          <ShieldCheck className="w-8 h-8 text-indigo-600 mb-1" />
+          <ShieldCheck className="w-8 h-8 text-[#1C32E6] mb-1" />
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Secure</span>
           
           {/* Inner Glow Pulse */}
           <motion.div 
-            className="absolute inset-0 bg-indigo-500/5 rounded-3xl"
+            className="absolute inset-0 bg-[#1C32E6]/5 rounded-3xl"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -61,7 +61,7 @@ export const NewConnectAnimation = () => {
               animate={{ scale: 2.5, opacity: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1 }}
-              className="absolute inset-0 bg-indigo-500/10 rounded-3xl -z-10"
+              className="absolute inset-0 bg-[#1C32E6]/10 rounded-3xl -z-10"
             />
           )}
         </AnimatePresence>
@@ -90,7 +90,7 @@ const NeuralNode = ({ source, isActive }: { source: any, isActive: boolean }) =>
       <svg className="absolute top-0 left-0 overflow-visible w-0 h-0 -z-10">
          <motion.line
            x1={0} y1={0} x2={x} y2={y}
-           stroke={isActive ? "#6366F1" : "#E2E8F0"}
+           stroke={isActive ? "#1C32E6" : "#E2E8F0"}
            strokeWidth={isActive ? 3 : 2}
            strokeDasharray="4 4"
            initial={{ pathLength: 0 }}
@@ -100,7 +100,7 @@ const NeuralNode = ({ source, isActive }: { source: any, isActive: boolean }) =>
          {/* Data Packet */}
          {isActive && (
            <motion.circle
-             cx={0} cy={0} r={4} fill="#6366F1"
+             cx={0} cy={0} r={4} fill="#1C32E6"
              initial={{ cx: x, cy: y }}
              animate={{ cx: 0, cy: 0 }}
              transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -131,10 +131,10 @@ const NeuralNode = ({ source, isActive }: { source: any, isActive: boolean }) =>
 // ==========================================
 
 const files = [
-  { id: 1, label: "Q3_Report.pdf", icon: FileText, color: "text-rose-500", bg: "bg-rose-50" },
-  { id: 2, label: "Data_Set.xlsx", icon: FileSpreadsheet, color: "text-emerald-500", bg: "bg-emerald-50" },
-  { id: 3, label: "Secure_Key.pem", icon: Lock, color: "text-amber-500", bg: "bg-amber-50" },
-  { id: 4, label: "RFP_Draft.docx", icon: File, color: "text-blue-500", bg: "bg-blue-50" },
+  { id: 1, label: "Q3_Report.pdf", icon: FileText, color: "text-[#FF3F49]", bg: "bg-[#FF3F49]/5" }, // Crimson
+  { id: 2, label: "Data_Set.xlsx", icon: FileSpreadsheet, color: "text-[#7D23F7]", bg: "bg-[#7D23F7]/5" }, // Violet
+  { id: 3, label: "Secure_Key.pem", icon: Lock, color: "text-[#FF3F49]", bg: "bg-[#FF3F49]/5" }, // Crimson
+  { id: 4, label: "RFP_Draft.docx", icon: File, color: "text-[#1C32E6]", bg: "bg-[#1C32E6]/5" }, // Ultramarine
 ];
 
 export const NewUploadAnimation = () => {
@@ -225,12 +225,12 @@ export const NewUploadAnimation = () => {
          <motion.div 
            animate={processing ? { scale: [1, 1.05, 1] } : { scale: 1 }}
            transition={{ repeat: processing ? Infinity : 0, duration: 0.5 }}
-           className="w-40 h-40 bg-white rounded-2xl shadow-xl border border-indigo-100 flex flex-col items-center justify-center relative overflow-hidden"
+           className="w-40 h-40 bg-white rounded-2xl shadow-xl border border-[#1C32E6]/20 flex flex-col items-center justify-center relative overflow-hidden"
          >
             {/* Success Flash */}
             {processing && (
               <motion.div 
-                className="absolute inset-0 bg-indigo-500/5"
+                className="absolute inset-0 bg-[#1C32E6]/5"
                 animate={{ opacity: [0, 1, 0] }}
                 transition={{ duration: 1, repeat: Infinity }}
               />
@@ -248,7 +248,7 @@ export const NewUploadAnimation = () => {
                  ) : (
                    <motion.div key="processing" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
                      {/* Spinner */}
-                     <svg className="animate-spin w-16 h-16 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                     <svg className="animate-spin w-16 h-16 text-[#1C32E6]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                      </svg>
@@ -265,7 +265,7 @@ export const NewUploadAnimation = () => {
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-100">
                {processing && (
                   <motion.div 
-                    className="h-full bg-indigo-500"
+                    className="h-full bg-[#1C32E6]"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 1.5, ease: "linear" }}

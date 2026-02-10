@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, FileText, Search, BarChart, Zap, Users, Database, Clock, CheckCircle } from "lucide-react";
 import { AgentCard, type ColorTheme } from "./AgentNotificationCards";
@@ -40,7 +40,7 @@ interface HeroCardsProps {
 }
 
 export default function HeroCards({ activeIndex, onIndexChange, isPaused }: HeroCardsProps) {
-  const navigate = useNavigate();
+
   const [isFlipped, setIsFlipped] = useState(false);
   
   const activeCard = CARDS[activeIndex];
@@ -104,7 +104,6 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
             <div 
               className="absolute inset-0 w-full h-full"
               style={{ backfaceVisibility: "hidden" }}
-              onClick={() => navigate('/product')}
             >
                <AgentCard
                   title={activeCard.title}
@@ -117,7 +116,7 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
 
             {/* BACK FACE */}
             <div 
-              className="absolute inset-0 w-full h-full bg-white rounded-[24px] shadow-lg border border-purple-100/50 overflow-hidden"
+              className="absolute inset-0 w-full h-full bg-white rounded-[24px] shadow-lg border border-[#7D23F7]/20 overflow-hidden"
               style={{ 
                   backfaceVisibility: "hidden", 
                   transform: "rotateY(180deg)" 
@@ -125,12 +124,12 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
             >
                {/* Background Effects matching AgentCard style */}
                <div className="absolute inset-0 bg-white/80 backdrop-blur-xl z-0" />
-               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-200/30 rounded-full blur-[40px] z-0" />
-               <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-200/30 rounded-full blur-[40px] z-0" />
+               <div className="absolute top-0 right-0 w-32 h-32 bg-[#7D23F7]/20 rounded-full blur-[40px] z-0" />
+               <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#60C2FF]/30 rounded-full blur-[40px] z-0" />
                
                <div className="relative z-10 flex flex-col h-full p-8 justify-center">
                   <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-2 rounded-lg ${activeCard.colorTheme === 'purple' ? 'bg-purple-100 text-purple-600' : 'bg-blue-100 text-blue-600'}`}>
+                      <div className={`p-2 rounded-lg ${activeCard.colorTheme === 'purple' ? 'bg-[#7D23F7]/10 text-[#7D23F7]' : 'bg-[#60C2FF]/10 text-[#60C2FF]'}`}>
                           <ActiveIcon size={20} />
                       </div>
                   </div>
@@ -142,9 +141,9 @@ export default function HeroCards({ activeIndex, onIndexChange, isPaused }: Hero
                               initial={{ opacity: 0, x: -10 }}
                               animate={{ opacity: isFlipped ? 1 : 0, x: isFlipped ? 0 : -10 }}
                               transition={{ delay: 0.2 + (i * 0.1) }}
-                              className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-purple-200 hover:shadow-sm transition-all"
+                              className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-[#7D23F7]/20 hover:shadow-sm transition-all"
                           >
-                              <feature.icon className={`w-5 h-5 shrink-0 mt-0.5 ${activeCard.colorTheme === 'purple' ? 'text-purple-500' : 'text-blue-500'}`} />
+                              <feature.icon className={`w-5 h-5 shrink-0 mt-0.5 ${activeCard.colorTheme === 'purple' ? 'text-[#7D23F7]' : 'text-[#60C2FF]'}`} />
                               <div>
                                   <div className="text-sm font-semibold text-slate-800">{feature.label}</div>
                                   <div className="text-xs text-slate-500 leading-snug mt-0.5">{feature.desc}</div>
