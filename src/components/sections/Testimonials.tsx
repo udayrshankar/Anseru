@@ -78,7 +78,7 @@ const Testimonials = () => {
         </div>
 
         <div 
-            className="relative scale-80 bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden"
+            className="relative scale-80 bg-white rounded-[40px] shadow-md shadow-black/10 border border-gray-100 overflow-hidden"
         >
             <div className="grid lg:grid-cols-2 h-full">
                 {/* Left Side: Content */}
