@@ -119,7 +119,7 @@ const CoreFeatures = () => {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1C32E6]/20 to-[#7D23F7]/10 flex items-center justify-center mb-6 scale-110 rotate-3 transition-transform duration-500 shadow-lg shadow-[#1C32E6]/10 border border-white/50">
                     <feature.icon className="w-8 h-8 text-[#1C32E6]" />
                   </div>
-                  <h3 className="font-onest text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#1C32E6] to-[#7D23F7] transition-colors duration-300">
+                  <h3 className="font-onest text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-black transition-colors duration-300" >
                     {feature.title}
                   </h3>
                   <div className="h-1 w-20 bg-[#7D23F7] rounded-full transition-all duration-500" />

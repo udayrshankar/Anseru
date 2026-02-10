@@ -7,12 +7,8 @@ export default function Footer() {
     <footer className="relative border-t border-[#483953]/10 overflow-hidden mt-16 md:mt-32">
       {/* Background Image - Preserved */}
       <div 
-        className="absolute inset-0 z-0 pointer-events-none opacity-60"
-        style={{
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "bottom",
-        }}
+        className="absolute inset-0 z-0 pointer-events-none bg-black"
+        
       />
       
       {/* Content */}
@@ -25,7 +21,7 @@ export default function Footer() {
                 <a href="/" className="block">
                   <img src={logo} alt="Anseru" className="h-[35px] w-auto opacity-90" />
                 </a>
-                <p className="text-lg text-[#483953]/70 leading-relaxed font-medium max-w-xs">
+                <p className="text-lg text-white leading-relaxed font-medium max-w-xs">
                     Accelerating trust in every deal with agentic AI for RFPs and security reviews.
                 </p>
             </div>
@@ -48,7 +44,7 @@ export default function Footer() {
                 ["Resources", ["Documentation", "API Reference", "Community", "Help Center", "Status"]],
               ].map(([title, items]) => (
                 <div key={title as string}>
-                  <h4 className="font-onest text-sm font-bold text-[#090909] mb-6 uppercase tracking-wider">
+                  <h4 className="font-onest text-sm font-bold text-white mb-6 uppercase tracking-wider">
                     {title}
                   </h4>
                   <ul className="space-y-4">
@@ -56,7 +52,7 @@ export default function Footer() {
                       <li key={item}>
                         <a 
                           href="#" 
-                          className="text-[#483953]/70 hover:text-[#FF3F49] font-medium text-[15px] transition-colors duration-200 block w-fit"
+                          className="text-white hover:text-white/80 font-medium text-[15px] transition-colors duration-200 block w-fit"
                         >
                           {item}
                         </a>
@@ -70,11 +66,11 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#483953]/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm font-medium text-[#483953]/50">
+          <p className="text-sm font-medium text-white/50">
             © 2026 Anseru Inc. All rights reserved.
           </p>
 
-          <div className="flex gap-8 text-sm font-medium text-[#483953]/60">
+          <div className="flex gap-8 text-sm font-medium text-white/60">
             <a href="#" className="hover:text-[#FF3F49] transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-[#FF3F49] transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-[#FF3F49] transition-colors">Security</a>
